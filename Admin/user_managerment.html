@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Quản Lý Người Dùng - WasteRecog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "surface-dark": "#1c2e22",
+                        "surface-darker": "#15261b",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display">
+    <!-- Top Navigation Bar -->
+    <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#28392e] bg-white dark:bg-[#111813] px-10 py-3 sticky top-0 z-50">
+        <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+            <div class="size-8 text-primary">
+                <span class="material-symbols-outlined !text-[32px]">recycling</span>
+            </div>
+            <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">WasteRecog
+                Admin</h2>
+        </div>
+        <div class="flex flex-1 justify-end gap-8">
+            <nav class="hidden md:flex items-center gap-9">
+                <a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors"
+                    href="#">Dashboard</a>
+                <a class="text-slate-900 dark:text-white text-sm font-bold leading-normal border-b-2 border-primary pb-0.5"
+                    href="#">Người dùng</a>
+                <a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors"
+                    href="#">Dữ liệu rác</a>
+                <a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors"
+                    href="#">Báo cáo</a>
+                <a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors"
+                    href="#">Cài đặt</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20"
+                    data-alt="Admin user profile picture"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXT0V3QikovxjbRQm1_Q_zr3YFGlEnUbl2XvS3LeOHRXMszmSXc4wD5JDgi0YRNbZ6VvrYE4molua1LD7QDmB7x4GX1yfu_7u_8JB8N7wGAHWRvFuLtNGuwBRjI6OpXQoJha5EpfrVr0nTd-DOmdEayc9W4C1ylKh2Kp1s5fo8D9GVmXR8y4rQxQfA_TlI08ugKWb7Ry0DHExuPQo0_Arcz5-B7cudaymnoKkG5cb4X9PlPQwPndpGeb3_oKoyj5B0YaP5VipxvvEd");'>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content Area -->
+    <main class="flex-1 flex justify-center py-8 px-4 sm:px-8 lg:px-20">
+        <div class="flex flex-col w-full max-w-[1200px]">
+            <!-- Page Heading & Actions -->
+            <div class="flex flex-wrap items-end justify-between gap-6 mb-8">
+                <div class="flex flex-col gap-2">
+                    <h1 class="text-4xl font-black leading-tight tracking-[-0.033em] text-slate-900 dark:text-white">
+                        Quản Lý Người Dùng</h1>
+                    <p class="text-slate-500 dark:text-[#9db9a6] text-base font-normal">Xem và quản lý quyền truy cập
+                        của tất cả người dùng trong hệ thống.</p>
+                </div>
+                <button
+                    class="group flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-5 bg-primary hover:bg-green-400 text-slate-900 text-sm font-bold leading-normal tracking-[0.015em] transition-all">
+                    <span
+                        class="material-symbols-outlined !text-lg group-hover:rotate-90 transition-transform duration-300">add</span>
+                    <span class="truncate">Thêm người dùng mới</span>
+                </button>
+            </div>
+            <!-- Filters & Search Bar -->
+            <div
+                class="bg-white dark:bg-surface-dark rounded-xl p-4 mb-6 shadow-sm border border-slate-200 dark:border-[#28392e]">
+                <div class="flex flex-col lg:flex-row gap-4 items-end lg:items-center justify-between">
+                    <!-- Search -->
+                    <div class="w-full lg:w-1/3 relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#9db9a6]">search</span>
+                        <input
+                            class="form-input flex w-full min-w-0 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-[#3b5443] bg-slate-50 dark:bg-[#15261b] h-11 pl-10 pr-4 text-sm font-normal leading-normal placeholder:text-slate-400 dark:placeholder:text-[#9db9a6]"
+                            placeholder="Tìm kiếm theo tên hoặc email..." value="" />
+                    </div>
+                    <!-- Filter Chips -->
+                    <div class="flex flex-wrap gap-3 items-center w-full lg:w-auto">
+                        <span class="text-sm font-medium text-slate-500 dark:text-[#9db9a6] mr-2 hidden sm:block">Lọc
+                            theo:</span>
+                        <!-- Role Filter -->
+                        <div class="relative group">
+                            <button
+                                class="flex h-9 items-center justify-center gap-x-2 rounded-lg border border-slate-200 dark:border-[#3b5443] bg-slate-50 dark:bg-[#15261b] hover:bg-slate-100 dark:hover:bg-[#28392e] px-3 transition-colors">
+                                <span
+                                    class="material-symbols-outlined !text-[18px] text-slate-500 dark:text-[#9db9a6]">verified_user</span>
+                                <p class="text-slate-700 dark:text-white text-sm font-medium leading-normal">Vai trò:
+                                    Tất cả</p>
+                                <span
+                                    class="material-symbols-outlined !text-[18px] text-slate-500 dark:text-[#9db9a6]">expand_more</span>
+                            </button>
+                        </div>
+                        <!-- Status Filter -->
+                        <div class="relative group">
+                            <button
+                                class="flex h-9 items-center justify-center gap-x-2 rounded-lg border border-slate-200 dark:border-[#3b5443] bg-slate-50 dark:bg-[#15261b] hover:bg-slate-100 dark:hover:bg-[#28392e] px-3 transition-colors">
+                                <span
+                                    class="material-symbols-outlined !text-[18px] text-slate-500 dark:text-[#9db9a6]">toggle_on</span>
+                                <p class="text-slate-700 dark:text-white text-sm font-medium leading-normal">Trạng thái:
+                                    Tất cả</p>
+                                <span
+                                    class="material-symbols-outlined !text-[18px] text-slate-500 dark:text-[#9db9a6]">expand_more</span>
+                            </button>
+                        </div>
+                        <button
+                            class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-[#3b5443] bg-slate-50 dark:bg-[#15261b] hover:bg-slate-100 dark:hover:bg-[#28392e] text-slate-500 dark:text-[#9db9a6] transition-colors"
+                            title="Reset filters">
+                            <span class="material-symbols-outlined !text-[20px]">restart_alt</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Users Table -->
+            <div
+                class="bg-white dark:bg-surface-dark rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-[#28392e]">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 dark:bg-[#15261b] border-b border-slate-200 dark:border-[#3b5443]">
+                                <th
+                                    class="p-4 text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-[#9db9a6]">
+                                    Tên người dùng</th>
+                                <th
+                                    class="p-4 text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-[#9db9a6]">
+                                    Email</th>
+                                <th
+                                    class="p-4 text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-[#9db9a6]">
+                                    Ngày tham gia</th>
+                                <th
+                                    class="p-4 text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-[#9db9a6] text-center">
+                                    Ảnh đã tải</th>
+                                <th
+                                    class="p-4 text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-[#9db9a6]">
+                                    Vai trò</th>
+                                <th
+                                    class="p-4 text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-[#9db9a6]">
+                                    Trạng thái</th>
+                                <th
+                                    class="p-4 text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-[#9db9a6] text-right">
+                                    Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-[#3b5443]">
+                            <!-- Row 1 -->
+                            <tr class="group hover:bg-slate-50 dark:hover:bg-[#28392e] transition-colors">
+                                <td class="p-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="h-10 w-10 rounded-full bg-cover bg-center"
+                                            data-alt="Avatar of Nguyen Van A"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSknJXVyQhNs1NaiJDC80Yut7FcdaBmxstGSPa22Hd0uZXebAsY1U147KLukUVFzCKPYGqjuJWYHNiR9I84vAtxcUXKWrINvJfPiJ-TI4YvCdk3b7dQUZyx_gRq9fgJI3ZasIakg0k5CElMgDuexL64gP6ed_mWsW57RBQcvtwi9D7B5yirXOfQoAeNKvpUnH0sBrsTxtGGkhdLEzUC1_Ow-uJtx6i-bIrO1HVHHqlVSmd6tnZvkAepE-_igZ2bgbu-raHAkCFaxy2");'>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-slate-900 dark:text-white">Nguyễn Văn A</p>
+                                            <p class="text-xs text-slate-500 dark:text-[#9db9a6] md:hidden">
+                                                vana@example.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300">vana@example.com</td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300">12/10/2023</td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300 text-center font-medium">145
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                                        <span class="material-symbols-outlined !text-[14px]">person</span> User
+                                    </span>
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-primary border border-green-200 dark:border-green-800/50">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-primary"></span>
+                                        Active
+                                    </span>
+                                </td>
+                                <td class="p-4 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <button
+                                            class="p-2 text-slate-400 hover:text-primary dark:hover:text-primary transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-[#3b5443]"
+                                            title="Edit Role">
+                                            <span class="material-symbols-outlined !text-[20px]">edit</span>
+                                        </button>
+                                        <button
+                                            class="p-2 text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                                            title="Block User">
+                                            <span class="material-symbols-outlined !text-[20px]">block</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr class="group hover:bg-slate-50 dark:hover:bg-[#28392e] transition-colors">
+                                <td class="p-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="h-10 w-10 rounded-full bg-cover bg-center"
+                                            data-alt="Avatar of Tran Thi B"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDM6EoCn_FUKTVgdhTK8DtXnuWUuuFa6lC7yjDO5CJPzRMYh4xIw_Fq06WB_ArhYFqnx6ul7ukCbKOXaSzEiuLKnwUmu-kSP6ukl2qpnVgtFshOQM9wnHSijSRjc87rlhPWAaqmX-Vgx0TK96cqaPojkX8q_QDx3ZiDxJadFcVOgffIKiW_Y8VjbSsLSSy-ujc0Oyeq-IPqtY3xgsvdtvG4yPSbUmitjlHP1Y0O68nTRBxpF-Ot31G7jFeLLZVlmi8ViG8ggKT3fvY5");'>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-slate-900 dark:text-white">Trần Thị B</p>
+                                            <p class="text-xs text-slate-500 dark:text-[#9db9a6] md:hidden">
+                                                tranb@example.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300">tranb@example.com</td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300">15/10/2023</td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300 text-center font-medium">32
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/50">
+                                        <span class="material-symbols-outlined !text-[14px]">shield_person</span> Admin
+                                    </span>
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-primary border border-green-200 dark:border-green-800/50">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-primary"></span>
+                                        Active
+                                    </span>
+                                </td>
+                                <td class="p-4 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <button
+                                            class="p-2 text-slate-400 hover:text-primary dark:hover:text-primary transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-[#3b5443]"
+                                            title="Edit Role">
+                                            <span class="material-symbols-outlined !text-[20px]">edit</span>
+                                        </button>
+                                        <button
+                                            class="p-2 text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                                            title="Block User">
+                                            <span class="material-symbols-outlined !text-[20px]">block</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="group hover:bg-slate-50 dark:hover:bg-[#28392e] transition-colors">
+                                <td class="p-4">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+                                            LV
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-slate-900 dark:text-white">Lê Văn C</p>
+                                            <p class="text-xs text-slate-500 dark:text-[#9db9a6] md:hidden">
+                                                levanc@example.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300">levanc@example.com</td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300">20/10/2023</td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300 text-center font-medium">0
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                                        <span class="material-symbols-outlined !text-[14px]">person</span> User
+                                    </span>
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800/50">
+                                        <span class="material-symbols-outlined !text-[14px]">lock</span> Blocked
+                                    </span>
+                                </td>
+                                <td class="p-4 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <button
+                                            class="p-2 text-slate-400 hover:text-primary dark:hover:text-primary transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-[#3b5443]"
+                                            title="Edit Role">
+                                            <span class="material-symbols-outlined !text-[20px]">edit</span>
+                                        </button>
+                                        <button
+                                            class="p-2 text-slate-400 hover:text-green-500 dark:hover:text-green-400 transition-colors rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20"
+                                            title="Unblock User">
+                                            <span class="material-symbols-outlined !text-[20px]">lock_open</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 4 -->
+                            <tr class="group hover:bg-slate-50 dark:hover:bg-[#28392e] transition-colors">
+                                <td class="p-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="h-10 w-10 rounded-full bg-cover bg-center"
+                                            data-alt="Avatar of Pham Thi D"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA3HcWnIKIAnXEhU-TbB9VNDPmMmWLSmt33dV6CSxCyJttfpEW-1xrAY_aqnkRf1la5RHYVfMLNF-ilQB3Qj2FV9SIQwaSd4CJKArDYmEsitZ0wd262EFiQe_Va6Ol3NCG_VzcIixNJbZ8lZnqZ7met7kFM3CxFm4ed8N3NydHSmTvGuog0vnf9IQLLBnC_61HI6fEvjx3oBlbi5Gw1TNa-kc1far-kHmzvuSc8Mrz2RocBzOowUKQ2abvoQSrLXTJ2wuIxPS8P_Bx_");'>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-slate-900 dark:text-white">Phạm Thị D</p>
+                                            <p class="text-xs text-slate-500 dark:text-[#9db9a6] md:hidden">
+                                                phamd@example.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300">phamd@example.com</td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300">22/10/2023</td>
+                                <td class="p-4 text-sm text-slate-600 dark:text-slate-300 text-center font-medium">89
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                                        <span class="material-symbols-outlined !text-[14px]">person</span> User
+                                    </span>
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-primary border border-green-200 dark:border-green-800/50">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-primary"></span>
+                                        Active
+                                    </span>
+                                </td>
+                                <td class="p-4 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <button
+                                            class="p-2 text-slate-400 hover:text-primary dark:hover:text-primary transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-[#3b5443]"
+                                            title="Edit Role">
+                                            <span class="material-symbols-outlined !text-[20px]">edit</span>
+                                        </button>
+                                        <button
+                                            class="p-2 text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                                            title="Block User">
+                                            <span class="material-symbols-outlined !text-[20px]">block</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                <div
+                    class="flex items-center justify-between px-4 py-3 bg-white dark:bg-surface-dark border-t border-slate-200 dark:border-[#3b5443]">
+                    <div class="text-sm text-slate-500 dark:text-[#9db9a6]">
+                        Hiển thị <span class="font-bold text-slate-900 dark:text-white">1-4</span> trong số <span
+                            class="font-bold text-slate-900 dark:text-white">128</span> người dùng
+                    </div>
+                    <div class="flex gap-2">
+                        <button
+                            class="flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-[#3b5443] bg-white dark:bg-[#15261b] text-slate-400 dark:text-[#9db9a6] hover:bg-slate-50 dark:hover:bg-[#28392e] disabled:opacity-50"
+                            disabled="">
+                            <span class="material-symbols-outlined !text-[18px]">chevron_left</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-slate-900 font-bold text-sm">1</button>
+                        <button
+                            class="flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-[#3b5443] bg-white dark:bg-[#15261b] text-slate-600 dark:text-white hover:bg-slate-50 dark:hover:bg-[#28392e] text-sm">2</button>
+                        <button
+                            class="flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-[#3b5443] bg-white dark:bg-[#15261b] text-slate-600 dark:text-white hover:bg-slate-50 dark:hover:bg-[#28392e] text-sm">3</button>
+                        <span
+                            class="flex items-center justify-center w-8 h-8 text-slate-400 dark:text-[#9db9a6]">...</span>
+                        <button
+                            class="flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-[#3b5443] bg-white dark:bg-[#15261b] text-slate-600 dark:text-white hover:bg-slate-50 dark:hover:bg-[#28392e] text-sm">8</button>
+                        <button
+                            class="flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-[#3b5443] bg-white dark:bg-[#15261b] text-slate-600 dark:text-white hover:bg-slate-50 dark:hover:bg-[#28392e]">
+                            <span class="material-symbols-outlined !text-[18px]">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

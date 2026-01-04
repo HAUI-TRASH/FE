@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Model / AI Monitoring - WasteAI</title>
+    <!-- Google Fonts: Space Grotesk -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "surface-dark": "#1a2c20",
+                        "surface-darker": "#111813",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Custom scrollbar for better aesthetic in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #102216;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2d4535;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3e5e49;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden h-screen flex">
+    <!-- Side Navigation -->
+    <aside
+        class="w-64 bg-surface-darker border-r border-[#28392e] flex-col justify-between hidden md:flex h-full shrink-0">
+        <div class="flex flex-col gap-4 p-4">
+            <!-- User/Org Profile -->
+            <div class="flex gap-3 items-center mb-4">
+                <div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border border-[#28392e]"
+                    data-alt="Company logo abstract green hexagon"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAE8hKWtYiQm0q4UfPDZxjTKwvOU33H_txZnyD_Nq3sfilJLmo5_7yl1Z2y54BpYuAJaHMj-YXy-Pe32XRgX1qvmRdYtbz6AE31bwq_MNlUlnljmiylg6964Ts-OK9vvAlBliu8Q5V8y8sj8YJQIQ9axseootVswX4ovN3CP7Lv2KLdFjSyCtBxqSU_UiYfLcXqQTxkO3nJgd30OyyZA8LE9DLTwrO8j2gIFo80xo6W5mplx2pQ2bryClSP5RNw9Ic5P_6tzXmC3zbc");'>
+                </div>
+                <div class="flex flex-col">
+                    <h1 class="text-white text-base font-bold leading-normal">WasteAI Admin</h1>
+                    <p class="text-[#9db9a6] text-xs font-normal leading-normal">Enterprise Edition</p>
+                </div>
+            </div>
+            <!-- Navigation Links -->
+            <div class="flex flex-col gap-2">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] transition-colors group"
+                    href="#">
+                    <span class="material-symbols-outlined text-[#9db9a6] group-hover:text-white">dashboard</span>
+                    <p class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal">Dashboard</p>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 border border-primary/20" href="#">
+                    <span class="material-symbols-outlined text-primary fill-1">monitoring</span>
+                    <p class="text-white text-sm font-medium leading-normal">Monitoring</p>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] transition-colors group"
+                    href="#">
+                    <span class="material-symbols-outlined text-[#9db9a6] group-hover:text-white">dataset</span>
+                    <p class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal">Datasets</p>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] transition-colors group"
+                    href="#">
+                    <span class="material-symbols-outlined text-[#9db9a6] group-hover:text-white">inventory_2</span>
+                    <p class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal">Models</p>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] transition-colors group"
+                    href="#">
+                    <span class="material-symbols-outlined text-[#9db9a6] group-hover:text-white">settings</span>
+                    <p class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal">Settings</p>
+                </a>
+            </div>
+        </div>
+        <!-- Bottom Actions -->
+        <div class="p-4 border-t border-[#28392e]">
+            <div
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] cursor-pointer transition-colors group">
+                <span class="material-symbols-outlined text-[#9db9a6] group-hover:text-white">logout</span>
+                <p class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal">Sign Out</p>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative">
+        <!-- Top Navigation -->
+        <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#28392e] px-6 py-4 bg-surface-darker/50 backdrop-blur-md sticky top-0 z-20">
+            <div class="flex items-center gap-4 text-white">
+                <div class="md:hidden">
+                    <span class="material-symbols-outlined text-white cursor-pointer">menu</span>
+                </div>
+                <div class="flex flex-col">
+                    <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Model Performance Monitor
+                    </h2>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        </span>
+                        <span class="text-xs text-primary font-medium tracking-wide uppercase">System Operational</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+                <!-- Search -->
+                <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+                    <div
+                        class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#28392e] border border-transparent focus-within:border-primary/50 transition-colors">
+                        <div
+                            class="text-[#9db9a6] flex border-none items-center justify-center pl-3 rounded-l-lg border-r-0">
+                            <span class="material-symbols-outlined text-[20px]">search</span>
+                        </div>
+                        <input
+                            class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-[#9db9a6] px-2 rounded-l-none text-sm font-normal leading-normal"
+                            placeholder="Search logs..." value="" />
+                    </div>
+                </label>
+                <!-- Action Icons -->
+                <div class="flex gap-3">
+                    <button
+                        class="flex items-center justify-center rounded-lg size-10 bg-[#28392e] hover:bg-[#344a3c] text-white transition-colors relative">
+                        <span class="material-symbols-outlined text-[20px]">notifications</span>
+                        <span
+                            class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-[#28392e]"></span>
+                    </button>
+                    <div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+                        data-alt="User avatar of a smiling man"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA6H3_8FCVdHZn_9NwreLj-a6H5aqQriy5J8JdxkJuwOGCWJViaU8nEoOH7SWsLo9hLOrxZwanZjbd4tRzXVmBVX1EOMMc0BSHJsgAdx-CDH8zwYVzVAJGTHkj34Ons-Zfpc8ZQndofNiTYWFytjLbQ9gMxLWrUQDZbDcv1fp6QNBZrHiSwr3__GFPmVdVozzfK4X7qnQJSTaMaoKECRZs-yQWd6NzJqejCBJJBBXtZSyFB5zkBK770WeVa2ghzDQ92tIq9KO-pTG52");'>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
+            <!-- Page Heading & Actions -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div class="flex flex-col gap-2">
+                    <h1 class="text-white text-3xl md:text-4xl font-bold leading-tight tracking-tight">AI System Health
+                    </h1>
+                    <p class="text-[#9db9a6] text-base font-normal">Real-time analytics for Waste Recognition Engine
+                        <span
+                            class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded text-sm">v3.0.1-beta</span>
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button
+                        class="flex items-center gap-2 px-4 h-10 bg-[#28392e] hover:bg-[#344a3c] text-white text-sm font-bold rounded-lg transition-colors border border-transparent hover:border-primary/30">
+                        <span class="material-symbols-outlined text-[18px]">history</span>
+                        <span>Switch Version</span>
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 h-10 bg-[#28392e] hover:bg-[#344a3c] text-white text-sm font-bold rounded-lg transition-colors border border-transparent hover:border-primary/30">
+                        <span class="material-symbols-outlined text-[18px]">download</span>
+                        <span>Export Logs</span>
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 h-10 bg-primary hover:bg-primary/90 text-background-dark text-sm font-bold rounded-lg shadow-[0_0_15px_rgba(19,236,91,0.3)] transition-all">
+                        <span class="material-symbols-outlined text-[18px]">model_training</span>
+                        <span>Retrain Model</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Time Range Selector -->
+            <div class="border-b border-[#28392e] pb-1">
+                <div class="flex gap-1 overflow-x-auto pb-2">
+                    <button
+                        class="px-4 py-2 text-sm font-medium text-[#9db9a6] hover:text-white hover:bg-[#28392e] rounded-lg transition-colors whitespace-nowrap">Last
+                        24 Hours</button>
+                    <button
+                        class="px-4 py-2 text-sm font-medium text-background-dark bg-primary rounded-lg transition-colors whitespace-nowrap">Last
+                        7 Days</button>
+                    <button
+                        class="px-4 py-2 text-sm font-medium text-[#9db9a6] hover:text-white hover:bg-[#28392e] rounded-lg transition-colors whitespace-nowrap">Last
+                        30 Days</button>
+                    <button
+                        class="px-4 py-2 text-sm font-medium text-[#9db9a6] hover:text-white hover:bg-[#28392e] rounded-lg transition-colors whitespace-nowrap">Custom
+                        Range</button>
+                </div>
+            </div>
+            <!-- KPI Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Card 1: Avg Accuracy -->
+                <div
+                    class="bg-surface-dark p-5 rounded-xl border border-[#28392e] flex flex-col justify-between h-40 group hover:border-primary/40 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <div class="p-2 bg-[#28392e] rounded-lg text-primary">
+                            <span class="material-symbols-outlined">verified</span>
+                        </div>
+                        <span
+                            class="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded-full flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">trending_up</span> +2.4%
+                        </span>
+                    </div>
+                    <div>
+                        <p class="text-[#9db9a6] text-sm font-medium mb-1">Avg. Confidence</p>
+                        <h3 class="text-3xl font-bold text-white tracking-tight">94.2%</h3>
+                    </div>
+                </div>
+                <!-- Card 2: Inference Time -->
+                <div
+                    class="bg-surface-dark p-5 rounded-xl border border-[#28392e] flex flex-col justify-between h-40 group hover:border-primary/40 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <div
+                            class="p-2 bg-[#28392e] rounded-lg text-[#9db9a6] group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">speed</span>
+                        </div>
+                        <span class="text-xs font-medium text-[#9db9a6] bg-[#28392e] px-2 py-1 rounded-full">
+                            -12ms vs avg
+                        </span>
+                    </div>
+                    <div>
+                        <p class="text-[#9db9a6] text-sm font-medium mb-1">Inference Speed</p>
+                        <h3 class="text-3xl font-bold text-white tracking-tight">120<span
+                                class="text-lg text-[#9db9a6] font-normal ml-1">ms</span></h3>
+                    </div>
+                </div>
+                <!-- Card 3: Error Rate -->
+                <div
+                    class="bg-surface-dark p-5 rounded-xl border border-[#28392e] flex flex-col justify-between h-40 group hover:border-red-500/40 transition-colors relative overflow-hidden">
+                    <div
+                        class="absolute right-0 top-0 w-24 h-24 bg-red-500/5 blur-[50px] rounded-full -mr-10 -mt-10 pointer-events-none">
+                    </div>
+                    <div class="flex justify-between items-start relative z-10">
+                        <div class="p-2 bg-[#28392e] rounded-lg text-red-400">
+                            <span class="material-symbols-outlined">error_med</span>
+                        </div>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-[#9db9a6] text-sm font-medium mb-1">Flagged Errors</p>
+                        <h3 class="text-3xl font-bold text-white tracking-tight">14 <span
+                                class="text-sm font-normal text-red-400 ml-2">Needs Review</span></h3>
+                    </div>
+                </div>
+                <!-- Card 4: Total Requests -->
+                <div
+                    class="bg-surface-dark p-5 rounded-xl border border-[#28392e] flex flex-col justify-between h-40 group hover:border-primary/40 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <div
+                            class="p-2 bg-[#28392e] rounded-lg text-[#9db9a6] group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">cloud_sync</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-[#9db9a6] text-sm font-medium mb-1">Total Predictions</p>
+                        <h3 class="text-3xl font-bold text-white tracking-tight">12.8k</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Charts & Logs Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Chart Area -->
+                <div class="lg:col-span-2 bg-surface-dark rounded-xl border border-[#28392e] p-6 flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="text-white text-lg font-bold">Performance Trend</h3>
+                            <p class="text-[#9db9a6] text-sm">Accuracy vs. Error Rate (Last 7 Days)</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="size-3 rounded-full bg-primary"></span> <span
+                                class="text-xs text-[#9db9a6]">Accuracy</span>
+                            <span class="size-3 rounded-full bg-red-500 ml-3"></span> <span
+                                class="text-xs text-[#9db9a6]">Errors</span>
+                        </div>
+                    </div>
+                    <!-- Fake Chart Visualization using CSS Gradients/Flex -->
+                    <div
+                        class="flex-1 min-h-[300px] w-full relative flex items-end justify-between gap-1 pt-10 px-2 pb-2 border-b border-l border-[#28392e] bg-[#111813]/50 rounded-lg">
+                        <!-- Y-Axis Lines (Background) -->
+                        <div class="absolute inset-0 flex flex-col justify-between pointer-events-none px-2 py-4">
+                            <div class="w-full h-px bg-[#28392e]/50"></div>
+                            <div class="w-full h-px bg-[#28392e]/50"></div>
+                            <div class="w-full h-px bg-[#28392e]/50"></div>
+                            <div class="w-full h-px bg-[#28392e]/50"></div>
+                            <div class="w-full h-px bg-[#28392e]/50"></div>
+                        </div>
+                        <!-- Data Bars/Points representation -->
+                        <!-- Day 1 -->
+                        <div class="relative flex flex-col justify-end h-full w-full items-center gap-2 group">
+                            <div
+                                class="w-full max-w-[40px] bg-primary/20 hover:bg-primary/40 h-[60%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-primary h-[90%] rounded-t-sm"></div>
+                            </div>
+                            <div
+                                class="w-full max-w-[40px] bg-red-500/10 hover:bg-red-500/30 h-[10%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-red-500 h-[30%] rounded-t-sm"></div>
+                            </div>
+                            <span class="text-[10px] text-[#9db9a6] mt-2">Mon</span>
+                        </div>
+                        <!-- Day 2 -->
+                        <div class="relative flex flex-col justify-end h-full w-full items-center gap-2 group">
+                            <div
+                                class="w-full max-w-[40px] bg-primary/20 hover:bg-primary/40 h-[75%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-primary h-[85%] rounded-t-sm"></div>
+                            </div>
+                            <div
+                                class="w-full max-w-[40px] bg-red-500/10 hover:bg-red-500/30 h-[5%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-red-500 h-[40%] rounded-t-sm"></div>
+                            </div>
+                            <span class="text-[10px] text-[#9db9a6] mt-2">Tue</span>
+                        </div>
+                        <!-- Day 3 -->
+                        <div class="relative flex flex-col justify-end h-full w-full items-center gap-2 group">
+                            <div
+                                class="w-full max-w-[40px] bg-primary/20 hover:bg-primary/40 h-[65%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-primary h-[92%] rounded-t-sm"></div>
+                            </div>
+                            <div
+                                class="w-full max-w-[40px] bg-red-500/10 hover:bg-red-500/30 h-[8%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-red-500 h-[20%] rounded-t-sm"></div>
+                            </div>
+                            <span class="text-[10px] text-[#9db9a6] mt-2">Wed</span>
+                        </div>
+                        <!-- Day 4 -->
+                        <div class="relative flex flex-col justify-end h-full w-full items-center gap-2 group">
+                            <div
+                                class="w-full max-w-[40px] bg-primary/20 hover:bg-primary/40 h-[80%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-primary h-[95%] rounded-t-sm"></div>
+                            </div>
+                            <div
+                                class="w-full max-w-[40px] bg-red-500/10 hover:bg-red-500/30 h-[4%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-red-500 h-[10%] rounded-t-sm"></div>
+                            </div>
+                            <span class="text-[10px] text-[#9db9a6] mt-2">Thu</span>
+                        </div>
+                        <!-- Day 5 -->
+                        <div class="relative flex flex-col justify-end h-full w-full items-center gap-2 group">
+                            <div
+                                class="w-full max-w-[40px] bg-primary/20 hover:bg-primary/40 h-[70%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-primary h-[88%] rounded-t-sm"></div>
+                            </div>
+                            <div
+                                class="w-full max-w-[40px] bg-red-500/10 hover:bg-red-500/30 h-[12%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-red-500 h-[50%] rounded-t-sm"></div>
+                            </div>
+                            <span class="text-[10px] text-[#9db9a6] mt-2">Fri</span>
+                        </div>
+                        <!-- Day 6 -->
+                        <div class="relative flex flex-col justify-end h-full w-full items-center gap-2 group">
+                            <div
+                                class="w-full max-w-[40px] bg-primary/20 hover:bg-primary/40 h-[85%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-primary h-[96%] rounded-t-sm"></div>
+                            </div>
+                            <div
+                                class="w-full max-w-[40px] bg-red-500/10 hover:bg-red-500/30 h-[3%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-red-500 h-[20%] rounded-t-sm"></div>
+                            </div>
+                            <span class="text-[10px] text-[#9db9a6] mt-2">Sat</span>
+                        </div>
+                        <!-- Day 7 -->
+                        <div class="relative flex flex-col justify-end h-full w-full items-center gap-2 group">
+                            <div
+                                class="w-full max-w-[40px] bg-primary/20 hover:bg-primary/40 h-[78%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-primary h-[94%] rounded-t-sm"></div>
+                            </div>
+                            <div
+                                class="w-full max-w-[40px] bg-red-500/10 hover:bg-red-500/30 h-[5%] rounded-t-sm transition-all relative">
+                                <div class="absolute bottom-0 w-full bg-red-500 h-[30%] rounded-t-sm"></div>
+                            </div>
+                            <span class="text-[10px] text-primary font-bold mt-2">Sun</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Inference Log -->
+                <div
+                    class="lg:col-span-1 bg-surface-dark rounded-xl border border-[#28392e] flex flex-col overflow-hidden">
+                    <div
+                        class="p-6 pb-4 border-b border-[#28392e] flex justify-between items-center bg-surface-darker/30">
+                        <h3 class="text-white text-lg font-bold">Recent Inferences</h3>
+                        <a class="text-primary text-xs font-bold hover:underline" href="#">View All</a>
+                    </div>
+                    <div class="flex-1 overflow-y-auto max-h-[400px]">
+                        <table class="w-full text-left">
+                            <thead class="bg-[#1c2e23] text-xs uppercase text-[#9db9a6] sticky top-0">
+                                <tr>
+                                    <th class="px-4 py-3 font-medium">Input</th>
+                                    <th class="px-4 py-3 font-medium">Prediction</th>
+                                    <th class="px-4 py-3 font-medium text-right">Conf.</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#28392e]">
+                                <!-- Row 1 -->
+                                <tr class="hover:bg-[#28392e]/50 transition-colors group">
+                                    <td class="px-4 py-3">
+                                        <div class="size-12 rounded bg-cover bg-center border border-[#28392e] group-hover:border-primary/50 transition-colors"
+                                            data-alt="Plastic bottle waste item"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbjm7EPHW-0TTo4zwcZVOf4KX9bmylZXOP6jeaoTA_IQHwcfKQlfW1uDqoISqg4nBwhnRVKsK2IkwALKI3iAixETc75xsRpgG99bvnQg6g3FvrAuYEgtARjU9-fPsiK8GTJoOJB3nrR8e5crwYd-u9LVZXgO6qgWNlWs6vvroqGQPzCjlQCudiKClJmto_9WiJEslq99eVr3HdInWG1xB614eTmQQIpx1dqid4dfH5GR3M2OnT3BvqobpOKb5u0xHx2ysEKKWq6a3t");'>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <p class="text-white text-sm font-medium">Plastic Bottle</p>
+                                        <p class="text-[#9db9a6] text-xs">2 mins ago</p>
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        <span
+                                            class="inline-flex items-center px-2 py-1 rounded bg-primary/10 text-primary text-xs font-bold">98%</span>
+                                    </td>
+                                </tr>
+                                <!-- Row 2 -->
+                                <tr class="hover:bg-[#28392e]/50 transition-colors group">
+                                    <td class="px-4 py-3">
+                                        <div class="size-12 rounded bg-cover bg-center border border-[#28392e] group-hover:border-primary/50 transition-colors"
+                                            data-alt="Crumpled paper waste"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBiAp_nGWg4a-mva4O_Q8E9LktGdC6apI5de7RHAeHjw7DQ6LTc90Ovg3hRAJ0lpGeTSf73gBgqyUpx-Omc6dh1XFcAN7FGQ9V0qc-Ie59WF3osa8nTV3hJb95so9HqW3UYjkvHc-x7jegib-NFVc8F0dyzmjgUH5sXX5TZZKNGooQG5v90eW8jLtUEP7tg5Z_3XFHpeKmpN0aN_dwA12VFa5C2bGtxImlZuTKcyVpJvRw7_OgSVeiYukogUoXu7fHQ1oa9B1ml-_jU");'>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <p class="text-white text-sm font-medium">Paper Waste</p>
+                                        <p class="text-[#9db9a6] text-xs">5 mins ago</p>
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        <span
+                                            class="inline-flex items-center px-2 py-1 rounded bg-primary/10 text-primary text-xs font-bold">92%</span>
+                                    </td>
+                                </tr>
+                                <!-- Row 3 (Error) -->
+                                <tr class="hover:bg-[#28392e]/50 transition-colors group bg-red-500/5">
+                                    <td class="px-4 py-3">
+                                        <div class="size-12 rounded bg-cover bg-center border border-[#28392e] group-hover:border-red-400 transition-colors"
+                                            data-alt="Unidentifiable metal scrap"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJFp2hhXMSfZDb_J6-1KnaLkcxHkPw3XkyR2gWHk_vLc58-SdCL0f6Sp3awfoaHGVoAHqSaI1MiunD2idjziYKDoa9cteVrmmP-Q1ky0kpGboKMkE0HeW_SDURr8xGs-xFt3qyMxfO2EuiKMTcIYqzrn-mpK704Ls2mrL4D6UyG777cM3YYh_bnhh7BVKBH-JTbgRsyxhGb2O4QngaFibxAd88hBdxpo8cPTAfw4htcX8N36O4cg0sxYlaMCnv6-FWkambrnQoWdx6");'>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <p class="text-white text-sm font-medium">Metal Can</p>
+                                        <p class="text-red-400 text-xs flex items-center gap-1"><span
+                                                class="material-symbols-outlined text-[10px]">warning</span> Low
+                                            Confidence</p>
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        <span
+                                            class="inline-flex items-center px-2 py-1 rounded bg-red-500/10 text-red-400 text-xs font-bold">64%</span>
+                                    </td>
+                                </tr>
+                                <!-- Row 4 -->
+                                <tr class="hover:bg-[#28392e]/50 transition-colors group">
+                                    <td class="px-4 py-3">
+                                        <div class="size-12 rounded bg-cover bg-center border border-[#28392e] group-hover:border-primary/50 transition-colors"
+                                            data-alt="Glass jar waste"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDGAv1CM8emx3kKNwMu_dbEU5tIe3suAdQ_IbkXuKC-YlNjSw1cLhFPmOnIEd3QgwWZIsAuxBdSTupQRWYyWmXOKZpJS-CWiV50rNjdvCEV4FQqNys4ANGkeHYjTus9r-fdvafmzC2NRD5hEfe2PVjrq8-5xwMObtJmm0dMr_tLBDd7vmrFtfxacEQMjFCkns4q6a3TCZFaN1o1sBSnhfX1tz7U74AkBnHRiKyEOWsPSbwPye11UR7Rfl9VT1koJ9NV8U5h1sttl5yk");'>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <p class="text-white text-sm font-medium">Glass Jar</p>
+                                        <p class="text-[#9db9a6] text-xs">12 mins ago</p>
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        <span
+                                            class="inline-flex items-center px-2 py-1 rounded bg-primary/10 text-primary text-xs font-bold">99%</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer for spacing -->
+            <div class="h-8"></div>
+        </div>
+    </main>
+</body>
+
+</html>
