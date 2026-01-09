@@ -106,7 +106,8 @@
                     <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Đăng Nhập</h2>
                     <p class="text-gray-400 text-sm">Chào mừng bạn quay trở lại với EcoScan</p>
                 </div>
-                <form class="space-y-6">
+
+                <form id="loginForm" class="space-y-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2 ml-1" for="phone">Số điện
                             thoại</label>
@@ -115,39 +116,50 @@
                                 <span
                                     class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">smartphone</span>
                             </div>
-                            <input
+                            <input id="phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]*"
+                                maxlength="11" placeholder="Nhập số điện thoại của bạn"
                                 class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                                id="phone" name="phone" placeholder="Nhập số điện thoại của bạn" type="tel" />
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+
                         </div>
                     </div>
+
                     <div>
                         <div class="flex items-center justify-between mb-2 ml-1">
                             <label class="block text-sm font-medium text-gray-300" for="password">Mật khẩu</label>
                             <a class="text-xs text-primary font-medium hover:text-[#11d852] transition-colors"
                                 href="#">Quên mật khẩu?</a>
                         </div>
+
                         <div class="relative group">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <span
                                     class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">lock</span>
                             </div>
+
                             <input
                                 class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-12 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                                id="password" name="password" placeholder="Nhập mật khẩu" type="password" />
-                            <button
+                                id="password" name="password" placeholder="Nhập mật khẩu" type="password" required />
+
+                            <button id="togglePass"
                                 class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-white transition-colors"
                                 type="button">
                                 <span class="material-symbols-outlined text-xl">visibility_off</span>
                             </button>
                         </div>
                     </div>
-                    <button
+
+                    <!-- Message -->
+                    <div id="msg" class="hidden text-sm rounded-xl px-4 py-3 border"></div>
+
+                    <button id="btnLogin"
                         class="w-full bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold text-base py-3.5 px-6 rounded-xl shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40 hover:-translate-y-0.5 flex items-center justify-center gap-2 mt-2"
-                        type="button">
+                        type="submit">
                         <span>Đăng nhập</span>
                         <span class="material-symbols-outlined text-xl">arrow_forward</span>
                     </button>
                 </form>
+
                 <div class="mt-8 pt-6 border-t border-[#28392e] text-center">
                     <p class="text-sm text-gray-400">
                         Chưa có tài khoản?
@@ -228,5 +240,89 @@
     </footer>
 
 </body>
+<script>
+
+    const API_BASE = "http://localhost:8080";
+    const form = document.getElementById("loginForm");
+    const msg = document.getElementById("msg");
+    const btn = document.getElementById("btnLogin");
+
+    document.getElementById("togglePass").addEventListener("click", () => {
+        const input = document.getElementById("password");
+        const icon = document.querySelector("#togglePass span");
+        const isPass = input.type === "password";
+        input.type = isPass ? "text" : "password";
+        icon.textContent = isPass ? "visibility" : "visibility_off";
+    });
+
+    function showMsg(text, type) {
+        msg.classList.remove("hidden");
+        msg.textContent = text;
+
+        msg.className = "text-sm rounded-xl px-4 py-3 border";
+        if (type === "success") {
+            msg.classList.add("border-green-500/30", "bg-green-500/10", "text-green-200");
+        } else {
+            msg.classList.add("border-red-500/30", "bg-red-500/10", "text-red-200");
+        }
+    }
+
+    function setLoading(isLoading) {
+        btn.disabled = isLoading;
+        btn.classList.toggle("opacity-70", isLoading);
+        btn.classList.toggle("cursor-not-allowed", isLoading);
+    }
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const phone = document.getElementById("phone").value.trim();
+        const password = document.getElementById("password").value;
+
+        if (!phone) return showMsg("Vui lòng nhập số điện thoại.", "error");
+        if (!/^[0-9+]{6,20}$/.test(phone)) return showMsg("Số điện thoại không hợp lệ.", "error");
+        if (!password) return showMsg("Vui lòng nhập mật khẩu.", "error");
+
+        setLoading(true);
+        msg.classList.add("hidden");
+
+        try {
+            const res = await fetch(API_BASE + "/api/v1/auth/login/user", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    identifier: phone,
+                    password: password
+                })
+            });
+
+            const json = await res.json().catch(() => null);
+
+            if (!res.ok) {
+                const errMsg = json?.message || "Đăng nhập thất bại.";
+                showMsg(errMsg, "error");
+                return;
+            }
+
+            const data = json?.data;
+            const token = data?.token;
+
+            if (token) {
+                localStorage.setItem("accessToken", token);
+                localStorage.setItem("account", JSON.stringify(data.account || {}));
+            }
+
+            showMsg(json?.message || "Đăng nhập thành công!", "success");
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 600);
+
+        } catch (err) {
+            showMsg("Không thể kết nối server. Kiểm tra API_BASE hoặc backend.", "error");
+        } finally {
+            setLoading(false);
+        }
+    });
+</script>
 
 </html>
