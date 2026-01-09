@@ -1,345 +1,552 @@
 <!DOCTYPE html>
 <html class="dark" lang="vi">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Kết Quả Nhận Diện Rác</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#13ec5b",
-                        "secondary": "#28392e",
-                        "background-light": "#f6f8f6",
-                        "background-dark": "#102216",
-                        "surface-dark": "#1c2a21",
-                        "surface-light": "#ffffff",
-                        "accent-blue": "#3b82f6",
-                        "accent-yellow": "#eab308",
-                        "accent-red": "#ef4444",
-                    },
-                    fontFamily: {
-                        "display": ["Space Grotesk", "sans-serif"],
-                        "body": ["Space Grotesk", "sans-serif"]
-                    },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
-                },
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#13ec5b",
+              secondary: "#28392e",
+              "background-light": "#f6f8f6",
+              "background-dark": "#102216",
+              "surface-dark": "#1c2a21",
+              "surface-light": "#ffffff",
+              "accent-blue": "#3b82f6",
+              "accent-yellow": "#eab308",
+              "accent-red": "#ef4444",
             },
-        }
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
     </script>
     <style>
-        body {
-            font-family: "Space Grotesk", sans-serif;
-        }
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
 
-        .filled-icon {
-            font-variation-settings: 'FILL' 1;
-        }
+      .filled-icon {
+        font-variation-settings: "FILL" 1;
+      }
     </style>
-</head>
+  </head>
 
-<body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-800 dark:text-gray-100">
-    <header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
-        <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full">
-            <div class="flex items-center gap-3 text-white">
-                <div class="size-8 flex items-center justify-center text-primary">
-                    <span class="material-symbols-outlined text-3xl">recycling</span>
-                </div>
-                <a class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block" href="#">EcoScan
-                    AI</a>
-            </div>
-            <nav class="hidden md:flex flex-1 justify-center gap-8">
-                <a class="text-gray-300 hover:text-primary transition-colors text-sm font-medium" href="#">Trang chủ</a>
-                <a class="text-primary transition-colors text-sm font-medium" href="#">Kết quả</a>
-                <a class="text-gray-300 hover:text-primary transition-colors text-sm font-medium" href="#">Lịch sử</a>
-                <a class="text-gray-300 hover:text-primary transition-colors text-sm font-medium" href="#">Hướng dẫn</a>
-            </nav>
-            <div class="flex items-center gap-4">
-                <button class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden">
-                    <span class="material-symbols-outlined">menu</span>
-                </button>
-                <div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-                    data-alt="User profile picture placeholder"
-                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'>
-                </div>
-            </div>
+  <body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-800 dark:text-gray-100"
+  >
+    <header
+      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
+    >
+      <div
+        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+      >
+        <div class="flex items-center gap-3 text-white">
+          <div class="size-8 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-3xl">recycling</span>
+          </div>
+          <a
+            class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
+            href="#"
+            >EcoScan AI</a
+          >
         </div>
+        <nav class="hidden md:flex flex-1 justify-center gap-8">
+          <a
+            class="text-gray-300 hover:text-primary text-sm font-medium"
+            href="index.html"
+            >Trang chủ</a
+          >
+          <a class="text-primary text-sm font-medium" href="#">Kết quả</a>
+          <a
+            class="text-gray-300 hover:text-primary text-sm font-medium"
+            href="#"
+            >Lịch sử</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary text-sm font-medium"
+            href="#"
+            >Hướng dẫn</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+          <a
+            href="../Admin/home.html"
+            class="bg-[#28392e] hover:bg-[#3b5443] text-white px-3 py-2 rounded-lg transition-colors text-sm font-medium flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined text-base"
+              >admin_panel_settings</span
+            >
+            Chế độ Quản trị
+          </a>
+          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+            <img
+              src="../img logo/logoHaUI.png"
+              alt="HaUI Logo"
+              class="h-8 w-8 rounded-full"
+            />
+          </a>
+          <button
+            class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div
+            class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+            data-alt="User profile picture placeholder"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+            "
+          ></div>
+        </div>
+      </div>
     </header>
-    <main class="flex-1 flex flex-col w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 gap-8">
-        <div class="flex items-center gap-2 text-sm text-gray-400">
-            <a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
-                <span class="material-symbols-outlined text-base">arrow_back</span>
-                Quay lại quét
-            </a>
-            <span class="mx-2">/</span>
-            <span class="text-white">Kết quả phân tích</span>
+    <main
+      class="flex-1 flex flex-col w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 gap-8"
+    >
+      <div class="flex items-center gap-2 text-sm text-gray-400">
+        <a
+          class="hover:text-primary transition-colors flex items-center gap-1"
+          href="#"
+        >
+          <span class="material-symbols-outlined text-base">arrow_back</span>
+          Quay lại quét
+        </a>
+        <span class="mx-2">/</span>
+        <span class="text-white">Kết quả phân tích</span>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          <div
+            class="bg-surface-dark border border-[#28392e] rounded-3xl p-2 shadow-2xl overflow-hidden relative group"
+          >
+            <div
+              class="absolute top-6 right-6 z-10 bg-primary text-[#051d0e] text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined filled-icon text-lg"
+                >check_circle</span
+              >
+              Độ tin cậy 98%
+            </div>
+            <div
+              class="rounded-2xl overflow-hidden aspect-[4/3] bg-gray-800 relative"
+            >
+              <div
+                class="absolute inset-0 bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
+                "
+              ></div>
+            </div>
+          </div>
+          <div
+            class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl"
+          >
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex flex-col">
+                <span
+                  class="text-primary font-bold text-sm tracking-wider uppercase mb-1"
+                  >Đã phát hiện</span
+                >
+                <h1
+                  class="text-3xl md:text-4xl font-black text-white leading-tight"
+                >
+                  Chai Nhựa PET
+                </h1>
+              </div>
+              <div class="bg-[#28392e] p-3 rounded-xl">
+                <span class="material-symbols-outlined text-4xl text-primary"
+                  >recycling</span
+                >
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
+                <span class="text-gray-400 text-xs uppercase block mb-1"
+                  >Loại rác</span
+                >
+                <span
+                  class="text-white font-bold text-lg flex items-center gap-2"
+                >
+                  <span class="w-2 h-2 rounded-full bg-primary"></span> Tái chế
+                </span>
+              </div>
+              <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
+                <span class="text-gray-400 text-xs uppercase block mb-1"
+                  >Chất liệu</span
+                >
+                <span class="text-white font-bold text-lg">Polyethylene</span>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div
+                class="p-4 rounded-2xl bg-yellow-900/20 border border-yellow-700/30 flex items-start gap-3"
+              >
+                <span class="material-symbols-outlined text-yellow-500 mt-0.5"
+                  >warning</span
+                >
+                <div>
+                  <h4 class="text-yellow-500 font-bold text-sm mb-1">
+                    Lưu ý xử lý
+                  </h4>
+                  <p class="text-gray-300 text-sm">
+                    Cần rửa sạch chất lỏng bên trong và tháo nắp chai (nếu nắp
+                    làm từ nhựa khác) trước khi bỏ vào thùng tái chế.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex items-start gap-3"
+              >
+                <span class="material-symbols-outlined text-primary mt-0.5"
+                  >verified</span
+                >
+                <div>
+                  <h4 class="text-primary font-bold text-sm mb-1">
+                    Hành động đề xuất
+                  </h4>
+                  <p class="text-gray-300 text-sm">
+                    Bỏ vào thùng rác màu xanh hoặc mang đến điểm thu gom nhựa
+                    tái chế.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div class="lg:col-span-5 flex flex-col gap-6">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div
+            class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl"
+          >
+            <h2
+              class="text-2xl font-bold text-white mb-6 flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >analytics</span
+              >
+              Phân tích chi tiết
+            </h2>
+            <div class="space-y-8">
+              <div class="relative pl-8 border-l-2 border-[#28392e]">
                 <div
-                    class="bg-surface-dark border border-[#28392e] rounded-3xl p-2 shadow-2xl overflow-hidden relative group">
-                    <div
-                        class="absolute top-6 right-6 z-10 bg-primary text-[#051d0e] text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
-                        <span class="material-symbols-outlined filled-icon text-lg">check_circle</span>
-                        Độ tin cậy 98%
-                    </div>
-                    <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-gray-800 relative">
-                        <div class="absolute inset-0 bg-cover bg-center"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx");'>
-                        </div>
-                    </div>
+                  class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"
+                ></div>
+                <h3 class="text-lg font-bold text-white mb-2">
+                  Tác động môi trường &amp; Kinh tế
+                </h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                  Việc tái chế 1 tấn nhựa PET giúp tiết kiệm 3,8 thùng dầu thô
+                  và giảm đáng kể lượng khí thải CO2. Nhựa PET có thể được tái
+                  chế thành sợi polyester dùng trong ngành dệt may, thảm, hoặc
+                  sản xuất chai lọ mới.
+                </p>
+                <div class="flex gap-2">
+                  <span
+                    class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#28392e] text-xs font-medium text-primary"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >savings</span
+                    >
+                    Tiết kiệm tài nguyên
+                  </span>
+                  <span
+                    class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#28392e] text-xs font-medium text-blue-400"
+                  >
+                    <span class="material-symbols-outlined text-sm">co2</span>
+                    Giảm khí thải
+                  </span>
                 </div>
-                <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="flex flex-col">
-                            <span class="text-primary font-bold text-sm tracking-wider uppercase mb-1">Đã phát
-                                hiện</span>
-                            <h1 class="text-3xl md:text-4xl font-black text-white leading-tight">Chai Nhựa PET</h1>
-                        </div>
-                        <div class="bg-[#28392e] p-3 rounded-xl">
-                            <span class="material-symbols-outlined text-4xl text-primary">recycling</span>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                            <span class="text-gray-400 text-xs uppercase block mb-1">Loại rác</span>
-                            <span class="text-white font-bold text-lg flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-primary"></span> Tái chế
-                            </span>
-                        </div>
-                        <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                            <span class="text-gray-400 text-xs uppercase block mb-1">Chất liệu</span>
-                            <span class="text-white font-bold text-lg">Polyethylene</span>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div
-                            class="p-4 rounded-2xl bg-yellow-900/20 border border-yellow-700/30 flex items-start gap-3">
-                            <span class="material-symbols-outlined text-yellow-500 mt-0.5">warning</span>
-                            <div>
-                                <h4 class="text-yellow-500 font-bold text-sm mb-1">Lưu ý xử lý</h4>
-                                <p class="text-gray-300 text-sm">Cần rửa sạch chất lỏng bên trong và tháo nắp chai (nếu
-                                    nắp làm từ nhựa khác) trước khi bỏ vào thùng tái chế.</p>
-                            </div>
-                        </div>
-                        <div class="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex items-start gap-3">
-                            <span class="material-symbols-outlined text-primary mt-0.5">verified</span>
-                            <div>
-                                <h4 class="text-primary font-bold text-sm mb-1">Hành động đề xuất</h4>
-                                <p class="text-gray-300 text-sm">Bỏ vào thùng rác màu xanh hoặc mang đến điểm thu gom
-                                    nhựa tái chế.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="lg:col-span-7 flex flex-col gap-6">
-                <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
-                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">analytics</span>
-                        Phân tích chi tiết
-                    </h2>
-                    <div class="space-y-8">
-                        <div class="relative pl-8 border-l-2 border-[#28392e]">
-                            <div
-                                class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4">
-                            </div>
-                            <h3 class="text-lg font-bold text-white mb-2">Tác động môi trường &amp; Kinh tế</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                                Việc tái chế 1 tấn nhựa PET giúp tiết kiệm 3,8 thùng dầu thô và giảm đáng kể lượng khí
-                                thải CO2. Nhựa PET có thể được tái chế thành sợi polyester dùng trong ngành dệt may,
-                                thảm, hoặc sản xuất chai lọ mới.
-                            </p>
-                            <div class="flex gap-2">
-                                <span
-                                    class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#28392e] text-xs font-medium text-primary">
-                                    <span class="material-symbols-outlined text-sm">savings</span> Tiết kiệm tài nguyên
-                                </span>
-                                <span
-                                    class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#28392e] text-xs font-medium text-blue-400">
-                                    <span class="material-symbols-outlined text-sm">co2</span> Giảm khí thải
-                                </span>
-                            </div>
-                        </div>
-                        <div class="relative pl-8 border-l-2 border-[#28392e]">
-                            <div
-                                class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-gray-500 rounded-full w-4 h-4">
-                            </div>
-                            <h3 class="text-lg font-bold text-white mb-2">Mức độ độc hại</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed">
-                                Nhựa PET an toàn cho thực phẩm và đồ uống khi sử dụng một lần. Tuy nhiên, không nên tái
-                                sử dụng chai nước nhiều lần mà không vệ sinh kỹ do nguy cơ vi khuẩn tích tụ. Khi đốt
-                                cháy, nó có thể sinh ra khí độc, vì vậy tuyệt đối không tự ý đốt.
-                            </p>
-                        </div>
-                        <div class="relative pl-8 border-l-2 border-[#28392e]">
-                            <div
-                                class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-green-500 rounded-full w-4 h-4">
-                            </div>
-                            <h3 class="text-lg font-bold text-white mb-2">Quy trình xử lý an toàn</h3>
-                            <ul class="list-disc list-outside ml-4 text-gray-400 text-sm space-y-2">
-                                <li>Làm rỗng chai hoàn toàn, đổ bỏ chất lỏng dư thừa.</li>
-                                <li>Bóp bẹp chai để tiết kiệm diện tích thùng chứa.</li>
-                                <li>Nếu có thể, tách riêng nhãn mác ni lông nếu quy định địa phương yêu cầu.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <div class="relative pl-8 border-l-2 border-[#28392e]">
                 <div
-                    class="bg-gradient-to-br from-[#152e20] to-[#0f2117] border border-[#28392e] rounded-3xl p-6 md:p-8 relative overflow-hidden">
-                    <div
-                        class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
-                    </div>
-                    <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
-                        <span class="material-symbols-outlined text-yellow-400">lightbulb</span>
-                        Câu chuyện tái chế &amp; Ý tưởng
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-                        <div
-                            class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
-                            <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
-                                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy");'>
-                                </div>
-                            </div>
-                            <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">Làm
-                                chậu cây tự động tưới</h4>
-                            <p class="text-gray-400 text-xs line-clamp-2">Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt
-                                thông minh cho vườn rau tại nhà.</p>
-                        </div>
-                        <div
-                            class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
-                            <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
-                                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X");'>
-                                </div>
-                            </div>
-                            <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
-                                Adidas &amp; Giày từ rác thải biển</h4>
-                            <p class="text-gray-400 text-xs line-clamp-2">Cách thương hiệu lớn sử dụng nhựa PET tái chế
-                                để tạo ra những đôi giày thể thao bền vững.</p>
-                        </div>
-                    </div>
-                    <div
-                        class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <p class="text-gray-400 text-xs italic">"Rác thải chỉ là tài nguyên đặt sai chỗ."</p>
-                        <button
-                            class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group">
-                            Xem thêm ý tưởng
-                            <span
-                                class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                        </button>
-                    </div>
+                  class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-gray-500 rounded-full w-4 h-4"
+                ></div>
+                <h3 class="text-lg font-bold text-white mb-2">
+                  Mức độ độc hại
+                </h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                  Nhựa PET an toàn cho thực phẩm và đồ uống khi sử dụng một lần.
+                  Tuy nhiên, không nên tái sử dụng chai nước nhiều lần mà không
+                  vệ sinh kỹ do nguy cơ vi khuẩn tích tụ. Khi đốt cháy, nó có
+                  thể sinh ra khí độc, vì vậy tuyệt đối không tự ý đốt.
+                </p>
+              </div>
+              <div class="relative pl-8 border-l-2 border-[#28392e]">
+                <div
+                  class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-green-500 rounded-full w-4 h-4"
+                ></div>
+                <h3 class="text-lg font-bold text-white mb-2">
+                  Quy trình xử lý an toàn
+                </h3>
+                <ul
+                  class="list-disc list-outside ml-4 text-gray-400 text-sm space-y-2"
+                >
+                  <li>Làm rỗng chai hoàn toàn, đổ bỏ chất lỏng dư thừa.</li>
+                  <li>Bóp bẹp chai để tiết kiệm diện tích thùng chứa.</li>
+                  <li>
+                    Nếu có thể, tách riêng nhãn mác ni lông nếu quy định địa
+                    phương yêu cầu.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-gradient-to-br from-[#152e20] to-[#0f2117] border border-[#28392e] rounded-3xl p-6 md:p-8 relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"
+            ></div>
+            <h2
+              class="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10"
+            >
+              <span class="material-symbols-outlined text-yellow-400"
+                >lightbulb</span
+              >
+              Câu chuyện tái chế &amp; Ý tưởng
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+              <div
+                class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer"
+              >
+                <div
+                  class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden"
+                >
+                  <div
+                    class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                    style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
+                    "
+                  ></div>
                 </div>
+                <h4
+                  class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors"
+                >
+                  Làm chậu cây tự động tưới
+                </h4>
+                <p class="text-gray-400 text-xs line-clamp-2">
+                  Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho
+                  vườn rau tại nhà.
+                </p>
+              </div>
+              <div
+                class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer"
+              >
+                <div
+                  class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden"
+                >
+                  <div
+                    class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                    style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
+                    "
+                  ></div>
+                </div>
+                <h4
+                  class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors"
+                >
+                  Adidas &amp; Giày từ rác thải biển
+                </h4>
+                <p class="text-gray-400 text-xs line-clamp-2">
+                  Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những
+                  đôi giày thể thao bền vững.
+                </p>
+              </div>
             </div>
-        </div>
-        <div class="mt-8 border-t border-[#28392e] pt-10">
-            <h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
-                <span class="material-symbols-outlined text-gray-400">category</span>
-                Các vật dụng tương tự
-            </h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-                    href="#">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh");'>
-                        </div>
-                        <div>
-                            <h4 class="text-white font-bold text-sm group-hover:text-primary">Ly nhựa PP</h4>
-                            <span class="text-xs text-gray-500">Tái chế được</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-                    href="#">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy");'>
-                        </div>
-                        <div>
-                            <h4 class="text-white font-bold text-sm group-hover:text-primary">Hộp xốp</h4>
-                            <span class="text-xs text-red-400">Rác thải</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-                    href="#">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X");'>
-                        </div>
-                        <div>
-                            <h4 class="text-white font-bold text-sm group-hover:text-primary">Nắp chai HDPE</h4>
-                            <span class="text-xs text-gray-500">Tái chế được</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-                    href="#">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx");'>
-                        </div>
-                        <div>
-                            <h4 class="text-white font-bold text-sm group-hover:text-primary">Túi ni lông</h4>
-                            <span class="text-xs text-yellow-500">Khó tái chế</span>
-                        </div>
-                    </div>
-                </a>
+            <div
+              class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4"
+            >
+              <p class="text-gray-400 text-xs italic">
+                "Rác thải chỉ là tài nguyên đặt sai chỗ."
+              </p>
+              <button
+                class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group"
+              >
+                Xem thêm ý tưởng
+                <span
+                  class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </button>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="mt-8 border-t border-[#28392e] pt-10">
+        <h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+          <span class="material-symbols-outlined text-gray-400">category</span>
+          Các vật dụng tương tự
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <a
+            class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div class="flex items-center gap-3 mb-2">
+              <div
+                class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');
+                "
+              ></div>
+              <div>
+                <h4
+                  class="text-white font-bold text-sm group-hover:text-primary"
+                >
+                  Ly nhựa PP
+                </h4>
+                <span class="text-xs text-gray-500">Tái chế được</span>
+              </div>
+            </div>
+          </a>
+          <a
+            class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div class="flex items-center gap-3 mb-2">
+              <div
+                class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
+                "
+              ></div>
+              <div>
+                <h4
+                  class="text-white font-bold text-sm group-hover:text-primary"
+                >
+                  Hộp xốp
+                </h4>
+                <span class="text-xs text-red-400">Rác thải</span>
+              </div>
+            </div>
+          </a>
+          <a
+            class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div class="flex items-center gap-3 mb-2">
+              <div
+                class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
+                "
+              ></div>
+              <div>
+                <h4
+                  class="text-white font-bold text-sm group-hover:text-primary"
+                >
+                  Nắp chai HDPE
+                </h4>
+                <span class="text-xs text-gray-500">Tái chế được</span>
+              </div>
+            </div>
+          </a>
+          <a
+            class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div class="flex items-center gap-3 mb-2">
+              <div
+                class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
+                "
+              ></div>
+              <div>
+                <h4
+                  class="text-white font-bold text-sm group-hover:text-primary"
+                >
+                  Túi ni lông
+                </h4>
+                <span class="text-xs text-yellow-500">Khó tái chế</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
     </main>
     <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
-        <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="flex flex-col gap-3 items-center md:items-start">
-                <div class="flex items-center gap-2 text-white font-bold text-xl">
-                    <span class="material-symbols-outlined text-primary text-3xl">eco</span>
-                    EcoScan AI
-                </div>
-                <p class="text-gray-500 text-sm">© 2024 EcoScan. Giải pháp xanh cho tương lai.</p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-8">
-                <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Điều khoản sử
-                    dụng</a>
-                <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Chính sách
-                    bảo mật</a>
-                <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Trung tâm hỗ
-                    trợ</a>
-            </div>
-            <div class="flex gap-4">
-                <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-                    href="#">
-                    <span class="text-xs font-bold">FB</span>
-                </a>
-                <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-                    href="#">
-                    <span class="text-xs font-bold">TW</span>
-                </a>
-                <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-                    href="#">
-                    <span class="text-xs font-bold">IN</span>
-                </a>
-            </div>
+      <div
+        class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8"
+      >
+        <div class="flex flex-col gap-3 items-center md:items-start">
+          <div class="flex items-center gap-2 text-white font-bold text-xl">
+            <span class="material-symbols-outlined text-primary text-3xl"
+              >eco</span
+            >
+            EcoScan AI
+          </div>
+          <p class="text-gray-500 text-sm">
+            © 2024 EcoScan. Giải pháp xanh cho tương lai.
+          </p>
         </div>
+        <div class="flex flex-wrap justify-center gap-8">
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Điều khoản sử dụng</a
+          >
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Chính sách bảo mật</a
+          >
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Trung tâm hỗ trợ</a
+          >
+        </div>
+        <div class="flex gap-4">
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">FB</span>
+          </a>
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">TW</span>
+          </a>
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">IN</span>
+          </a>
+        </div>
+      </div>
     </footer>
-
-</body>
-
+  </body>
 </html>
