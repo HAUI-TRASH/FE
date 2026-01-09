@@ -71,6 +71,13 @@
         class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
       >
         <div class="flex items-center gap-3 text-white">
+          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+            <img
+              src="../img logo/logoHaUI.png"
+              alt="HaUI Logo"
+              class="h-12 w-12 rounded-full"
+            />
+          </a>
           <div class="size-8 flex items-center justify-center text-primary">
             <span class="material-symbols-outlined text-3xl">recycling</span>
           </div>
@@ -89,6 +96,11 @@
           <a class="text-primary text-sm font-medium" href="#">Kết quả</a>
           <a
             class="text-gray-300 hover:text-primary text-sm font-medium"
+            href="list_blog.html"
+            >Blog</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary text-sm font-medium"
             href="#"
             >Lịch sử</a
           >
@@ -99,34 +111,44 @@
           >
         </nav>
         <div class="flex items-center gap-4">
-          <a
-            href="../Admin/home.html"
-            class="bg-[#28392e] hover:bg-[#3b5443] text-white px-3 py-2 rounded-lg transition-colors text-sm font-medium flex items-center gap-2"
-          >
-            <span class="material-symbols-outlined text-base"
-              >admin_panel_settings</span
-            >
-            Chế độ Quản trị
-          </a>
-          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
-            <img
-              src="../img logo/logoHaUI.png"
-              alt="HaUI Logo"
-              class="h-8 w-8 rounded-full"
-            />
-          </a>
           <button
             class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
           >
             <span class="material-symbols-outlined">menu</span>
           </button>
-          <div
-            class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-            data-alt="User profile picture placeholder"
-            style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
-            "
-          ></div>
+          <div class="relative">
+            <button
+              id="user-menu-button"
+              class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+              "
+              onclick="toggleUserMenu()"
+            ></button>
+            <div
+              id="user-menu"
+              class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
+            >
+              <a
+                href="#"
+                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+              >
+                <img
+                  class="w-8 h-8 rounded-full mr-3"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
+                  alt="Avatar"
+                />
+                Tài khoản của bạn
+              </a>
+              <a
+                href="#"
+                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+              >
+                <span class="material-symbols-outlined mr-3">logout</span>
+                Đăng xuất
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -548,5 +570,19 @@
         </div>
       </div>
     </footer>
+    <script>
+      function toggleUserMenu() {
+        const menu = document.getElementById("user-menu");
+        menu.classList.toggle("hidden");
+      }
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const button = document.getElementById("user-menu-button");
+        const menu = document.getElementById("user-menu");
+        if (!button.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.add("hidden");
+        }
+      });
+    </script>
   </body>
 </html>
