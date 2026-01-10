@@ -1,57 +1,55 @@
 <!DOCTYPE html>
 <html class="dark" lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Trang Chủ Nhận Diện Rác</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#13ec5b",
-              "background-light": "#f6f8f6",
-              "background-dark": "#102216",
-              "surface-dark": "#1c2a21",
-              "surface-light": "#ffffff",
-            },
-            fontFamily: {
-              display: ["Space Grotesk", "sans-serif"],
-              body: ["Space Grotesk", "sans-serif"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              "2xl": "1rem",
-              full: "9999px",
-            },
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Trang Chủ Nhận Diện Rác</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13ec5b",
+            "background-light": "#f6f8f6",
+            "background-dark": "#102216",
+            "surface-dark": "#1c2a21",
+            "surface-light": "#ffffff",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Space Grotesk", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            "2xl": "1rem",
+            full: "9999px",
           },
         },
-      };
-    </script>
-    <style>
-      body {
-        font-family: "Space Grotesk", sans-serif;
-      }
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family: "Space Grotesk", sans-serif;
+    }
 
-      .material-symbols-outlined {
-        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-      }
-    </style>
-  </head>
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+  </style>
+</head>
 
   <body
     class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300"
@@ -143,377 +141,597 @@
           </div>
         </div>
       </div>
-    </header>
-    <main class="flex-1 flex flex-col items-center w-full px-4 py-8 md:py-12">
+    </div>
+  </header>
+  <main class="flex-1 flex flex-col items-center w-full px-4 py-8 md:py-12">
+    <div class="max-w-4xl w-full text-center mb-10 space-y-4 animate-fade-in-up">
       <div
-        class="max-w-4xl w-full text-center mb-10 space-y-4 animate-fade-in-up"
-      >
-        <div
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2"
-        >
-          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-          AI Technology V2.0
-        </div>
-        <h2
-          class="text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight"
-        >
-          Phân loại rác thải bằng <span class="text-primary">AI</span>
-          <br class="hidden md:block" />chỉ trong 1 giây
-        </h2>
-        <p
-          class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-normal"
-        >
-          Sử dụng công nghệ trí tuệ nhân tạo tiên tiến để nhận diện và phân loại
-          rác thải, góp phần bảo vệ môi trường xanh sạch.
-        </p>
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        AI Technology V2.0
       </div>
-      <div
-        class="max-w-[1100px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16"
-      >
-        <div class="lg:col-span-8 flex flex-col">
+      <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
+        Phân loại rác thải bằng <span class="text-primary">AI</span>
+        <br class="hidden md:block" />chỉ trong 1 giây
+      </h2>
+      <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-normal">
+        Sử dụng công nghệ trí tuệ nhân tạo tiên tiến để nhận diện và phân loại
+        rác thải, góp phần bảo vệ môi trường xanh sạch.
+      </p>
+    </div>
+    <div class="max-w-[1100px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16">
+      <div class="lg:col-span-8 flex flex-col">
+        <div id="dropZone"
+          class="bg-surface-dark border-2 border-dashed border-[#3b5443] hover:border-primary/50 transition-all duration-300 rounded-3xl flex flex-col items-center justify-center py-12 px-6 h-full min-h-[400px] group cursor-pointer relative overflow-hidden shadow-2xl shadow-black/20">
+
           <div
-            class="bg-surface-dark border-2 border-dashed border-[#3b5443] hover:border-primary/50 transition-all duration-300 rounded-3xl flex flex-col items-center justify-center py-12 px-6 h-full min-h-[400px] group cursor-pointer relative overflow-hidden shadow-2xl shadow-black/20"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-            ></div>
-            <div class="relative z-10 flex flex-col items-center">
-              <div
-                class="bg-[#28392e] p-6 rounded-full mb-6 group-hover:scale-110 group-hover:bg-[#3b5443] transition-all duration-300 shadow-inner"
-              >
-                <span class="material-symbols-outlined text-5xl text-primary"
-                  >cloud_upload</span
-                >
-              </div>
-              <h3 class="text-white text-2xl font-bold mb-3">
-                Kéo thả ảnh vào đây
-              </h3>
-              <p
-                class="text-gray-400 text-center max-w-sm mb-8 text-sm leading-relaxed"
-              >
-                Hoặc nhấp vào nút bên dưới để chọn ảnh từ thư viện của bạn.
-                <br /><span class="text-gray-500 text-xs mt-2 block"
-                  >Hỗ trợ JPG, PNG, WEBP tối đa 10MB.</span
-                >
-              </p>
-              <button
-                class="bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40 hover:-translate-y-1 flex items-center gap-2.5 text-base"
-              >
-                <span class="material-symbols-outlined">folder_open</span>
-                Chọn tệp từ máy tính
-              </button>
-            </div>
+            class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
           </div>
-        </div>
-        <div class="lg:col-span-4 flex flex-col gap-6">
-          <div
-            class="bg-surface-dark border border-[#28392e] p-8 rounded-3xl flex flex-col items-center text-center hover:border-primary/30 transition-all duration-300 shadow-xl shadow-black/10 flex-1 justify-center relative overflow-hidden group"
-          >
+          <div class="relative z-10 flex flex-col items-center">
             <div
-              class="absolute inset-0 bg-gradient-to-b from-[#28392e]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
-            ></div>
-            <div
-              class="bg-[#28392e] p-4 rounded-full mb-5 group-hover:bg-[#3b5443] transition-colors relative z-10"
-            >
-              <span class="material-symbols-outlined text-4xl text-white"
-                >photo_camera</span
-              >
+              class="bg-[#28392e] p-6 rounded-full mb-6 group-hover:scale-110 group-hover:bg-[#3b5443] transition-all duration-300 shadow-inner">
+              <span class="material-symbols-outlined text-5xl text-primary">cloud_upload</span>
             </div>
-            <h3 class="text-white text-xl font-bold mb-2 relative z-10">
-              Chụp ảnh trực tiếp
+            <h3 class="text-white text-2xl font-bold mb-3">
+              Kéo thả ảnh vào đây
             </h3>
-            <p class="text-gray-400 text-sm mb-8 relative z-10">
-              Sử dụng camera thiết bị để nhận diện ngay lập tức.
+            <p class="text-gray-400 text-center max-w-sm mb-8 text-sm leading-relaxed">
+              Hoặc nhấp vào nút bên dưới để chọn ảnh từ thư viện của bạn.
+              <br /><span class="text-gray-500 text-xs mt-2 block">Hỗ trợ JPG, PNG, WEBP tối đa 10MB.</span>
             </p>
-            <button
-              class="w-full bg-[#28392e] hover:bg-[#3b5443] hover:text-primary text-white font-bold py-3.5 px-4 rounded-xl border border-white/5 hover:border-primary/20 transition-all flex items-center justify-center gap-2 relative z-10 group-hover:shadow-lg"
-            >
-              <span class="material-symbols-outlined">shutter_speed</span>
-              Kích hoạt Camera
+            <button id="btnPick"
+              class="bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40 hover:-translate-y-1 flex items-center gap-2.5 text-base">
+              <span class="material-symbols-outlined">folder_open</span>
+              Chọn tệp từ máy tính
             </button>
           </div>
-          <div
-            class="bg-gradient-to-br from-[#152e20] to-[#0f2117] p-6 rounded-3xl border border-[#28392e]"
-          >
-            <div class="flex items-start gap-4 mb-5">
-              <div class="bg-primary/10 p-2 rounded-lg">
-                <span class="material-symbols-outlined text-primary text-2xl"
-                  >auto_awesome</span
-                >
-              </div>
-              <div>
-                <h4 class="text-white font-bold text-lg">Độ chính xác 98%</h4>
-                <p class="text-sm text-gray-400 mt-1">
-                  AI được huấn luyện trên 10 triệu mẫu dữ liệu rác thải.
-                </p>
-              </div>
-            </div>
-            <div class="space-y-3">
-              <div
-                class="flex justify-between text-xs font-medium text-gray-400 uppercase tracking-wide"
-              >
-                <span>Độ tin cậy</span>
-                <span class="text-primary">Tuyệt đối</span>
-              </div>
-              <div
-                class="w-full bg-gray-800/50 h-2 rounded-full overflow-hidden backdrop-blur-sm"
-              >
-                <div
-                  class="bg-gradient-to-r from-primary to-[#86efac] h-full w-[98%] shadow-[0_0_15px_rgba(19,236,91,0.5)]"
-                ></div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-      <div class="max-w-[1200px] w-full mt-8">
+      <div class="lg:col-span-4 flex flex-col gap-6">
         <div
-          class="flex items-center justify-between mb-8 px-4 border-b border-[#28392e] pb-4"
-        >
-          <h2 class="text-white text-2xl font-bold flex items-center gap-3">
-            <span
-              class="bg-[#28392e] p-1.5 rounded-lg text-primary flex items-center justify-center"
-            >
-              <span class="material-symbols-outlined">grid_view</span>
-            </span>
-            Các loại rác phổ biến
-          </h2>
-          <a
-            class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group"
-            href="#"
-          >
-            Xem thư viện
-            <span
-              class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform"
-              >arrow_right_alt</span
-            >
-          </a>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+          class="bg-surface-dark border border-[#28392e] p-8 rounded-3xl flex flex-col items-center text-center hover:border-primary/30 transition-all duration-300 shadow-xl shadow-black/10 flex-1 justify-center relative overflow-hidden group">
           <div
-            class="group bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full"
-          >
-            <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden">
-              <div
-                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                data-alt="Plastic bottle waste example"
-                style="
-                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
-                "
-              ></div>
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60"
-              ></div>
-              <div
-                class="absolute top-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 text-primary text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1"
-              >
-                <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                Tái chế
-              </div>
-            </div>
-            <div class="p-5 flex-1 flex flex-col">
-              <h3
-                class="text-white font-bold text-lg mb-2 group-hover:text-primary transition-colors"
-              >
-                Chai Nhựa PET
-              </h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
-                Nhựa dẻo trong suốt, có thể tái chế thành sợi vải polyester.
-              </p>
-              <div
-                class="mt-auto flex items-center gap-2 text-xs text-gray-500 font-medium border-t border-white/5 pt-3"
-              >
-                <span class="material-symbols-outlined text-base">info</span>
-                Cần làm sạch trước khi bỏ
-              </div>
-            </div>
+            class="absolute inset-0 bg-gradient-to-b from-[#28392e]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
           </div>
-          <div
-            class="group bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden hover:border-yellow-500/50 hover:shadow-lg hover:shadow-yellow-500/5 transition-all duration-300 flex flex-col h-full"
-          >
-            <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden">
-              <div
-                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                data-alt="Banana peel organic waste example"
-                style="
-                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');
-                "
-              ></div>
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60"
-              ></div>
-              <div
-                class="absolute top-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 text-yellow-400 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1"
-              >
-                <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
-                Hữu cơ
-              </div>
-            </div>
-            <div class="p-5 flex-1 flex flex-col">
-              <h3
-                class="text-white font-bold text-lg mb-2 group-hover:text-yellow-400 transition-colors"
-              >
-                Vỏ Chuối
-              </h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
-                Rác thải thực phẩm, dễ phân hủy tự nhiên làm phân bón.
-              </p>
-              <div
-                class="mt-auto flex items-center gap-2 text-xs text-gray-500 font-medium border-t border-white/5 pt-3"
-              >
-                <span class="material-symbols-outlined text-base">compost</span>
-                Ủ phân compost
-              </div>
-            </div>
+          <div class="bg-[#28392e] p-4 rounded-full mb-5 group-hover:bg-[#3b5443] transition-colors relative z-10">
+            <span class="material-symbols-outlined text-4xl text-white">photo_camera</span>
           </div>
-          <div
-            class="group bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full"
-          >
-            <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden">
-              <div
-                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                data-alt="Glass jar recycling waste example"
-                style="
-                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
-                "
-              ></div>
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60"
-              ></div>
-              <div
-                class="absolute top-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 text-primary text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1"
-              >
-                <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                Tái chế
-              </div>
-            </div>
-            <div class="p-5 flex-1 flex flex-col">
-              <h3
-                class="text-white font-bold text-lg mb-2 group-hover:text-primary transition-colors"
-              >
-                Chai Thủy Tinh
-              </h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
-                Có thể tái chế vô hạn 100% nếu được phân loại đúng.
-              </p>
-              <div
-                class="mt-auto flex items-center gap-2 text-xs text-gray-500 font-medium border-t border-white/5 pt-3"
-              >
-                <span class="material-symbols-outlined text-base">warning</span>
-                Cẩn thận vỡ
-              </div>
-            </div>
-          </div>
-          <div
-            class="group bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/5 transition-all duration-300 flex flex-col h-full"
-          >
-            <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden">
-              <div
-                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                data-alt="Used batteries hazardous waste example"
-                style="
-                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
-                "
-              ></div>
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60"
-              ></div>
-              <div
-                class="absolute top-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 text-red-500 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1"
-              >
-                <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-                Nguy hại
-              </div>
-            </div>
-            <div class="p-5 flex-1 flex flex-col">
-              <h3
-                class="text-white font-bold text-lg mb-2 group-hover:text-red-500 transition-colors"
-              >
-                Pin Cũ
-              </h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
-                Chứa chì, thủy ngân. Tuyệt đối không bỏ chung rác thường.
-              </p>
-              <div
-                class="mt-auto flex items-center gap-2 text-xs text-gray-500 font-medium border-t border-white/5 pt-3"
-              >
-                <span class="material-symbols-outlined text-base"
-                  >delete_forever</span
-                >
-                Thu gom riêng
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-    <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
-      <div
-        class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8"
-      >
-        <div class="flex flex-col gap-3 items-center md:items-start">
-          <div class="flex items-center gap-2 text-white font-bold text-xl">
-            <span class="material-symbols-outlined text-primary text-3xl"
-              >eco</span
-            >
-            EcoScan AI
-          </div>
-          <p class="text-gray-500 text-sm">
-            © 2024 EcoScan. Giải pháp xanh cho tương lai.
+          <h3 class="text-white text-xl font-bold mb-2 relative z-10">
+            Chụp ảnh trực tiếp
+          </h3>
+          <p class="text-gray-400 text-sm mb-8 relative z-10">
+            Sử dụng camera thiết bị để nhận diện ngay lập tức.
           </p>
+          <button id="btnCamera"
+            class="w-full bg-[#28392e] hover:bg-[#3b5443] hover:text-primary text-white font-bold py-3.5 px-4 rounded-xl border border-white/5 hover:border-primary/20 transition-all flex items-center justify-center gap-2 relative z-10 group-hover:shadow-lg">
+            <span class="material-symbols-outlined">shutter_speed</span>
+            Kích hoạt Camera
+          </button>
+
         </div>
-        <div class="flex flex-wrap justify-center gap-8">
-          <a
-            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
-            href="#"
-            >Điều khoản sử dụng</a
-          >
-          <a
-            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
-            href="#"
-            >Chính sách bảo mật</a
-          >
-          <a
-            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
-            href="#"
-            >Trung tâm hỗ trợ</a
-          >
-        </div>
-        <div class="flex gap-4">
-          <a
-            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-            href="#"
-          >
-            <span class="text-xs font-bold">FB</span>
-          </a>
-          <a
-            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-            href="#"
-          >
-            <span class="text-xs font-bold">TW</span>
-          </a>
-          <a
-            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-            href="#"
-          >
-            <span class="text-xs font-bold">IN</span>
-          </a>
+        <div class="bg-gradient-to-br from-[#152e20] to-[#0f2117] p-6 rounded-3xl border border-[#28392e]">
+          <div class="flex items-start gap-4 mb-5">
+            <div class="bg-primary/10 p-2 rounded-lg">
+              <span class="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
+            </div>
+            <div>
+              <h4 class="text-white font-bold text-lg">Độ chính xác 98%</h4>
+              <p class="text-sm text-gray-400 mt-1">
+                AI được huấn luyện trên 10 triệu mẫu dữ liệu rác thải.
+              </p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between text-xs font-medium text-gray-400 uppercase tracking-wide">
+              <span>Độ tin cậy</span>
+              <span class="text-primary">Tuyệt đối</span>
+            </div>
+            <div class="w-full bg-gray-800/50 h-2 rounded-full overflow-hidden backdrop-blur-sm">
+              <div
+                class="bg-gradient-to-r from-primary to-[#86efac] h-full w-[98%] shadow-[0_0_15px_rgba(19,236,91,0.5)]">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </footer>
-    <script>
-      function toggleUserMenu() {
-        const menu = document.getElementById("user-menu");
-        menu.classList.toggle("hidden");
-      }
-      // Close menu when clicking outside
-      document.addEventListener("click", function (event) {
-        const button = document.getElementById("user-menu-button");
-        const menu = document.getElementById("user-menu");
-        if (!button.contains(event.target) && !menu.contains(event.target)) {
-          menu.classList.add("hidden");
-        }
+    </div>
+    <div class="max-w-[1200px] w-full mt-8">
+      <div class="flex items-center justify-between mb-8 px-4 border-b border-[#28392e] pb-4">
+        <h2 class="text-white text-2xl font-bold flex items-center gap-3">
+          <span class="bg-[#28392e] p-1.5 rounded-lg text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">grid_view</span>
+          </span>
+          Các loại rác phổ biến
+        </h2>
+        <a class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group"
+          href="#">
+          Xem thư viện
+          <span
+            class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+        <div
+          class="group bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full">
+          <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              data-alt="Plastic bottle waste example" style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
+                "></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60"></div>
+            <div
+              class="absolute top-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 text-primary text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Tái chế
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="text-white font-bold text-lg mb-2 group-hover:text-primary transition-colors">
+              Chai Nhựa PET
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+              Nhựa dẻo trong suốt, có thể tái chế thành sợi vải polyester.
+            </p>
+            <div class="mt-auto flex items-center gap-2 text-xs text-gray-500 font-medium border-t border-white/5 pt-3">
+              <span class="material-symbols-outlined text-base">info</span>
+              Cần làm sạch trước khi bỏ
+            </div>
+          </div>
+        </div>
+        <div
+          class="group bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden hover:border-yellow-500/50 hover:shadow-lg hover:shadow-yellow-500/5 transition-all duration-300 flex flex-col h-full">
+          <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              data-alt="Banana peel organic waste example" style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');
+                "></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60"></div>
+            <div
+              class="absolute top-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 text-yellow-400 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+              Hữu cơ
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="text-white font-bold text-lg mb-2 group-hover:text-yellow-400 transition-colors">
+              Vỏ Chuối
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+              Rác thải thực phẩm, dễ phân hủy tự nhiên làm phân bón.
+            </p>
+            <div class="mt-auto flex items-center gap-2 text-xs text-gray-500 font-medium border-t border-white/5 pt-3">
+              <span class="material-symbols-outlined text-base">compost</span>
+              Ủ phân compost
+            </div>
+          </div>
+        </div>
+        <div
+          class="group bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full">
+          <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              data-alt="Glass jar recycling waste example" style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
+                "></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60"></div>
+            <div
+              class="absolute top-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 text-primary text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Tái chế
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="text-white font-bold text-lg mb-2 group-hover:text-primary transition-colors">
+              Chai Thủy Tinh
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+              Có thể tái chế vô hạn 100% nếu được phân loại đúng.
+            </p>
+            <div class="mt-auto flex items-center gap-2 text-xs text-gray-500 font-medium border-t border-white/5 pt-3">
+              <span class="material-symbols-outlined text-base">warning</span>
+              Cẩn thận vỡ
+            </div>
+          </div>
+        </div>
+        <div
+          class="group bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/5 transition-all duration-300 flex flex-col h-full">
+          <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              data-alt="Used batteries hazardous waste example" style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
+                "></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60"></div>
+            <div
+              class="absolute top-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 text-red-500 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+              Nguy hại
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h3 class="text-white font-bold text-lg mb-2 group-hover:text-red-500 transition-colors">
+              Pin Cũ
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
+              Chứa chì, thủy ngân. Tuyệt đối không bỏ chung rác thường.
+            </p>
+            <div class="mt-auto flex items-center gap-2 text-xs text-gray-500 font-medium border-t border-white/5 pt-3">
+              <span class="material-symbols-outlined text-base">delete_forever</span>
+              Thu gom riêng
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
+    <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex flex-col gap-3 items-center md:items-start">
+        <div class="flex items-center gap-2 text-white font-bold text-xl">
+          <span class="material-symbols-outlined text-primary text-3xl">eco</span>
+          EcoScan AI
+        </div>
+        <p class="text-gray-500 text-sm">
+          © 2024 EcoScan. Giải pháp xanh cho tương lai.
+        </p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-8">
+        <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Điều khoản sử
+          dụng</a>
+        <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Chính sách bảo
+          mật</a>
+        <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Trung tâm hỗ trợ</a>
+      </div>
+      <div class="flex gap-4">
+        <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+          href="#">
+          <span class="text-xs font-bold">FB</span>
+        </a>
+        <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+          href="#">
+          <span class="text-xs font-bold">TW</span>
+        </a>
+        <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+          href="#">
+          <span class="text-xs font-bold">IN</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+<script>
+
+  const API_BASE = ""; // ví dụ: "http://localhost:8080"
+  const UPLOAD_URL = API_BASE + "/api/v1/user/ai-requests";
+
+  const token = localStorage.getItem("accessToken");
+  const isLogged = !!token; // true nếu đã login, false nếu chưa
+
+  const dropZone = document.getElementById("dropZone");
+  const btnPick = document.getElementById("btnPick");
+  const avatarBox = document.getElementById("avatarBox");
+
+  // Toggle user menu: if not logged, go to login page; otherwise show menu
+  function toggleUserMenu() {
+    const userMenu = document.getElementById('user-menu');
+    if (!isLogged) {
+      window.location.href = 'login.html';
+      return;
+    }
+    if (!userMenu) return;
+    userMenu.classList.toggle('hidden');
+  }
+
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+  fileInput.style.display = "none";
+  document.body.appendChild(fileInput);
+  let isPreview = false;
+  let isCameraUI = false;
+
+  // ==========================
+  // Load user info -> set avatar
+  // ==========================
+  try {
+    const acc = JSON.parse(localStorage.getItem("account") || "{}");
+    if (acc?.avatarUrl && avatarBox) {
+      avatarBox.style.backgroundImage = `url('${acc.avatarUrl}')`;
+    }
+  } catch (e) { }
+
+
+  function showToast(message, type = "info") {
+    const t = document.createElement("div");
+    t.className =
+      "fixed z-[9999] left-1/2 -translate-x-1/2 top-6 px-4 py-3 rounded-xl border text-sm shadow-2xl backdrop-blur-md";
+    if (type === "success") {
+      t.classList.add("border-green-500/30", "bg-green-500/10", "text-green-200");
+    } else if (type === "error") {
+      t.classList.add("border-red-500/30", "bg-red-500/10", "text-red-200");
+    } else {
+      t.classList.add("border-white/10", "bg-white/5", "text-gray-200");
+    }
+    t.textContent = message;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2200);
+  }
+
+  function isValidImage(file) {
+    if (!file) return false;
+    if (!file.type.startsWith("image/")) return false;
+    const max = 10 * 1024 * 1024; // 10MB
+    if (file.size > max) return false;
+    return true;
+  }
+
+  function setUploading(isUploading) {
+    if (!dropZone) return;
+    dropZone.classList.toggle("opacity-70", isUploading);
+    dropZone.classList.toggle("pointer-events-none", isUploading);
+    if (btnPick) btnPick.disabled = isUploading;
+  }
+
+  function renderPreview(file, fromCamera = false) {
+    isPreview = true;
+    isCameraUI = false;
+    const url = URL.createObjectURL(file);
+
+    dropZone.innerHTML = `
+      <div class="relative z-10 w-full max-w-md">
+        <div class="rounded-2xl overflow-hidden border border-[#28392e] bg-[#102216]">
+          <img src="${url}" alt="preview" class="w-full h-auto block" />
+        </div>
+
+        <div class="mt-4 flex items-center gap-3">
+          ${fromCamera ? `
+            <button id="btnUploadNow" class="flex-1 bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold py-3 px-4 rounded-xl shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40">Gửi ảnh để AI phân loại</button>
+            <button id="btnRetake" class="bg-[#28392e] hover:bg-[#3b5443] text-white font-bold py-3 px-4 rounded-xl border border-white/5 transition-all">Chụp lại</button>
+            <button id="btnPickFromComputer" class="bg-[#28392e] hover:bg-[#3b5443] text-white font-bold py-3 px-4 rounded-xl border border-white/5 transition-all">Chọn ảnh từ máy tính</button>
+          ` : `
+            <button id="btnUploadNow" class="flex-1 bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold py-3 px-4 rounded-xl shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40">Gửi ảnh để AI phân loại</button>
+            <button id="btnPickAgain" class="bg-[#28392e] hover:bg-[#3b5443] text-white font-bold py-3 px-4 rounded-xl border border-white/5 transition-all">Chọn lại</button>
+          `}
+        </div>
+
+        <p class="mt-3 text-xs text-gray-400">
+          ${file.name} • ${(file.size / 1024 / 1024).toFixed(2)} MB
+        </p>
+      </div>
+    `;
+
+    document.getElementById("btnUploadNow").onclick = () => uploadFile(file);
+    if (fromCamera) {
+      const retake = document.getElementById('btnRetake');
+      const pickComp = document.getElementById('btnPickFromComputer');
+      if (retake) retake.onclick = async () => {
+        // restart camera for retake
+        await startCamera('environment');
+      };
+      if (pickComp) pickComp.onclick = () => fileInput.click();
+    } else {
+      const pickAgain = document.getElementById("btnPickAgain");
+      if (pickAgain) pickAgain.onclick = () => fileInput.click();
+    }
+  }
+
+
+  async function uploadFile(file) {
+    if (!isValidImage(file)) {
+      showToast("Ảnh không hợp lệ (chỉ JPG/PNG/WEBP, tối đa 10MB).", "error");
+      return;
+    }
+
+    setUploading(true);
+    showToast("Đang tải ảnh lên...", "info");
+
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+
+      const res = await fetch(UPLOAD_URL, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+        body: fd,
       });
-    </script>
-  </body>
+
+      const json = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        const msg = json?.message || "Upload thất bại.";
+        showToast(msg, "error");
+        setUploading(false);
+        return;
+      }
+
+      const data = json?.data;
+      const id = data?.id || data?.requestId || data?.aiRequestId;
+
+      showToast("Gửi ảnh thành công! Đang chuyển trang...", "success");
+
+      setTimeout(() => {
+        // result_analys.html?id=123
+        window.location.href = `result_analys.html?id=${encodeURIComponent(id || "")}`;
+      }, 600);
+
+    } catch (e) {
+      showToast("Không thể kết nối server. Kiểm tra API_BASE/UPLOAD_URL.", "error");
+      setUploading(false);
+    }
+  }
+
+  if (btnPick) btnPick.addEventListener("click", () => fileInput.click());
+  if (dropZone) dropZone.addEventListener("click", (e) => {
+    // don't open file picker when camera UI or preview is active
+    if (isCameraUI || isPreview) return;
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files?.[0];
+    if (!isValidImage(file)) {
+      showToast("Ảnh không hợp lệ (chỉ JPG/PNG/WEBP, tối đa 10MB).", "error");
+      fileInput.value = "";
+      return;
+    }
+    renderPreview(file);
+  });
+
+  ["dragenter", "dragover"].forEach((evt) => {
+    dropZone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropZone.classList.add("border-primary");
+    });
+  });
+
+  ["dragleave", "drop"].forEach((evt) => {
+    dropZone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropZone.classList.remove("border-primary");
+    });
+  });
+
+  dropZone.addEventListener("drop", (e) => {
+    const file = e.dataTransfer?.files?.[0];
+    if (!isValidImage(file)) {
+      showToast("Ảnh không hợp lệ (chỉ JPG/PNG/WEBP, tối đa 10MB).", "error");
+      return;
+    }
+    renderPreview(file);
+  });
+  window.ecoscanLogout = function () {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("account");
+    window.location.href = "login.html";
+  };
+
+  const btnCamera = document.getElementById("btnCamera");
+  let cameraStream = null;
+
+  function stopCamera() {
+    if (cameraStream) {
+      cameraStream.getTracks().forEach(t => t.stop());
+      cameraStream = null;
+    }
+  }
+
+  function renderCameraUI() {
+    isCameraUI = true;
+    isPreview = false;
+    dropZone.innerHTML = `
+      <div class="relative z-10 w-full max-w-2xl">
+        <div class="rounded-2xl overflow-hidden border border-[#28392e] bg-[#102216]">
+          <video id="camVideo" autoplay playsinline class="w-full h-auto block"></video>
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center gap-3">
+          <button id="btnSnap"
+            class="flex-1 bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold py-3 px-4 rounded-xl shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40">
+            Chụp ảnh
+          </button>
+
+          <button id="btnSwitchCam"
+            class="bg-[#28392e] hover:bg-[#3b5443] text-white font-bold py-3 px-4 rounded-xl border border-white/5 transition-all">
+            Đổi camera
+          </button>
+
+          <button id="btnCloseCam"
+            class="bg-[#3b5443] hover:bg-[#4a6a55] text-white font-bold py-3 px-4 rounded-xl border border-white/5 transition-all">
+            Tắt camera
+          </button>
+        </div>
+
+        <p class="mt-3 text-xs text-gray-400">
+          Tip: Nếu không mở được camera, hãy chạy bằng https hoặc localhost.
+        </p>
+      </div>
+    `;
+  }
+
+  async function startCamera(facingMode = "environment") {
+    try {
+      stopCamera();
+      renderCameraUI();
+
+      const constraints = {
+        video: { facingMode }, // "user" (camera trước) | "environment" (camera sau)
+        audio: false
+      };
+
+      cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+
+      const video = document.getElementById("camVideo");
+      video.srcObject = cameraStream;
+
+      document.getElementById("btnCloseCam").onclick = () => {
+        stopCamera();
+        // restore page state - reload to ensure original listeners are attached
+        window.location.reload();
+      };
+
+      document.getElementById("btnSwitchCam").onclick = async () => {
+        const current = constraints.video.facingMode;
+        const next = current === "environment" ? "user" : "environment";
+        await startCamera(next);
+      };
+
+      document.getElementById("btnSnap").onclick = async () => {
+        try {
+          const v = document.getElementById("camVideo");
+          const canvas = document.createElement("canvas");
+          canvas.width = v.videoWidth || 1280;
+          canvas.height = v.videoHeight || 720;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
+
+          const blob = await new Promise((resolve) =>
+            canvas.toBlob(resolve, "image/jpeg", 0.92)
+          );
+
+          if (!blob) {
+            showToast("Không thể chụp ảnh. Thử lại.", "error");
+            return;
+          }
+
+          const file = new File([blob], `camera_${Date.now()}.jpg`, { type: "image/jpeg" });
+
+          // stop camera để giải phóng thiết bị
+          stopCamera();
+
+          renderPreview(file, true);
+
+        } catch (e) {
+          showToast("Chụp ảnh thất bại.", "error");
+        }
+      };
+
+    } catch (err) {
+      console.error(err);
+      let msg = "Không thể mở camera.";
+      if (err?.name === "NotAllowedError") msg = "Bạn đã từ chối quyền camera.";
+      if (err?.name === "NotFoundError") msg = "Không tìm thấy camera trên thiết bị.";
+      if (err?.name === "NotReadableError") msg = "Camera đang được app khác sử dụng.";
+      if (err?.name === "SecurityError") msg = "Camera cần https hoặc localhost.";
+      showToast(msg, "error");
+    }
+  }
+
+  // click "Kích hoạt Camera"
+  if (btnCamera) {
+    btnCamera.addEventListener("click", async () => {
+      if (!navigator.mediaDevices?.getUserMedia) {
+        showToast("Trình duyệt không hỗ trợ camera.", "error");
+        return;
+      }
+      await startCamera("environment");
+    });
+  }
+
+  // khi rời trang -> tắt camera
+  window.addEventListener("beforeunload", () => stopCamera());
+
+</script>
+
 </html>
