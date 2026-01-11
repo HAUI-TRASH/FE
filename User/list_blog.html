@@ -1,326 +1,694 @@
 <!DOCTYPE html>
-<html class="dark" lang="vi"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Danh Sách Blog - EcoScan AI</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#13ec5b",
-                        "background-light": "#f6f8f6",
-                        "background-dark": "#102216",
-                        "surface-dark": "#1c2a21",
-                        "surface-light": "#ffffff",
-                    },
-                    fontFamily: {
-                        "display": ["Space Grotesk", "sans-serif"],
-                        "body": ["Space Grotesk", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
-                },
+<html class="dark" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Danh Sách Blog - EcoScan AI</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#13ec5b",
+              "background-light": "#f6f8f6",
+              "background-dark": "#102216",
+              "surface-dark": "#1c2a21",
+              "surface-light": "#ffffff",
             },
-        }
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
     </script>
-<style>
-        body {
-            font-family: "Space Grotesk", sans-serif;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #102216; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #28392e; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3b5443; 
-        }
+    <style>
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #102216;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #28392e;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3b5443;
+      }
     </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-300">
-<header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
-<div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full">
-<div class="flex items-center gap-3 text-white">
-<div class="size-8 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-3xl">recycling</span>
-</div>
-<h1 class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block">EcoScan AI</h1>
-</div>
-<nav class="hidden md:flex flex-1 justify-center gap-8">
-<a class="text-white hover:text-primary transition-colors text-sm font-medium" href="#">Trang chủ</a>
-<a class="text-primary font-medium hover:text-primary transition-colors text-sm" href="#">Blog</a>
-<a class="text-gray-300 hover:text-primary transition-colors text-sm font-medium" href="#">Hướng dẫn</a>
-</nav>
-<div class="flex items-center gap-4">
-<button class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden">
-<span class="material-symbols-outlined">menu</span>
-</button>
-<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]" data-alt="User profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'>
-</div>
-</div>
-</div>
-</header>
-<main class="flex-1 w-full px-4 py-8 md:py-12 max-w-[1200px] mx-auto">
-<section class="mb-12 text-center max-w-2xl mx-auto animate-fade-in-up">
-<span class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4 inline-block">
-            Kiến Thức &amp; Tin Tức
-        </span>
-<h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">Góc Xanh EcoScan</h1>
-<p class="text-gray-400 text-lg">Cập nhật những thông tin mới nhất về môi trường, công nghệ tái chế và mẹo sống xanh mỗi ngày.</p>
-</section>
-<section class="mb-16">
-<a class="group relative block w-full bg-surface-dark border border-[#28392e] rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 shadow-xl shadow-black/20" href="#">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-0">
-<div class="relative aspect-video md:aspect-auto h-full overflow-hidden">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx");'></div>
-<div class="absolute inset-0 bg-gradient-to-t from-[#1c2a21] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#1c2a21]"></div>
-</div>
-<div class="p-6 md:p-10 flex flex-col justify-center">
-<div class="flex items-center gap-3 mb-4">
-<span class="text-primary text-xs font-bold uppercase tracking-wider">Nổi bật</span>
-<span class="w-1 h-1 bg-gray-600 rounded-full"></span>
-<span class="text-gray-500 text-xs font-medium">12 Tháng 10, 2023</span>
-</div>
-<h2 class="text-2xl md:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-primary transition-colors">Hướng dẫn phân loại rác tại nguồn: Bước nhỏ, tác động lớn</h2>
-<p class="text-gray-400 mb-6 line-clamp-3 md:line-clamp-none">
-                        Phân loại rác thải tại nguồn là hành động thiết thực nhất để bảo vệ môi trường. Bài viết này sẽ hướng dẫn bạn cách nhận diện và xử lý rác thải ngay tại nhà một cách hiệu quả.
-                    </p>
-<div class="flex items-center gap-3 mt-auto">
-<div class="size-8 rounded-full bg-cover bg-center border border-[#28392e]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<div class="text-sm">
-<p class="text-white font-bold">Nguyễn Văn A</p>
-<p class="text-gray-500 text-xs">Chuyên gia Môi trường</p>
-</div>
-</div>
-</div>
-</div>
-</a>
-</section>
-<section class="mb-10 flex flex-col md:flex-row justify-between items-center gap-6 border-b border-[#28392e] pb-8">
-<div class="flex flex-wrap gap-2 justify-center md:justify-start">
-<button class="px-5 py-2 rounded-full bg-primary text-[#051d0e] text-sm font-bold border border-primary transition-transform hover:-translate-y-0.5">Tất cả</button>
-<button class="px-5 py-2 rounded-full bg-[#1c2a21] text-gray-400 hover:text-white text-sm font-medium border border-[#28392e] hover:border-gray-500 transition-all">Sống xanh</button>
-<button class="px-5 py-2 rounded-full bg-[#1c2a21] text-gray-400 hover:text-white text-sm font-medium border border-[#28392e] hover:border-gray-500 transition-all">Công nghệ</button>
-<button class="px-5 py-2 rounded-full bg-[#1c2a21] text-gray-400 hover:text-white text-sm font-medium border border-[#28392e] hover:border-gray-500 transition-all">Tái chế</button>
-<button class="px-5 py-2 rounded-full bg-[#1c2a21] text-gray-400 hover:text-white text-sm font-medium border border-[#28392e] hover:border-gray-500 transition-all">Cộng đồng</button>
-</div>
-<div class="relative w-full md:w-auto min-w-[300px]">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 material-symbols-outlined">search</span>
-<input class="w-full bg-[#102216] border border-[#28392e] rounded-full py-2.5 pl-10 pr-4 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-sm" placeholder="Tìm kiếm bài viết..." type="text"/>
-</div>
-</section>
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<article class="flex flex-col group h-full">
-<a class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors" href="#">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X");'></div>
-<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">
-<span class="text-primary text-xs font-bold uppercase">Sống xanh</span>
-</div>
-</a>
-<div class="flex-1 flex flex-col">
-<div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
-<span class="material-symbols-outlined text-sm">calendar_today</span> 10 Tháng 10, 2023
-                    <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
-<span>5 phút đọc</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors">
-<a href="#">Cách xử lý Pin cũ an toàn tại nhà: Đừng vứt bừa bãi!</a>
-</h3>
-<p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
-                    Pin cũ chứa nhiều hóa chất độc hại như chì, thủy ngân. Việc vứt pin chung với rác thải sinh hoạt gây ô nhiễm nghiêm trọng. Hãy tìm hiểu cách thu gom đúng.
-                </p>
-<div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
-<div class="size-6 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<span class="text-xs text-gray-300 font-medium">Lê Minh Tuấn</span>
-</div>
-</div>
-</article>
-<article class="flex flex-col group h-full">
-<a class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors" href="#">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy");'></div>
-<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">
-<span class="text-blue-400 text-xs font-bold uppercase">Tái chế</span>
-</div>
-</a>
-<div class="flex-1 flex flex-col">
-<div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
-<span class="material-symbols-outlined text-sm">calendar_today</span> 08 Tháng 10, 2023
-                    <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
-<span>7 phút đọc</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors">
-<a href="#">Thủy tinh: Quy trình tái chế vô hạn &amp; lợi ích kinh tế</a>
-</h3>
-<p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
-                    Khác với nhựa, thủy tinh có thể tái chế 100% mà không giảm chất lượng. Khám phá hành trình tái sinh của những chiếc chai lọ thủy tinh.
-                </p>
-<div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
-<div class="size-6 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<span class="text-xs text-gray-300 font-medium">Nguyễn Văn A</span>
-</div>
-</div>
-</article>
-<article class="flex flex-col group h-full">
-<a class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors" href="#">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx");'></div>
-<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">
-<span class="text-yellow-400 text-xs font-bold uppercase">Kiến thức</span>
-</div>
-</a>
-<div class="flex-1 flex flex-col">
-<div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
-<span class="material-symbols-outlined text-sm">calendar_today</span> 05 Tháng 10, 2023
-                    <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
-<span>10 phút đọc</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors">
-<a href="#">7 loại nhựa và ý nghĩa các ký hiệu dưới đáy chai</a>
-</h3>
-<p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
-                    Bạn có biết không phải loại nhựa nào cũng an toàn để tái sử dụng? Cùng giải mã các ký hiệu tam giác số từ 1 đến 7 để bảo vệ sức khỏe.
-                </p>
-<div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
-<div class="size-6 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<span class="text-xs text-gray-300 font-medium">Trần Thị B</span>
-</div>
-</div>
-</article>
-<article class="flex flex-col group h-full">
-<a class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors" href="#">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh");'></div>
-<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">
-<span class="text-green-400 text-xs font-bold uppercase">Hữu cơ</span>
-</div>
-</a>
-<div class="flex-1 flex flex-col">
-<div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
-<span class="material-symbols-outlined text-sm">calendar_today</span> 01 Tháng 10, 2023
-                    <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
-<span>6 phút đọc</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors">
-<a href="#">Compost là gì? Hướng dẫn ủ phân hữu cơ tại nhà</a>
-</h3>
-<p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
-                    Biến rác thải nhà bếp thành "vàng đen" cho cây trồng. Phương pháp ủ phân hữu cơ đơn giản, không mùi hôi dành cho nhà phố.
-                </p>
-<div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
-<div class="size-6 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<span class="text-xs text-gray-300 font-medium">Nguyễn Văn A</span>
-</div>
-</div>
-</article>
-<article class="flex flex-col group h-full">
-<a class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors" href="#">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy");'></div>
-<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">
-<span class="text-purple-400 text-xs font-bold uppercase">Công nghệ</span>
-</div>
-</a>
-<div class="flex-1 flex flex-col">
-<div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
-<span class="material-symbols-outlined text-sm">calendar_today</span> 28 Tháng 09, 2023
-                    <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
-<span>4 phút đọc</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors">
-<a href="#">EcoScan AI: Công nghệ nhận diện rác thải bằng AI</a>
-</h3>
-<p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
-                    Tìm hiểu cách trí tuệ nhân tạo đang giúp hàng ngàn người dùng phân loại rác chính xác chỉ trong vài giây.
-                </p>
-<div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
-<div class="size-6 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<span class="text-xs text-gray-300 font-medium">Team EcoScan</span>
-</div>
-</div>
-</article>
-<article class="flex flex-col group h-full">
-<a class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors" href="#">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">
-<span class="text-orange-400 text-xs font-bold uppercase">Cộng đồng</span>
-</div>
-</a>
-<div class="flex-1 flex flex-col">
-<div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
-<span class="material-symbols-outlined text-sm">calendar_today</span> 25 Tháng 09, 2023
-                    <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
-<span>3 phút đọc</span>
-</div>
-<h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors">
-<a href="#">Chiến dịch "Chủ Nhật Xanh" thu hút hơn 1000 người tham gia</a>
-</h3>
-<p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
-                    Tổng kết hoạt động dọn dẹp bãi biển và khu dân cư vừa qua. Những con số ấn tượng và những khoảnh khắc đẹp của các tình nguyện viên.
-                </p>
-<div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
-<div class="size-6 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<span class="text-xs text-gray-300 font-medium">Lê Minh Tuấn</span>
-</div>
-</div>
-</article>
-</section>
-<div class="mt-16 flex justify-center items-center gap-4">
-<button class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-500 hover:text-white hover:border-white transition-colors disabled:opacity-50">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<button class="size-10 flex items-center justify-center rounded-full bg-primary text-[#051d0e] font-bold border border-primary">1</button>
-<button class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-400 hover:text-white hover:border-gray-500 transition-colors">2</button>
-<button class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-400 hover:text-white hover:border-gray-500 transition-colors">3</button>
-<span class="text-gray-600">...</span>
-<button class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-400 hover:text-white hover:border-gray-500 transition-colors">8</button>
-<button class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-400 hover:text-white hover:border-white transition-colors">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
-</main>
-<footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
-<div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="flex flex-col gap-3 items-center md:items-start">
-<div class="flex items-center gap-2 text-white font-bold text-xl">
-<span class="material-symbols-outlined text-primary text-3xl">eco</span>
-                EcoScan AI
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-300"
+  >
+    <header
+      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
+    >
+      <div
+        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+      >
+        <div class="flex items-center gap-3 text-white">
+          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+            <img
+              src="../img logo/logoHaUI.png"
+              alt="HaUI Logo"
+              style="width: 28x; height: 28px"
+              class="rounded-full"
+            />
+          </a>
+          <div class="size-8 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-3xl">recycling</span>
+          </div>
+          <h1
+            class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
+          >
+            EcoScan AI
+          </h1>
+        </div>
+        <nav class="hidden md:flex flex-1 justify-center gap-8">
+          <a
+            class="text-white hover:text-primary transition-colors text-sm font-medium"
+            href="index.html"
+            >Trang chủ</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="result_analys.html"
+            >Kết quả</a
+          >
+          <a
+            class="text-primary font-medium hover:text-primary transition-colors text-sm"
+            href="list_blog.html"
+            >Blog</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Lịch sử</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Hướng dẫn</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+          <button
+            class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="relative">
+            <button
+              id="user-menu-button"
+              class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+              "
+              onclick="toggleUserMenu()"
+            ></button>
+            <div
+              id="user-menu"
+              class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
+            >
+              <a
+                href="#"
+                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+              >
+                <img
+                  class="w-8 h-8 rounded-full mr-3"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
+                  alt="Avatar"
+                />
+                Tài khoản của bạn
+              </a>
+              <a
+                href="#"
+                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+              >
+                <span class="material-symbols-outlined mr-3">logout</span>
+                Đăng xuất
+              </a>
             </div>
-<p class="text-gray-500 text-sm">© 2024 EcoScan. Giải pháp xanh cho tương lai.</p>
-</div>
-<div class="flex flex-wrap justify-center gap-8">
-<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Điều khoản sử dụng</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Chính sách bảo mật</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Trung tâm hỗ trợ</a>
-</div>
-<div class="flex gap-4">
-<a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300" href="#">
-<span class="text-xs font-bold">FB</span>
-</a>
-<a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300" href="#">
-<span class="text-xs font-bold">TW</span>
-</a>
-<a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300" href="#">
-<span class="text-xs font-bold">IN</span>
-</a>
-</div>
-</div>
-</footer>
-
-</body></html>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-1 w-full px-4 py-8 md:py-12 max-w-[1200px] mx-auto">
+      <section class="mb-12 text-center max-w-2xl mx-auto animate-fade-in-up">
+        <span
+          class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4 inline-block"
+        >
+          Kiến Thức &amp; Tin Tức
+        </span>
+        <h1
+          class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight"
+        >
+          Góc Xanh EcoScan
+        </h1>
+        <p class="text-gray-400 text-lg">
+          Cập nhật những thông tin mới nhất về môi trường, công nghệ tái chế và
+          mẹo sống xanh mỗi ngày.
+        </p>
+      </section>
+      <section class="mb-16">
+        <a
+          class="group relative block w-full bg-surface-dark border border-[#28392e] rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 shadow-xl shadow-black/20"
+          href="#"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div
+              class="relative aspect-video md:aspect-auto h-full overflow-hidden"
+            >
+              <div
+                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
+                "
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#1c2a21] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#1c2a21]"
+              ></div>
+            </div>
+            <div class="p-6 md:p-10 flex flex-col justify-center">
+              <div class="flex items-center gap-3 mb-4">
+                <span
+                  class="text-primary text-xs font-bold uppercase tracking-wider"
+                  >Nổi bật</span
+                >
+                <span class="w-1 h-1 bg-gray-600 rounded-full"></span>
+                <span class="text-gray-500 text-xs font-medium"
+                  >12 Tháng 10, 2023</span
+                >
+              </div>
+              <h2
+                class="text-2xl md:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-primary transition-colors"
+              >
+                Hướng dẫn phân loại rác tại nguồn: Bước nhỏ, tác động lớn
+              </h2>
+              <p class="text-gray-400 mb-6 line-clamp-3 md:line-clamp-none">
+                Phân loại rác thải tại nguồn là hành động thiết thực nhất để bảo
+                vệ môi trường. Bài viết này sẽ hướng dẫn bạn cách nhận diện và
+                xử lý rác thải ngay tại nhà một cách hiệu quả.
+              </p>
+              <div class="flex items-center gap-3 mt-auto">
+                <div
+                  class="size-8 rounded-full bg-cover bg-center border border-[#28392e]"
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                  "
+                ></div>
+                <div class="text-sm">
+                  <p class="text-white font-bold">Nguyễn Văn A</p>
+                  <p class="text-gray-500 text-xs">Chuyên gia Môi trường</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </section>
+      <section
+        class="mb-10 flex flex-col md:flex-row justify-between items-center gap-6 border-b border-[#28392e] pb-8"
+      >
+        <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+          <button
+            class="px-5 py-2 rounded-full bg-primary text-[#051d0e] text-sm font-bold border border-primary transition-transform hover:-translate-y-0.5"
+          >
+            Tất cả
+          </button>
+          <button
+            class="px-5 py-2 rounded-full bg-[#1c2a21] text-gray-400 hover:text-white text-sm font-medium border border-[#28392e] hover:border-gray-500 transition-all"
+          >
+            Sống xanh
+          </button>
+          <button
+            class="px-5 py-2 rounded-full bg-[#1c2a21] text-gray-400 hover:text-white text-sm font-medium border border-[#28392e] hover:border-gray-500 transition-all"
+          >
+            Công nghệ
+          </button>
+          <button
+            class="px-5 py-2 rounded-full bg-[#1c2a21] text-gray-400 hover:text-white text-sm font-medium border border-[#28392e] hover:border-gray-500 transition-all"
+          >
+            Tái chế
+          </button>
+          <button
+            class="px-5 py-2 rounded-full bg-[#1c2a21] text-gray-400 hover:text-white text-sm font-medium border border-[#28392e] hover:border-gray-500 transition-all"
+          >
+            Cộng đồng
+          </button>
+        </div>
+        <div class="relative w-full md:w-auto min-w-[300px]">
+          <span
+            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 material-symbols-outlined"
+            >search</span
+          >
+          <input
+            class="w-full bg-[#102216] border border-[#28392e] rounded-full py-2.5 pl-10 pr-4 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-sm"
+            placeholder="Tìm kiếm bài viết..."
+            type="text"
+          />
+        </div>
+      </section>
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <article class="flex flex-col group h-full">
+          <a
+            class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
+              "
+            ></div>
+            <div
+              class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
+            ></div>
+            <div
+              class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full"
+            >
+              <span class="text-primary text-xs font-bold uppercase"
+                >Sống xanh</span
+              >
+            </div>
+          </a>
+          <div class="flex-1 flex flex-col">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+              <span class="material-symbols-outlined text-sm"
+                >calendar_today</span
+              >
+              10 Tháng 10, 2023
+              <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
+              <span>5 phút đọc</span>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors"
+            >
+              <a href="#"
+                >Cách xử lý Pin cũ an toàn tại nhà: Đừng vứt bừa bãi!</a
+              >
+            </h3>
+            <p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
+              Pin cũ chứa nhiều hóa chất độc hại như chì, thủy ngân. Việc vứt
+              pin chung với rác thải sinh hoạt gây ô nhiễm nghiêm trọng. Hãy tìm
+              hiểu cách thu gom đúng.
+            </p>
+            <div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
+              <div
+                class="size-6 rounded-full bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                "
+              ></div>
+              <span class="text-xs text-gray-300 font-medium"
+                >Lê Minh Tuấn</span
+              >
+            </div>
+          </div>
+        </article>
+        <article class="flex flex-col group h-full">
+          <a
+            class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
+              "
+            ></div>
+            <div
+              class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
+            ></div>
+            <div
+              class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full"
+            >
+              <span class="text-blue-400 text-xs font-bold uppercase"
+                >Tái chế</span
+              >
+            </div>
+          </a>
+          <div class="flex-1 flex flex-col">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+              <span class="material-symbols-outlined text-sm"
+                >calendar_today</span
+              >
+              08 Tháng 10, 2023
+              <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
+              <span>7 phút đọc</span>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors"
+            >
+              <a href="#"
+                >Thủy tinh: Quy trình tái chế vô hạn &amp; lợi ích kinh tế</a
+              >
+            </h3>
+            <p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
+              Khác với nhựa, thủy tinh có thể tái chế 100% mà không giảm chất
+              lượng. Khám phá hành trình tái sinh của những chiếc chai lọ thủy
+              tinh.
+            </p>
+            <div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
+              <div
+                class="size-6 rounded-full bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                "
+              ></div>
+              <span class="text-xs text-gray-300 font-medium"
+                >Nguyễn Văn A</span
+              >
+            </div>
+          </div>
+        </article>
+        <article class="flex flex-col group h-full">
+          <a
+            class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
+              "
+            ></div>
+            <div
+              class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
+            ></div>
+            <div
+              class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full"
+            >
+              <span class="text-yellow-400 text-xs font-bold uppercase"
+                >Kiến thức</span
+              >
+            </div>
+          </a>
+          <div class="flex-1 flex flex-col">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+              <span class="material-symbols-outlined text-sm"
+                >calendar_today</span
+              >
+              05 Tháng 10, 2023
+              <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
+              <span>10 phút đọc</span>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors"
+            >
+              <a href="#">7 loại nhựa và ý nghĩa các ký hiệu dưới đáy chai</a>
+            </h3>
+            <p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
+              Bạn có biết không phải loại nhựa nào cũng an toàn để tái sử dụng?
+              Cùng giải mã các ký hiệu tam giác số từ 1 đến 7 để bảo vệ sức
+              khỏe.
+            </p>
+            <div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
+              <div
+                class="size-6 rounded-full bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                "
+              ></div>
+              <span class="text-xs text-gray-300 font-medium">Trần Thị B</span>
+            </div>
+          </div>
+        </article>
+        <article class="flex flex-col group h-full">
+          <a
+            class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');
+              "
+            ></div>
+            <div
+              class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
+            ></div>
+            <div
+              class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full"
+            >
+              <span class="text-green-400 text-xs font-bold uppercase"
+                >Hữu cơ</span
+              >
+            </div>
+          </a>
+          <div class="flex-1 flex flex-col">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+              <span class="material-symbols-outlined text-sm"
+                >calendar_today</span
+              >
+              01 Tháng 10, 2023
+              <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
+              <span>6 phút đọc</span>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors"
+            >
+              <a href="#">Compost là gì? Hướng dẫn ủ phân hữu cơ tại nhà</a>
+            </h3>
+            <p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
+              Biến rác thải nhà bếp thành "vàng đen" cho cây trồng. Phương pháp
+              ủ phân hữu cơ đơn giản, không mùi hôi dành cho nhà phố.
+            </p>
+            <div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
+              <div
+                class="size-6 rounded-full bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                "
+              ></div>
+              <span class="text-xs text-gray-300 font-medium"
+                >Nguyễn Văn A</span
+              >
+            </div>
+          </div>
+        </article>
+        <article class="flex flex-col group h-full">
+          <a
+            class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
+              "
+            ></div>
+            <div
+              class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
+            ></div>
+            <div
+              class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full"
+            >
+              <span class="text-purple-400 text-xs font-bold uppercase"
+                >Công nghệ</span
+              >
+            </div>
+          </a>
+          <div class="flex-1 flex flex-col">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+              <span class="material-symbols-outlined text-sm"
+                >calendar_today</span
+              >
+              28 Tháng 09, 2023
+              <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
+              <span>4 phút đọc</span>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors"
+            >
+              <a href="#">EcoScan AI: Công nghệ nhận diện rác thải bằng AI</a>
+            </h3>
+            <p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
+              Tìm hiểu cách trí tuệ nhân tạo đang giúp hàng ngàn người dùng phân
+              loại rác chính xác chỉ trong vài giây.
+            </p>
+            <div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
+              <div
+                class="size-6 rounded-full bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                "
+              ></div>
+              <span class="text-xs text-gray-300 font-medium"
+                >Team EcoScan</span
+              >
+            </div>
+          </div>
+        </article>
+        <article class="flex flex-col group h-full">
+          <a
+            class="block overflow-hidden rounded-2xl border border-[#28392e] relative aspect-[4/3] mb-4 group-hover:border-primary/50 transition-colors"
+            href="#"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+              "
+            ></div>
+            <div
+              class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
+            ></div>
+            <div
+              class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full"
+            >
+              <span class="text-orange-400 text-xs font-bold uppercase"
+                >Cộng đồng</span
+              >
+            </div>
+          </a>
+          <div class="flex-1 flex flex-col">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+              <span class="material-symbols-outlined text-sm"
+                >calendar_today</span
+              >
+              25 Tháng 09, 2023
+              <span class="w-1 h-1 bg-gray-700 rounded-full"></span>
+              <span>3 phút đọc</span>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-primary transition-colors"
+            >
+              <a href="#"
+                >Chiến dịch "Chủ Nhật Xanh" thu hút hơn 1000 người tham gia</a
+              >
+            </h3>
+            <p class="text-gray-400 text-sm line-clamp-3 mb-4 flex-1">
+              Tổng kết hoạt động dọn dẹp bãi biển và khu dân cư vừa qua. Những
+              con số ấn tượng và những khoảnh khắc đẹp của các tình nguyện viên.
+            </p>
+            <div class="flex items-center gap-2 pt-4 border-t border-[#28392e]">
+              <div
+                class="size-6 rounded-full bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                "
+              ></div>
+              <span class="text-xs text-gray-300 font-medium"
+                >Lê Minh Tuấn</span
+              >
+            </div>
+          </div>
+        </article>
+      </section>
+      <div class="mt-16 flex justify-center items-center gap-4">
+        <button
+          class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-500 hover:text-white hover:border-white transition-colors disabled:opacity-50"
+        >
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <button
+          class="size-10 flex items-center justify-center rounded-full bg-primary text-[#051d0e] font-bold border border-primary"
+        >
+          1
+        </button>
+        <button
+          class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
+        >
+          2
+        </button>
+        <button
+          class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
+        >
+          3
+        </button>
+        <span class="text-gray-600">...</span>
+        <button
+          class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
+        >
+          8
+        </button>
+        <button
+          class="size-10 flex items-center justify-center rounded-full border border-[#28392e] text-gray-400 hover:text-white hover:border-white transition-colors"
+        >
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
+    </main>
+    <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
+      <div
+        class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8"
+      >
+        <div class="flex flex-col gap-3 items-center md:items-start">
+          <div class="flex items-center gap-2 text-white font-bold text-xl">
+            <span class="material-symbols-outlined text-primary text-3xl"
+              >eco</span
+            >
+            EcoScan AI
+          </div>
+          <p class="text-gray-500 text-sm">
+            © 2024 EcoScan. Giải pháp xanh cho tương lai.
+          </p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8">
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Điều khoản sử dụng</a
+          >
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Chính sách bảo mật</a
+          >
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Trung tâm hỗ trợ</a
+          >
+        </div>
+        <div class="flex gap-4">
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">FB</span>
+          </a>
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">TW</span>
+          </a>
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">IN</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

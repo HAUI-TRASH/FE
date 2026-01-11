@@ -1,372 +1,533 @@
 <!DOCTYPE html>
 <html class="dark" lang="vi">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Đăng Ký - EcoScan AI</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#13ec5b",
-                        "background-light": "#f6f8f6",
-                        "background-dark": "#102216",
-                        "surface-dark": "#1c2a21",
-                        "surface-light": "#ffffff",
-                    },
-                    fontFamily: {
-                        "display": ["Space Grotesk", "sans-serif"],
-                        "body": ["Space Grotesk", "sans-serif"]
-                    },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                },
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#13ec5b",
+              "background-light": "#f6f8f6",
+              "background-dark": "#102216",
+              "surface-dark": "#1c2a21",
+              "surface-light": "#ffffff",
             },
-        }
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              full: "9999px",
+            },
+            animation: {
+              "fade-in-up": "fadeInUp 0.5s ease-out forwards",
+            },
+            keyframes: {
+              fadeInUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
     </script>
     <style>
-        body {
-            font-family: "Space Grotesk", sans-serif;
-        }
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
 
-        ::-webkit-scrollbar-track {
-            background: #102216;
-        }
+      ::-webkit-scrollbar-track {
+        background: #102216;
+      }
 
-        ::-webkit-scrollbar-thumb {
-            background: #28392e;
-            border-radius: 4px;
-        }
+      ::-webkit-scrollbar-thumb {
+        background: #28392e;
+        border-radius: 4px;
+      }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3b5443;
-        }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3b5443;
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden text-gray-300">
-    <header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
-        <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full">
-            <a class="flex items-center gap-3 text-white hover:opacity-80 transition-opacity" href="#">
-                <div class="size-8 flex items-center justify-center text-primary">
-                    <span class="material-symbols-outlined text-3xl">recycling</span>
-                </div>
-                <h1 class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block">EcoScan AI</h1>
-            </a>
-            <nav class="hidden md:flex flex-1 justify-center gap-8">
-            </nav>
-            <div class="flex items-center gap-4">
-                <a class="text-sm font-bold text-white bg-[#28392e] hover:bg-[#3b5443] px-5 py-2 rounded-full transition-colors border border-white/5 flex items-center gap-2"
-                    href="index.html">
-                    <span class="material-symbols-outlined text-lg">arrow_back</span>
-                    Về Trang Chủ
-                </a>
-            </div>
+  <body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden text-gray-300"
+  >
+    <header
+      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
+    >
+      <div
+        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+      >
+        <a
+          class="flex items-center gap-3 text-white hover:opacity-80 transition-opacity"
+          href="#"
+        >
+          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+            <img
+              src="../img logo/logoHaUI.png"
+              alt="HaUI Logo"
+              style="width: 28x; height: 28px"
+              class="rounded-full"
+            />
+          </a>
+          <div class="size-8 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-3xl">recycling</span>
+          </div>
+          <h1
+            class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
+          >
+            EcoScan AI
+          </h1>
+        </a>
+        <nav class="hidden md:flex flex-1 justify-center gap-8"></nav>
+        <div class="flex items-center gap-4">
+          <a
+            class="text-sm font-bold text-white bg-[#28392e] hover:bg-[#3b5443] px-5 py-2 rounded-full transition-colors border border-white/5 flex items-center gap-2"
+            href="index.html"
+          >
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+            Về Trang Chủ
+          </a>
         </div>
+      </div>
     </header>
-    <main class="flex-1 w-full px-4 py-8 md:py-12 flex items-center justify-center relative">
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-            <div class="absolute top-[10%] left-[20%] w-96 h-96 bg-primary/5 rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-[10%] right-[20%] w-80 h-80 bg-blue-500/5 rounded-full blur-[100px]"></div>
-        </div>
-        <div class="w-full max-w-[480px] z-10 animate-fade-in-up">
-            <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-10 shadow-2xl shadow-black/40">
-                <div class="text-center mb-8">
-                    <div
-                        class="inline-flex items-center justify-center size-16 rounded-2xl bg-[#102216] border border-[#28392e] mb-4 text-primary">
-                        <span class="material-symbols-outlined text-4xl">person_add</span>
-                    </div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Đăng Ký Tài Khoản</h2>
-                    <p class="text-gray-400 text-sm">Tạo tài khoản mới để tham gia cộng đồng EcoScan</p>
-                </div>
-                <form id="registerForm" class="space-y-6">
-                    <!-- Full name (optional nhưng nên có) -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-2 ml-1" for="full_name">Họ và
-                            tên</label>
-                        <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <span
-                                    class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">badge</span>
-                            </div>
-                            <input
-                                class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                                id="full_name" name="full_name" placeholder="Nhập họ và tên (tuỳ chọn)" type="text" />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-2 ml-1" for="phone">Số điện
-                            thoại</label>
-                        <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <span
-                                    class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">smartphone</span>
-                            </div>
-                            <input id="phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]*"
-                                maxlength="11" placeholder="Nhập số điện thoại của bạn"
-                                class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
-
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="flex items-center justify-between mb-2 ml-1">
-                            <label class="block text-sm font-medium text-gray-300" for="password">Mật khẩu</label>
-                        </div>
-                        <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <span
-                                    class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">lock</span>
-                            </div>
-                            <input
-                                class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-12 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                                id="password" name="password" placeholder="Tạo mật khẩu" type="password" required />
-                            <button id="togglePass1"
-                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-white transition-colors"
-                                type="button">
-                                <span class="material-symbols-outlined text-xl">visibility_off</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="flex items-center justify-between mb-2 ml-1">
-                            <label class="block text-sm font-medium text-gray-300" for="confirm_password">Xác nhận mật
-                                khẩu</label>
-                        </div>
-                        <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <span
-                                    class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">lock_reset</span>
-                            </div>
-                            <input
-                                class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-12 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                                id="confirm_password" name="confirm_password" placeholder="Nhập lại mật khẩu"
-                                type="password" required />
-                            <button id="togglePass2"
-                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-white transition-colors"
-                                type="button">
-                                <span class="material-symbols-outlined text-xl">visibility_off</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Message -->
-                    <div id="msg" class="hidden text-sm rounded-xl px-4 py-3 border"></div>
-
-                    <button id="btnRegister"
-                        class="w-full bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold text-base py-3.5 px-6 rounded-xl shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40 hover:-translate-y-0.5 flex items-center justify-center gap-2 mt-2"
-                        type="submit">
-                        <span>Đăng ký</span>
-                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
-                    </button>
-                </form>
-                <div class="mt-8 pt-6 border-t border-[#28392e] text-center">
-                    <p class="text-sm text-gray-400">
-                        Đã có tài khoản?
-                        <a class="text-primary font-bold hover:underline ml-1" href="login.html">Đăng nhập ngay</a>
-                    </p>
-                </div>
-                <div class="mt-6 flex flex-col gap-3">
-                    <div class="relative flex py-2 items-center">
-                        <div class="flex-grow border-t border-[#28392e]"></div>
-                        <span class="flex-shrink-0 mx-4 text-gray-500 text-xs uppercase tracking-wider">Hoặc đăng ký
-                            với</span>
-                        <div class="flex-grow border-t border-[#28392e]"></div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <button
-                            class="flex items-center justify-center gap-2 bg-[#102216] border border-[#28392e] hover:border-gray-500 text-white rounded-xl py-2.5 transition-all text-sm font-medium">
-                            <svg class="size-5" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                                    fill="#4285F4"></path>
-                                <path
-                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                                    fill="#34A853"></path>
-                                <path
-                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.84z"
-                                    fill="#FBBC05"></path>
-                                <path
-                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                                    fill="#EA4335"></path>
-                            </svg>
-                            Google
-                        </button>
-                        <button
-                            class="flex items-center justify-center gap-2 bg-[#102216] border border-[#28392e] hover:border-gray-500 text-white rounded-xl py-2.5 transition-all text-sm font-medium">
-                            <svg class="size-5 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
-                                </path>
-                            </svg>
-                            Facebook
-                        </button>
-                    </div>
-                </div>
+    <main
+      class="flex-1 w-full px-4 py-8 md:py-12 flex items-center justify-center relative"
+    >
+      <div
+        class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0"
+      >
+        <div
+          class="absolute top-[10%] left-[20%] w-96 h-96 bg-primary/5 rounded-full blur-[100px]"
+        ></div>
+        <div
+          class="absolute bottom-[10%] right-[20%] w-80 h-80 bg-blue-500/5 rounded-full blur-[100px]"
+        ></div>
+      </div>
+      <div class="w-full max-w-[480px] z-10 animate-fade-in-up">
+        <div
+          class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-10 shadow-2xl shadow-black/40"
+        >
+          <div class="text-center mb-8">
+            <div
+              class="inline-flex items-center justify-center size-16 rounded-2xl bg-[#102216] border border-[#28392e] mb-4 text-primary"
+            >
+              <span class="material-symbols-outlined text-4xl">person_add</span>
             </div>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">
+              Đăng Ký Tài Khoản
+            </h2>
+            <p class="text-gray-400 text-sm">
+              Tạo tài khoản mới để tham gia cộng đồng EcoScan
+            </p>
+          </div>
+          <form id="registerForm" class="space-y-6">
+            <!-- Full name (optional nhưng nên có) -->
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-300 mb-2 ml-1"
+                for="full_name"
+                >Họ và tên</label
+              >
+              <div class="relative group">
+                <div
+                  class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+                >
+                  <span
+                    class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors"
+                    >badge</span
+                  >
+                </div>
+                <input
+                  class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  id="full_name"
+                  name="full_name"
+                  placeholder="Nhập họ và tên (tuỳ chọn)"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-300 mb-2 ml-1"
+                for="phone"
+                >Số điện thoại</label
+              >
+              <div class="relative group">
+                <div
+                  class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+                >
+                  <span
+                    class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors"
+                    >smartphone</span
+                  >
+                </div>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  maxlength="11"
+                  placeholder="Nhập số điện thoại của bạn"
+                  class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-2 ml-1">
+                <label
+                  class="block text-sm font-medium text-gray-300"
+                  for="password"
+                  >Mật khẩu</label
+                >
+              </div>
+              <div class="relative group">
+                <div
+                  class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+                >
+                  <span
+                    class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors"
+                    >lock</span
+                  >
+                </div>
+                <input
+                  class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-12 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  id="password"
+                  name="password"
+                  placeholder="Tạo mật khẩu"
+                  type="password"
+                  required
+                />
+                <button
+                  id="togglePass1"
+                  class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-white transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-xl"
+                    >visibility_off</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-2 ml-1">
+                <label
+                  class="block text-sm font-medium text-gray-300"
+                  for="confirm_password"
+                  >Xác nhận mật khẩu</label
+                >
+              </div>
+              <div class="relative group">
+                <div
+                  class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+                >
+                  <span
+                    class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors"
+                    >lock_reset</span
+                  >
+                </div>
+                <input
+                  class="w-full bg-[#102216] border border-[#28392e] rounded-xl py-3.5 pl-12 pr-12 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  id="confirm_password"
+                  name="confirm_password"
+                  placeholder="Nhập lại mật khẩu"
+                  type="password"
+                  required
+                />
+                <button
+                  id="togglePass2"
+                  class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-white transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-xl"
+                    >visibility_off</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div
+              id="msg"
+              class="hidden text-sm rounded-xl px-4 py-3 border"
+            ></div>
+
+            <button
+              id="btnRegister"
+              class="w-full bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold text-base py-3.5 px-6 rounded-xl shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40 hover:-translate-y-0.5 flex items-center justify-center gap-2 mt-2"
+              type="submit"
+            >
+              <span>Đăng ký</span>
+              <span class="material-symbols-outlined text-xl"
+                >arrow_forward</span
+              >
+            </button>
+          </form>
+          <div class="mt-8 pt-6 border-t border-[#28392e] text-center">
+            <p class="text-sm text-gray-400">
+              Đã có tài khoản?
+              <a
+                class="text-primary font-bold hover:underline ml-1"
+                href="login.html"
+                >Đăng nhập ngay</a
+              >
+            </p>
+          </div>
+          <div class="mt-6 flex flex-col gap-3">
+            <div class="relative flex py-2 items-center">
+              <div class="flex-grow border-t border-[#28392e]"></div>
+              <span
+                class="flex-shrink-0 mx-4 text-gray-500 text-xs uppercase tracking-wider"
+                >Hoặc đăng ký với</span
+              >
+              <div class="flex-grow border-t border-[#28392e]"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <button
+                class="flex items-center justify-center gap-2 bg-[#102216] border border-[#28392e] hover:border-gray-500 text-white rounded-xl py-2.5 transition-all text-sm font-medium"
+              >
+                <svg
+                  class="size-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                    fill="#4285F4"
+                  ></path>
+                  <path
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    fill="#34A853"
+                  ></path>
+                  <path
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.84z"
+                    fill="#FBBC05"
+                  ></path>
+                  <path
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                    fill="#EA4335"
+                  ></path>
+                </svg>
+                Google
+              </button>
+              <button
+                class="flex items-center justify-center gap-2 bg-[#102216] border border-[#28392e] hover:border-gray-500 text-white rounded-xl py-2.5 transition-all text-sm font-medium"
+              >
+                <svg
+                  class="size-5 text-[#1877F2]"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  ></path>
+                </svg>
+                Facebook
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
     <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-auto">
-        <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="flex flex-col gap-3 items-center md:items-start">
-                <div class="flex items-center gap-2 text-white font-bold text-xl">
-                    <span class="material-symbols-outlined text-primary text-3xl">eco</span>
-                    EcoScan AI
-                </div>
-                <p class="text-gray-500 text-sm">© 2024 EcoScan. Giải pháp xanh cho tương lai.</p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-8">
-                <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Điều khoản sử
-                    dụng</a>
-                <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Chính sách
-                    bảo mật</a>
-                <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Trung tâm hỗ
-                    trợ</a>
-            </div>
-            <div class="flex gap-4">
-                <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-                    href="#">
-                    <span class="text-xs font-bold">FB</span>
-                </a>
-                <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-                    href="#">
-                    <span class="text-xs font-bold">TW</span>
-                </a>
-                <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-                    href="#">
-                    <span class="text-xs font-bold">IN</span>
-                </a>
-            </div>
+      <div
+        class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8"
+      >
+        <div class="flex flex-col gap-3 items-center md:items-start">
+          <div class="flex items-center gap-2 text-white font-bold text-xl">
+            <span class="material-symbols-outlined text-primary text-3xl"
+              >eco</span
+            >
+            EcoScan AI
+          </div>
+          <p class="text-gray-500 text-sm">
+            © 2024 EcoScan. Giải pháp xanh cho tương lai.
+          </p>
         </div>
+        <div class="flex flex-wrap justify-center gap-8">
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Điều khoản sử dụng</a
+          >
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Chính sách bảo mật</a
+          >
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Trung tâm hỗ trợ</a
+          >
+        </div>
+        <div class="flex gap-4">
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">FB</span>
+          </a>
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">TW</span>
+          </a>
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">IN</span>
+          </a>
+        </div>
+      </div>
     </footer>
-</body>
-<script>
-
+  </body>
+  <script>
     const API_BASE = "http://localhost:8080";
     const form = document.getElementById("registerForm");
     const msg = document.getElementById("msg");
     const btn = document.getElementById("btnRegister");
 
     const toggle = (btnId, inputId) => {
-        const b = document.getElementById(btnId);
-        const inp = document.getElementById(inputId);
-        b.addEventListener("click", () => {
-            const isPass = inp.type === "password";
-            inp.type = isPass ? "text" : "password";
-            b.querySelector("span").textContent = isPass ? "visibility" : "visibility_off";
-        });
+      const b = document.getElementById(btnId);
+      const inp = document.getElementById(inputId);
+      b.addEventListener("click", () => {
+        const isPass = inp.type === "password";
+        inp.type = isPass ? "text" : "password";
+        b.querySelector("span").textContent = isPass
+          ? "visibility"
+          : "visibility_off";
+      });
     };
     toggle("togglePass1", "password");
     toggle("togglePass2", "confirm_password");
 
     function showMsg(text, type) {
-        msg.classList.remove("hidden");
-        msg.textContent = text;
+      msg.classList.remove("hidden");
+      msg.textContent = text;
 
-        // reset class
-        msg.className = "text-sm rounded-xl px-4 py-3 border";
+      // reset class
+      msg.className = "text-sm rounded-xl px-4 py-3 border";
 
-        if (type === "success") {
-            msg.classList.add("border-green-500/30", "bg-green-500/10", "text-green-200");
-        } else {
-            msg.classList.add("border-red-500/30", "bg-red-500/10", "text-red-200");
-        }
+      if (type === "success") {
+        msg.classList.add(
+          "border-green-500/30",
+          "bg-green-500/10",
+          "text-green-200"
+        );
+      } else {
+        msg.classList.add("border-red-500/30", "bg-red-500/10", "text-red-200");
+      }
     }
 
     function setLoading(isLoading) {
-        btn.disabled = isLoading;
-        btn.classList.toggle("opacity-70", isLoading);
-        btn.classList.toggle("cursor-not-allowed", isLoading);
+      btn.disabled = isLoading;
+      btn.classList.toggle("opacity-70", isLoading);
+      btn.classList.toggle("cursor-not-allowed", isLoading);
     }
 
     form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
-        const fullName = document.getElementById("full_name").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirm_password").value;
+      const fullName = document.getElementById("full_name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm_password").value;
 
-        // validate basic
-        if (!phone) return showMsg("Vui lòng nhập số điện thoại.", "error");
-        if (!/^[0-9+]{6,20}$/.test(phone)) return showMsg("Số điện thoại không hợp lệ.", "error");
-        if (!password || password.length < 6) return showMsg("Mật khẩu tối thiểu 6 ký tự.", "error");
-        if (password !== confirmPassword) return showMsg("Mật khẩu xác nhận không khớp.", "error");
+      // validate basic
+      if (!phone) return showMsg("Vui lòng nhập số điện thoại.", "error");
+      if (!/^[0-9+]{6,20}$/.test(phone))
+        return showMsg("Số điện thoại không hợp lệ.", "error");
+      if (!password || password.length < 6)
+        return showMsg("Mật khẩu tối thiểu 6 ký tự.", "error");
+      if (password !== confirmPassword)
+        return showMsg("Mật khẩu xác nhận không khớp.", "error");
 
-        setLoading(true);
-        msg.classList.add("hidden");
+      setLoading(true);
+      msg.classList.add("hidden");
 
-        try {
-            const res = await fetch(API_BASE + "/api/v1/auth/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    phone: phone,
-                    password: password,
-                    fullName: fullName || null
-                })
-            });
+      try {
+        const res = await fetch(API_BASE + "/api/v1/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phone: phone,
+            password: password,
+            fullName: fullName || null,
+          }),
+        });
 
-            const json = await res.json().catch(() => null);
+        const json = await res.json().catch(() => null);
 
-            if (!res.ok) {
-                const errMsg = (json && json.message) ? json.message : "Đăng ký thất bại.";
-                showMsg(errMsg, "error");
-                return;
-            }
-
-            // Success
-            const data = json?.data;
-            const token = data?.token;
-
-            if (token) {
-                localStorage.setItem("accessToken", token);
-                localStorage.setItem("account", JSON.stringify(data.account || {}));
-            }
-
-            showMsg(json?.message || "Đăng ký thành công!", "success");
-
-            // Redirect sau 800ms (tuỳ bạn)
-            setTimeout(() => {
-                window.location.href = "login.html"; // hoặc user dashboard
-            }, 800);
-
-        } catch (err) {
-            showMsg("Không thể kết nối server. Kiểm tra API_BASE hoặc backend.", "error");
-        } finally {
-            setLoading(false);
+        if (!res.ok) {
+          const errMsg =
+            json && json.message ? json.message : "Đăng ký thất bại.";
+          showMsg(errMsg, "error");
+          return;
         }
-    });
-</script>
 
+        // Success
+        const data = json?.data;
+        const token = data?.token;
+
+        if (token) {
+          localStorage.setItem("accessToken", token);
+          localStorage.setItem("account", JSON.stringify(data.account || {}));
+        }
+
+        showMsg(json?.message || "Đăng ký thành công!", "success");
+
+        // Redirect sau 800ms (tuỳ bạn)
+        setTimeout(() => {
+          window.location.href = "login.html"; // hoặc user dashboard
+        }, 800);
+      } catch (err) {
+        showMsg(
+          "Không thể kết nối server. Kiểm tra API_BASE hoặc backend.",
+          "error"
+        );
+      } finally {
+        setLoading(false);
+      }
+    });
+  </script>
 </html>
