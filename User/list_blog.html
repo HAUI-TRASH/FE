@@ -690,5 +690,19 @@
         </div>
       </div>
     </footer>
+    <script>
+      function toggleUserMenu() {
+        const menu = document.getElementById("user-menu");
+        menu.classList.toggle("hidden");
+      }
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const button = document.getElementById("user-menu-button");
+        const menu = document.getElementById("user-menu");
+        if (!button.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.add("hidden");
+        }
+      });
+    </script>
   </body>
 </html>

@@ -124,13 +124,15 @@
           >
             <span class="material-symbols-outlined">menu</span>
           </button>
-          <div
-            class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-            data-alt="User profile picture placeholder"
-            style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
-            "
-          onclick="toggleUserMenu()"
+          <div class="relative">
+            <button
+              id="user-menu-button"
+              class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+              data-alt="User profile picture placeholder"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+              "
+              onclick="toggleUserMenu()"
             ></button>
             <div
               id="user-menu"
