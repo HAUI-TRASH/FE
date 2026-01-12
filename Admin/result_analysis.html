@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>EcoScan AI - Lịch Sử Xử Lý</title>
+    <title>WasteAI - Lịch Sử Xử Lý</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
@@ -45,7 +45,6 @@
         },
       };
     </script>
-
     <style>
       body {
         font-family: "Space Grotesk", sans-serif;
@@ -73,17 +72,15 @@
   </head>
 
   <body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-white selection:bg-primary selection:text-background-dark overflow-x-hidden"
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden"
   >
-    <!-- Top Navigation -->
-    <header
-      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
-    >
-      <div
-        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+   <div class="flex h-screen w-full">
+      <!-- Sidebar -->
+      <aside
+        class="hidden w-64 flex-col border-r border-border-dark bg-background-dark p-4 md:flex"
       >
-        <div class="flex items-center gap-3 text-white">
-          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+        <div class="mb-8 flex items-center gap-2 px-2">
+           <a href="https://www.haui.edu.vn/vn" class="flex items-center">
             <img
               src="../img logo/logoHaUI.png"
               alt="HaUI Logo"
@@ -91,95 +88,89 @@
               class="rounded-full"
             />
           </a>
-          <div class="size-8 flex items-center justify-center text-primary">
-            <a href="index.html" class="flex items-center">
-              <span class="material-symbols-outlined text-3xl">recycling</span>
-            </a>
-          </div>
+          <a href="home.html">
+            <span style="color: rgb(19 236 91 / var(--tw-text-opacity, 1))" class="material-symbols-outlined text-3xl">recycling</span>
+          </a>
           <div>
-            <a href="index.html" class="flex items-center">
-              <h1
-                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
-              >
-                EcoScan AI
-              </h1>
-            </a>
+            <a href="home.html" class="font-display text-lg font-bold text-white">EcoScan AI</a>
+            <p class="text-xs text-text-secondary">Bảng Quản trị</p>
           </div>
         </div>
-
-        <nav class="hidden md:flex flex-1 justify-center gap-8">
+         <nav class="flex flex-1 flex-col gap-2">
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="home.html"
-            >Bảng Điều Khiển</a
           >
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-medium">Bảng Điều Khiển</span>
+          </a>
           <a
-            class="text-primary hover:text-primary transition-colors text-sm font-medium"
-            href="history.html"
-            >Lịch Sử Xử Lý</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg bg-surface-dark px-3 py-2 text-white"
             href="#"
-            >Thống kê</a
           >
+            <span class="material-symbols-outlined text-primary">history</span>
+            <span class="font-medium">Lịch Sử Quét</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="report.html"
+          >
+            <span class="material-symbols-outlined">analytics</span>
+            <span class="font-medium">Thống Kê</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="model.html"
-            >Giám sát</a
           >
+            <span class="material-symbols-outlined">monitoring</span>
+            <span class="font-medium">Giám sát</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="user_managerment.html"
+          >
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-medium">Quản lý người dùng</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="#"
-            >Cài Đặt</a
           >
+            <span class="material-symbols-outlined">settings</span>
+            <span class="font-medium">Cài Đặt</span>
+          </a>
         </nav>
-        <div class="flex items-center gap-4">
-          <button
-            id="user-menu-button"
-            class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-            data-alt="User profile picture placeholder"
-            style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
-            "
-            onclick="toggleUserMenu()"
-          ></button>
-
-          <div
-            id="user-menu"
-            class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
-          >
-            <a
-              href="#"
-              class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-            >
-              <img
-                class="w-8 h-8 rounded-full mr-3"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
-                alt="Avatar"
-              />
-              Tài khoản của bạn
-            </a>
-            <a
-              href="#"
-              class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-            >
-              <span class="material-symbols-outlined mr-3">logout</span>
-              Đăng xuất
-            </a>
+        <div class="mt-auto border-t border-border-dark pt-4">
+          <div class="flex items-center gap-3 px-2">
+            <div
+              class="h-10 w-10 overflow-hidden rounded-full bg-surface-dark"
+              data-alt="User avatar placeholder"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChOUBerVJzuzQkuzkG2loe1YHa731qHyAZ6EhJl0bkkMcz0dZACqML4Zj_ZzLoiZakNBG0SoyvLqyB1s1HEJJf58_nv_y6pmluY054exh0W2HP_rssgemSn1B6TKxySvvtFncPRyUTO6QGUA1dyyaEovtff1ZyJXs10nX_EOUENyPhQF-Mpx_iLYXTAqKhNLu7fSEE_8N5KCV2A5pxgS-MZwHXbURLMmYEWapg9-tAXW6hie5Lpfm16CqWUi5S8y9kdqO7MHBQYtZB');
+                background-size: cover;
+              "
+            ></div>
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-white"
+                >Người dùng Quản trị</span
+              >
+              <span class="text-xs text-text-secondary">admin@wasteai.com</span>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-    <main
-      class="layout-container flex h-full grow flex-col w-full max-w-[1440px] mx-auto px-4 md:px-6 lg:px-12 py-6"
-    >
+      </aside>
+    
+
+        <div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
+   
+          <div class="mx-auto max-w-7xl flex flex-col gap-6">
+    
       <!-- Breadcrumbs -->
-      <div class="flex flex-wrap gap-2 py-2 mb-4 items-center">
+      <div style="margin: 0;" class="flex flex-wrap gap-2 py-2 mb-4 items-center">
         <a
           class="text-text-muted hover:text-primary transition-colors text-sm font-medium"
-          href="#"
-          >Lịch Sử Xử Lý</a
+          href="history.html"
+          >Lịch Sử Quét</a
         >
         <span class="text-text-muted text-sm font-medium">/</span>
         <span
@@ -376,7 +367,7 @@
               <span class="material-symbols-outlined text-primary"
                 >terminal</span
               >
-              Raw Analysis Log
+              Nhật ký phân tích thô
             </h3>
             <div
               class="bg-[#0f1511] p-4 rounded-lg font-mono text-xs text-text-muted overflow-x-auto border border-border-dark/50"

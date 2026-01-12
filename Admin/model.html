@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>EcoScan AI - Giám Sát</title>
+    <title>WasteAI - Lịch Sử Xử Lý</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
@@ -45,7 +45,6 @@
         },
       };
     </script>
-    
     <style>
       body {
         font-family: "Space Grotesk", sans-serif;
@@ -73,16 +72,15 @@
   </head>
 
   <body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300"
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden"
   >
-    <header
-      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
-    >
-      <div
-        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+    <div class="flex h-screen w-full">
+      <!-- Sidebar -->
+      <aside
+        class="hidden w-64 flex-col border-r border-border-dark bg-background-dark p-4 md:flex"
       >
-        <div class="flex items-center gap-3 text-white">
-          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+        <div class="mb-8 flex items-center gap-2 px-2">
+           <a href="https://www.haui.edu.vn/vn" class="flex items-center">
             <img
               src="../img logo/logoHaUI.png"
               alt="HaUI Logo"
@@ -90,113 +88,159 @@
               class="rounded-full"
             />
           </a>
-          <div class="size-8 flex items-center justify-center text-primary">
-            <a href="index.html" class="flex items-center">
-              <span class="material-symbols-outlined text-3xl">recycling</span>
-            </a>
-          </div>
+          <a href="home.html">
+            <span style="color: rgb(19 236 91 / var(--tw-text-opacity, 1))" class="material-symbols-outlined text-3xl">recycling</span>
+          </a>
           <div>
-            <a href="index.html" class="flex items-center">
-              <h1
-                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
-              >
-                EcoScan AI
-              </h1>
-            </a>
+            <a href="home.html" class="font-display text-lg font-bold text-white">EcoScan AI</a>
+            <p class="text-xs text-text-secondary">Bảng Quản trị</p>
           </div>
         </div>
-        <nav 
-          class="hidden md:flex flex-1 justify-center gap-8">
+        <nav class="flex flex-1 flex-col gap-2">
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="home.html"
-            >Bảng Điều Khiển</a
           >
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-medium">Bảng Điều Khiển</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="history.html"
-            >Lịch Sử Xử Lý</a
           >
+            <span class="material-symbols-outlined">history</span>
+            <span class="font-medium">Lịch Sử Quét</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="report.html"
-            >Thống kê</a
           >
+            <span class="material-symbols-outlined">analytics</span>
+            <span class="font-medium">Thống Kê</span>
+          </a>
           <a
-            class="text-primary hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg bg-surface-dark px-3 py-2 text-white"
             href="model.html"
-            >Giám sát</a
           >
+            <span class="material-symbols-outlined text-primary">monitoring</span>
+            <span class="font-medium">Giám sát</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="user_managerment.html"
+          >
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-medium">Quản lý người dùng</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="#"
-            >Cài Đặt</a
           >
+            <span class="material-symbols-outlined">settings</span>
+            <span class="font-medium">Cài Đặt</span>
+          </a>
         </nav>
-        <div class="flex items-center gap-4">
-  <button
-    class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
-  >
-    <span class="material-symbols-outlined">menu</span>
-  </button>
-
-  <div class="relative flex items-center gap-4">
-    <button
-            class="relative bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors"
-          >
-            <span class="material-symbols-outlined">notifications</span>
-            <span
-              class="absolute top-0 right-0 size-2.5 bg-red-500 rounded-full border-2 border-[#102216]"
-            ></span>
-          </button>
-    <button
-      class="flex items-center gap-2 rounded-full border border-border-dark bg-surface-dark px-3 py-1.5 text-sm text-white hover:border-primary/50 transition-colors"
+        <div class="mt-auto border-t border-border-dark pt-4">
+          <div class="flex items-center gap-3 px-2">
+            <div
+              class="h-10 w-10 overflow-hidden rounded-full bg-surface-dark"
+              data-alt="User avatar placeholder"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChOUBerVJzuzQkuzkG2loe1YHa731qHyAZ6EhJl0bkkMcz0dZACqML4Zj_ZzLoiZakNBG0SoyvLqyB1s1HEJJf58_nv_y6pmluY054exh0W2HP_rssgemSn1B6TKxySvvtFncPRyUTO6QGUA1dyyaEovtff1ZyJXs10nX_EOUENyPhQF-Mpx_iLYXTAqKhNLu7fSEE_8N5KCV2A5pxgS-MZwHXbURLMmYEWapg9-tAXW6hie5Lpfm16CqWUi5S8y9kdqO7MHBQYtZB');
+                background-size: cover;
+              "
+            ></div>
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-white"
+                >Người dùng Quản trị</span
+              >
+              <span class="text-xs text-text-secondary">admin@wasteai.com</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- Bottom Actions -->
+     
+    <!-- Main Content Area -->
+    <main
+      class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative"
     >
-      <span class="material-symbols-outlined text-primary text-lg">add_a_photo</span>
-      <span class="hidden sm:inline">Nhận diện mới</span>
-    </button>
-    <button
-      id="user-menu-button"
-      class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-      data-alt="User profile picture placeholder"
-      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');"
-      onclick="toggleUserMenu()"
-    ></button>
-<div
-  class="flex items-center justify-center gap-2 
-         border border-[#9db9a6] rounded-lg px-3 py-2 text-[#9db9a6]"
->
-  <span class="material-symbols-outlined text-[20px]">search</span>
-  <span class="text-sm">Search</span>
-</div>
+      <!-- Top Navigation -->
+      <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#28392e] px-6 py-4 bg-surface-darker/50 backdrop-blur-md sticky top-0 z-20"
+      >
+        <div class="flex items-center gap-4 text-white">
+          <div class="md:hidden">
+            <span class="material-symbols-outlined text-white cursor-pointer"
+              >menu</span
+            >
+          </div>
+          <div class="flex flex-col">
+            <h2
+              class="text-white text-lg font-bold leading-tight tracking-[-0.015em]"
+            >
+              Màn hình giám sát hiệu năng mô hình
+            </h2>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-primary"
+                ></span>
+              </span>
+              <span
+                class="text-xs text-primary font-medium tracking-wide uppercase"
+                >Hệ thống đang hoạt động</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <!-- Search -->
+          <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+            <div
+              class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#28392e] border border-transparent focus-within:border-primary/50 transition-colors"
+            >
+              <div
+                class="text-[#9db9a6] flex border-none items-center justify-center pl-3 rounded-l-lg border-r-0"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >search</span
+                >
+              </div>
+              <input
+                class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-[#9db9a6] px-2 rounded-l-none text-sm font-normal leading-normal"
+                placeholder="Search logs..."
+                value=""
+              />
+            </div>
+          </label>
+          <!-- Action Icons -->
 
-    <div
-      id="user-menu"
-      class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
-    >
-      <a
-        href="#"
-        class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-      >
-        <img
-          class="w-8 h-8 rounded-full mr-3"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
-          alt="Avatar"
-        />
-        Tài khoản của bạn
-      </a>
-      <a
-        href="#"
-        class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-      >
-        <span class="material-symbols-outlined mr-3">logout</span>
-        Đăng xuất
-      </a>
-    </div>
-  </div>
-</div>
-    </header>
-      
+          <div class="flex gap-3">
+            <button
+              class="flex items-center justify-center rounded-lg size-10 bg-[#28392e] hover:bg-[#344a3c] text-white transition-colors relative"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >notifications</span
+              >
+              <span
+                class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-[#28392e]"
+              ></span>
+            </button>
+            <div
+              class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+              data-alt="User avatar of a smiling man"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA6H3_8FCVdHZn_9NwreLj-a6H5aqQriy5J8JdxkJuwOGCWJViaU8nEoOH7SWsLo9hLOrxZwanZjbd4tRzXVmBVX1EOMMc0BSHJsgAdx-CDH8zwYVzVAJGTHkj34Ons-Zfpc8ZQndofNiTYWFytjLbQ9gMxLWrUQDZbDcv1fp6QNBZrHiSwr3__GFPmVdVozzfK4X7qnQJSTaMaoKECRZs-yQWd6NzJqejCBJJBBXtZSyFB5zkBK770WeVa2ghzDQ92tIq9KO-pTG52');
+              "
+            ></div>
+          </div>
+        </div>
+      </header>
+
       <!-- Scrollable Content -->
       <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
         <!-- Page Heading & Actions -->
@@ -207,10 +251,10 @@
             <h1
               class="text-white text-3xl md:text-4xl font-bold leading-tight tracking-tight"
             >
-              AI System Health
+              Sức khỏe hệ thống AI
             </h1>
             <p class="text-[#9db9a6] text-base font-normal">
-              Real-time analytics for Waste Recognition Engine
+              Phân tích theo thời gian thực cho Hệ thống Nhận dạng Rác thải
               <span
                 class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded text-sm"
                 >v3.0.1-beta</span
@@ -222,7 +266,7 @@
               class="flex items-center gap-2 px-4 h-10 bg-[#28392e] hover:bg-[#344a3c] text-white text-sm font-bold rounded-lg transition-colors border border-transparent hover:border-primary/30"
             >
               <span class="material-symbols-outlined text-[18px]">history</span>
-              <span>Switch Version</span>
+              <span>Chuyển phiên bản</span>
             </button>
             <button
               class="flex items-center gap-2 px-4 h-10 bg-[#28392e] hover:bg-[#344a3c] text-white text-sm font-bold rounded-lg transition-colors border border-transparent hover:border-primary/30"
@@ -230,7 +274,7 @@
               <span class="material-symbols-outlined text-[18px]"
                 >download</span
               >
-              <span>Export Logs</span>
+              <span>Xuất nhật ký</span>
             </button>
             <button
               class="flex items-center gap-2 px-4 h-10 bg-primary hover:bg-primary/90 text-background-dark text-sm font-bold rounded-lg shadow-[0_0_15px_rgba(19,236,91,0.3)] transition-all"
@@ -238,7 +282,7 @@
               <span class="material-symbols-outlined text-[18px]"
                 >model_training</span
               >
-              <span>Retrain Model</span>
+              <span>Huấn luyện lại mô hình</span>
             </button>
           </div>
         </div>
@@ -248,22 +292,22 @@
             <button
               class="px-4 py-2 text-sm font-medium text-[#9db9a6] hover:text-white hover:bg-[#28392e] rounded-lg transition-colors whitespace-nowrap"
             >
-              Last 24 Hours
+             24 giờ trước
             </button>
             <button
               class="px-4 py-2 text-sm font-medium text-background-dark bg-primary rounded-lg transition-colors whitespace-nowrap"
             >
-              Last 7 Days
+              7 ngày trước
             </button>
             <button
               class="px-4 py-2 text-sm font-medium text-[#9db9a6] hover:text-white hover:bg-[#28392e] rounded-lg transition-colors whitespace-nowrap"
             >
-              Last 30 Days
+              30 ngày trước
             </button>
             <button
               class="px-4 py-2 text-sm font-medium text-[#9db9a6] hover:text-white hover:bg-[#28392e] rounded-lg transition-colors whitespace-nowrap"
             >
-              Custom Range
+              Phạm vi tùy chỉnh
             </button>
           </div>
         </div>
@@ -288,7 +332,7 @@
             </div>
             <div>
               <p class="text-[#9db9a6] text-sm font-medium mb-1">
-                Avg. Confidence
+                Độ tin cậy trung bình
               </p>
               <h3 class="text-3xl font-bold text-white tracking-tight">
                 94.2%
@@ -313,7 +357,7 @@
             </div>
             <div>
               <p class="text-[#9db9a6] text-sm font-medium mb-1">
-                Inference Speed
+                Tốc độ suy luận
               </p>
               <h3 class="text-3xl font-bold text-white tracking-tight">
                 120<span class="text-lg text-[#9db9a6] font-normal ml-1"
@@ -336,12 +380,12 @@
             </div>
             <div class="relative z-10">
               <p class="text-[#9db9a6] text-sm font-medium mb-1">
-                Flagged Errors
+                Lỗi được đánh dấu
               </p>
               <h3 class="text-3xl font-bold text-white tracking-tight">
                 14
                 <span class="text-sm font-normal text-red-400 ml-2"
-                  >Needs Review</span
+                  >Cần xem xét</span
                 >
               </h3>
             </div>
@@ -359,7 +403,7 @@
             </div>
             <div>
               <p class="text-[#9db9a6] text-sm font-medium mb-1">
-                Total Predictions
+                Tổng số dự đoán
               </p>
               <h3 class="text-3xl font-bold text-white tracking-tight">
                 12.8k
@@ -375,16 +419,16 @@
           >
             <div class="flex justify-between items-center mb-6">
               <div>
-                <h3 class="text-white text-lg font-bold">Performance Trend</h3>
+                <h3 class="text-white text-lg font-bold">Xu hướng hiệu suất</h3>
                 <p class="text-[#9db9a6] text-sm">
-                  Accuracy vs. Error Rate (Last 7 Days)
+                  chính xác so với Tỷ lệ lỗi (7 ngày trước)
                 </p>
               </div>
               <div class="flex items-center gap-2">
                 <span class="size-3 rounded-full bg-primary"></span>
-                <span class="text-xs text-[#9db9a6]">Accuracy</span>
+                <span class="text-xs text-[#9db9a6]">Độ chính xác</span>
                 <span class="size-3 rounded-full bg-red-500 ml-3"></span>
-                <span class="text-xs text-[#9db9a6]">Errors</span>
+                <span class="text-xs text-[#9db9a6]">Lỗi</span>
               </div>
             </div>
             <!-- Fake Chart Visualization using CSS Gradients/Flex -->
@@ -420,7 +464,7 @@
                     class="absolute bottom-0 w-full bg-red-500 h-[30%] rounded-t-sm"
                   ></div>
                 </div>
-                <span class="text-[10px] text-[#9db9a6] mt-2">Mon</span>
+                <span class="text-[10px] text-[#9db9a6] mt-2">Thứ Hai</span>
               </div>
               <!-- Day 2 -->
               <div
@@ -440,7 +484,7 @@
                     class="absolute bottom-0 w-full bg-red-500 h-[40%] rounded-t-sm"
                   ></div>
                 </div>
-                <span class="text-[10px] text-[#9db9a6] mt-2">Tue</span>
+                <span class="text-[10px] text-[#9db9a6] mt-2">Thứ Ba</span>
               </div>
               <!-- Day 3 -->
               <div
@@ -460,7 +504,7 @@
                     class="absolute bottom-0 w-full bg-red-500 h-[20%] rounded-t-sm"
                   ></div>
                 </div>
-                <span class="text-[10px] text-[#9db9a6] mt-2">Wed</span>
+                <span class="text-[10px] text-[#9db9a6] mt-2">Thứ Tư</span>
               </div>
               <!-- Day 4 -->
               <div
@@ -480,7 +524,7 @@
                     class="absolute bottom-0 w-full bg-red-500 h-[10%] rounded-t-sm"
                   ></div>
                 </div>
-                <span class="text-[10px] text-[#9db9a6] mt-2">Thu</span>
+                <span class="text-[10px] text-[#9db9a6] mt-2">Thứ Năm</span>
               </div>
               <!-- Day 5 -->
               <div
@@ -500,7 +544,7 @@
                     class="absolute bottom-0 w-full bg-red-500 h-[50%] rounded-t-sm"
                   ></div>
                 </div>
-                <span class="text-[10px] text-[#9db9a6] mt-2">Fri</span>
+                <span class="text-[10px] text-[#9db9a6] mt-2">Thứ Sáu</span>
               </div>
               <!-- Day 6 -->
               <div
@@ -520,7 +564,7 @@
                     class="absolute bottom-0 w-full bg-red-500 h-[20%] rounded-t-sm"
                   ></div>
                 </div>
-                <span class="text-[10px] text-[#9db9a6] mt-2">Sat</span>
+                <span class="text-[10px] text-[#9db9a6] mt-2">Thứ Bảy</span>
               </div>
               <!-- Day 7 -->
               <div
@@ -540,7 +584,7 @@
                     class="absolute bottom-0 w-full bg-red-500 h-[30%] rounded-t-sm"
                   ></div>
                 </div>
-                <span class="text-[10px] text-primary font-bold mt-2">Sun</span>
+                <span class="text-[10px] text-primary font-bold mt-2">Chủ Nhật</span>
               </div>
             </div>
           </div>
@@ -551,9 +595,9 @@
             <div
               class="p-6 pb-4 border-b border-[#28392e] flex justify-between items-center bg-surface-darker/30"
             >
-              <h3 class="text-white text-lg font-bold">Recent Inferences</h3>
+              <h3 class="text-white text-lg font-bold">Suy luận gần đây</h3>
               <a class="text-primary text-xs font-bold hover:underline" href="#"
-                >View All</a
+                >Xem tất cả</a
               >
             </div>
             <div class="flex-1 overflow-y-auto max-h-[400px]">
@@ -562,9 +606,9 @@
                   class="bg-[#1c2e23] text-xs uppercase text-[#9db9a6] sticky top-0"
                 >
                   <tr>
-                    <th class="px-4 py-3 font-medium">Input</th>
-                    <th class="px-4 py-3 font-medium">Prediction</th>
-                    <th class="px-4 py-3 font-medium text-right">Conf.</th>
+                    <th class="px-4 py-3 font-medium">Ảnh đầu vào</th>
+                    <th class="px-4 py-3 font-medium">Dự đoán</th>
+                    <th class="px-4 py-3 font-medium text-right">Độ tin cậy</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-[#28392e]">
@@ -581,9 +625,9 @@
                     </td>
                     <td class="px-4 py-3">
                       <p class="text-white text-sm font-medium">
-                        Plastic Bottle
+                        Chai nhựa
                       </p>
-                      <p class="text-[#9db9a6] text-xs">2 mins ago</p>
+                      <p class="text-[#9db9a6] text-xs">2 phút trước</p>
                     </td>
                     <td class="px-4 py-3 text-right">
                       <span
@@ -604,8 +648,8 @@
                       ></div>
                     </td>
                     <td class="px-4 py-3">
-                      <p class="text-white text-sm font-medium">Paper Waste</p>
-                      <p class="text-[#9db9a6] text-xs">5 mins ago</p>
+                      <p class="text-white text-sm font-medium">Rác thải giấy</p>
+                      <p class="text-[#9db9a6] text-xs">5 phút trước</p>
                     </td>
                     <td class="px-4 py-3 text-right">
                       <span
@@ -628,12 +672,12 @@
                       ></div>
                     </td>
                     <td class="px-4 py-3">
-                      <p class="text-white text-sm font-medium">Metal Can</p>
+                      <p class="text-white text-sm font-medium">Can nhựa</p>
                       <p class="text-red-400 text-xs flex items-center gap-1">
                         <span class="material-symbols-outlined text-[10px]"
                           >warning</span
                         >
-                        Low Confidence
+                       Độ tin cậy thấp
                       </p>
                     </td>
                     <td class="px-4 py-3 text-right">
@@ -655,8 +699,8 @@
                       ></div>
                     </td>
                     <td class="px-4 py-3">
-                      <p class="text-white text-sm font-medium">Glass Jar</p>
-                      <p class="text-[#9db9a6] text-xs">12 mins ago</p>
+                      <p class="text-white text-sm font-medium">Chai thủy tinh</p>
+                      <p class="text-[#9db9a6] text-xs">12 phút trước</p>
                     </td>
                     <td class="px-4 py-3 text-right">
                       <span

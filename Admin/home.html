@@ -1,11 +1,10 @@
 <!DOCTYPE html>
+
 <html class="dark" lang="vi">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Bảng Điều Khiển Tổng Quan</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <title>WasteAI - Lịch Sử Xử Lý</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
@@ -14,8 +13,12 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <script>
       tailwind.config = {
         darkMode: "class",
         theme: {
@@ -24,8 +27,9 @@
               primary: "#13ec5b",
               "background-light": "#f6f8f6",
               "background-dark": "#102216",
-              "surface-dark": "#1c2a21",
-              "surface-light": "#ffffff",
+              "surface-dark": "#1c271f",
+              "border-dark": "#28392e",
+              "text-secondary": "#9db9a6",
             },
             fontFamily: {
               display: ["Space Grotesk", "sans-serif"],
@@ -35,45 +39,48 @@
               DEFAULT: "0.25rem",
               lg: "0.5rem",
               xl: "0.75rem",
-              "2xl": "1rem",
               full: "9999px",
             },
           },
         },
       };
     </script>
-
     <style>
       body {
         font-family: "Space Grotesk", sans-serif;
       }
 
-      .material-symbols-outlined {
-        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      /* Custom scrollbar for table container if needed */
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
       }
 
-      @keyframes growUp {
-        from {
-          height: 0;
-        }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #1c271f;
       }
 
-      .bar-animate {
-        animation: growUp 1s ease-out forwards;
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #28392e;
+        border-radius: 4px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #3b5443;
       }
     </style>
   </head>
+
   <body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300"
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden"
   >
-    <header
-      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
-    >
-      <div
-        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+    <div class="flex h-screen w-full">
+      <!-- Sidebar -->
+      <aside
+        class="hidden w-64 flex-col border-r border-border-dark bg-background-dark p-4 md:flex"
       >
-        <div class="flex items-center gap-3 text-white">
-          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+        <div class="mb-8 flex items-center gap-2 px-2">
+           <a href="https://www.haui.edu.vn/vn" class="flex items-center">
             <img
               src="../img logo/logoHaUI.png"
               alt="HaUI Logo"
@@ -81,66 +88,82 @@
               class="rounded-full"
             />
           </a>
-          <div class="size-8 flex items-center justify-center text-primary">
-            <a href="index.html" class="flex items-center">
-              <span class="material-symbols-outlined text-3xl">recycling</span>
-            </a>
-          </div>
+          <a href="home.html">
+            <span style="color: rgb(19 236 91 / var(--tw-text-opacity, 1))" class="material-symbols-outlined text-3xl">recycling</span>
+          </a>
           <div>
-            <a href="index.html" class="flex items-center">
-              <h1
-                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
-              >
-                EcoScan AI
-              </h1>
-            </a>
+            <a href="home.html" class="font-display text-lg font-bold text-white">EcoScan AI</a>
+            <p class="text-xs text-text-secondary">Bảng Quản trị</p>
           </div>
         </div>
-        <nav class="hidden md:flex flex-1 justify-center gap-8">
-          <a class="text-primary transition-colors text-sm font-bold" href="#">
-            Bảng Điều Khiển
+        <nav class="flex flex-1 flex-col gap-2">
+          <a
+            class="flex items-center gap-3 rounded-lg bg-surface-dark px-3 py-2 text-white"
+            href="home.html"
+          >
+            <span class="material-symbols-outlined text-primary">dashboard</span>
+            <span class="font-medium">Bảng Điều Khiển</span>
           </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="history.html"
-            >Lịch Sử Xử Lý</a
           >
+            <span class="material-symbols-outlined">history</span>
+            <span class="font-medium">Lịch Sử Quét</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="report.html"
-            >Thống kê</a
           >
+            <span class="material-symbols-outlined">analytics</span>
+            <span class="font-medium">Thống Kê</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="model.html"
-            >Giám sát</a
           >
+            <span class="material-symbols-outlined">monitoring</span>
+            <span class="font-medium">Giám sát</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
-            href="model.html"
-            >Cài đặt</a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="user_managerment.html"
           >
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-medium">Quản lý người dùng</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">settings</span>
+            <span class="font-medium">Cài Đặt</span>
+          </a>
         </nav>
-        <div class="flex items-center gap-4">
-          <button
-            class="relative bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors"
-          >
-            <span class="material-symbols-outlined">notifications</span>
-            <span
-              class="absolute top-0 right-0 size-2.5 bg-red-500 rounded-full border-2 border-[#102216]"
-            ></span>
-          </button>
-          <div
-            class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-            data-alt="User profile picture placeholder"
-            style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
-            "
-          ></div>
+        <div class="mt-auto border-t border-border-dark pt-4">
+          <div class="flex items-center gap-3 px-2">
+            <div
+              class="h-10 w-10 overflow-hidden rounded-full bg-surface-dark"
+              data-alt="User avatar placeholder"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChOUBerVJzuzQkuzkG2loe1YHa731qHyAZ6EhJl0bkkMcz0dZACqML4Zj_ZzLoiZakNBG0SoyvLqyB1s1HEJJf58_nv_y6pmluY054exh0W2HP_rssgemSn1B6TKxySvvtFncPRyUTO6QGUA1dyyaEovtff1ZyJXs10nX_EOUENyPhQF-Mpx_iLYXTAqKhNLu7fSEE_8N5KCV2A5pxgS-MZwHXbURLMmYEWapg9-tAXW6hie5Lpfm16CqWUi5S8y9kdqO7MHBQYtZB');
+                background-size: cover;
+              "
+            ></div>
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-white"
+                >Người dùng Quản trị</span
+              >
+              <span class="text-xs text-text-secondary">admin@wasteai.com</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </header>
-    <main class="flex-1 w-full px-4 py-8 md:py-10 max-w-[1200px] mx-auto">
+      </aside>
+        
+        <!-- Scrollable Content Area -->
+        <div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
+          <div class="mx-auto max-w-7xl flex flex-col gap-6">
+    
       <div
         class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"
       >

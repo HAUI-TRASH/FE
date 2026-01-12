@@ -4,15 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Bảng Thống Kê - EcoScan AI</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <title>WasteAI - Lịch Sử Xử Lý</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
-    <!-- Material Symbols -->
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
@@ -21,9 +17,8 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <script>
       tailwind.config = {
         darkMode: "class",
         theme: {
@@ -32,12 +27,13 @@
               primary: "#13ec5b",
               "background-light": "#f6f8f6",
               "background-dark": "#102216",
-              "surface-dark": "#16261d",
+              "surface-dark": "#1c271f",
               "border-dark": "#28392e",
+              "text-secondary": "#9db9a6",
             },
             fontFamily: {
               display: ["Space Grotesk", "sans-serif"],
-              body: ["Noto Sans", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
             },
             borderRadius: {
               DEFAULT: "0.25rem",
@@ -50,56 +46,41 @@
       };
     </script>
     <style>
-      .chart-gradient {
-        background: linear-gradient(
-          180deg,
-          rgba(19, 236, 91, 0.2) 0%,
-          rgba(19, 236, 91, 0) 100%
-        );
+      body {
+        font-family: "Space Grotesk", sans-serif;
       }
 
-      .donut-chart {
-        background: conic-gradient(
-          #13ec5b 0% 45%,
-          /* Plastic */ #2f5e41 45% 70%,
-          /* Organic */ #4ade80 70% 85%,
-          /* Metal */ #1f3326 85% 100% /* Other */
-        );
-      }
-
-      /* Custom scrollbar for data tables */
-      ::-webkit-scrollbar {
-        width: 8px;
+      /* Custom scrollbar for table container if needed */
+      .custom-scrollbar::-webkit-scrollbar {
         height: 8px;
+        width: 8px;
       }
 
-      ::-webkit-scrollbar-track {
-        background: #102216;
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #1c271f;
       }
 
-      ::-webkit-scrollbar-thumb {
+      .custom-scrollbar::-webkit-scrollbar-thumb {
         background: #28392e;
         border-radius: 4px;
       }
 
-      ::-webkit-scrollbar-thumb:hover {
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: #3b5443;
       }
     </style>
   </head>
 
   <body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-white overflow-x-hidden selection:bg-primary selection:text-black"
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden"
   >
-    <!-- Top Navigation -->
-    <header
-      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
-    >
-      <div
-        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+    <div class="flex h-screen w-full">
+      <!-- Sidebar -->
+      <aside
+        class="hidden w-64 flex-col border-r border-border-dark bg-background-dark p-4 md:flex"
       >
-        <div class="flex items-center gap-3 text-white">
-          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+        <div class="mb-8 flex items-center gap-2 px-2">
+           <a href="https://www.haui.edu.vn/vn" class="flex items-center">
             <img
               src="../img logo/logoHaUI.png"
               alt="HaUI Logo"
@@ -107,93 +88,86 @@
               class="rounded-full"
             />
           </a>
-          <div class="size-8 flex items-center justify-center text-primary">
-            <a href="index.html" class="flex items-center">
-              <span class="material-symbols-outlined text-3xl">recycling</span>
-            </a>
-          </div>
+          <a href="home.html">
+            <span style="color: rgb(19 236 91 / var(--tw-text-opacity, 1))" class="material-symbols-outlined text-3xl">recycling</span>
+          </a>
           <div>
-            <a href="index.html" class="flex items-center">
-              <h1
-                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
-              >
-                EcoScan AI
-              </h1>
-            </a>
+            <a href="home.html" class="font-display text-lg font-bold text-white">EcoScan AI</a>
+            <p class="text-xs text-text-secondary">Bảng Quản trị</p>
           </div>
         </div>
-        <nav 
-          class="hidden md:flex flex-1 justify-center gap-8">
+        <nav class="flex flex-1 flex-col gap-2">
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="home.html"
-            >Bảng Điều Khiển</a
           >
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-medium">Bảng Điều Khiển</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="history.html"
-            >Lịch Sử Xử Lý</a
           >
+            <span class="material-symbols-outlined">history</span>
+            <span class="font-medium">Lịch Sử Quét</span>
+          </a>
           <a
-            class="text-primary hover:text-primary transition-colors text-sm font-medium"
-            href="#"
-            >Thống kê</a
+            class="flex items-center gap-3 rounded-lg bg-surface-dark px-3 py-2 text-white"
+            href="report.html"
           >
+            <span class="material-symbols-outlined text-primary">analytics</span>
+            <span class="font-medium">Thống Kê</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="model.html"
-            >Giám sát</a
           >
+            <span class="material-symbols-outlined">monitoring</span>
+            <span class="font-medium">Giám sát</span>
+          </a>
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
-            href="#"
-            >Cài Đặt</a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="user_managerment.html"
           >
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-medium">Quản lý người dùng</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">settings</span>
+            <span class="font-medium">Cài Đặt</span>
+          </a>
         </nav>
-        <div class="flex items-center gap-4">
-  <button
-    class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
-  >
-    <span class="material-symbols-outlined">menu</span>
-  </button>
-
-  <div class="relative flex items-center gap-4">
-    <button
-      id="user-menu-button"
-      class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-      data-alt="User profile picture placeholder"
-      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');"
-      onclick="toggleUserMenu()"
-    ></button>
-
-    <div
-      id="user-menu"
-      class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
-    >
-      <a
-        href="#"
-        class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+        <div class="mt-auto border-t border-border-dark pt-4">
+          <div class="flex items-center gap-3 px-2">
+            <div
+              class="h-10 w-10 overflow-hidden rounded-full bg-surface-dark"
+              data-alt="User avatar placeholder"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChOUBerVJzuzQkuzkG2loe1YHa731qHyAZ6EhJl0bkkMcz0dZACqML4Zj_ZzLoiZakNBG0SoyvLqyB1s1HEJJf58_nv_y6pmluY054exh0W2HP_rssgemSn1B6TKxySvvtFncPRyUTO6QGUA1dyyaEovtff1ZyJXs10nX_EOUENyPhQF-Mpx_iLYXTAqKhNLu7fSEE_8N5KCV2A5pxgS-MZwHXbURLMmYEWapg9-tAXW6hie5Lpfm16CqWUi5S8y9kdqO7MHBQYtZB');
+                background-size: cover;
+              "
+            ></div>
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-white"
+                >Người dùng Quản trị</span
+              >
+              <span class="text-xs text-text-secondary">admin@wasteai.com</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- Main Content -->
+      <main
+        class="flex flex-1 flex-col overflow-hidden bg-background-light dark:bg-background-dark"
       >
-        <img
-          class="w-8 h-8 rounded-full mr-3"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
-          alt="Avatar"
-        />
-        Tài khoản của bạn
-      </a>
-      <a
-        href="#"
-        class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-      >
-        <span class="material-symbols-outlined mr-3">logout</span>
-        Đăng xuất
-      </a>
-    </div>
-  </div>
-</div>
-    </header>
-    <main class="flex-1 flex flex-col items-center w-full py-8 px-4 md:px-10">
-      <div class="w-full max-w-[1200px] flex flex-col gap-8">
+        <!-- Top Navbar -->
+        
+        <!-- Scrollable Content Area -->
+        <div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
+          <div class="mx-auto max-w-7xl flex flex-col gap-6">
         <!-- Page Heading & Controls -->
         <div
           class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-border-dark/50"
@@ -286,8 +260,8 @@
               >
             </div>
             <div class="flex items-baseline gap-3 mt-1">
-              <p class="text-white text-3xl font-bold">Plastic</p>
-              <p class="text-[#9db9a6] text-sm font-medium">45% of total</p>
+              <p class="text-white text-3xl font-bold">Nhựa</p>
+              <p class="text-[#9db9a6] text-sm font-medium">45% tổng số quét</p>
             </div>
             <p class="text-gray-500 text-xs">Loại hàng đầu được nhận diện</p>
           </div>
@@ -329,7 +303,7 @@
               <span class="material-symbols-outlined text-primary"
                 >show_chart</span
               >
-              Identification Trends
+              Xu hướng nhận dạng
             </h3>
             <div class="flex gap-4 text-sm text-gray-400">
               <div class="flex items-center gap-2">
@@ -424,7 +398,7 @@
               <span class="material-symbols-outlined text-primary"
                 >pie_chart</span
               >
-              Waste Composition
+              Thành phần chất thải
             </h3>
             <div
               class="flex flex-col sm:flex-row items-center justify-center gap-8"
@@ -437,7 +411,7 @@
                   class="size-36 md:size-44 bg-surface-dark rounded-full flex flex-col items-center justify-center"
                 >
                   <span class="text-gray-400 text-xs uppercase tracking-widest"
-                    >Total</span
+                    >TỔNG CỘNG</span
                   >
                   <span class="text-2xl font-bold text-white">1,240</span>
                 </div>
@@ -448,7 +422,7 @@
                 >
                   <div class="flex items-center gap-2">
                     <span class="size-3 rounded-full bg-[#13ec5b]"></span>
-                    <span class="text-sm text-gray-200">Plastic</span>
+                    <span class="text-sm text-gray-200">Nhựa</span>
                   </div>
                   <span class="text-sm font-bold text-white ml-auto">45%</span>
                 </div>
@@ -457,7 +431,7 @@
                 >
                   <div class="flex items-center gap-2">
                     <span class="size-3 rounded-full bg-[#2f5e41]"></span>
-                    <span class="text-sm text-gray-200">Organic</span>
+                    <span class="text-sm text-gray-200">Hữu cơ</span>
                   </div>
                   <span class="text-sm font-bold text-white ml-auto">25%</span>
                 </div>
@@ -466,7 +440,7 @@
                 >
                   <div class="flex items-center gap-2">
                     <span class="size-3 rounded-full bg-[#4ade80]"></span>
-                    <span class="text-sm text-gray-200">Metal</span>
+                    <span class="text-sm text-gray-200">Kim loại</span>
                   </div>
                   <span class="text-sm font-bold text-white ml-auto">15%</span>
                 </div>
@@ -475,7 +449,7 @@
                 >
                   <div class="flex items-center gap-2">
                     <span class="size-3 rounded-full bg-[#1f3326]"></span>
-                    <span class="text-sm text-gray-200">Others</span>
+                    <span class="text-sm text-gray-200">Khác</span>
                   </div>
                   <span class="text-sm font-bold text-white ml-auto">15%</span>
                 </div>
@@ -491,16 +465,16 @@
                 <span class="material-symbols-outlined text-primary"
                   >compare_arrows</span
                 >
-                Monthly Comparison
+                So sánh theo tháng
               </h3>
               <div class="flex gap-4 text-sm text-gray-400">
                 <div class="flex items-center gap-2">
                   <span class="w-3 h-3 rounded bg-primary"></span>
-                  <span>This Month</span>
+                  <span>Tháng này</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <span class="w-3 h-3 rounded bg-[#28392e]"></span>
-                  <span>Last Month</span>
+                  <span>Tháng trước</span>
                 </div>
               </div>
             </div>
@@ -508,7 +482,7 @@
               <!-- Item 1 -->
               <div class="flex flex-col gap-2">
                 <div class="flex justify-between text-sm">
-                  <span class="text-white font-medium">Plastic</span>
+                  <span class="text-white font-medium">Nhựa</span>
                   <span class="text-primary font-bold">+15%</span>
                 </div>
                 <div class="w-full h-8 flex flex-col gap-1 relative">
@@ -527,7 +501,7 @@
               <!-- Item 2 -->
               <div class="flex flex-col gap-2">
                 <div class="flex justify-between text-sm">
-                  <span class="text-white font-medium">Organic</span>
+                  <span class="text-white font-medium">Hữu cơ</span>
                   <span class="text-[#9db9a6] font-bold">-5%</span>
                 </div>
                 <div class="w-full h-8 flex flex-col gap-1 relative">
@@ -546,7 +520,7 @@
               <!-- Item 3 -->
               <div class="flex flex-col gap-2">
                 <div class="flex justify-between text-sm">
-                  <span class="text-white font-medium">Metal</span>
+                  <span class="text-white font-medium">Kim loại</span>
                   <span class="text-primary font-bold">+8%</span>
                 </div>
                 <div class="w-full h-8 flex flex-col gap-1 relative">
@@ -597,14 +571,14 @@
                   <td class="px-6 py-4">
                     <div class="flex items-center gap-2">
                       <div class="size-2 rounded-full bg-primary"></div>
-                      Plastic Bottle
+                      Chai Nhựa
                     </div>
                   </td>
                   <td class="px-6 py-4 font-bold">98.5%</td>
                   <td class="px-6 py-4">
                     <span
                       class="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20"
-                      >Verified</span
+                      >Đã xác minh</span
                     >
                   </td>
                 </tr>
@@ -614,14 +588,14 @@
                   <td class="px-6 py-4">
                     <div class="flex items-center gap-2">
                       <div class="size-2 rounded-full bg-[#2f5e41]"></div>
-                      Organic Waste
+                      Chất thải hữu cơ
                     </div>
                   </td>
                   <td class="px-6 py-4 font-bold">92.1%</td>
                   <td class="px-6 py-4">
                     <span
                       class="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20"
-                      >Verified</span
+                      >Đã xác minh</span
                     >
                   </td>
                 </tr>
@@ -631,14 +605,14 @@
                   <td class="px-6 py-4">
                     <div class="flex items-center gap-2">
                       <div class="size-2 rounded-full bg-red-400"></div>
-                      Unknown Object
+                      Vật thể không xác định
                     </div>
                   </td>
                   <td class="px-6 py-4 font-bold text-red-400">45.2%</td>
                   <td class="px-6 py-4">
                     <span
                       class="inline-flex items-center rounded-md bg-red-400/10 px-2 py-1 text-xs font-medium text-red-400 ring-1 ring-inset ring-red-400/20"
-                      >Flagged</span
+                      >Đã đánh dấu</span
                     >
                   </td>
                 </tr>
@@ -648,14 +622,14 @@
                   <td class="px-6 py-4">
                     <div class="flex items-center gap-2">
                       <div class="size-2 rounded-full bg-[#4ade80]"></div>
-                      Aluminum Can
+                      Lon nhôm
                     </div>
                   </td>
                   <td class="px-6 py-4 font-bold">99.1%</td>
                   <td class="px-6 py-4">
                     <span
                       class="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20"
-                      >Verified</span
+                      >Đã xác minh</span
                     >
                   </td>
                 </tr>

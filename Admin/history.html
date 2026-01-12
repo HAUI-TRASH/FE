@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>EcoScan AI - Lịch Sử Xử Lý</title>
+    <title>WasteAI - Lịch Sử Xử Lý</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
@@ -45,7 +45,6 @@
         },
       };
     </script>
-    
     <style>
       body {
         font-family: "Space Grotesk", sans-serif;
@@ -73,15 +72,14 @@
   </head>
 
   <body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300"
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden"
   >
-    <header
-      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
-    >
-      <div
-        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+    <div class="flex h-screen w-full">
+      <!-- Sidebar -->
+      <aside
+        class="hidden w-64 flex-col border-r border-border-dark bg-background-dark p-4 md:flex"
       >
-        <div class="flex items-center gap-3 text-white">
+        <div class="mb-8 flex items-center gap-2 px-2">
           <a href="https://www.haui.edu.vn/vn" class="flex items-center">
             <img
               src="../img logo/logoHaUI.png"
@@ -90,148 +88,131 @@
               class="rounded-full"
             />
           </a>
-          <div class="size-8 flex items-center justify-center text-primary">
-            <a href="index.html" class="flex items-center">
-              <span class="material-symbols-outlined text-3xl">recycling</span>
-            </a>
-          </div>
+          <a href="home.html">
+            <span
+              style="color: rgb(19 236 91 / var(--tw-text-opacity, 1))"
+              class="material-symbols-outlined text-3xl"
+              >recycling</span
+            >
+          </a>
           <div>
-            <a href="index.html" class="flex items-center">
-              <h1
-                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
-              >
-                EcoScan AI
-              </h1>
-            </a>
+            <a
+              href="home.html"
+              class="font-display text-lg font-bold text-white"
+              >EcoScan AI</a
+            >
+            <p class="text-xs text-text-secondary">Bảng Quản trị</p>
           </div>
         </div>
-        <nav 
-          class="hidden md:flex flex-1 justify-center gap-8">
+        <nav class="flex flex-1 flex-col gap-2">
           <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="home.html"
-            >Bảng Điều Khiển</a
           >
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-medium">Bảng Điều Khiển</span>
+          </a>
           <a
-            class="text-primary hover:text-primary transition-colors text-sm font-medium"
-            href="history.html"
-            >Lịch Sử Xử Lý</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
-            href="report.html"
-            >Thống kê</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
-            href="model.html"
-            >Giám sát</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            class="flex items-center gap-3 rounded-lg bg-surface-dark px-3 py-2 text-white"
             href="#"
-            >Cài Đặt</a
           >
+            <span class="material-symbols-outlined text-primary">history</span>
+            <span class="font-medium">Lịch Sử Quét</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="report.html"
+          >
+            <span class="material-symbols-outlined">analytics</span>
+            <span class="font-medium">Thống Kê</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="model.html"
+          >
+            <span class="material-symbols-outlined">monitoring</span>
+            <span class="font-medium">Giám sát</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="user_managerment.html"
+          >
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-medium">Quản lý người dùng</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">settings</span>
+            <span class="font-medium">Cài Đặt</span>
+          </a>
         </nav>
-        <div class="flex items-center gap-4">
-  <button
-    class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
-  >
-    <span class="material-symbols-outlined">menu</span>
-  </button>
-
-  <div class="relative flex items-center gap-4">
-    <button
-            class="relative bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors"
-          >
-            <span class="material-symbols-outlined">notifications</span>
-            <span
-              class="absolute top-0 right-0 size-2.5 bg-red-500 rounded-full border-2 border-[#102216]"
-            ></span>
-          </button>
-    <button
-      class="flex items-center gap-2 rounded-full border border-border-dark bg-surface-dark px-3 py-1.5 text-sm text-white hover:border-primary/50 transition-colors"
-    >
-      <span class="material-symbols-outlined text-primary text-lg">add_a_photo</span>
-      <span class="hidden sm:inline">Nhận diện mới</span>
-    </button>
-    <button
-      id="user-menu-button"
-      class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-      data-alt="User profile picture placeholder"
-      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');"
-      onclick="toggleUserMenu()"
-    ></button>
-
-    <div
-      id="user-menu"
-      class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
-    >
-      <a
-        href="#"
-        class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-      >
-        <img
-          class="w-8 h-8 rounded-full mr-3"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
-          alt="Avatar"
-        />
-        Tài khoản của bạn
-      </a>
-      <a
-        href="#"
-        class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-      >
-        <span class="material-symbols-outlined mr-3">logout</span>
-        Đăng xuất
-      </a>
-    </div>
-  </div>
-</div>
-    </header>
+        <div class="mt-auto border-t border-border-dark pt-4">
+          <div class="flex items-center gap-3 px-2">
+            <div
+              class="h-10 w-10 overflow-hidden rounded-full bg-surface-dark"
+              data-alt="User avatar placeholder"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChOUBerVJzuzQkuzkG2loe1YHa731qHyAZ6EhJl0bkkMcz0dZACqML4Zj_ZzLoiZakNBG0SoyvLqyB1s1HEJJf58_nv_y6pmluY054exh0W2HP_rssgemSn1B6TKxySvvtFncPRyUTO6QGUA1dyyaEovtff1ZyJXs10nX_EOUENyPhQF-Mpx_iLYXTAqKhNLu7fSEE_8N5KCV2A5pxgS-MZwHXbURLMmYEWapg9-tAXW6hie5Lpfm16CqWUi5S8y9kdqO7MHBQYtZB');
+                background-size: cover;
+              "
+            ></div>
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-white"
+                >Người dùng Quản trị</span
+              >
+              <span class="text-xs text-text-secondary">admin@wasteai.com</span>
+            </div>
+          </div>
+        </div>
       </aside>
       <!-- Main Content -->
       <main
         class="flex flex-1 flex-col overflow-hidden bg-background-light dark:bg-background-dark"
       >
         <!-- Top Navbar -->
-        
-          <div class="flex items-center gap-4 md:hidden">
-            <button class="text-text-secondary hover:text-white">
-              <span class="material-symbols-outlined">menu</span>
-            </button>
-            <span class="font-display text-lg font-bold text-white"
-              >WasteAI</span
-            >
-          </div>
+
         <!-- Scrollable Content Area -->
         <div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
+          <!-- Page Heading -->
           <div class="mx-auto max-w-7xl flex flex-col gap-6">
-            <!-- Page Heading -->
             <div
               class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
             >
               <div>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 25px;" class="text-sm text-white">Quản Lý Dữ Liệu</span>
-    <span style="font-size: 25px; color: aliceblue;" class="material-symbols-outlined text-sm">
-      chevron_right
-    </span>
-    <span style="font-size: 25px;" class="text-sm text-white">Lịch Sử Xử Lý</span>
-  </div>
-  <p style="margin-top: 20px;"class="mt-1 text-text-secondary">
-    Quản lý và theo dõi tất cả dữ liệu hình ảnh đã được xử lý bởi AI.
-  </p>
-</div>
-
-      <div class="flex gap-3">
+                <h2 class="text-3xl font-bold tracking-tight text-white">
+                  Lịch Sử Quét
+                </h2>
+                <p class="mt-1 text-text-secondary">
+                  Quản lý và theo dõi tất cả dữ liệu hình ảnh đã được xử lý bởi
+                  AI.
+                </p>
+              </div>
+              <div class="flex gap-3">
+                <button
+                  class="relative rounded-full p-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+                >
+                  <span class="material-symbols-outlined">notifications</span>
+                  <span
+                    class="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary"
+                  ></span>
+                </button>
+                <button
+                  class="flex items-center gap-2 rounded-full border border-border-dark bg-surface-dark px-3 py-1.5 text-sm text-white hover:border-primary/50 transition-colors"
+                >
+                  <span class="material-symbols-outlined text-primary text-lg"
+                    >add_a_photo</span
+                  >
+                  <span class="hidden sm:inline">Nhận diện mới</span>
+                </button>
                 <button
                   class="flex items-center gap-2 rounded-lg border border-border-dark bg-surface-dark px-4 py-2 text-sm font-medium text-white hover:bg-border-dark transition-colors"
                 >
                   <span class="material-symbols-outlined text-lg"
                     >file_download</span
                   >
-                  Export Data
+                  Xuất dữ liệu
                 </button>
               </div>
             </div>
@@ -318,11 +299,11 @@
                         Hành động
                       </th>
                     </tr>
-                    </thead>
+                  </thead>
                   <tbody class="divide-y divide-border-dark">
                     <!-- Row 1 -->
-                     
-                     <tr
+
+                    <tr
                       class="group hover:bg-background-dark/50 transition-colors"
                     >
                       <td class="px-6 py-4">
@@ -381,7 +362,7 @@
                         </div>
                       </td>
                       <td class="px-6 py-4 text-right">
-                      <button
+                        <button
                           onclick="window.location.href='result_analysis.html';"
                           class="inline-flex items-center gap-1 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
                         >
@@ -392,7 +373,7 @@
                         </button>
                       </td>
                     </tr>
-                    
+
                     <!-- Row 2 -->
                     <tr
                       class="group hover:bg-background-dark/50 transition-colors"
