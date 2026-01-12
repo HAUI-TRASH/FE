@@ -4,12 +4,9 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Chi Tiết Phân Tích - GreenAI Detector</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <title>EcoScan AI - Lịch Sử Xử Lý</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
     <link
@@ -20,9 +17,8 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <script>
       tailwind.config = {
         darkMode: "class",
         theme: {
@@ -30,14 +26,14 @@
             colors: {
               primary: "#13ec5b",
               "background-light": "#f6f8f6",
-              "background-dark": "#111813",
+              "background-dark": "#102216",
               "surface-dark": "#1c271f",
               "border-dark": "#28392e",
-              "text-muted": "#9db9a6",
+              "text-secondary": "#9db9a6",
             },
             fontFamily: {
               display: ["Space Grotesk", "sans-serif"],
-              body: ["Noto Sans", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
             },
             borderRadius: {
               DEFAULT: "0.25rem",
@@ -49,23 +45,28 @@
         },
       };
     </script>
+
     <style>
-      /* Custom scrollbar for dark theme */
-      ::-webkit-scrollbar {
-        width: 8px;
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      /* Custom scrollbar for table container if needed */
+      .custom-scrollbar::-webkit-scrollbar {
         height: 8px;
+        width: 8px;
       }
 
-      ::-webkit-scrollbar-track {
-        background: #111813;
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #1c271f;
       }
 
-      ::-webkit-scrollbar-thumb {
+      .custom-scrollbar::-webkit-scrollbar-thumb {
         background: #28392e;
         border-radius: 4px;
       }
 
-      ::-webkit-scrollbar-thumb:hover {
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: #3b5443;
       }
     </style>
@@ -76,57 +77,98 @@
   >
     <!-- Top Navigation -->
     <header
-      class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark px-6 lg:px-10 py-3 bg-[#111813] sticky top-0 z-50"
+      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
     >
-      <div class="flex items-center gap-4 text-white">
-        <div class="size-8 text-primary flex items-center justify-center">
-          <span class="material-symbols-outlined text-3xl">eco</span>
+      <div
+        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+      >
+        <div class="flex items-center gap-3 text-white">
+          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+            <img
+              src="../img logo/logoHaUI.png"
+              alt="HaUI Logo"
+              style="width: 28x; height: 28px"
+              class="rounded-full"
+            />
+          </a>
+          <div class="size-8 flex items-center justify-center text-primary">
+            <a href="index.html" class="flex items-center">
+              <span class="material-symbols-outlined text-3xl">recycling</span>
+            </a>
+          </div>
+          <div>
+            <a href="index.html" class="flex items-center">
+              <h1
+                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
+              >
+                EcoScan AI
+              </h1>
+            </a>
+          </div>
         </div>
-        <h2
-          class="text-white text-xl font-bold leading-tight tracking-[-0.015em]"
-        >
-          Công cụ Phát hiện GreenAI
-        </h2>
-      </div>
-      <div class="flex flex-1 justify-end gap-8">
-        <nav class="hidden md:flex items-center gap-9">
+
+        <nav class="hidden md:flex flex-1 justify-center gap-8">
           <a
-            class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal flex items-center gap-2"
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
             href="home.html"
+            >Bảng Điều Khiển</a
           >
-            <span class="material-symbols-outlined text-lg">dashboard</span>
-            Tổng quan
-          </a>
           <a
-            class="text-white text-sm font-medium leading-normal flex items-center gap-2"
+            class="text-primary hover:text-primary transition-colors text-sm font-medium"
             href="history.html"
+            >Lịch Sử Xử Lý</a
           >
-            <span class="material-symbols-outlined text-lg">history</span> Lịch
-            sử
-          </a>
           <a
-            class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal flex items-center gap-2"
-            href="model.html"
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Thống kê</a
           >
-            <span class="material-symbols-outlined text-lg">settings</span> Cài
-            đặt
-          </a>
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="model.html"
+            >Giám sát</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Cài Đặt</a
+          >
         </nav>
         <div class="flex items-center gap-4">
-          <a
-            href="../User/index.html"
-            class="flex items-center gap-2 px-3 py-2 bg-[#28392e] hover:bg-[#3b5443] text-white text-sm font-medium rounded-lg transition-colors"
-          >
-            <span class="material-symbols-outlined text-base">person</span>
-            Chế độ Người dùng
-          </a>
+          <button
+            id="user-menu-button"
+            class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+            data-alt="User profile picture placeholder"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+            "
+            onclick="toggleUserMenu()"
+          ></button>
+
           <div
-            class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-border-dark cursor-pointer"
-          data-alt="User avatar placeholder"
-          style="
-            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCAdxXL_adow85s4_1dsarOVneDBxMYTcEmZtVcTIQlA-oZBn1WYWhbtJMJxfLGdg4UeAuhuPtwxpAe_Rb8VZPMr6nFNk6VL4uM2EgVaLmjYvf9Jmmr0ytN97_larNoZLIwq3kB9QIkixIyV86QC3yec-wo3BsSq-6bNaLUCqRExHnOTxT-Lgk3YIdzIrYWYZsSU-Y-hjs-P0bmJYwRpucPAiMevqS3zUUJNbHva5o7gh13Hgt6BF6ovfcF3rZYIW8OrSr4BjQH6Bri');
-          "
-        ></div>
+            id="user-menu"
+            class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
+          >
+            <a
+              href="#"
+              class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+            >
+              <img
+                class="w-8 h-8 rounded-full mr-3"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
+                alt="Avatar"
+              />
+              Tài khoản của bạn
+            </a>
+            <a
+              href="#"
+              class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+            >
+              <span class="material-symbols-outlined mr-3">logout</span>
+              Đăng xuất
+            </a>
+          </div>
+        </div>
       </div>
     </header>
     <main
@@ -137,13 +179,7 @@
         <a
           class="text-text-muted hover:text-primary transition-colors text-sm font-medium"
           href="#"
-          >Dashboard</a
-        >
-        <span class="text-text-muted text-sm font-medium">/</span>
-        <a
-          class="text-text-muted hover:text-primary transition-colors text-sm font-medium"
-          href="#"
-          >Lịch sử phân tích</a
+          >Lịch Sử Xử Lý</a
         >
         <span class="text-text-muted text-sm font-medium">/</span>
         <span
@@ -543,5 +579,19 @@
         </div>
       </div>
     </main>
+    <script>
+      function toggleUserMenu() {
+        const menu = document.getElementById("user-menu");
+        menu.classList.toggle("hidden");
+      }
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const button = document.getElementById("user-menu-button");
+        const menu = document.getElementById("user-menu");
+        if (!button.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.add("hidden");
+        }
+      });
+    </script>
   </body>
 </html>

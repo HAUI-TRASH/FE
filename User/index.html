@@ -72,81 +72,87 @@
             />
           </a>
           <div class="size-8 flex items-center justify-center text-primary">
-            <span class="material-symbols-outlined text-3xl">recycling</span>
+            <a href="index.html" class="flex items-center">
+              <span class="material-symbols-outlined text-3xl">recycling</span>
+            </a>
           </div>
-          <h1
-            class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
-          >
-            EcoScan AI
-          </h1>
+          <div>
+            <a href="index.html" class="flex items-center">
+              <h1
+                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
+              >
+                EcoScan AI
+              </h1>
+            </a>
+          </div>
         </div>
-        <nav class="hidden md:flex flex-1 justify-center gap-8">
-          <a class="text-primary text-sm font-bold" href="index.html"
-            >Trang chủ</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="result_analys.html"
-            >Kết quả</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="list_blog.html"
-            >Blog</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="#"
-            >Lịch sử</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="#"
-            >Hướng dẫn</a
-          >
-        </nav>
-        <div class="flex items-center gap-4">
-          <button
-            class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
-          >
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-          <div class="relative">
-            <button
-              id="user-menu-button"
-              class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
-              "
-              onclick="toggleUserMenu()"
-            ></button>
-            <div
-              id="user-menu"
-              class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
+          <nav class="hidden md:flex flex-1 justify-center gap-8">
+            <a class="text-primary text-sm font-bold" href="index.html"
+              >Trang chủ</a
             >
-              <a
-                href="#"
-                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+            <a
+              class="text-gray-300 hover:text-primary text-sm font-medium"
+              href="result_analys.html"
+              >Kết quả</a
+            >
+            <a
+              class="text-gray-300 hover:text-primary text-sm font-medium"
+              href="list_blog.html"
+              >Blog</a
+            >
+            <a
+              class="text-gray-300 hover:text-primary text-sm font-medium"
+              href="#"
+              >Lịch sử</a
+            >
+            <a
+              class="text-gray-300 hover:text-primary text-sm font-medium"
+              href="#"
+              >Hướng dẫn</a
+            >
+          </nav>
+          <div class="flex items-center gap-4">
+            <button
+              class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
+            >
+              <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="relative">
+              <button
+                id="user-menu-button"
+                class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                "
+                onclick="toggleUserMenu()"
+              ></button>
+              <div
+                id="user-menu"
+                class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
               >
-                <img
-                  class="w-8 h-8 rounded-full mr-3"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
-                  alt="Avatar"
-                />
-                Tài khoản của bạn
-              </a>
-              <a
-                href="#"
-                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-              >
-                <span class="material-symbols-outlined mr-3">logout</span>
-                Đăng xuất
-              </a>
+                <a
+                  href="#"
+                  class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+                >
+                  <img
+                    class="w-8 h-8 rounded-full mr-3"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
+                    alt="Avatar"
+                  />
+                  Tài khoản của bạn
+                </a>
+                <a
+                  href="#"
+                  class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+                >
+                  <span class="material-symbols-outlined mr-3">logout</span>
+                  Đăng xuất
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </header>
     <main class="flex-1 flex flex-col items-center w-full px-4 py-8 md:py-12">
       <div
@@ -558,17 +564,17 @@
       setTimeout(() => t.remove(), 2200);
     }
     function toggleUserMenu() {
-        const menu = document.getElementById("user-menu");
-        menu.classList.toggle("hidden");
+      const menu = document.getElementById("user-menu");
+      menu.classList.toggle("hidden");
+    }
+    // Close menu when clicking outside
+    document.addEventListener("click", function (event) {
+      const button = document.getElementById("user-menu-button");
+      const menu = document.getElementById("user-menu");
+      if (!button.contains(event.target) && !menu.contains(event.target)) {
+        menu.classList.add("hidden");
       }
-      // Close menu when clicking outside
-      document.addEventListener("click", function (event) {
-        const button = document.getElementById("user-menu-button");
-        const menu = document.getElementById("user-menu");
-        if (!button.contains(event.target) && !menu.contains(event.target)) {
-          menu.classList.add("hidden");
-        }
-      });
+    });
     function isValidImage(file) {
       if (!file) return false;
       if (!file.type.startsWith("image/")) return false;

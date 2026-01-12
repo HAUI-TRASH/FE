@@ -4,15 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Model / AI Monitoring - WasteAI</title>
-    <!-- Google Fonts: Space Grotesk -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <title>EcoScan AI - Giám Sát</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
-    <!-- Material Symbols -->
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
@@ -21,10 +17,8 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <!-- Tailwind Config -->
-    <script id="tailwind-config">
+    <script>
       tailwind.config = {
         darkMode: "class",
         theme: {
@@ -33,14 +27,16 @@
               primary: "#13ec5b",
               "background-light": "#f6f8f6",
               "background-dark": "#102216",
-              "surface-dark": "#1a2c20",
-              "surface-darker": "#111813",
+              "surface-dark": "#1c271f",
+              "border-dark": "#28392e",
+              "text-secondary": "#9db9a6",
             },
             fontFamily: {
               display: ["Space Grotesk", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
             },
             borderRadius: {
-              DEFAULT: "0.375rem",
+              DEFAULT: "0.25rem",
               lg: "0.5rem",
               xl: "0.75rem",
               full: "9999px",
@@ -49,231 +45,158 @@
         },
       };
     </script>
+    
     <style>
       body {
         font-family: "Space Grotesk", sans-serif;
       }
 
-      /* Custom scrollbar for better aesthetic in dark mode */
-      ::-webkit-scrollbar {
-        width: 8px;
+      /* Custom scrollbar for table container if needed */
+      .custom-scrollbar::-webkit-scrollbar {
         height: 8px;
+        width: 8px;
       }
 
-      ::-webkit-scrollbar-track {
-        background: #102216;
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #1c271f;
       }
 
-      ::-webkit-scrollbar-thumb {
-        background: #2d4535;
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #28392e;
         border-radius: 4px;
       }
 
-      ::-webkit-scrollbar-thumb:hover {
-        background: #3e5e49;
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #3b5443;
       }
     </style>
   </head>
 
   <body
-    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden h-screen flex"
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300"
   >
-    <!-- Side Navigation -->
-    <aside
-      class="w-64 bg-surface-darker border-r border-[#28392e] flex-col justify-between hidden md:flex h-full shrink-0"
+    <header
+      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
     >
-      <div class="flex flex-col gap-4 p-4">
-        <!-- User/Org Profile -->
-        <div class="flex gap-3 items-center mb-4">
-          <div
-            class="bg-center bg-no-repeat bg-cover rounded-full size-10 border border-[#28392e]"
-            data-alt="Company logo abstract green hexagon"
-            style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAE8hKWtYiQm0q4UfPDZxjTKwvOU33H_txZnyD_Nq3sfilJLmo5_7yl1Z2y54BpYuAJaHMj-YXy-Pe32XRgX1qvmRdYtbz6AE31bwq_MNlUlnljmiylg6964Ts-OK9vvAlBliu8Q5V8y8sj8YJQIQ9axseootVswX4ovN3CP7Lv2KLdFjSyCtBxqSU_UiYfLcXqQTxkO3nJgd30OyyZA8LE9DLTwrO8j2gIFo80xo6W5mplx2pQ2bryClSP5RNw9Ic5P_6tzXmC3zbc');
-            "
-          ></div>
-          <div class="flex flex-col">
-            <h1 class="text-white text-base font-bold leading-normal">
-              Quản trị WasteAI
-            </h1>
-            <p class="text-[#9db9a6] text-xs font-normal leading-normal">
-              Phiên bản Doanh nghiệp
-            </p>
-          </div>
-        </div>
-        <!-- Navigation Links -->
-        <div class="flex flex-col gap-2">
-          <a
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] transition-colors group"
-            href="home.html"
-          >
-            <span
-              class="material-symbols-outlined text-[#9db9a6] group-hover:text-white"
-              >dashboard</span
-            >
-            <p
-              class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal"
-            >
-              Tổng quan
-            </p>
-          </a>
-          <a
-            class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 border border-primary/20"
-            href="#"
-          >
-            <span class="material-symbols-outlined text-primary fill-1"
-              >monitoring</span
-            >
-            <p class="text-white text-sm font-medium leading-normal">
-              Giám sát
-            </p>
-          </a>
-          <a
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] transition-colors group"
-            href="report.html"
-          >
-            <span
-              class="material-symbols-outlined text-[#9db9a6] group-hover:text-white"
-              >dataset</span
-            >
-            <p
-              class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal"
-            >
-              Dữ liệu
-            </p>
-          </a>
-          <a
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] transition-colors group"
-            href="user_managerment.html"
-          >
-            <span
-              class="material-symbols-outlined text-[#9db9a6] group-hover:text-white"
-              >inventory_2</span
-            >
-            <p
-              class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal"
-            >
-              Mô hình
-            </p>
-          </a>
-          <a
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] transition-colors group"
-            href="#"
-          >
-            <span
-              class="material-symbols-outlined text-[#9db9a6] group-hover:text-white"
-              >settings</span
-            >
-            <p
-              class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal"
-            >
-              Settings
-            </p>
-          </a>
-        </div>
-      </div>
-      <!-- Bottom Actions -->
-      <div class="p-4 border-t border-[#28392e]">
-        <div
-          class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#28392e] cursor-pointer transition-colors group"
-        >
-          <span
-            class="material-symbols-outlined text-[#9db9a6] group-hover:text-white"
-            >logout</span
-          >
-          <p
-            class="text-[#9db9a6] group-hover:text-white text-sm font-medium leading-normal"
-          >
-            Sign Out
-          </p>
-        </div>
-      </div>
-    </aside>
-    <!-- Main Content Area -->
-    <main
-      class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative"
-    >
-      <!-- Top Navigation -->
-      <header
-        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#28392e] px-6 py-4 bg-surface-darker/50 backdrop-blur-md sticky top-0 z-20"
+      <div
+        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
       >
-        <div class="flex items-center gap-4 text-white">
-          <div class="md:hidden">
-            <span class="material-symbols-outlined text-white cursor-pointer"
-              >menu</span
-            >
-          </div>
-          <div class="flex flex-col">
-            <h2
-              class="text-white text-lg font-bold leading-tight tracking-[-0.015em]"
-            >
-              Model Performance Monitor
-            </h2>
-            <div class="flex items-center gap-2 mt-1">
-              <span class="relative flex h-2 w-2">
-                <span
-                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
-                ></span>
-                <span
-                  class="relative inline-flex rounded-full h-2 w-2 bg-primary"
-                ></span>
-              </span>
-              <span
-                class="text-xs text-primary font-medium tracking-wide uppercase"
-                >System Operational</span
-              >
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center gap-6">
-          <!-- Search -->
-          <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
-            <div
-              class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#28392e] border border-transparent focus-within:border-primary/50 transition-colors"
-            >
-              <div
-                class="text-[#9db9a6] flex border-none items-center justify-center pl-3 rounded-l-lg border-r-0"
-              >
-                <span class="material-symbols-outlined text-[20px]"
-                  >search</span
-                >
-              </div>
-              <input
-                class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-[#9db9a6] px-2 rounded-l-none text-sm font-normal leading-normal"
-                placeholder="Search logs..."
-                value=""
-              />
-            </div>
-          </label>
-          <!-- Action Icons -->
-          <a
-            href="../User/index.html"
-            class="flex items-center gap-2 px-3 py-2 bg-[#28392e] hover:bg-[#3b5443] text-white text-sm font-medium rounded-lg transition-colors"
-          >
-            <span class="material-symbols-outlined text-base">person</span>
-            Chế độ Người dùng
+        <div class="flex items-center gap-3 text-white">
+          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+            <img
+              src="../img logo/logoHaUI.png"
+              alt="HaUI Logo"
+              style="width: 28x; height: 28px"
+              class="rounded-full"
+            />
           </a>
-          <div class="flex gap-3">
-            <button
-              class="flex items-center justify-center rounded-lg size-10 bg-[#28392e] hover:bg-[#344a3c] text-white transition-colors relative"
-            >
-              <span class="material-symbols-outlined text-[20px]"
-                >notifications</span
+          <div class="size-8 flex items-center justify-center text-primary">
+            <a href="index.html" class="flex items-center">
+              <span class="material-symbols-outlined text-3xl">recycling</span>
+            </a>
+          </div>
+          <div>
+            <a href="index.html" class="flex items-center">
+              <h1
+                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
               >
-              <span
-                class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-[#28392e]"
-              ></span>
-            </button>
-            <div
-              class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-              data-alt="User avatar of a smiling man"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA6H3_8FCVdHZn_9NwreLj-a6H5aqQriy5J8JdxkJuwOGCWJViaU8nEoOH7SWsLo9hLOrxZwanZjbd4tRzXVmBVX1EOMMc0BSHJsgAdx-CDH8zwYVzVAJGTHkj34Ons-Zfpc8ZQndofNiTYWFytjLbQ9gMxLWrUQDZbDcv1fp6QNBZrHiSwr3__GFPmVdVozzfK4X7qnQJSTaMaoKECRZs-yQWd6NzJqejCBJJBBXtZSyFB5zkBK770WeVa2ghzDQ92tIq9KO-pTG52');
-              "
-            ></div>
+                EcoScan AI
+              </h1>
+            </a>
           </div>
         </div>
-      </header>
+        <nav 
+          class="hidden md:flex flex-1 justify-center gap-8">
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="home.html"
+            >Bảng Điều Khiển</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="history.html"
+            >Lịch Sử Xử Lý</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="report.html"
+            >Thống kê</a
+          >
+          <a
+            class="text-primary hover:text-primary transition-colors text-sm font-medium"
+            href="model.html"
+            >Giám sát</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Cài Đặt</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+  <button
+    class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
+  >
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+
+  <div class="relative flex items-center gap-4">
+    <button
+            class="relative bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+              class="absolute top-0 right-0 size-2.5 bg-red-500 rounded-full border-2 border-[#102216]"
+            ></span>
+          </button>
+    <button
+      class="flex items-center gap-2 rounded-full border border-border-dark bg-surface-dark px-3 py-1.5 text-sm text-white hover:border-primary/50 transition-colors"
+    >
+      <span class="material-symbols-outlined text-primary text-lg">add_a_photo</span>
+      <span class="hidden sm:inline">Nhận diện mới</span>
+    </button>
+    <button
+      id="user-menu-button"
+      class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+      data-alt="User profile picture placeholder"
+      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');"
+      onclick="toggleUserMenu()"
+    ></button>
+<div
+  class="flex items-center justify-center gap-2 
+         border border-[#9db9a6] rounded-lg px-3 py-2 text-[#9db9a6]"
+>
+  <span class="material-symbols-outlined text-[20px]">search</span>
+  <span class="text-sm">Search</span>
+</div>
+
+    <div
+      id="user-menu"
+      class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
+    >
+      <a
+        href="#"
+        class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+      >
+        <img
+          class="w-8 h-8 rounded-full mr-3"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
+          alt="Avatar"
+        />
+        Tài khoản của bạn
+      </a>
+      <a
+        href="#"
+        class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+      >
+        <span class="material-symbols-outlined mr-3">logout</span>
+        Đăng xuất
+      </a>
+    </div>
+  </div>
+</div>
+    </header>
+      
       <!-- Scrollable Content -->
       <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
         <!-- Page Heading & Actions -->
