@@ -1,350 +1,716 @@
 <!DOCTYPE html>
-<html class="dark" lang="vi"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hướng Dẫn Phân Loại Rác Tại Nguồn - EcoScan Blog</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#13ec5b",
-                        "background-light": "#f6f8f6",
-                        "background-dark": "#102216",
-                        "surface-dark": "#1c2a21",
-                        "surface-light": "#ffffff",
-                    },
-                    fontFamily: {
-                        "display": ["Space Grotesk", "sans-serif"],
-                        "body": ["Space Grotesk", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
-                },
+<html class="dark" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hướng Dẫn Phân Loại Rác Tại Nguồn - EcoScan Blog</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#13ec5b",
+              "background-light": "#f6f8f6",
+              "background-dark": "#102216",
+              "surface-dark": "#1c2a21",
+              "surface-light": "#ffffff",
             },
-        }
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
     </script>
-<style>
-        body {
-            font-family: "Space Grotesk", sans-serif;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #102216; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #28392e; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3b5443; 
-        }
+    <style>
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #102216;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #28392e;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3b5443;
+      }
     </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-300">
-<header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
-<div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full">
-<div class="flex items-center gap-3 text-white">
-<div class="size-8 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-3xl">recycling</span>
-</div>
-<h1 class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block">EcoScan AI</h1>
-</div>
-<nav class="hidden md:flex flex-1 justify-center gap-8">
-<a class="text-white font-medium hover:text-primary transition-colors text-sm" href="#">Trang chủ</a>
-<a class="text-primary hover:text-primary transition-colors text-sm font-medium" href="#">Blog</a>
-<a class="text-gray-300 hover:text-primary transition-colors text-sm font-medium" href="#">Hướng dẫn</a>
-</nav>
-<div class="flex items-center gap-4">
-<button class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden">
-<span class="material-symbols-outlined">menu</span>
-</button>
-<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]" data-alt="User profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'>
-</div>
-</div>
-</div>
-</header>
-<main class="flex-1 w-full px-4 py-8 md:py-12">
-<article class="max-w-[840px] w-full mx-auto">
-<header class="mb-8 md:mb-12 animate-fade-in-up">
-<div class="flex items-center gap-3 mb-6">
-<span class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider">
-                        Kiến thức môi trường
-                    </span>
-<span class="text-gray-500 text-sm font-medium">5 phút đọc</span>
-</div>
-<h1 class="text-white text-3xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6">
-                    Hướng dẫn phân loại rác tại nguồn: <br class="hidden md:block"/> <span class="text-primary">Bước nhỏ, tác động lớn</span>
-</h1>
-<div class="flex items-center justify-between border-y border-[#28392e] py-4">
-<div class="flex items-center gap-3">
-<div class="size-10 rounded-full bg-cover bg-center border border-[#28392e]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<div>
-<p class="text-white font-bold text-sm">Nguyễn Văn A</p>
-<p class="text-gray-500 text-xs">Chuyên gia Môi trường</p>
-</div>
-</div>
-<div class="flex items-center gap-4 text-gray-500 text-sm">
-<span class="hidden sm:inline">12 Tháng 10, 2023</span>
-<div class="flex gap-2">
-<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">share</span></button>
-<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">bookmark_border</span></button>
-</div>
-</div>
-</div>
-</header>
-<div class="w-full aspect-video md:aspect-[21/9] rounded-2xl md:rounded-3xl overflow-hidden mb-10 shadow-2xl shadow-black/20 relative group border border-[#28392e]">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx");'></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-</div>
-<div class="space-y-8 text-lg leading-relaxed text-gray-300">
-<p class="text-xl md:text-2xl text-white font-medium leading-relaxed drop-shadow-sm">
-                    Phân loại rác thải tại nguồn là một trong những hành động thiết thực nhất mà mỗi cá nhân có thể thực hiện để bảo vệ môi trường, giúp giảm tải áp lực lên các bãi chôn lấp và thúc đẩy nền kinh tế tuần hoàn.
-                </p>
-<div class="h-px w-20 bg-primary/50 my-8"></div>
-<h2 class="text-2xl md:text-3xl font-bold text-white mt-12 mb-4">Tại sao cần phân loại rác?</h2>
-<p>
-                    Hàng ngày, lượng rác thải sinh hoạt thải ra môi trường là vô cùng lớn. Nếu không được phân loại, phần lớn rác thải sẽ bị chôn lấp, gây lãng phí tài nguyên và ô nhiễm môi trường đất, nước, không khí. Việc phân loại rác giúp:
-                </p>
-<ul class="list-none space-y-3 ml-2">
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
-<span>Giảm lượng rác thải ra môi trường.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
-<span>Tiết kiệm chi phí thu gom, vận chuyển và xử lý.</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
-<span>Tăng lượng rác tái chế, biến rác thành tài nguyên.</span>
-</li>
-</ul>
-<figure class="my-10 bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden p-2">
-<div class="aspect-[16/9] w-full bg-gray-800 rounded-xl overflow-hidden relative">
-<div class="absolute inset-0 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh");'></div>
-</div>
-<figcaption class="p-4 text-center text-sm text-gray-400 italic">
-                        Rác hữu cơ như vỏ trái cây có thể dễ dàng ủ làm phân bón (Compost) tại nhà.
-                    </figcaption>
-</figure>
-<h2 class="text-2xl md:text-3xl font-bold text-white mt-12 mb-4">Nhận diện các loại rác phổ biến</h2>
-<p class="mb-6">
-                    Để phân loại chính xác, chúng ta cần nắm rõ đặc điểm của từng loại rác. Dưới đây là những nhóm rác thường gặp nhất trong sinh hoạt hàng ngày.
-                </p>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 not-prose">
-<div class="bg-[#2e3312] border border-yellow-800/30 p-6 rounded-2xl hover:border-yellow-500/50 transition-all duration-300">
-<div class="flex items-center gap-3 mb-4">
-<div class="bg-yellow-500/20 p-2 rounded-lg text-yellow-400">
-<span class="material-symbols-outlined">compost</span>
-</div>
-<h3 class="text-white font-bold text-lg">Rác Hữu Cơ</h3>
-</div>
-<p class="text-gray-300 text-sm mb-4">Bao gồm thức ăn thừa, rau củ quả hư hỏng, bã trà, bã cà phê, lá cây...</p>
-<div class="bg-black/20 p-3 rounded-lg text-xs text-yellow-200/80 border border-yellow-500/10">
-                            💡 Mẹo: Hãy để ráo nước trước khi bỏ vào thùng.
-                        </div>
-</div>
-<div class="bg-[#122633] border border-blue-800/30 p-6 rounded-2xl hover:border-blue-500/50 transition-all duration-300">
-<div class="flex items-center gap-3 mb-4">
-<div class="bg-blue-500/20 p-2 rounded-lg text-blue-400">
-<span class="material-symbols-outlined">recycling</span>
-</div>
-<h3 class="text-white font-bold text-lg">Rác Tái Chế</h3>
-</div>
-<p class="text-gray-300 text-sm mb-4">Bao gồm giấy, báo, thùng carton, chai lọ nhựa, vỏ lon kim loại, thủy tinh...</p>
-<div class="bg-black/20 p-3 rounded-lg text-xs text-blue-200/80 border border-blue-500/10">
-                            💡 Mẹo: Làm sạch và ép dẹp để tiết kiệm diện tích.
-                        </div>
-</div>
-</div>
-<p>
-                    Ngoài ra, đối với các loại rác nguy hại như pin, bóng đèn, chai lọ đựng hóa chất, chúng ta tuyệt đối không bỏ chung với rác sinh hoạt thông thường mà cần thu gom riêng và mang đến các điểm tiếp nhận xử lý rác thải nguy hại.
-                </p>
-<blockquote class="border-l-4 border-primary bg-gradient-to-r from-primary/10 to-transparent p-6 my-8 rounded-r-xl">
-<p class="text-xl italic text-white font-medium mb-2">"Rác thải chỉ là rác thải khi chúng ta không biết cách sử dụng chúng. Khi được phân loại đúng, chúng là tài nguyên."</p>
-<footer class="text-sm text-primary font-bold uppercase tracking-wider">— Thông điệp xanh</footer>
-</blockquote>
-<h2 class="text-2xl md:text-3xl font-bold text-white mt-12 mb-4">Ứng dụng công nghệ AI vào phân loại</h2>
-<p>
-                    Với sự phát triển của công nghệ, việc phân loại rác trở nên dễ dàng hơn bao giờ hết. Các ứng dụng như <strong>EcoScan AI</strong> cho phép người dùng chỉ cần chụp ảnh rác thải, hệ thống sẽ tự động nhận diện và đưa ra hướng dẫn xử lý cụ thể trong tíc tắc.
-                </p>
-<div class="my-8 rounded-2xl overflow-hidden border border-[#28392e] shadow-xl">
-<img alt="Glass recycling example" class="w-full h-auto object-cover opacity-80 hover:opacity-100 transition-opacity duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy"/>
-</div>
-<p>
-                    Hãy bắt đầu thói quen phân loại rác ngay từ hôm nay. Một hành động nhỏ của bạn sẽ góp phần tạo nên một tương lai xanh và bền vững hơn cho thế hệ mai sau.
-                </p>
-</div>
-<hr class="border-[#28392e] my-12 md:my-16"/>
-<div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start hover:border-primary/30 transition-colors duration-300">
-<div class="relative">
-<div class="size-24 rounded-full bg-cover border-4 border-[#102216] shadow-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<div class="absolute bottom-0 right-0 bg-primary text-[#051d0e] p-1.5 rounded-full border-2 border-[#102216]">
-<span class="material-symbols-outlined text-sm font-bold block">verified</span>
-</div>
-</div>
-<div class="flex-1 text-center md:text-left">
-<h3 class="text-white font-bold text-xl mb-1">Nguyễn Văn A</h3>
-<p class="text-primary text-sm font-medium mb-4 uppercase tracking-wider">Chuyên gia Môi trường &amp; AI</p>
-<p class="text-gray-400 text-sm leading-relaxed mb-4">
-                        Đam mê công nghệ xanh và phát triển bền vững. Với hơn 10 năm kinh nghiệm trong lĩnh vực xử lý chất thải, tôi luôn tìm kiếm những giải pháp thông minh để giải quyết các vấn đề môi trường cấp bách.
-                    </p>
-<div class="flex justify-center md:justify-start gap-3">
-<button class="text-xs font-bold text-white bg-[#28392e] hover:bg-primary hover:text-black px-4 py-2 rounded-full transition-colors border border-white/5">Theo dõi</button>
-<button class="text-xs font-bold text-white bg-[#28392e] hover:bg-white hover:text-black px-4 py-2 rounded-full transition-colors border border-white/5">Xem hồ sơ</button>
-</div>
-</div>
-</div>
-<div class="mt-16 md:mt-24">
-<div class="flex items-center justify-between mb-8">
-<h3 class="text-white text-2xl font-bold flex items-center gap-3">
-<span class="w-1 h-8 bg-primary rounded-full"></span>
-                        Bài viết liên quan
-                    </h3>
-<a class="text-sm text-gray-400 hover:text-primary transition-colors flex items-center gap-1" href="#">
-                        Xem tất cả <span class="material-symbols-outlined text-lg">arrow_forward</span>
-</a>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-<a class="group block" href="#">
-<div class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative border border-[#28392e] group-hover:border-primary/50 transition-all">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X");'></div>
-<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-</div>
-<h4 class="text-white font-bold text-lg mb-2 leading-snug group-hover:text-primary transition-colors">Cách xử lý Pin cũ an toàn tại nhà</h4>
-<div class="flex items-center gap-2 text-xs text-gray-500">
-<span class="material-symbols-outlined text-sm">schedule</span> 10 Th10, 2023
-                        </div>
-</a>
-<a class="group block" href="#">
-<div class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative border border-[#28392e] group-hover:border-primary/50 transition-all">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy");'></div>
-<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-</div>
-<h4 class="text-white font-bold text-lg mb-2 leading-snug group-hover:text-primary transition-colors">Thủy tinh: Quy trình tái chế vô hạn</h4>
-<div class="flex items-center gap-2 text-xs text-gray-500">
-<span class="material-symbols-outlined text-sm">schedule</span> 08 Th10, 2023
-                        </div>
-</a>
-<a class="group block" href="#">
-<div class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative border border-[#28392e] group-hover:border-primary/50 transition-all">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx");'></div>
-<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-</div>
-<h4 class="text-white font-bold text-lg mb-2 leading-snug group-hover:text-primary transition-colors">7 loại nhựa và ý nghĩa các ký hiệu</h4>
-<div class="flex items-center gap-2 text-xs text-gray-500">
-<span class="material-symbols-outlined text-sm">schedule</span> 05 Th10, 2023
-                        </div>
-</a>
-</div>
-</div>
-<div class="mt-16 md:mt-24" id="comments">
-<h3 class="text-white text-2xl font-bold mb-8 flex items-center gap-2">
-                    Bình luận <span class="text-gray-500 text-lg font-normal">(3)</span>
-</h3>
-<div class="bg-surface-dark border border-[#28392e] rounded-2xl p-6 mb-10">
-<div class="flex gap-4">
-<div class="size-10 rounded-full bg-cover bg-center hidden sm:block border border-[#28392e]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<div class="flex-1">
-<textarea class="w-full bg-[#102216] border border-[#28392e] rounded-xl p-4 text-white placeholder-gray-500 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-y min-h-[120px]" placeholder="Chia sẻ suy nghĩ của bạn về bài viết này..."></textarea>
-<div class="flex justify-end mt-4 gap-3">
-<button class="text-gray-400 hover:text-white text-sm font-medium px-4 py-2">Hủy</button>
-<button class="bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold py-2.5 px-6 rounded-lg shadow-lg shadow-primary/10 transition-all hover:shadow-primary/30 hover:-translate-y-0.5">Gửi bình luận</button>
-</div>
-</div>
-</div>
-</div>
-<div class="space-y-8">
-<div class="flex gap-4">
-<div class="size-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-200 font-bold border border-blue-700/50 flex-shrink-0">
-                            MT
-                        </div>
-<div class="flex-1">
-<div class="flex items-center justify-between mb-2">
-<h5 class="text-white font-bold">Minh Tuấn</h5>
-<span class="text-gray-500 text-xs">2 giờ trước</span>
-</div>
-<p class="text-gray-400 text-sm leading-relaxed bg-[#102216]/50 p-4 rounded-xl rounded-tl-none border border-[#28392e]">
-                                Bài viết rất chi tiết và dễ hiểu. Mình đã bắt đầu phân loại rác từ tháng trước và thấy lượng rác thải ra ít hẳn đi. Rất mong chờ thêm nhiều bài viết như thế này!
-                            </p>
-<div class="flex items-center gap-4 mt-2 ml-2">
-<button class="text-gray-500 hover:text-primary text-xs font-medium flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">thumb_up</span> Thích
-                                </button>
-<button class="text-gray-500 hover:text-white text-xs font-medium">Trả lời</button>
-</div>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="size-10 rounded-full bg-purple-900 flex items-center justify-center text-purple-200 font-bold border border-purple-700/50 flex-shrink-0">
-                            LA
-                        </div>
-<div class="flex-1">
-<div class="flex items-center justify-between mb-2">
-<h5 class="text-white font-bold">Lan Anh</h5>
-<span class="text-gray-500 text-xs">5 giờ trước</span>
-</div>
-<p class="text-gray-400 text-sm leading-relaxed bg-[#102216]/50 p-4 rounded-xl rounded-tl-none border border-[#28392e]">
-                                Cho mình hỏi thêm về cách xử lý các loại hộp xốp đựng thức ăn thì nên phân loại vào nhóm nào ạ?
-                            </p>
-<div class="flex items-center gap-4 mt-2 ml-2">
-<button class="text-gray-500 hover:text-primary text-xs font-medium flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">thumb_up</span> Thích (2)
-                                </button>
-<button class="text-gray-500 hover:text-white text-xs font-medium">Trả lời</button>
-</div>
-<div class="flex gap-4 mt-4 ml-2 border-l-2 border-[#28392e] pl-4">
-<div class="size-8 rounded-full bg-cover bg-center border border-[#28392e] flex-shrink-0" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU");'></div>
-<div class="flex-1">
-<div class="flex items-center gap-2 mb-1">
-<h5 class="text-white font-bold text-sm">Nguyễn Văn A</h5>
-<span class="bg-primary/20 text-primary text-[10px] font-bold px-1.5 py-0.5 rounded">Tác giả</span>
-</div>
-<p class="text-gray-400 text-sm">Chào Lan Anh, hộp xốp thường dính dầu mỡ nên rất khó tái chế, bạn nên bỏ vào thùng rác thải thông thường (vô cơ) nhé. Tốt nhất là hạn chế sử dụng chúng ạ.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</article>
-</main>
-<footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
-<div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="flex flex-col gap-3 items-center md:items-start">
-<div class="flex items-center gap-2 text-white font-bold text-xl">
-<span class="material-symbols-outlined text-primary text-3xl">eco</span>
-                    EcoScan AI
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-300"
+  >
+    <header
+      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
+    >
+      <div
+        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
+      >
+        <div class="flex items-center gap-3 text-white">
+          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+            <img
+              src="../img logo/logoHaUI.png"
+              alt="HaUI Logo"
+              style="width: 28x; height: 28px"
+              class="rounded-full"
+            />
+          </a>
+          <div class="size-8 flex items-center justify-center text-primary">
+            <a href="index.html" class="flex items-center">
+              <span class="material-symbols-outlined text-3xl">recycling</span>
+            </a>
+          </div>
+          <div>
+            <a href="index.html" class="flex items-center">
+              <h1
+                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
+              >
+                EcoScan AI
+              </h1>
+            </a>
+          </div>
+        </div>
+        <nav class="hidden md:flex flex-1 justify-center gap-8">
+          <a
+            class="text-white font-medium hover:text-primary transition-colors text-sm"
+            href="index.html"
+            >Trang chủ</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="result_analys.html"
+            >Kết quả</a
+          >
+          <a
+            class="text-primary hover:text-primary transition-colors text-sm font-medium"
+            href="list_blog.html"
+            >Blog</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Lịch sử</a
+          >
+          <a
+            class="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Hướng dẫn</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+          <button
+            class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="relative">
+            <button
+              id="user-menu-button"
+              class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+              data-alt="User profile picture placeholder"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+              "
+              onclick="toggleUserMenu()"
+            ></button>
+            <div
+              id="user-menu"
+              class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
+            >
+              <a
+                href="#"
+                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+              >
+                <img
+                  class="w-8 h-8 rounded-full mr-3"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
+                  alt="Avatar"
+                />
+                Tài khoản của bạn
+              </a>
+              <a
+                href="#"
+                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
+              >
+                <span class="material-symbols-outlined mr-3">logout</span>
+                Đăng xuất
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-1 w-full px-4 py-8 md:py-12">
+      <article class="max-w-[840px] w-full mx-auto">
+        <header class="mb-8 md:mb-12 animate-fade-in-up">
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider"
+            >
+              Kiến thức môi trường
+            </span>
+            <span class="text-gray-500 text-sm font-medium">5 phút đọc</span>
+          </div>
+          <h1
+            class="text-white text-3xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6"
+          >
+            Hướng dẫn phân loại rác tại nguồn: <br class="hidden md:block" />
+            <span class="text-primary">Bước nhỏ, tác động lớn</span>
+          </h1>
+          <div
+            class="flex items-center justify-between border-y border-[#28392e] py-4"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="size-10 rounded-full bg-cover bg-center border border-[#28392e]"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                "
+              ></div>
+              <div>
+                <p class="text-white font-bold text-sm">Nguyễn Văn A</p>
+                <p class="text-gray-500 text-xs">Chuyên gia Môi trường</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 text-gray-500 text-sm">
+              <span class="hidden sm:inline">12 Tháng 10, 2023</span>
+              <div class="flex gap-2">
+                <button class="hover:text-primary transition-colors">
+                  <span class="material-symbols-outlined text-xl">share</span>
+                </button>
+                <button class="hover:text-primary transition-colors">
+                  <span class="material-symbols-outlined text-xl"
+                    >bookmark_border</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div
+          class="w-full aspect-video md:aspect-[21/9] rounded-2xl md:rounded-3xl overflow-hidden mb-10 shadow-2xl shadow-black/20 relative group border border-[#28392e]"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+          ></div>
+        </div>
+        <div class="space-y-8 text-lg leading-relaxed text-gray-300">
+          <p
+            class="text-xl md:text-2xl text-white font-medium leading-relaxed drop-shadow-sm"
+          >
+            Phân loại rác thải tại nguồn là một trong những hành động thiết thực
+            nhất mà mỗi cá nhân có thể thực hiện để bảo vệ môi trường, giúp giảm
+            tải áp lực lên các bãi chôn lấp và thúc đẩy nền kinh tế tuần hoàn.
+          </p>
+          <div class="h-px w-20 bg-primary/50 my-8"></div>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-12 mb-4">
+            Tại sao cần phân loại rác?
+          </h2>
+          <p>
+            Hàng ngày, lượng rác thải sinh hoạt thải ra môi trường là vô cùng
+            lớn. Nếu không được phân loại, phần lớn rác thải sẽ bị chôn lấp, gây
+            lãng phí tài nguyên và ô nhiễm môi trường đất, nước, không khí. Việc
+            phân loại rác giúp:
+          </p>
+          <ul class="list-none space-y-3 ml-2">
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary mt-1"
+                >check_circle</span
+              >
+              <span>Giảm lượng rác thải ra môi trường.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary mt-1"
+                >check_circle</span
+              >
+              <span>Tiết kiệm chi phí thu gom, vận chuyển và xử lý.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary mt-1"
+                >check_circle</span
+              >
+              <span>Tăng lượng rác tái chế, biến rác thành tài nguyên.</span>
+            </li>
+          </ul>
+          <figure
+            class="my-10 bg-surface-dark border border-[#28392e] rounded-2xl overflow-hidden p-2"
+          >
+            <div
+              class="aspect-[16/9] w-full bg-gray-800 rounded-xl overflow-hidden relative"
+            >
+              <div
+                class="absolute inset-0 bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');
+                "
+              ></div>
+            </div>
+            <figcaption class="p-4 text-center text-sm text-gray-400 italic">
+              Rác hữu cơ như vỏ trái cây có thể dễ dàng ủ làm phân bón (Compost)
+              tại nhà.
+            </figcaption>
+          </figure>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-12 mb-4">
+            Nhận diện các loại rác phổ biến
+          </h2>
+          <p class="mb-6">
+            Để phân loại chính xác, chúng ta cần nắm rõ đặc điểm của từng loại
+            rác. Dưới đây là những nhóm rác thường gặp nhất trong sinh hoạt hàng
+            ngày.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 not-prose">
+            <div
+              class="bg-[#2e3312] border border-yellow-800/30 p-6 rounded-2xl hover:border-yellow-500/50 transition-all duration-300"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <div class="bg-yellow-500/20 p-2 rounded-lg text-yellow-400">
+                  <span class="material-symbols-outlined">compost</span>
                 </div>
-<p class="text-gray-500 text-sm">© 2024 EcoScan. Giải pháp xanh cho tương lai.</p>
-</div>
-<div class="flex flex-wrap justify-center gap-8">
-<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Điều khoản sử dụng</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Chính sách bảo mật</a>
-<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Trung tâm hỗ trợ</a>
-</div>
-<div class="flex gap-4">
-<a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300" href="#">
-<span class="text-xs font-bold">FB</span>
-</a>
-<a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300" href="#">
-<span class="text-xs font-bold">TW</span>
-</a>
-<a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300" href="#">
-<span class="text-xs font-bold">IN</span>
-</a>
-</div>
-</div>
-</footer>
-
-</body></html>
+                <h3 class="text-white font-bold text-lg">Rác Hữu Cơ</h3>
+              </div>
+              <p class="text-gray-300 text-sm mb-4">
+                Bao gồm thức ăn thừa, rau củ quả hư hỏng, bã trà, bã cà phê, lá
+                cây...
+              </p>
+              <div
+                class="bg-black/20 p-3 rounded-lg text-xs text-yellow-200/80 border border-yellow-500/10"
+              >
+                💡 Mẹo: Hãy để ráo nước trước khi bỏ vào thùng.
+              </div>
+            </div>
+            <div
+              class="bg-[#122633] border border-blue-800/30 p-6 rounded-2xl hover:border-blue-500/50 transition-all duration-300"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <div class="bg-blue-500/20 p-2 rounded-lg text-blue-400">
+                  <span class="material-symbols-outlined">recycling</span>
+                </div>
+                <h3 class="text-white font-bold text-lg">Rác Tái Chế</h3>
+              </div>
+              <p class="text-gray-300 text-sm mb-4">
+                Bao gồm giấy, báo, thùng carton, chai lọ nhựa, vỏ lon kim loại,
+                thủy tinh...
+              </p>
+              <div
+                class="bg-black/20 p-3 rounded-lg text-xs text-blue-200/80 border border-blue-500/10"
+              >
+                💡 Mẹo: Làm sạch và ép dẹp để tiết kiệm diện tích.
+              </div>
+            </div>
+          </div>
+          <p>
+            Ngoài ra, đối với các loại rác nguy hại như pin, bóng đèn, chai lọ
+            đựng hóa chất, chúng ta tuyệt đối không bỏ chung với rác sinh hoạt
+            thông thường mà cần thu gom riêng và mang đến các điểm tiếp nhận xử
+            lý rác thải nguy hại.
+          </p>
+          <blockquote
+            class="border-l-4 border-primary bg-gradient-to-r from-primary/10 to-transparent p-6 my-8 rounded-r-xl"
+          >
+            <p class="text-xl italic text-white font-medium mb-2">
+              "Rác thải chỉ là rác thải khi chúng ta không biết cách sử dụng
+              chúng. Khi được phân loại đúng, chúng là tài nguyên."
+            </p>
+            <footer
+              class="text-sm text-primary font-bold uppercase tracking-wider"
+            >
+              — Thông điệp xanh
+            </footer>
+          </blockquote>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-12 mb-4">
+            Ứng dụng công nghệ AI vào phân loại
+          </h2>
+          <p>
+            Với sự phát triển của công nghệ, việc phân loại rác trở nên dễ dàng
+            hơn bao giờ hết. Các ứng dụng như <strong>EcoScan AI</strong> cho
+            phép người dùng chỉ cần chụp ảnh rác thải, hệ thống sẽ tự động nhận
+            diện và đưa ra hướng dẫn xử lý cụ thể trong tíc tắc.
+          </p>
+          <div
+            class="my-8 rounded-2xl overflow-hidden border border-[#28392e] shadow-xl"
+          >
+            <img
+              alt="Glass recycling example"
+              class="w-full h-auto object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy"
+            />
+          </div>
+          <p>
+            Hãy bắt đầu thói quen phân loại rác ngay từ hôm nay. Một hành động
+            nhỏ của bạn sẽ góp phần tạo nên một tương lai xanh và bền vững hơn
+            cho thế hệ mai sau.
+          </p>
+        </div>
+        <hr class="border-[#28392e] my-12 md:my-16" />
+        <div
+          class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start hover:border-primary/30 transition-colors duration-300"
+        >
+          <div class="relative">
+            <div
+              class="size-24 rounded-full bg-cover border-4 border-[#102216] shadow-lg"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+              "
+            ></div>
+            <div
+              class="absolute bottom-0 right-0 bg-primary text-[#051d0e] p-1.5 rounded-full border-2 border-[#102216]"
+            >
+              <span class="material-symbols-outlined text-sm font-bold block"
+                >verified</span
+              >
+            </div>
+          </div>
+          <div class="flex-1 text-center md:text-left">
+            <h3 class="text-white font-bold text-xl mb-1">Nguyễn Văn A</h3>
+            <p
+              class="text-primary text-sm font-medium mb-4 uppercase tracking-wider"
+            >
+              Chuyên gia Môi trường &amp; AI
+            </p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+              Đam mê công nghệ xanh và phát triển bền vững. Với hơn 10 năm kinh
+              nghiệm trong lĩnh vực xử lý chất thải, tôi luôn tìm kiếm những
+              giải pháp thông minh để giải quyết các vấn đề môi trường cấp bách.
+            </p>
+            <div class="flex justify-center md:justify-start gap-3">
+              <button
+                class="text-xs font-bold text-white bg-[#28392e] hover:bg-primary hover:text-black px-4 py-2 rounded-full transition-colors border border-white/5"
+              >
+                Theo dõi
+              </button>
+              <button
+                class="text-xs font-bold text-white bg-[#28392e] hover:bg-white hover:text-black px-4 py-2 rounded-full transition-colors border border-white/5"
+              >
+                Xem hồ sơ
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="mt-16 md:mt-24">
+          <div class="flex items-center justify-between mb-8">
+            <h3 class="text-white text-2xl font-bold flex items-center gap-3">
+              <span class="w-1 h-8 bg-primary rounded-full"></span>
+              Bài viết liên quan
+            </h3>
+            <a
+              class="text-sm text-gray-400 hover:text-primary transition-colors flex items-center gap-1"
+              href="#"
+            >
+              Xem tất cả
+              <span class="material-symbols-outlined text-lg"
+                >arrow_forward</span
+              >
+            </a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <a class="group block" href="#">
+              <div
+                class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative border border-[#28392e] group-hover:border-primary/50 transition-all"
+              >
+                <div
+                  class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
+                  "
+                ></div>
+                <div
+                  class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
+                ></div>
+              </div>
+              <h4
+                class="text-white font-bold text-lg mb-2 leading-snug group-hover:text-primary transition-colors"
+              >
+                Cách xử lý Pin cũ an toàn tại nhà
+              </h4>
+              <div class="flex items-center gap-2 text-xs text-gray-500">
+                <span class="material-symbols-outlined text-sm">schedule</span>
+                10 Th10, 2023
+              </div>
+            </a>
+            <a class="group block" href="#">
+              <div
+                class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative border border-[#28392e] group-hover:border-primary/50 transition-all"
+              >
+                <div
+                  class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
+                  "
+                ></div>
+                <div
+                  class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
+                ></div>
+              </div>
+              <h4
+                class="text-white font-bold text-lg mb-2 leading-snug group-hover:text-primary transition-colors"
+              >
+                Thủy tinh: Quy trình tái chế vô hạn
+              </h4>
+              <div class="flex items-center gap-2 text-xs text-gray-500">
+                <span class="material-symbols-outlined text-sm">schedule</span>
+                08 Th10, 2023
+              </div>
+            </a>
+            <a class="group block" href="#">
+              <div
+                class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative border border-[#28392e] group-hover:border-primary/50 transition-all"
+              >
+                <div
+                  class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
+                  "
+                ></div>
+                <div
+                  class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
+                ></div>
+              </div>
+              <h4
+                class="text-white font-bold text-lg mb-2 leading-snug group-hover:text-primary transition-colors"
+              >
+                7 loại nhựa và ý nghĩa các ký hiệu
+              </h4>
+              <div class="flex items-center gap-2 text-xs text-gray-500">
+                <span class="material-symbols-outlined text-sm">schedule</span>
+                05 Th10, 2023
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="mt-16 md:mt-24" id="comments">
+          <h3
+            class="text-white text-2xl font-bold mb-8 flex items-center gap-2"
+          >
+            Bình luận <span class="text-gray-500 text-lg font-normal">(3)</span>
+          </h3>
+          <div
+            class="bg-surface-dark border border-[#28392e] rounded-2xl p-6 mb-10"
+          >
+            <div class="flex gap-4">
+              <div
+                class="size-10 rounded-full bg-cover bg-center hidden sm:block border border-[#28392e]"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                "
+              ></div>
+              <div class="flex-1">
+                <textarea
+                  class="w-full bg-[#102216] border border-[#28392e] rounded-xl p-4 text-white placeholder-gray-500 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-y min-h-[120px]"
+                  placeholder="Chia sẻ suy nghĩ của bạn về bài viết này..."
+                ></textarea>
+                <div class="flex justify-end mt-4 gap-3">
+                  <button
+                    class="text-gray-400 hover:text-white text-sm font-medium px-4 py-2"
+                  >
+                    Hủy
+                  </button>
+                  <button
+                    class="bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold py-2.5 px-6 rounded-lg shadow-lg shadow-primary/10 transition-all hover:shadow-primary/30 hover:-translate-y-0.5"
+                  >
+                    Gửi bình luận
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-8">
+            <div class="flex gap-4">
+              <div
+                class="size-10 rounded-full bg-blue-900 flex items-center justify-center text-blue-200 font-bold border border-blue-700/50 flex-shrink-0"
+              >
+                MT
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-2">
+                  <h5 class="text-white font-bold">Minh Tuấn</h5>
+                  <span class="text-gray-500 text-xs">2 giờ trước</span>
+                </div>
+                <p
+                  class="text-gray-400 text-sm leading-relaxed bg-[#102216]/50 p-4 rounded-xl rounded-tl-none border border-[#28392e]"
+                >
+                  Bài viết rất chi tiết và dễ hiểu. Mình đã bắt đầu phân loại
+                  rác từ tháng trước và thấy lượng rác thải ra ít hẳn đi. Rất
+                  mong chờ thêm nhiều bài viết như thế này!
+                </p>
+                <div class="flex items-center gap-4 mt-2 ml-2">
+                  <button
+                    class="text-gray-500 hover:text-primary text-xs font-medium flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >thumb_up</span
+                    >
+                    Thích
+                  </button>
+                  <button
+                    class="text-gray-500 hover:text-white text-xs font-medium"
+                  >
+                    Trả lời
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div
+                class="size-10 rounded-full bg-purple-900 flex items-center justify-center text-purple-200 font-bold border border-purple-700/50 flex-shrink-0"
+              >
+                LA
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-2">
+                  <h5 class="text-white font-bold">Lan Anh</h5>
+                  <span class="text-gray-500 text-xs">5 giờ trước</span>
+                </div>
+                <p
+                  class="text-gray-400 text-sm leading-relaxed bg-[#102216]/50 p-4 rounded-xl rounded-tl-none border border-[#28392e]"
+                >
+                  Cho mình hỏi thêm về cách xử lý các loại hộp xốp đựng thức ăn
+                  thì nên phân loại vào nhóm nào ạ?
+                </p>
+                <div class="flex items-center gap-4 mt-2 ml-2">
+                  <button
+                    class="text-gray-500 hover:text-primary text-xs font-medium flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >thumb_up</span
+                    >
+                    Thích (2)
+                  </button>
+                  <button
+                    class="text-gray-500 hover:text-white text-xs font-medium"
+                  >
+                    Trả lời
+                  </button>
+                </div>
+                <div
+                  class="flex gap-4 mt-4 ml-2 border-l-2 border-[#28392e] pl-4"
+                >
+                  <div
+                    class="size-8 rounded-full bg-cover bg-center border border-[#28392e] flex-shrink-0"
+                    style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+                    "
+                  ></div>
+                  <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1">
+                      <h5 class="text-white font-bold text-sm">Nguyễn Văn A</h5>
+                      <span
+                        class="bg-primary/20 text-primary text-[10px] font-bold px-1.5 py-0.5 rounded"
+                        >Tác giả</span
+                      >
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                      Chào Lan Anh, hộp xốp thường dính dầu mỡ nên rất khó tái
+                      chế, bạn nên bỏ vào thùng rác thải thông thường (vô cơ)
+                      nhé. Tốt nhất là hạn chế sử dụng chúng ạ.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+    <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
+      <div
+        class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8"
+      >
+        <div class="flex flex-col gap-3 items-center md:items-start">
+          <div class="flex items-center gap-2 text-white font-bold text-xl">
+            <span class="material-symbols-outlined text-primary text-3xl"
+              >eco</span
+            >
+            EcoScan AI
+          </div>
+          <p class="text-gray-500 text-sm">
+            © 2024 EcoScan. Giải pháp xanh cho tương lai.
+          </p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8">
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Điều khoản sử dụng</a
+          >
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Chính sách bảo mật</a
+          >
+          <a
+            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
+            href="#"
+            >Trung tâm hỗ trợ</a
+          >
+        </div>
+        <div class="flex gap-4">
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">FB</span>
+          </a>
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">TW</span>
+          </a>
+          <a
+            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+            href="#"
+          >
+            <span class="text-xs font-bold">IN</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      function toggleUserMenu() {
+        const menu = document.getElementById("user-menu");
+        menu.classList.toggle("hidden");
+      }
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const button = document.getElementById("user-menu-button");
+        const menu = document.getElementById("user-menu");
+        if (!button.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.add("hidden");
+        }
+      });
+    </script>
+  </body>
+</html>
