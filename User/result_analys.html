@@ -1,589 +1,890 @@
 <!DOCTYPE html>
 <html class="dark" lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Kết Quả Nhận Diện Rác</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#13ec5b",
-              secondary: "#28392e",
-              "background-light": "#f6f8f6",
-              "background-dark": "#102216",
-              "surface-dark": "#1c2a21",
-              "surface-light": "#ffffff",
-              "accent-blue": "#3b82f6",
-              "accent-yellow": "#eab308",
-              "accent-red": "#ef4444",
-            },
-            fontFamily: {
-              display: ["Space Grotesk", "sans-serif"],
-              body: ["Space Grotesk", "sans-serif"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              "2xl": "1rem",
-              full: "9999px",
-            },
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Kết Quả Nhận Diện Rác</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13ec5b",
+            secondary: "#28392e",
+            "background-light": "#f6f8f6",
+            "background-dark": "#102216",
+            "surface-dark": "#1c2a21",
+            "surface-light": "#ffffff",
+            "accent-blue": "#3b82f6",
+            "accent-yellow": "#eab308",
+            "accent-red": "#ef4444",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Space Grotesk", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            "2xl": "1rem",
+            full: "9999px",
           },
         },
-      };
-    </script>
-    <style>
-      body {
-        font-family: "Space Grotesk", sans-serif;
-      }
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family: "Space Grotesk", sans-serif;
+    }
 
-      .material-symbols-outlined {
-        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-      }
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
 
-      .filled-icon {
-        font-variation-settings: "FILL" 1;
-      }
-    </style>
-  </head>
+    .filled-icon {
+      font-variation-settings: "FILL" 1;
+    }
+  </style>
+</head>
 
-  <body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-800 dark:text-gray-100"
-  >
-    <header
-      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
-    >
-      <div
-        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
-      >
-        <div class="flex items-center gap-3 text-white">
-          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
-            <img
-              src="../img logo/logoHaUI.png"
-              alt="HaUI Logo"
-              style="width: 28x; height: 28px"
-              class="rounded-full"
-            />
-          </a>
-          <div class="size-8 flex items-center justify-center text-primary">
-            <span class="material-symbols-outlined text-3xl">recycling</span>
-          </div>
-          <a
-            class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
-            href="#"
-            >EcoScan AI</a
-          >
-        </div>
-        <nav class="hidden md:flex flex-1 justify-center gap-8">
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="index.html"
-            >Trang chủ</a
-          >
-          <a class="text-primary text-sm font-medium" href="#">Kết quả</a>
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="list_blog.html"
-            >Blog</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="#"
-            >Lịch sử</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="#"
-            >Hướng dẫn</a
-          >
-        </nav>
-        <div class="flex items-center gap-4">
-          <button
-            class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
-          >
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-          <div class="relative">
-            <button
-              id="user-menu-button"
-              class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
-              "
-              onclick="toggleUserMenu()"
-            ></button>
-            <div
-              id="user-menu"
-              class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
-            >
-              <a
-                href="#"
-                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-              >
-                <img
-                  class="w-8 h-8 rounded-full mr-3"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
-                  alt="Avatar"
-                />
-                Tài khoản của bạn
-              </a>
-              <a
-                href="#"
-                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-              >
-                <span class="material-symbols-outlined mr-3">logout</span>
-                Đăng xuất
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main
-      class="flex-1 flex flex-col w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 gap-8"
-    >
-      <div class="flex items-center gap-2 text-sm text-gray-400">
-        <a
-          class="hover:text-primary transition-colors flex items-center gap-1"
-          href="#"
-        >
-          <span class="material-symbols-outlined text-base">arrow_back</span>
-          Quay lại quét
+<body
+  class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-800 dark:text-gray-100">
+  <header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
+    <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full">
+      <div class="flex items-center gap-3 text-white">
+        <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+          <img src="../img logo/logoHaUI.png" alt="HaUI Logo" style="width: 28x; height: 28px" class="rounded-full" />
         </a>
-        <span class="mx-2">/</span>
-        <span class="text-white">Kết quả phân tích</span>
+        <div class="size-8 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-3xl">recycling</span>
+        </div>
+        <a class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block" href="#">EcoScan AI</a>
       </div>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div class="lg:col-span-5 flex flex-col gap-6">
+      <nav class="hidden md:flex flex-1 justify-center gap-8">
+        <a class="text-gray-300 hover:text-primary text-sm font-medium" href="index.html">Trang chủ</a>
+        <a class="text-primary text-sm font-medium" href="#">Kết quả</a>
+        <a class="text-gray-300 hover:text-primary text-sm font-medium" href="list_blog.html">Blog</a>
+        <a class="text-gray-300 hover:text-primary text-sm font-medium" href="#">Lịch sử</a>
+        <a class="text-gray-300 hover:text-primary text-sm font-medium" href="#">Hướng dẫn</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <button class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <div class="relative">
+          <button id="user-menu-button"
+            class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]" style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
+              " onclick="toggleUserMenu()"></button>
+          <div id="user-menu"
+            class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out">
+            <a href="#"
+              class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors">
+              <img class="w-8 h-8 rounded-full mr-3"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
+                alt="Avatar" />
+              Tài khoản của bạn
+            </a>
+            <a href="#"
+              class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors">
+              <span class="material-symbols-outlined mr-3">logout</span>
+              Đăng xuất
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="flex-1 flex flex-col w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 gap-8">
+    <div class="flex items-center gap-2 text-sm text-gray-400">
+      <a class="hover:text-primary transition-colors flex items-center gap-1" href="index.html">
+        <span class="material-symbols-outlined text-base">arrow_back</span>
+        Quay lại quét
+      </a>
+      <span class="mx-2">/</span>
+      <span class="text-white">Kết quả phân tích</span>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-2 shadow-2xl overflow-hidden relative group">
           <div
-            class="bg-surface-dark border border-[#28392e] rounded-3xl p-2 shadow-2xl overflow-hidden relative group"
-          >
-            <div
-              class="absolute top-6 right-6 z-10 bg-primary text-[#051d0e] text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2"
-            >
-              <span class="material-symbols-outlined filled-icon text-lg"
-                >check_circle</span
-              >
-              Độ tin cậy 98%
-            </div>
-            <div
-              class="rounded-2xl overflow-hidden aspect-[4/3] bg-gray-800 relative"
-            >
-              <div
-                class="absolute inset-0 bg-cover bg-center"
-                style="
+            class="absolute top-6 right-6 z-10 bg-primary text-[#051d0e] text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+            <span class="material-symbols-outlined filled-icon text-lg">check_circle</span>
+            <span id="confidenceText">Độ chính xác --%</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-gray-800 relative">
+            <div id="resultImage" class="absolute inset-0 bg-contain bg-top bg-no-repeat cursor-zoom-in" style="
                   background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
-                "
-              ></div>
+                "></div>
+          </div>
+        </div>
+        <!-- Danh sách vật dụng -->
+        <div class="mb-6">
+          <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">recycling</span>
+              Danh sách rác đã nhận diện
+            </h2>
+            <div id="detectionsChips" class="flex flex-wrap gap-3"></div>
+
+          </div>
+
+        </div>
+        <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex flex-col">
+              <span class="text-primary font-bold text-sm tracking-wider uppercase mb-1">Đang xem chi tiết</span>
+              <h1 id="mainLabel" class="text-3xl md:text-4xl font-black text-white leading-tight">
+                Chai Nhựa PET
+              </h1>
+            </div>
+            <div class="bg-[#28392e] p-3 rounded-xl">
+              <span class="material-symbols-outlined text-4xl text-primary">recycling</span>
             </div>
           </div>
-          <div
-            class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl"
-          >
-            <div class="flex items-center justify-between mb-6">
-              <div class="flex flex-col">
-                <span
-                  class="text-primary font-bold text-sm tracking-wider uppercase mb-1"
-                  >Đã phát hiện</span
-                >
-                <h1
-                  class="text-3xl md:text-4xl font-black text-white leading-tight"
-                >
-                  Chai Nhựa PET
-                </h1>
-              </div>
-              <div class="bg-[#28392e] p-3 rounded-xl">
-                <span class="material-symbols-outlined text-4xl text-primary"
-                  >recycling</span
-                >
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
+              <span class="text-gray-400 text-xs uppercase block mb-1">Loại rác</span>
+              <span class="text-white font-bold text-lg flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                <span id="trashTypeText">Tái chế </span>
+            </div>
+            <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
+              <span class="text-gray-400 text-xs uppercase block mb-1">Chất liệu</span>
+              <span id="materialText" class="text-white font-bold text-lg">Polyethylene</span>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div class="p-4 rounded-2xl bg-yellow-900/20 border border-yellow-700/30 flex items-start gap-3">
+              <span class="material-symbols-outlined text-yellow-500 mt-0.5">warning</span>
+              <div>
+                <h4 class="text-yellow-500 font-bold text-sm mb-1">
+                  Lưu ý xử lý
+                </h4>
+                <p id="noteText" class="text-gray-300 text-sm">
+                  Cần rửa sạch chất lỏng bên trong và tháo nắp chai (nếu nắp
+                  làm từ nhựa khác) trước khi bỏ vào thùng tái chế.
+                </p>
               </div>
             </div>
-            <div class="grid grid-cols-2 gap-4 mb-6">
-              <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                <span class="text-gray-400 text-xs uppercase block mb-1"
-                  >Loại rác</span
-                >
-                <span
-                  class="text-white font-bold text-lg flex items-center gap-2"
-                >
-                  <span class="w-2 h-2 rounded-full bg-primary"></span> Tái chế
-                </span>
-              </div>
-              <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                <span class="text-gray-400 text-xs uppercase block mb-1"
-                  >Chất liệu</span
-                >
-                <span class="text-white font-bold text-lg">Polyethylene</span>
-              </div>
-            </div>
-            <div class="space-y-4">
-              <div
-                class="p-4 rounded-2xl bg-yellow-900/20 border border-yellow-700/30 flex items-start gap-3"
-              >
-                <span class="material-symbols-outlined text-yellow-500 mt-0.5"
-                  >warning</span
-                >
-                <div>
-                  <h4 class="text-yellow-500 font-bold text-sm mb-1">
-                    Lưu ý xử lý
-                  </h4>
-                  <p class="text-gray-300 text-sm">
-                    Cần rửa sạch chất lỏng bên trong và tháo nắp chai (nếu nắp
-                    làm từ nhựa khác) trước khi bỏ vào thùng tái chế.
-                  </p>
-                </div>
-              </div>
-              <div
-                class="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex items-start gap-3"
-              >
-                <span class="material-symbols-outlined text-primary mt-0.5"
-                  >verified</span
-                >
-                <div>
-                  <h4 class="text-primary font-bold text-sm mb-1">
-                    Hành động đề xuất
-                  </h4>
-                  <p class="text-gray-300 text-sm">
-                    Bỏ vào thùng rác màu xanh hoặc mang đến điểm thu gom nhựa
-                    tái chế.
-                  </p>
-                </div>
+            <div class="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary mt-0.5">verified</span>
+              <div>
+                <h4 class="text-primary font-bold text-sm mb-1">
+                  Hành động đề xuất
+                </h4>
+                <p id="actionText" class="text-gray-300 text-sm">
+                  Bỏ vào thùng rác màu xanh hoặc mang đến điểm thu gom nhựa
+                  tái chế.
+                </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="lg:col-span-7 flex flex-col gap-6">
-          <div
-            class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl"
-          >
-            <h2
-              class="text-2xl font-bold text-white mb-6 flex items-center gap-2"
-            >
-              <span class="material-symbols-outlined text-primary"
-                >analytics</span
-              >
-              Phân tích chi tiết
-            </h2>
-            <div class="space-y-8">
-              <div class="relative pl-8 border-l-2 border-[#28392e]">
-                <div
-                  class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"
-                ></div>
-                <h3 class="text-lg font-bold text-white mb-2">
-                  Tác động môi trường &amp; Kinh tế
-                </h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                  Việc tái chế 1 tấn nhựa PET giúp tiết kiệm 3,8 thùng dầu thô
-                  và giảm đáng kể lượng khí thải CO2. Nhựa PET có thể được tái
-                  chế thành sợi polyester dùng trong ngành dệt may, thảm, hoặc
-                  sản xuất chai lọ mới.
-                </p>
-                <div class="flex gap-2">
-                  <span
-                    class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#28392e] text-xs font-medium text-primary"
-                  >
-                    <span class="material-symbols-outlined text-sm"
-                      >savings</span
-                    >
-                    Tiết kiệm tài nguyên
-                  </span>
-                  <span
-                    class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#28392e] text-xs font-medium text-blue-400"
-                  >
-                    <span class="material-symbols-outlined text-sm">co2</span>
-                    Giảm khí thải
-                  </span>
-                </div>
-              </div>
-              <div class="relative pl-8 border-l-2 border-[#28392e]">
-                <div
-                  class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-gray-500 rounded-full w-4 h-4"
-                ></div>
-                <h3 class="text-lg font-bold text-white mb-2">
-                  Mức độ độc hại
-                </h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                  Nhựa PET an toàn cho thực phẩm và đồ uống khi sử dụng một lần.
-                  Tuy nhiên, không nên tái sử dụng chai nước nhiều lần mà không
-                  vệ sinh kỹ do nguy cơ vi khuẩn tích tụ. Khi đốt cháy, nó có
-                  thể sinh ra khí độc, vì vậy tuyệt đối không tự ý đốt.
-                </p>
-              </div>
-              <div class="relative pl-8 border-l-2 border-[#28392e]">
-                <div
-                  class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-green-500 rounded-full w-4 h-4"
-                ></div>
-                <h3 class="text-lg font-bold text-white mb-2">
-                  Quy trình xử lý an toàn
-                </h3>
-                <ul
-                  class="list-disc list-outside ml-4 text-gray-400 text-sm space-y-2"
-                >
-                  <li>Làm rỗng chai hoàn toàn, đổ bỏ chất lỏng dư thừa.</li>
-                  <li>Bóp bẹp chai để tiết kiệm diện tích thùng chứa.</li>
-                  <li>
-                    Nếu có thể, tách riêng nhãn mác ni lông nếu quy định địa
-                    phương yêu cầu.
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div
-            class="bg-gradient-to-br from-[#152e20] to-[#0f2117] border border-[#28392e] rounded-3xl p-6 md:p-8 relative overflow-hidden"
-          >
-            <div
-              class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"
-            ></div>
-            <h2
-              class="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10"
-            >
-              <span class="material-symbols-outlined text-yellow-400"
-                >lightbulb</span
-              >
-              Câu chuyện tái chế &amp; Ý tưởng
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-              <div
-                class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer"
-              >
-                <div
-                  class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden"
-                >
-                  <div
-                    class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                    style="
-                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
-                    "
-                  ></div>
-                </div>
-                <h4
-                  class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors"
-                >
-                  Làm chậu cây tự động tưới
-                </h4>
-                <p class="text-gray-400 text-xs line-clamp-2">
-                  Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho
-                  vườn rau tại nhà.
-                </p>
-              </div>
-              <div
-                class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer"
-              >
-                <div
-                  class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden"
-                >
-                  <div
-                    class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                    style="
-                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
-                    "
-                  ></div>
-                </div>
-                <h4
-                  class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors"
-                >
-                  Adidas &amp; Giày từ rác thải biển
-                </h4>
-                <p class="text-gray-400 text-xs line-clamp-2">
-                  Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những
-                  đôi giày thể thao bền vững.
-                </p>
-              </div>
-            </div>
-            <div
-              class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4"
-            >
-              <p class="text-gray-400 text-xs italic">
-                "Rác thải chỉ là tài nguyên đặt sai chỗ."
+      </div>
+      <div class="lg:col-span-7 flex flex-col gap-6">
+        <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
+          <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">analytics</span>
+            Phân tích chi tiết
+          </h2>
+          <div class="space-y-8">
+            <div class="relative pl-8 border-l-2 border-[#28392e]">
+              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"></div>
+              <h3 class="text-lg font-bold text-white mb-2">
+                Tác động môi trường &amp; Kinh tế
+              </h3>
+              <p id="impactText" class="text-gray-400 text-sm leading-relaxed mb-4">
+                Việc tái chế 1 tấn nhựa PET giúp tiết kiệm 3,8 thùng dầu thô
+                và giảm đáng kể lượng khí thải CO2. Nhựa PET có thể được tái
+                chế thành sợi polyester dùng trong ngành dệt may, thảm, hoặc
+                sản xuất chai lọ mới.
               </p>
-              <button
-                class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group"
-              >
-                Xem thêm ý tưởng
-                <span
-                  class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform"
-                  >arrow_forward</span
-                >
-              </button>
+            </div>
+            <div class="relative pl-8 border-l-2 border-[#28392e]">
+              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"></div>
+              <h3 class="text-lg font-bold text-white mb-2">
+                Mức độ độc hại
+              </h3>
+              <p id="toxicityText" class="text-gray-400 text-sm leading-relaxed">
+                Nhựa PET an toàn cho thực phẩm và đồ uống khi sử dụng một lần.
+                Tuy nhiên, không nên tái sử dụng chai nước nhiều lần mà không
+                vệ sinh kỹ do nguy cơ vi khuẩn tích tụ. Khi đốt cháy, nó có
+                thể sinh ra khí độc, vì vậy tuyệt đối không tự ý đốt.
+              </p>
+            </div>
+            <div class="relative pl-8 border-l-2 border-[#28392e]">
+              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-green-500 rounded-full w-4 h-4"></div>
+              <h3 class="text-lg font-bold text-white mb-2">
+                Quy trình xử lý an toàn
+              </h3>
+              <ul id="safeStepsList" class="list-disc list-outside ml-4 text-gray-400 text-sm space-y-2">
+                <li>Làm rỗng chai hoàn toàn, đổ bỏ chất lỏng dư thừa.</li>
+                <li>Bóp bẹp chai để tiết kiệm diện tích thùng chứa.</li>
+                <li>
+                  Nếu có thể, tách riêng nhãn mác ni lông nếu quy định địa
+                  phương yêu cầu.
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+        <div
+          class="bg-gradient-to-br from-[#152e20] to-[#0f2117] border border-[#28392e] rounded-3xl p-6 md:p-8 relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
+          </div>
+          <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
+            <span class="material-symbols-outlined text-yellow-400">lightbulb</span>
+            Câu chuyện tái chế &amp; Ý tưởng
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+            <div
+              class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
+              <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
+                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                  style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
+                    "></div>
+              </div>
+              <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
+                Làm chậu cây tự động tưới
+              </h4>
+              <p class="text-gray-400 text-xs line-clamp-2">
+                Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho
+                vườn rau tại nhà.
+              </p>
+            </div>
+            <div
+              class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
+              <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
+                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                  style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
+                    "></div>
+              </div>
+              <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
+                Adidas &amp; Giày từ rác thải biển
+              </h4>
+              <p class="text-gray-400 text-xs line-clamp-2">
+                Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những
+                đôi giày thể thao bền vững.
+              </p>
+            </div>
+          </div>
+          <div class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-gray-400 text-xs italic">
+              "Rác thải chỉ là tài nguyên đặt sai chỗ."
+            </p>
+            <button
+              class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group">
+              Xem thêm ý tưởng
+              <span
+                class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="mt-8 border-t border-[#28392e] pt-10">
-        <h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
-          <span class="material-symbols-outlined text-gray-400">category</span>
-          Các vật dụng tương tự
-        </h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <a
-            class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-            href="#"
-          >
-            <div class="flex items-center gap-3 mb-2">
-              <div
-                class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                style="
+    </div>
+    <div class="mt-8 border-t border-[#28392e] pt-10">
+      <h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+        <span class="material-symbols-outlined text-gray-400">category</span>
+        Các vật dụng tương tự
+      </h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+          href="#">
+
+          <div class="flex items-center gap-3 mb-2">
+            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center" style="
                   background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');
-                "
-              ></div>
-              <div>
-                <h4
-                  class="text-white font-bold text-sm group-hover:text-primary"
-                >
-                  Ly nhựa PP
-                </h4>
-                <span class="text-xs text-gray-500">Tái chế được</span>
-              </div>
+                "></div>
+            <div>
+              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+                Ly nhựa PP
+              </h4>
+              <span class="text-xs text-gray-500">Tái chế được</span>
             </div>
-          </a>
-          <a
-            class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-            href="#"
-          >
-            <div class="flex items-center gap-3 mb-2">
-              <div
-                class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                style="
-                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
-                "
-              ></div>
-              <div>
-                <h4
-                  class="text-white font-bold text-sm group-hover:text-primary"
-                >
-                  Hộp xốp
-                </h4>
-                <span class="text-xs text-red-400">Rác thải</span>
-              </div>
-            </div>
-          </a>
-          <a
-            class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-            href="#"
-          >
-            <div class="flex items-center gap-3 mb-2">
-              <div
-                class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                style="
-                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
-                "
-              ></div>
-              <div>
-                <h4
-                  class="text-white font-bold text-sm group-hover:text-primary"
-                >
-                  Nắp chai HDPE
-                </h4>
-                <span class="text-xs text-gray-500">Tái chế được</span>
-              </div>
-            </div>
-          </a>
-          <a
-            class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-            href="#"
-          >
-            <div class="flex items-center gap-3 mb-2">
-              <div
-                class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                style="
-                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
-                "
-              ></div>
-              <div>
-                <h4
-                  class="text-white font-bold text-sm group-hover:text-primary"
-                >
-                  Túi ni lông
-                </h4>
-                <span class="text-xs text-yellow-500">Khó tái chế</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </main>
-    <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
-      <div
-        class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8"
-      >
-        <div class="flex flex-col gap-3 items-center md:items-start">
-          <div class="flex items-center gap-2 text-white font-bold text-xl">
-            <span class="material-symbols-outlined text-primary text-3xl"
-              >eco</span
-            >
-            EcoScan AI
           </div>
-          <p class="text-gray-500 text-sm">
-            © 2024 EcoScan. Giải pháp xanh cho tương lai.
-          </p>
-        </div>
-        <div class="flex flex-wrap justify-center gap-8">
-          <a
-            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
-            href="#"
-            >Điều khoản sử dụng</a
-          >
-          <a
-            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
-            href="#"
-            >Chính sách bảo mật</a
-          >
-          <a
-            class="text-gray-400 hover:text-primary transition-colors text-sm font-medium"
-            href="#"
-            >Trung tâm hỗ trợ</a
-          >
-        </div>
-        <div class="flex gap-4">
-          <a
-            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-            href="#"
-          >
-            <span class="text-xs font-bold">FB</span>
-          </a>
-          <a
-            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-            href="#"
-          >
-            <span class="text-xs font-bold">TW</span>
-          </a>
-          <a
-            class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
-            href="#"
-          >
-            <span class="text-xs font-bold">IN</span>
-          </a>
+        </a>
+        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+          href="#">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center" style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
+                "></div>
+            <div>
+              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+                Hộp xốp
+              </h4>
+              <span class="text-xs text-red-400">Rác thải</span>
+            </div>
+          </div>
+        </a>
+        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+          href="#">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center" style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
+                "></div>
+            <div>
+              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+                Nắp chai HDPE
+              </h4>
+              <span class="text-xs text-gray-500">Tái chế được</span>
+            </div>
+          </div>
+        </a>
+        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+          href="#">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center" style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');
+                "></div>
+            <div>
+              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+                Túi ni lông
+              </h4>
+              <span class="text-xs text-yellow-500">Khó tái chế</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- Zoom Modal -->
+    <div id="imgModal" class="fixed inset-0 z-[999] hidden">
+      <!-- overlay -->
+      <div id="imgModalOverlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+
+      <!-- content -->
+      <div class="absolute inset-0 flex items-center justify-center p-4">
+        <div class="relative w-full max-w-5xl">
+          <!-- close button -->
+          <button id="imgModalClose"
+            class="absolute -top-4 -right-4 md:top-2 md:right-2 z-10 size-10 rounded-full bg-surface-dark border border-[#28392e]
+               flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors" aria-label="Close">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+
+          <!-- image -->
+          <div class="rounded-2xl overflow-hidden border border-[#28392e] bg-black shadow-2xl">
+            <img id="imgModalSrc" src="" alt="Zoomed image"
+              class="w-full h-auto max-h-[85vh] object-contain select-none" />
+          </div>
         </div>
       </div>
-    </footer>
-    <script>
-      function toggleUserMenu() {
-        const menu = document.getElementById("user-menu");
-        menu.classList.toggle("hidden");
+    </div>
+
+  </main>
+  <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
+    <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex flex-col gap-3 items-center md:items-start">
+        <div class="flex items-center gap-2 text-white font-bold text-xl">
+          <span class="material-symbols-outlined text-primary text-3xl">eco</span>
+          EcoScan AI
+        </div>
+        <p class="text-gray-500 text-sm">
+          © 2024 EcoScan. Giải pháp xanh cho tương lai.
+        </p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-8">
+        <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Điều khoản sử
+          dụng</a>
+        <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Chính sách bảo
+          mật</a>
+        <a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium" href="#">Trung tâm hỗ trợ</a>
+      </div>
+      <div class="flex gap-4">
+        <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+          href="#">
+          <span class="text-xs font-bold">FB</span>
+        </a>
+        <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+          href="#">
+          <span class="text-xs font-bold">TW</span>
+        </a>
+        <a class="size-10 rounded-full bg-[#1c2a21] border border-[#28392e] flex items-center justify-center text-gray-400 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300"
+          href="#">
+          <span class="text-xs font-bold">IN</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================
+    // Config
+    // =========================
+    const API_BASE = "http://localhost:8080";
+
+    // GET detail
+    const DETAIL_URL = (id) => API_BASE + `/api/v1/ai_response/${encodeURIComponent(id)}/detail`;
+
+    // POST enrich-all (aiRequestId)
+    // Nếu m đổi controller: `/api/v1/ai_requests/{id}/enrich-all` thì đổi dòng này.
+    const ENRICH_ALL_URL = (id) => API_BASE + `/api/v1/trash-items/${encodeURIComponent(id)}/enrich-all`;
+
+    const token = localStorage.getItem("accessToken") || "";
+
+    async function apiFetchJson(url, { method = "GET", headers = {}, body = null } = {}) {
+      const h = { ...headers };
+      if (token) h.Authorization = "Bearer " + token;
+
+      const opt = { method, headers: h };
+      if (body != null) {
+        opt.headers["Content-Type"] = "application/json";
+        opt.body = JSON.stringify(body);
       }
-      // Close menu when clicking outside
-      document.addEventListener("click", function (event) {
-        const button = document.getElementById("user-menu-button");
-        const menu = document.getElementById("user-menu");
-        if (!button.contains(event.target) && !menu.contains(event.target)) {
-          menu.classList.add("hidden");
+
+      const res = await fetch(url, opt);
+      const json = await res.json().catch(() => null);
+      return { ok: res.ok, status: res.status, json };
+    }
+
+    // =========================
+    // Menu
+    // =========================
+    function toggleUserMenu() {
+      const menu = document.getElementById("user-menu");
+      menu?.classList.toggle("hidden");
+    }
+
+    document.addEventListener("click", function (event) {
+      const button = document.getElementById("user-menu-button");
+      const menu = document.getElementById("user-menu");
+      if (button && menu && !button.contains(event.target) && !menu.contains(event.target)) {
+        menu.classList.add("hidden");
+      }
+    });
+
+    window.ecoscanLogout = function () {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("account");
+      window.location.href = "login.html";
+    };
+
+    // =========================
+    // Utils
+    // =========================
+    function qs(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    function safeNum(n, fallback = null) {
+      const x = Number(n);
+      return Number.isFinite(x) ? x : fallback;
+    }
+
+    function setText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text ?? "--";
+    }
+
+    function setBgImage(id, url) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.backgroundImage = url ? `url('${url}')` : "none";
+    }
+
+    function prettifyLabel(label) {
+      if (!label) return "Không xác định";
+      return String(label).replaceAll("_", " ");
+    }
+
+    function fbNote() {
+      return "Không đốt rác. Làm sạch sơ bộ và phân loại theo hướng dẫn địa phương.";
+    }
+
+    function hasEnrichData(det) {
+      const trashTypeOk = det?.trashType && det.trashType !== "Không xác định";
+      const materialOk = det?.material && det.material !== "Không xác định";
+      const noteOk = det?.note && det.note !== fbNote();
+      const detailOk =
+        det?.detail &&
+        (det.detail.impact ||
+          det.detail.toxicity ||
+          (Array.isArray(det.detail.safeSteps) && det.detail.safeSteps.length > 0));
+
+      return !!(trashTypeOk || materialOk || noteOk || detailOk);
+    }
+
+    function applyEnrichToUI(full) {
+      setText("trashTypeText", full?.trashType ?? "—");
+      setText("materialText", full?.material ?? "—");
+      setText("noteText", full?.note ?? "—");
+      setText("actionText", full?.action ?? "—");
+
+      setText("impactText", full?.detail?.impact ?? "Không có dữ liệu tác động.");
+      setText("toxicityText", full?.detail?.toxicity ?? "Không có dữ liệu độc hại.");
+
+      const steps = Array.isArray(full?.detail?.safeSteps) ? full.detail.safeSteps : [];
+      const ul = document.getElementById("safeStepsList");
+      if (ul) {
+        ul.innerHTML = "";
+        if (steps.length === 0) {
+          const li = document.createElement("li");
+          li.textContent = "Không có hướng dẫn an toàn.";
+          ul.appendChild(li);
+        } else {
+          steps.forEach((s) => {
+            const li = document.createElement("li");
+            li.textContent = s;
+            ul.appendChild(li);
+          });
+        }
+      }
+    }
+
+    function setLoadingDetail(labelText = "") {
+      setText("trashTypeText", "—");
+      setText("materialText", "Đang phân tích...");
+      setText("noteText", labelText ? `Đang phân tích "${labelText}"...` : "Đang gọi AI để bổ sung phân tích...");
+      setText("actionText", "—");
+      setText("impactText", "Đang tải...");
+      setText("toxicityText", "Đang tải...");
+
+      const ul = document.getElementById("safeStepsList");
+      if (ul) {
+        ul.innerHTML = "";
+        const li = document.createElement("li");
+        li.textContent = "Đang tải hướng dẫn an toàn...";
+        ul.appendChild(li);
+      }
+    }
+
+    // =========================
+    // Detections Chips + Select
+    // =========================
+    let __detectionsUnique = [];
+    let __selectedKey = null;
+
+    let __enrichAllDone = false;
+    let __enrichAllInflight = false;
+
+    function buildUniqueDetections(detections) {
+      const arr = Array.isArray(detections) ? detections : [];
+      const map = new Map(); // key = label
+
+      arr.forEach((x) => {
+        const label = x?.label ?? "";
+        if (!label) return;
+
+        const curr = map.get(label);
+        const q = safeNum(x?.quantity, 1) ?? 1;
+        const conf = safeNum(x?.confidence, 0) ?? 0;
+
+        if (!curr) {
+          map.set(label, { ...x, quantity: q, confidence: conf, _key: label });
+        } else {
+          curr.quantity = (safeNum(curr.quantity, 1) ?? 1) + q;
+
+          // giữ bản “đẹp” hơn để lấy labelDisplay / trashItemId...
+          if (conf > (safeNum(curr.confidence, 0) ?? 0)) {
+            map.set(label, { ...curr, ...x, quantity: curr.quantity, confidence: conf, _key: label });
+          } else {
+            map.set(label, { ...curr, quantity: curr.quantity, _key: label });
+          }
         }
       });
-    </script>
-  </body>
+
+      const out = Array.from(map.values());
+      out.sort((a, b) => {
+        const q = (safeNum(b.quantity, 1) ?? 1) - (safeNum(a.quantity, 1) ?? 1);
+        if (q !== 0) return q;
+        return (safeNum(b.confidence, 0) ?? 0) - (safeNum(a.confidence, 0) ?? 0);
+      });
+      return out;
+    }
+
+    function renderChips(list) {
+      const wrap = document.getElementById("detectionsChips");
+      if (!wrap) return;
+
+      wrap.innerHTML = "";
+
+      if (!Array.isArray(list) || list.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "text-sm text-gray-500";
+        empty.textContent = "Không tìm thấy vật dụng nào.";
+        wrap.appendChild(empty);
+        return;
+      }
+
+      list.forEach((d) => {
+        const isActive = d._key === __selectedKey;
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className =
+          "relative flex items-center gap-2 px-4 py-2 rounded-full border transition-colors text-sm font-bold " +
+          (isActive
+            ? "bg-primary text-[#051d0e] border-primary"
+            : "bg-[#152e20] text-gray-200 border-[#28392e] hover:border-primary/50 hover:text-white");
+
+        const name = document.createElement("span");
+        name.textContent = d?.labelDisplay || prettifyLabel(d?.label);
+        btn.appendChild(name);
+
+        const q = safeNum(d?.quantity, 1) ?? 1;
+        if (q > 1) {
+          const badge = document.createElement("span");
+          badge.className =
+            "ml-1 px-2 py-0.5 rounded-full text-xs font-black " +
+            (isActive ? "bg-[#051d0e]/15 text-[#051d0e]" : "bg-black/20 text-gray-200");
+          badge.textContent = `x${q}`;
+          btn.appendChild(badge);
+        }
+
+        // ✅ tick nếu item đã có enrich
+        if (hasEnrichData(d)) {
+          const tick = document.createElement("span");
+          tick.className =
+            "ml-1 inline-flex items-center justify-center size-5 rounded-full " +
+            (isActive ? "bg-[#051d0e]/15" : "bg-white/10");
+          tick.innerHTML = `<span class="material-symbols-outlined text-[16px] ${isActive ? "text-[#051d0e]" : "text-primary"}">check</span>`;
+          btn.appendChild(tick);
+        }
+
+        btn.addEventListener("click", () => selectDetectionByKey(d._key));
+        wrap.appendChild(btn);
+      });
+    }
+
+    function selectDetectionByKey(key) {
+      const found = __detectionsUnique.find((x) => x._key === key);
+      if (!found) return;
+      __selectedKey = key;
+      renderChips(__detectionsUnique);
+      renderDetectionDetail(found);
+    }
+
+    function renderDetectionDetail(det) {
+      const labelText = det?.labelDisplay || det?.label || "Không xác định";
+      setText("mainLabel", labelText);
+
+      const conf = safeNum(det?.confidence, null);
+      setText("confidenceText", conf != null ? `Độ chính xác ${Math.round(conf * 100)}%` : `Độ chính xác --%`);
+
+      // Nếu chưa enrich-all xong mà det cũng chưa có dữ liệu -> show loading
+      if (!__enrichAllDone && !hasEnrichData(det)) {
+        setLoadingDetail(labelText);
+        return;
+      }
+
+      // Có dữ liệu -> render
+      applyEnrichToUI(det);
+    }
+
+    // =========================
+    // Merge enrich-all result into __detectionsUnique
+    // =========================
+    function mergeEnrichAllIntoDetections(enrichPayload) {
+      if (!enrichPayload) return;
+
+      const data = enrichPayload?.data ?? enrichPayload;
+
+      // BE có thể trả:
+      // A) AiResponseDetailsDTO { detections:[...] }
+      // B) List<TrashItemEnrichResponseDTO> { items:[...] } hoặc trả thẳng [...]
+      const dets = Array.isArray(data?.detections) ? data.detections : null;
+      const items = Array.isArray(data?.items) ? data.items : null;
+      const directList = Array.isArray(data) ? data : null;
+
+      const list = dets || items || directList || [];
+      if (!Array.isArray(list) || list.length === 0) return;
+
+      // index theo label và trashItemId
+      const byLabel = new Map();
+      const byId = new Map();
+
+      list.forEach((x) => {
+        if (!x) return;
+        if (x.label) byLabel.set(String(x.label), x);
+
+        const tid = x.trashItemId || x.trash_item_id || null;
+        if (tid != null) byId.set(Number(tid), x);
+      });
+
+      __detectionsUnique = __detectionsUnique.map((d) => {
+        const label = d?.label ? String(d.label) : null;
+        const tid = d?.trashItemId || d?.trash_item_id || null;
+
+        const add =
+          (label && byLabel.get(label)) ||
+          (tid != null && byId.get(Number(tid))) ||
+          null;
+
+        // merge: dữ liệu enrich overwrite
+        return add ? { ...d, ...add } : d;
+      });
+    }
+
+    // =========================
+    // Enrich all once (batch)
+    // =========================
+    async function enrichAllOnce(aiRequestId) {
+      if (__enrichAllDone || __enrichAllInflight) return;
+      __enrichAllInflight = true;
+
+      try {
+        const selected = __detectionsUnique.find((x) => x._key === __selectedKey);
+        if (selected && !hasEnrichData(selected)) setLoadingDetail(selected?.labelDisplay || selected?.label || "");
+
+        const r = await apiFetchJson(ENRICH_ALL_URL(aiRequestId), { method: "POST" });
+        if (!r.ok) {
+          console.error("enrich-all failed:", r.status, r.json);
+          return;
+        }
+
+        mergeEnrichAllIntoDetections(r.json);
+
+        __enrichAllDone = true;
+
+        // re-render chips + selected detail
+        renderChips(__detectionsUnique);
+
+        if (__selectedKey) {
+          const found = __detectionsUnique.find((x) => x._key === __selectedKey);
+          if (found) renderDetectionDetail(found);
+        }
+      } finally {
+        __enrichAllInflight = false;
+      }
+    }
+
+    // =========================
+    // Render from API detail
+    // =========================
+    function renderFromApi(payload) {
+      const d = payload?.data ?? payload;
+
+      const annotatedUrl = d?.annotatedUrl || d?.annotated_url || d?.resultImageUrl || null;
+      const cloudinaryUrl = d?.cloudinaryUrl || d?.cloudinary_url || d?.imageUrl || d?.image_url || null;
+
+      setBgImage("resultImage", annotatedUrl || cloudinaryUrl);
+
+      __detectionsUnique = buildUniqueDetections(d?.detections);
+      __selectedKey = __detectionsUnique.length > 0 ? __detectionsUnique[0]._key : null;
+
+      __enrichAllDone = false;
+      __enrichAllInflight = false;
+
+      renderChips(__detectionsUnique);
+
+      if (__selectedKey) selectDetectionByKey(__selectedKey);
+      else {
+        setText("mainLabel", "Không tìm thấy kết quả");
+        setText("confidenceText", "Độ tin cậy --%");
+        setText("trashTypeText", "—");
+        setText("materialText", "—");
+        setText("noteText", "—");
+        setText("actionText", "—");
+        setText("impactText", "Không có dữ liệu tác động.");
+        setText("toxicityText", "Không có dữ liệu độc hại.");
+        const ul = document.getElementById("safeStepsList");
+        if (ul) {
+          ul.innerHTML = "";
+          const li = document.createElement("li");
+          li.textContent = "Không có hướng dẫn an toàn.";
+          ul.appendChild(li);
+        }
+      }
+    }
+
+    // =========================
+    // Load API
+    // =========================
+    async function loadResult() {
+      const id = qs("id"); // aiRequestId
+      if (!id) {
+        setText("mainLabel", "Thiếu id trên URL");
+        setText("confidenceText", "Độ tin cậy --%");
+        return;
+      }
+
+      try {
+        const headers = {};
+        if (token) headers.Authorization = "Bearer " + token;
+
+        // 1) Load detail nhanh
+        const res = await fetch(DETAIL_URL(id), { headers });
+        const json = await res.json().catch(() => null);
+
+        if (!res.ok) {
+          console.error("GET detail failed:", json);
+          setText("mainLabel", "Không tải được kết quả");
+          setText("confidenceText", "Độ tin cậy --%");
+          return;
+        }
+
+        renderFromApi(json);
+
+        // 2) Enrich-all batch đúng 1 lần
+        await enrichAllOnce(id);
+      } catch (e) {
+        console.error(e);
+        setText("mainLabel", "Lỗi kết nối server");
+        setText("confidenceText", "Độ tin cậy --%");
+      }
+    }
+
+    // =========================
+    // Image Zoom Modal
+    // =========================
+    const imgModal = document.getElementById("imgModal");
+    const imgModalSrc = document.getElementById("imgModalSrc");
+    const imgModalClose = document.getElementById("imgModalClose");
+    const imgModalOverlay = document.getElementById("imgModalOverlay");
+    const resultImageEl = document.getElementById("resultImage");
+
+    function getBgImageUrl(el) {
+      const bg = el?.style?.backgroundImage || "";
+      const match = bg.match(/url\(["']?(.*?)["']?\)/i);
+      return match ? match[1] : "";
+    }
+
+    function openImgModal(url) {
+      if (!url) return;
+      imgModalSrc.src = url;
+      imgModal.classList.remove("hidden");
+      document.body.classList.add("overflow-hidden");
+    }
+
+    function closeImgModal() {
+      imgModal.classList.add("hidden");
+      imgModalSrc.src = "";
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    resultImageEl?.addEventListener("click", () => {
+      const url = getBgImageUrl(resultImageEl);
+      openImgModal(url);
+    });
+
+    imgModalOverlay?.addEventListener("click", closeImgModal);
+    imgModalClose?.addEventListener("click", closeImgModal);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !imgModal.classList.contains("hidden")) closeImgModal();
+    });
+
+    // =========================
+    // Start
+    // =========================
+    loadResult();
+  </script>
+
+</body>
+
 </html>
