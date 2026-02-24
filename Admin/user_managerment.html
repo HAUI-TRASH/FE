@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Quản Lý Người Dùng - WasteRecog</title>
+    <title>EcoScan AI - Quản Lý Người Dùng</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
@@ -18,7 +18,7 @@
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <script>
       tailwind.config = {
         darkMode: "class",
         theme: {
@@ -27,8 +27,9 @@
               primary: "#13ec5b",
               "background-light": "#f6f8f6",
               "background-dark": "#102216",
-              "surface-dark": "#1c2e22",
-              "surface-darker": "#15261b",
+              "surface-dark": "#1c271f",
+              "border-dark": "#28392e",
+              "text-secondary": "#9db9a6",
             },
             fontFamily: {
               display: ["Space Grotesk", "sans-serif"],
@@ -48,73 +49,116 @@
       body {
         font-family: "Space Grotesk", sans-serif;
       }
+
+      /* Custom scrollbar for table container if needed */
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #1c271f;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #28392e;
+        border-radius: 4px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #3b5443;
+      }
     </style>
   </head>
 
   <body
-    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display"
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden"
   >
-    <!-- Top Navigation Bar -->
-    <header
-      class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#28392e] bg-white dark:bg-[#111813] px-10 py-3 sticky top-0 z-50"
-    >
-      <div class="flex items-center gap-4 text-slate-900 dark:text-white">
-        <div class="size-8 text-primary">
-          <span class="material-symbols-outlined !text-[32px]">recycling</span>
-        </div>
-        </div>
-        <h2
-          class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]"
-        >
-          Quản trị WasteRecog
-        </h2>
-      </div>
-      <div class="flex flex-1 justify-end gap-8">
-        <nav class="hidden md:flex items-center gap-9">
-          <a
-            class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors"
-            href="home.html"
-            >Tổng quan</a
-          >
-          <a
-            class="text-slate-900 dark:text-white text-sm font-bold leading-normal border-b-2 border-primary pb-0.5"
-            href="#"
-            >Người dùng</a
-          >
-          <a
-            class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors"
-            href="history.html"
-            >Dữ liệu rác</a
-          >
-          <a
-            class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors"
-            href="report.html"
-            >Báo cáo</a
-          >
-          <a
-            class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors"
-            href="model.html"
-            >Cài đặt</a
-          >
-        </nav>
-        <div class="flex items-center gap-4">
-          <a
-            href="../User/index.html"
-            class="flex items-center gap-2 px-3 py-2 bg-[#28392e] hover:bg-[#3b5443] text-white text-sm font-medium rounded-lg transition-colors"
-          >
-            <span class="material-symbols-outlined text-base">person</span>
-            Chế độ Người dùng
+    <div class="flex h-screen w-full">
+      <!-- Sidebar -->
+      <aside
+        class="hidden w-64 flex-col border-r border-border-dark bg-background-dark p-4 md:flex"
+      >
+        <div class="mb-8 flex items-center gap-2 px-2">
+           <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+            <img
+              src="../img logo/logoHaUI.png"
+              alt="HaUI Logo"
+              style="width: 28x; height: 28px"
+              class="rounded-full"
+            />
           </a>
-          <div
-            class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20"
-            data-alt="Admin user profile picture"
-            style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXT0V3QikovxjbRQm1_Q_zr3YFGlEnUbl2XvS3LeOHRXMszmSXc4wD5JDgi0YRNbZ6VvrYE4molua1LD7QDmB7x4GX1yfu_7u_8JB8N7wGAHWRvFuLtNGuwBRjI6OpXQoJha5EpfrVr0nTd-DOmdEayc9W4C1ylKh2Kp1s5fo8D9GVmXR8y4rQxQfA_TlI08ugKWb7Ry0DHExuPQo0_Arcz5-B7cudaymnoKkG5cb4X9PlPQwPndpGeb3_oKoyj5B0YaP5VipxvvEd');
-            "
-          ></div>
+          <a href="home.html">
+            <span style="color: rgb(19 236 91 / var(--tw-text-opacity, 1))" class="material-symbols-outlined text-3xl">recycling</span>
+          </a>
+          <div>
+            <a href="home.html" class="font-display text-lg font-bold text-white">EcoScan AI</a>
+            <p class="text-xs text-text-secondary">Bảng Quản trị</p>
+          </div>
         </div>
-      </div>
-    </header>
+        <nav class="flex flex-1 flex-col gap-2">
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="home.html"
+          >
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-medium">Bảng Điều Khiển</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="history.html"
+          >
+            <span class="material-symbols-outlined">history</span>
+            <span class="font-medium">Lịch Sử Quét</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="report.html"
+          >
+            <span class="material-symbols-outlined">analytics</span>
+            <span class="font-medium">Thống Kê</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="model.html"
+          >
+            <span class="material-symbols-outlined">monitoring</span>
+            <span class="font-medium">Quản lý mô hình</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg bg-surface-dark px-3 py-2 text-white"
+            href="user_managerment.html"
+          >
+            <span class="material-symbols-outlined text-primary">group</span>
+            <span class="font-medium">Quản lý người dùng</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">settings</span>
+            <span class="font-medium">Cài Đặt</span>
+          </a>
+        </nav>
+        <div class="mt-auto border-t border-border-dark pt-4">
+          <div class="flex items-center gap-3 px-2">
+            <div
+              class="h-10 w-10 overflow-hidden rounded-full bg-surface-dark"
+              data-alt="User avatar placeholder"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChOUBerVJzuzQkuzkG2loe1YHa731qHyAZ6EhJl0bkkMcz0dZACqML4Zj_ZzLoiZakNBG0SoyvLqyB1s1HEJJf58_nv_y6pmluY054exh0W2HP_rssgemSn1B6TKxySvvtFncPRyUTO6QGUA1dyyaEovtff1ZyJXs10nX_EOUENyPhQF-Mpx_iLYXTAqKhNLu7fSEE_8N5KCV2A5pxgS-MZwHXbURLMmYEWapg9-tAXW6hie5Lpfm16CqWUi5S8y9kdqO7MHBQYtZB');
+                background-size: cover;
+              "
+            ></div>
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-white"
+                >Người dùng Quản trị</span
+              >
+              <span class="text-xs text-text-secondary">admin@wasteai.com</span>
+            </div>
+          </div>
+        </div>
+      </aside>
     <!-- Main Content Area -->
     <main class="flex-1 flex justify-center py-8 px-4 sm:px-8 lg:px-20">
       <div class="flex flex-col w-full max-w-[1200px]">

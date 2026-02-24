@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>WasteAI - Lịch Sử Xử Lý</title>
+    <title>EcoScan AI - Lịch Sử Quét</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
@@ -80,13 +80,27 @@
         class="hidden w-64 flex-col border-r border-border-dark bg-background-dark p-4 md:flex"
       >
         <div class="mb-8 flex items-center gap-2 px-2">
-          <div
-            class="flex h-8 w-8 items-center justify-center rounded bg-primary text-black"
-          >
-            <span class="material-symbols-outlined">recycling</span>
-          </div>
+          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+            <img
+              src="../img logo/logoHaUI.png"
+              alt="HaUI Logo"
+              style="width: 28x; height: 28px"
+              class="rounded-full"
+            />
+          </a>
+          <a href="home.html">
+            <span
+              style="color: rgb(19 236 91 / var(--tw-text-opacity, 1))"
+              class="material-symbols-outlined text-3xl"
+              >recycling</span
+            >
+          </a>
           <div>
-            <h1 class="font-display text-lg font-bold text-white">WasteAI</h1>
+            <a
+              href="home.html"
+              class="font-display text-lg font-bold text-white"
+              >EcoScan AI</a
+            >
             <p class="text-xs text-text-secondary">Bảng Quản trị</p>
           </div>
         </div>
@@ -116,6 +130,20 @@
             class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
             href="model.html"
           >
+            <span class="material-symbols-outlined">monitoring</span>
+            <span class="font-medium">Quản lý mô hình</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="user_managerment.html"
+          >
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-medium">Quản lý người dùng</span>
+          </a>
+          <a
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+            href="#"
+          >
             <span class="material-symbols-outlined">settings</span>
             <span class="font-medium">Cài Đặt</span>
           </a>
@@ -144,58 +172,17 @@
         class="flex flex-1 flex-col overflow-hidden bg-background-light dark:bg-background-dark"
       >
         <!-- Top Navbar -->
-        <header
-          class="flex h-16 items-center justify-between border-b border-border-dark bg-background-dark/50 px-6 backdrop-blur-md"
-        >
-          <div class="flex items-center gap-4 md:hidden">
-            <button class="text-text-secondary hover:text-white">
-              <span class="material-symbols-outlined">menu</span>
-            </button>
-            <span class="font-display text-lg font-bold text-white"
-              >WasteAI</span
-            >
-          </div>
-          <div class="hidden md:flex items-center gap-2 text-text-secondary">
-            <span class="text-sm">Quản Lý Dữ Liệu</span>
-            <span class="material-symbols-outlined text-sm">chevron_right</span>
-            <span class="text-sm text-white">Lịch Sử Xử Lý</span>
-          </div>
-          <div class="flex items-center gap-4">
-            <a
-              href="../User/index.html"
-              class="rounded-lg px-3 py-2 bg-[#28392e] text-white text-sm font-medium hover:bg-[#3b5443] transition-colors flex items-center gap-2"
-            >
-              <span class="material-symbols-outlined text-base">person</span>
-              Chế độ Người dùng
-            </a>
-            <button
-              class="relative rounded-full p-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
-            >
-              <span class="material-symbols-outlined">notifications</span>
-              <span
-                class="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary"
-              ></span>
-            </button>
-            <button
-              class="flex items-center gap-2 rounded-full border border-border-dark bg-surface-dark px-3 py-1.5 text-sm text-white hover:border-primary/50 transition-colors"
-            >
-              <span class="material-symbols-outlined text-primary text-lg"
-                >add_a_photo</span
-              >
-              <span class="hidden sm:inline">Nhận diện mới</span>
-            </button>
-          </div>
-        </header>
+
         <!-- Scrollable Content Area -->
         <div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
+          <!-- Page Heading -->
           <div class="mx-auto max-w-7xl flex flex-col gap-6">
-            <!-- Page Heading -->
             <div
               class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
             >
               <div>
                 <h2 class="text-3xl font-bold tracking-tight text-white">
-                  Lịch Sử Nhận Diện Rác
+                  Lịch Sử Quét
                 </h2>
                 <p class="mt-1 text-text-secondary">
                   Quản lý và theo dõi tất cả dữ liệu hình ảnh đã được xử lý bởi
@@ -204,12 +191,28 @@
               </div>
               <div class="flex gap-3">
                 <button
+                  class="relative rounded-full p-2 text-text-secondary hover:bg-surface-dark hover:text-white transition-colors"
+                >
+                  <span class="material-symbols-outlined">notifications</span>
+                  <span
+                    class="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary"
+                  ></span>
+                </button>
+                <button
+                  class="flex items-center gap-2 rounded-full border border-border-dark bg-surface-dark px-3 py-1.5 text-sm text-white hover:border-primary/50 transition-colors"
+                >
+                  <span class="material-symbols-outlined text-primary text-lg"
+                    >add_a_photo</span
+                  >
+                  <span class="hidden sm:inline">Nhận diện mới</span>
+                </button>
+                <button
                   class="flex items-center gap-2 rounded-lg border border-border-dark bg-surface-dark px-4 py-2 text-sm font-medium text-white hover:bg-border-dark transition-colors"
                 >
                   <span class="material-symbols-outlined text-lg"
                     >file_download</span
                   >
-                  Export Data
+                  Xuất dữ liệu
                 </button>
               </div>
             </div>
@@ -299,6 +302,7 @@
                   </thead>
                   <tbody class="divide-y divide-border-dark">
                     <!-- Row 1 -->
+
                     <tr
                       class="group hover:bg-background-dark/50 transition-colors"
                     >
@@ -359,6 +363,7 @@
                       </td>
                       <td class="px-6 py-4 text-right">
                         <button
+                          onclick="window.location.href='result_analysis.html';"
                           class="inline-flex items-center gap-1 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
                         >
                           Xem chi tiết
@@ -368,6 +373,7 @@
                         </button>
                       </td>
                     </tr>
+
                     <!-- Row 2 -->
                     <tr
                       class="group hover:bg-background-dark/50 transition-colors"
@@ -429,6 +435,7 @@
                       </td>
                       <td class="px-6 py-4 text-right">
                         <button
+                          onclick="window.location.href='result_analysis.html';"
                           class="inline-flex items-center gap-1 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
                         >
                           Xem chi tiết
@@ -497,6 +504,7 @@
                       </td>
                       <td class="px-6 py-4 text-right">
                         <button
+                          onclick="window.location.href='result_analysis.html';"
                           class="inline-flex items-center gap-1 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
                         >
                           Xem chi tiết
@@ -567,6 +575,7 @@
                       </td>
                       <td class="px-6 py-4 text-right">
                         <button
+                          onclick="window.location.href='result_analysis.html';"
                           class="inline-flex items-center gap-1 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
                         >
                           Xem chi tiết
@@ -637,6 +646,7 @@
                       </td>
                       <td class="px-6 py-4 text-right">
                         <button
+                          onclick="window.location.href='result_analysis.html';"
                           class="inline-flex items-center gap-1 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
                         >
                           Xem chi tiết
@@ -698,5 +708,19 @@
         </div>
       </main>
     </div>
+    <script>
+      function toggleUserMenu() {
+        const menu = document.getElementById("user-menu");
+        menu.classList.toggle("hidden");
+      }
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const button = document.getElementById("user-menu-button");
+        const menu = document.getElementById("user-menu");
+        if (!button.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.add("hidden");
+        }
+      });
+    </script>
   </body>
 </html>
