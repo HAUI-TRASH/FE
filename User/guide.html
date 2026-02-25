@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <title>Hướng dẫn sử dụng - EcoScan AI</title>
+</head>
+<script>
+    async function loadComponent(id, file) {
+        const res = await fetch(file);
+        const html = await res.text();
+        document.getElementById(id).innerHTML = html;
+
+        // Nếu là header thì chạy active menu
+        if (id === "header-container") {
+            setActiveMenu();
+        }
+    }
+
+    function setActiveMenu() {
+        const links = document.querySelectorAll(".nav-link");
+        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+        links.forEach(link => {
+            const linkPage = link.getAttribute("href");
+            if (linkPage === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    window.toggleUserMenu = function () {
+        const menu = document.getElementById("user-menu");
+        menu?.classList.toggle("hidden");
+    };
+
+    loadComponent("header-container", "header.html");
+    loadComponent("footer-container", "footer.html");
+</script>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+    <!-- Top Navigation Bar -->
+    <div id="header-container"></div>
+    <main class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Hướng dẫn sử dụng EcoScan AI</h1>
+            <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
+                Khám phá cách thức phân loại rác thông minh chỉ với 3 bước đơn giản cùng công nghệ AI hiện đại nhất.
+            </p>
+        </div>
+        <!-- Step-by-Step Layout -->
+        <div class="space-y-24">
+            <!-- Step 1 -->
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span
+                            class="flex items-center justify-center size-10 rounded-full bg-primary/20 text-primary font-bold text-xl">1</span>
+                        <h2 class="text-2xl font-bold">Bước 1: Tải ảnh lên hoặc Chụp ảnh trực tiếp </h2>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">Chụp ảnh trực tiếp hoặc tải ảnh
+                        rác thải từ thư viện điện thoại/máy tính của bạn. Nếu đang ở ngoài, hãy sử dụng tính năng camera
+                        để nhận diện vật phẩm ngay lập tức một cách nhanh chóng và chính xác.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            <span>Chụp ảnh trực tiếp cực kỳ sắc nét</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            <span>Hỗ trợ định dạng JPG, PNG, WEBP</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            <span>Chụp cận cảnh để AI nhận diện tốt nhất</span>
+                        </li>
+                    </ul>
+                </div>
+                <div
+                    class="order-1 md:order-2 rounded-2xl border-primary/20 flex flex-col items-center justify-center min-h-[400px] text-center">
+                    <img alt="Hướng dẫn tải ảnh" class="w-full h-auto rounded-2xl shadow-2xl border border-primary/20"
+                        src="b1.png" />
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col gap-4">
+                    <div
+                        class="relative bg-[#1a2e21] rounded-2xl p-4 overflow-hidden border border-primary/20 aspect-video group">
+                        <!-- High Quality AI Analysis Visual -->
+                        <div
+                            class="w-full h-full bg-slate-900 rounded-lg relative overflow-hidden flex items-center justify-center border border-primary/30">
+                            <img alt="Chuyên nghiệp: AI đang phân tích rác thải" class="w-full h-full object-cover"
+                                src="b2.jpg" />
+                            <!-- Professional Bounding Boxes Overlay -->
+                            <!-- Scanning Animation Overlay -->
+                            <div
+                                class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background-dark/90 via-background-dark/40 to-transparent p-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="size-2 bg-primary rounded-full animate-pulse"></div>
+                                        <span class="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">Xử
+                                            lý thời gian thực...</span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 font-mono">PRO-MODEL v2.4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        @keyframes scan {
+
+                            0%,
+                            100% {
+                                transform: translateY(-100%);
+                            }
+
+                            50% {
+                                transform: translateY(200%);
+                            }
+                        }
+                    </style>
+                </div>
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span
+                            class="flex items-center justify-center size-10 rounded-full bg-primary/20 text-primary font-bold text-xl">2</span>
+                        <h2 class="text-2xl font-bold">Bước 2: AI Phân tích dữ liệu</h2>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                        Sau khi tải ảnh, thuật toán thị giác máy tính của EcoScan AI sẽ tiến hành quét các vật thể. Hệ
+                        thống sẽ tự động khoanh vùng và xác định loại vật liệu có trong hình ảnh của bạn.
+                    </p>
+                    <div class="bg-primary/5 border-l-4 border-primary p-4 rounded-r-lg">
+                        <p class="text-sm italic">"Công nghệ AI của chúng tôi có thể nhận diện hơn 150 loại rác thải
+                            sinh hoạt khác nhau với độ chính xác trên 90%."</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div class="order-2 md:order-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span
+                            class="flex items-center justify-center size-10 rounded-full bg-primary/20 text-primary font-bold text-xl">3</span>
+                        <h2 class="text-2xl font-bold">Bước 3: Xem kết quả chi tiết</h2>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">Sau khi phân tích, hệ thống sẽ
+                        cung cấp cho bạn thông tin toàn diện về vật liệu, tác động môi trường và hướng dẫn xử lý đúng
+                        cách nhất.</p>
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <div class="flex flex-col items-center p-4 rounded-xl bg-slate-100 dark:bg-primary/10">
+                            <span class="material-symbols-outlined text-primary mb-2 text-3xl">recycling</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider">Tái chế</span>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-xl bg-slate-100 dark:bg-primary/10">
+                            <span class="material-symbols-outlined text-primary mb-2 text-3xl">info</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider">Thông tin</span>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-xl bg-slate-100 dark:bg-primary/10">
+                            <span class="material-symbols-outlined text-primary mb-2 text-3xl">warning</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider">Cảnh báo </span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="order-1 md:order-2 bg-[#1a2e21] p-8 rounded-2xl border border-primary/20 shadow-2xl shadow-primary/5">
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded">analytics</span>
+                        <h3 class="text-xl font-bold">Phân tích chi tiết</h3>
+                    </div>
+                    <div class="space-y-10 relative">
+                        <div class="absolute left-[11px] top-2 bottom-2 w-px bg-primary/20"></div>
+                        <div class="relative pl-10">
+                            <div
+                                class="absolute left-0 top-1.5 size-[23px] rounded-full border-2 border-primary bg-[#1a2e21]">
+                            </div>
+                            <h4 class="text-lg font-bold mb-3">Tác động môi trường</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">Việc tái chế 1 tấn nhựa PET giúp tiết
+                                kiệm 3,8 thùng dầu thô và giảm đáng kể lượng khí thải CO2.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-full border border-primary/20">Tiết
+                                    kiệm tài nguyên</span>
+                                <span
+                                    class="bg-white/5 text-slate-400 text-[10px] font-bold px-2 py-1 rounded-full">Giảm
+                                    khí thải</span>
+                            </div>
+                        </div>
+                        <div class="relative pl-10">
+                            <div
+                                class="absolute left-0 top-1.5 size-[23px] rounded-full border-2 border-slate-600 bg-[#1a2e21]">
+                            </div>
+                            <h4 class="text-lg font-bold mb-3">Mức độ độc hại</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed">Nhựa PET an toàn khi sử dụng một lần.
+                                Không nên tái sử dụng nhiều lần để tránh vi khuẩn tích tụ.</p>
+                        </div>
+                        <div class="relative pl-10">
+                            <div
+                                class="absolute left-0 top-1.5 size-[23px] rounded-full border-2 border-primary bg-[#1a2e21]">
+                            </div>
+                            <h4 class="text-lg font-bold mb-3">Quy trình xử lý</h4>
+                            <ul class="space-y-2 text-sm text-slate-400">
+                                <li class="flex gap-2"><span class="text-primary">•</span> Làm rỗng và rửa sạch chai
+                                </li>
+                                <li class="flex gap-2"><span class="text-primary">•</span> Bóp bẹp để tiết kiệm diện
+                                    tích</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CTA Section -->
+            <div
+                class="mt-24 bg-primary rounded-2xl p-8 md:p-12 text-background-dark text-center overflow-hidden relative">
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold mb-4">Sẵn sàng để bắt đầu?</h2>
+                    <p class="mb-8 font-medium opacity-80 max-w-xl mx-auto">Chung tay bảo vệ môi trường cùng EcoScan AI
+                        ngay hôm nay.</p>
+                    <a href="index.html">
+                        <button
+                            class="bg-background-dark text-primary px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform">
+                            Bắt đầu quét ngay
+                        </button>
+                    </a>
+                </div>
+                <!-- Decorative background element -->
+                <div class="absolute -bottom-10 -right-10 size-64 bg-background-dark/10 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <div id="footer-container"></div>
+</body>
+
+</html>

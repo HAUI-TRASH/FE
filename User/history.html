@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html class="dark" lang="vi"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Lịch Sử Nhận Diện Rác (Tối Giản)</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
+<html class="dark" lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Lịch Sử Nhận Diện Rác (Tối Giản)</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -24,12 +29,12 @@
                         "display": ["Space Grotesk", "sans-serif"],
                         "body": ["Space Grotesk", "sans-serif"]
                     },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px" },
                 },
             },
         }
     </script>
-<style type="text/tailwindcss">
+    <style type="text/tailwindcss">
         body {
             font-family: "Space Grotesk", sans-serif;
         }
@@ -51,8 +56,43 @@
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300">
-<header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
+
+<script>
+    async function loadComponent(id, file) {
+        const res = await fetch(file);
+        const html = await res.text();
+        document.getElementById(id).innerHTML = html;
+
+        // Nếu là header thì chạy active menu
+        if (id === "header-container") {
+            setActiveMenu();
+        }
+    }
+
+    function setActiveMenu() {
+        const links = document.querySelectorAll(".nav-link");
+        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+        links.forEach(link => {
+            const linkPage = link.getAttribute("href");
+            if (linkPage === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    window.toggleUserMenu = function () {
+        const menu = document.getElementById("user-menu");
+        menu?.classList.toggle("hidden");
+    };
+
+    loadComponent("header-container", "header.html");
+    loadComponent("footer-container", "footer.html");
+</script>
+
+<body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300">
+    <!-- <header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
 <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full">
 <div class="flex items-center gap-3 text-white">
 <a class="size-8 flex items-center justify-center text-primary" href="#">
@@ -71,208 +111,249 @@
 </div>
 </div>
 </div>
-</header>
-<main class="flex-1 flex flex-col items-center w-full px-4 py-8 md:py-16">
-<div class="max-w-[1200px] w-full mb-8">
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-<div class="space-y-1">
-<h2 class="text-white text-3xl font-black leading-tight tracking-tight">
-                    Lịch Sử <span class="text-primary">Nhận Diện</span>
-</h2>
-<p class="text-gray-400 text-sm font-normal">
-                    Theo dõi lịch sử phân loại rác của bạn một cách tối giản.
-                </p>
-</div>
-<div class="flex items-center gap-3">
-<div class="flex items-center gap-3 px-4 py-2.5 bg-surface-dark rounded-xl border border-[#28392e]">
-<span class="material-symbols-outlined text-primary text-sm">calendar_month</span>
-<span class="text-gray-300 text-sm font-medium">01/05/2024 - 31/05/2024</span>
-<button class="text-gray-500 hover:text-white transition-colors ml-2">
-<span class="material-symbols-outlined text-lg">expand_more</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="max-w-[1200px] w-full">
-<div class="bg-surface-dark rounded-3xl border border-[#28392e] overflow-hidden shadow-2xl">
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-[#152e20]/50 border-b border-[#28392e]">
-<th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider">Thời gian quét</th>
-<th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider text-center">Hình ảnh</th>
-<th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider">Chất liệu</th>
-<th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider">Thùng rác</th>
-<th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider">Độ tin cậy</th>
-<th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider text-right">Chi tiết</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-[#28392e]">
-<tr class="hover:bg-white/5 transition-colors group">
-<td class="px-6 py-5">
-<div class="flex flex-col">
-<span class="text-white font-medium">15/05/2024</span>
-<span class="text-gray-500 text-xs">14:30 PM</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-primary/50 transition-colors bg-gray-800">
-<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx");'></div>
-</div>
-</td>
-<td class="px-6 py-5">
-<span class="text-white font-semibold">Nhựa PET</span>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-2">
-<div class="size-7 rounded-md bg-primary/20 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-lg">delete</span>
-</div>
-<span class="text-gray-300 text-sm">Thùng Tái Chế</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-3">
-<div class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
-<div class="bg-primary h-full w-[98%] shadow-[0_0_8px_rgba(19,236,91,0.5)]"></div>
-</div>
-<span class="text-primary font-bold text-sm">98%</span>
-</div>
-</td>
-<td class="px-6 py-5 text-right">
-<button class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<tr class="hover:bg-white/5 transition-colors group">
-<td class="px-6 py-5">
-<div class="flex flex-col">
-<span class="text-white font-medium">14/05/2024</span>
-<span class="text-gray-500 text-xs">09:15 AM</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-yellow-500/50 transition-colors bg-gray-800">
-<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh");'></div>
-</div>
-</td>
-<td class="px-6 py-5">
-<span class="text-white font-semibold">Hữu cơ</span>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-2">
-<div class="size-7 rounded-md bg-yellow-500/20 flex items-center justify-center text-yellow-500">
-<span class="material-symbols-outlined text-lg">compost</span>
-</div>
-<span class="text-gray-300 text-sm">Thùng Hữu Cơ</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-3">
-<div class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
-<div class="bg-yellow-500 h-full w-[95%]"></div>
-</div>
-<span class="text-yellow-500 font-bold text-sm">95%</span>
-</div>
-</td>
-<td class="px-6 py-5 text-right">
-<button class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<tr class="hover:bg-white/5 transition-colors group">
-<td class="px-6 py-5">
-<div class="flex flex-col">
-<span class="text-white font-medium">12/05/2024</span>
-<span class="text-gray-500 text-xs">18:45 PM</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-primary/50 transition-colors bg-gray-800">
-<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy");'></div>
-</div>
-</td>
-<td class="px-6 py-5">
-<span class="text-white font-semibold">Thủy tinh</span>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-2">
-<div class="size-7 rounded-md bg-primary/20 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-lg">liquor</span>
-</div>
-<span class="text-gray-300 text-sm">Thùng Tái Chế</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-3">
-<div class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
-<div class="bg-primary h-full w-[92%]"></div>
-</div>
-<span class="text-primary font-bold text-sm">92%</span>
-</div>
-</td>
-<td class="px-6 py-5 text-right">
-<button class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<tr class="hover:bg-white/5 transition-colors group border-none">
-<td class="px-6 py-5">
-<div class="flex flex-col">
-<span class="text-white font-medium">10/05/2024</span>
-<span class="text-gray-500 text-xs">08:00 AM</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-red-500/50 transition-colors bg-gray-800">
-<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X");'></div>
-</div>
-</td>
-<td class="px-6 py-5">
-<span class="text-white font-semibold">Pin - Nguy hại</span>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-2">
-<div class="size-7 rounded-md bg-red-500/20 flex items-center justify-center text-red-500">
-<span class="material-symbols-outlined text-lg">dangerous</span>
-</div>
-<span class="text-gray-300 text-sm">Thùng Nguy Hại</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-3">
-<div class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
-<div class="bg-red-500 h-full w-[100%]"></div>
-</div>
-<span class="text-red-500 font-bold text-sm">100%</span>
-</div>
-</td>
-<td class="px-6 py-5 text-right">
-<button class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="mt-6 flex justify-between items-center px-4">
-<p class="text-gray-500 text-xs font-medium uppercase tracking-widest">Hiển thị các lần quét gần nhất</p>
-<div class="flex gap-4">
-<button class="text-gray-400 hover:text-primary transition-colors disabled:opacity-30 flex items-center gap-1 text-sm font-bold uppercase tracking-tighter" disabled="">
-<span class="material-symbols-outlined text-sm">arrow_back</span> Trước
-                </button>
-<button class="text-gray-400 hover:text-primary transition-colors flex items-center gap-1 text-sm font-bold uppercase tracking-tighter">
-                    Sau <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
-</main>
+</header> -->
+    <div id="header-container"></div>
 
-</body></html>
+    <main class="flex-1 flex flex-col items-center w-full px-4 py-8 md:py-16">
+        <div class="max-w-[1200px] w-full mb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="space-y-1">
+                    <h2 class="text-white text-3xl font-black leading-tight tracking-tight">
+                        Lịch Sử <span class="text-primary">Nhận Diện</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm font-normal">
+                        Theo dõi lịch sử phân loại rác của bạn một cách tối giản.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3 px-4 py-2.5 bg-surface-dark rounded-xl border border-[#28392e]">
+                        <span class="material-symbols-outlined text-primary text-sm">calendar_month</span>
+                        <span class="text-gray-300 text-sm font-medium">01/05/2024 - 31/05/2024</span>
+                        <button class="text-gray-500 hover:text-white transition-colors ml-2">
+                            <span class="material-symbols-outlined text-lg">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1200px] w-full">
+            <div class="bg-surface-dark rounded-3xl border border-[#28392e] overflow-hidden shadow-2xl">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-[#152e20]/50 border-b border-[#28392e]">
+                                <th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider">Thời gian
+                                    quét</th>
+                                <th
+                                    class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider text-center">
+                                    Hình ảnh</th>
+                                <th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider">Chất liệu
+                                </th>
+                                <th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider">Thùng rác
+                                </th>
+                                <th class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider">Độ tin
+                                    cậy</th>
+                                <th
+                                    class="px-6 py-5 text-gray-400 font-bold text-xs uppercase tracking-wider text-right">
+                                    Chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#28392e]">
+                            <tr class="hover:bg-white/5 transition-colors group">
+                                <td class="px-6 py-5">
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-medium">15/05/2024</span>
+                                        <span class="text-gray-500 text-xs">14:30 PM</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div
+                                        class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-primary/50 transition-colors bg-gray-800">
+                                        <div class="w-full h-full bg-cover bg-center"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx");'>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <span class="text-white font-semibold">Nhựa PET</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-2">
+                                        <div
+                                            class="size-7 rounded-md bg-primary/20 flex items-center justify-center text-primary">
+                                            <span class="material-symbols-outlined text-lg">delete</span>
+                                        </div>
+                                        <span class="text-gray-300 text-sm">Thùng Tái Chế</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
+                                            <div class="bg-primary h-full w-[98%] shadow-[0_0_8px_rgba(19,236,91,0.5)]">
+                                            </div>
+                                        </div>
+                                        <span class="text-primary font-bold text-sm">98%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-right">
+                                    <button
+                                        class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-xl">visibility</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition-colors group">
+                                <td class="px-6 py-5">
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-medium">14/05/2024</span>
+                                        <span class="text-gray-500 text-xs">09:15 AM</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div
+                                        class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-yellow-500/50 transition-colors bg-gray-800">
+                                        <div class="w-full h-full bg-cover bg-center"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh");'>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <span class="text-white font-semibold">Hữu cơ</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-2">
+                                        <div
+                                            class="size-7 rounded-md bg-yellow-500/20 flex items-center justify-center text-yellow-500">
+                                            <span class="material-symbols-outlined text-lg">compost</span>
+                                        </div>
+                                        <span class="text-gray-300 text-sm">Thùng Hữu Cơ</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
+                                            <div class="bg-yellow-500 h-full w-[95%]"></div>
+                                        </div>
+                                        <span class="text-yellow-500 font-bold text-sm">95%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-right">
+                                    <button
+                                        class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-xl">visibility</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition-colors group">
+                                <td class="px-6 py-5">
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-medium">12/05/2024</span>
+                                        <span class="text-gray-500 text-xs">18:45 PM</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div
+                                        class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-primary/50 transition-colors bg-gray-800">
+                                        <div class="w-full h-full bg-cover bg-center"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy");'>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <span class="text-white font-semibold">Thủy tinh</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-2">
+                                        <div
+                                            class="size-7 rounded-md bg-primary/20 flex items-center justify-center text-primary">
+                                            <span class="material-symbols-outlined text-lg">liquor</span>
+                                        </div>
+                                        <span class="text-gray-300 text-sm">Thùng Tái Chế</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
+                                            <div class="bg-primary h-full w-[92%]"></div>
+                                        </div>
+                                        <span class="text-primary font-bold text-sm">92%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-right">
+                                    <button
+                                        class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-xl">visibility</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition-colors group border-none">
+                                <td class="px-6 py-5">
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-medium">10/05/2024</span>
+                                        <span class="text-gray-500 text-xs">08:00 AM</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div
+                                        class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-red-500/50 transition-colors bg-gray-800">
+                                        <div class="w-full h-full bg-cover bg-center"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X");'>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <span class="text-white font-semibold">Pin - Nguy hại</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-2">
+                                        <div
+                                            class="size-7 rounded-md bg-red-500/20 flex items-center justify-center text-red-500">
+                                            <span class="material-symbols-outlined text-lg">dangerous</span>
+                                        </div>
+                                        <span class="text-gray-300 text-sm">Thùng Nguy Hại</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
+                                            <div class="bg-red-500 h-full w-[100%]"></div>
+                                        </div>
+                                        <span class="text-red-500 font-bold text-sm">100%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-right">
+                                    <button
+                                        class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-xl">visibility</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-between items-center px-4">
+                <p class="text-gray-500 text-xs font-medium uppercase tracking-widest">Hiển thị các lần quét gần nhất
+                </p>
+                <div class="flex gap-4">
+                    <button
+                        class="text-gray-400 hover:text-primary transition-colors disabled:opacity-30 flex items-center gap-1 text-sm font-bold uppercase tracking-tighter"
+                        disabled="">
+                        <span class="material-symbols-outlined text-sm">arrow_back</span> Trước
+                    </button>
+                    <button
+                        class="text-gray-400 hover:text-primary transition-colors flex items-center gap-1 text-sm font-bold uppercase tracking-tighter">
+                        Sau <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="footer-container"></div>
+</body>
+
+</html>

@@ -50,10 +50,42 @@
     }
   </style>
 </head>
+<script>
+  async function loadComponent(id, file) {
+    const res = await fetch(file);
+    const html = await res.text();
+    document.getElementById(id).innerHTML = html;
+
+    // Nếu là header thì chạy active menu
+    if (id === "header-container") {
+      setActiveMenu();
+    }
+  }
+
+  function setActiveMenu() {
+    const links = document.querySelectorAll(".nav-link");
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+    links.forEach(link => {
+      const linkPage = link.getAttribute("href");
+      if (linkPage === currentPage) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+  window.toggleUserMenu = function () {
+    const menu = document.getElementById("user-menu");
+    menu?.classList.toggle("hidden");
+  };
+
+  loadComponent("header-container", "header.html");
+  loadComponent("footer-container", "footer.html");
+</script>
 
 <body
   class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300">
-  <header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
+  <!-- <header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
     <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full">
       <div class="flex items-center gap-3 text-white">
         <a href="https://www.haui.edu.vn/vn" class="flex items-center">
@@ -101,7 +133,9 @@
       </div>
     </div>
     </div>
-  </header>
+  </header> -->
+  <div id="header-container"></div>
+
   <main class="flex-1 flex flex-col items-center w-full px-4 py-8 md:py-12">
     <div class="max-w-4xl w-full text-center mb-10 space-y-4 animate-fade-in-up">
       <div
@@ -319,7 +353,7 @@
       </div>
     </div>
   </main>
-  <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
+  <!-- <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
     <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
       <div class="flex flex-col gap-3 items-center md:items-start">
         <div class="flex items-center gap-2 text-white font-bold text-xl">
@@ -352,8 +386,10 @@
         </a>
       </div>
     </div>
-  </footer>
+  </footer> -->
+  <div id="footer-container"></div>
 </body>
+
 <script>
   const API_BASE = "http://localhost:8080";
   const UPLOAD_URL = API_BASE + "/api/v1/ai_request";

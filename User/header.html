@@ -1,0 +1,81 @@
+<style>
+  .nav-link {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    color: #d1d5db;
+    transition: 0.3s;
+  }
+
+  .nav-link:hover {
+    color: #22c55e;
+  }
+
+  .nav-link.active {
+    color: #22c55e;
+    font-weight: 700;
+  }
+
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #22c55e;
+    border-radius: 2px;
+  }
+</style>
+<header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
+  <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full">
+
+    <div class="flex items-center gap-3 text-white">
+      <a href="https://www.haui.edu.vn/vn" class="flex items-center">
+        <img src="../img logo/logoHaUI.png" alt="HaUI Logo" style="width: 28px; height: 28px" class="rounded-full" />
+      </a>
+      <div class="size-8 flex items-center justify-center text-primary">
+        <a href="index.html">
+          <span class="material-symbols-outlined text-3xl">recycling</span>
+
+        </a>
+      </div>
+      <a href="index.html">
+        <h1 class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block">
+          EcoScan AI
+        </h1>
+      </a>
+    </div>
+
+    <nav class="hidden md:flex flex-1 justify-center gap-8">
+      <a class="nav-link" href="index.html">Trang chủ</a>
+      <a class="nav-link" href="result_analys.html">Kết quả</a>
+      <a class="nav-link" href="list_blog.html">Blog</a>
+      <a class="nav-link" href="history.html">Lịch sử</a>
+      <a class="nav-link" href="guide.html">Hướng dẫn</a>
+      <a class="nav-link" href="about-us.html">Về chúng tôi</a>
+    </nav>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <div class="relative">
+        <button id="user-menu-button"
+          class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
+          onclick="toggleUserMenu()">
+        </button>
+
+        <div id="user-menu"
+          class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden">
+          <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white">
+            Tài khoản của bạn
+          </a>
+          <a href="#" onclick="ecoscanLogout()"
+            class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white">
+            Đăng xuất
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
