@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Hướng Dẫn Phân Loại Rác Tại Nguồn - EcoScan Blog</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13ec5b",
+            "background-light": "#f6f8f6",
+            "background-dark": "#102216",
+            "surface-dark": "#1c2a21",
+            "surface-light": "#ffffff",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Space Grotesk", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            "2xl": "1rem",
+            full: "9999px",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #102216;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #28392e;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b5443;
+    }
+  </style>
+</head>
+<script>
+  async function loadComponent(id, file) {
+    const res = await fetch(file);
+    const html = await res.text();
+    document.getElementById(id).innerHTML = html;
+
+    // Nếu là header thì chạy active menu
+    if (id === "header-container") {
+      setActiveMenu();
+    }
+  }
+
+  function setActiveMenu() {
+    const links = document.querySelectorAll(".nav-link");
+    const currentPage = window.location.pathname.split("/").pop();
+
+    links.forEach(link => {
+      const linkPage = link.getAttribute("href");
+
+      // Nếu đang ở blog list hoặc blog detail
+      if (
+        (linkPage === "list_blog.html" &&
+          (currentPage === "list_blog.html" || currentPage.includes("blog")))
+        ||
+        linkPage === currentPage
+      ) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+    window.toggleUserMenu = function () {
+      const menu = document.getElementById("user-menu");
+      menu?.classList.toggle("hidden");
+    };
+
+    loadComponent("header-container", "header.html");
+    loadComponent("footer-container", "footer.html");
+</script>
+
+<body
+  class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-300">
+ 
+  <div id="header-container"></div>
+  <main class="flex-1 w-full px-4 py-8 md:py-12">
+  
+  </main>
+ 
+  <div id="footer-container"></div>
+</body>
+
+</html>

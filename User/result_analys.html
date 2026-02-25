@@ -59,125 +59,13 @@
   </style>
 </head>
 
-<<<<<<< HEAD
 <body
   class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-800 dark:text-gray-100">
-  <header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
+  <!-- <header class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md">
     <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full">
       <div class="flex items-center gap-3 text-white">
         <a href="https://www.haui.edu.vn/vn" class="flex items-center">
           <img src="../img logo/logoHaUI.png" alt="HaUI Logo" style="width: 28x; height: 28px" class="rounded-full" />
-=======
-  <body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-800 dark:text-gray-100"
-  >
-    <header
-      class="sticky top-0 z-50 w-full border-b border-[#28392e] bg-[#102216]/80 backdrop-blur-md"
-    >
-      <div
-        class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full"
-      >
-        <div class="flex items-center gap-3 text-white">
-          <a href="https://www.haui.edu.vn/vn" class="flex items-center">
-            <img
-              src="../img logo/logoHaUI.png"
-              alt="HaUI Logo"
-              style="width: 28x; height: 28px"
-              class="rounded-full"
-            />
-          </a>
-          <div class="size-8 flex items-center justify-center text-primary">
-            <a href="index.html" class="flex items-center">
-              <span class="material-symbols-outlined text-3xl">recycling</span>
-            </a>
-          </div>
-          <div>
-            <a href="index.html" class="flex items-center">
-              <h1
-                class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
-              >
-                EcoScan AI
-              </h1>
-            </a>
-          </div>
-        </div>
-
-        <nav class="hidden md:flex flex-1 justify-center gap-8">
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="index.html"
-            >Trang chủ</a
-          >
-          <a class="text-primary text-sm font-medium" href="#">Kết quả</a>
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="list_blog.html"
-            >Blog</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="#"
-            >Lịch sử</a
-          >
-          <a
-            class="text-gray-300 hover:text-primary text-sm font-medium"
-            href="#"
-            >Hướng dẫn</a
-          >
-        </nav>
-        <div class="flex items-center gap-4">
-          <button
-            class="bg-[#28392e] hover:bg-[#3b5443] text-white p-2 rounded-full transition-colors md:hidden"
-          >
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-          <div class="relative">
-            <button
-              id="user-menu-button"
-              class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#28392e]"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU');
-              "
-              onclick="toggleUserMenu()"
-            ></button>
-            <div
-              id="user-menu"
-              class="absolute right-0 mt-2 w-56 bg-surface-dark border border-[#28392e] rounded-lg shadow-lg py-1 z-50 hidden transition-all duration-200 ease-in-out"
-            >
-              <a
-                href="#"
-                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-              >
-                <img
-                  class="w-8 h-8 rounded-full mr-3"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJbRwudh1lfRj57Ms7RUhPBEM2sBQW4qxbF5AhL8SKYQ05X9vhu-Msbqdq5Un_tR6H1b77VClThNwzHTZc-oFg5eNQDkL9H8rOATZtd_aykfILbZOdPKGasttZu4DOJltBzIUyazl6KPB1lz8nk7z_OULoc8RrAr3GuG5y2khTNFLBxqTEp4PfdVLtOnuJAj2PQ1yVZEKCKn4_IQ3TUBDCNUwfg-g16d8EPHoR5MpAsNoWz_lepcvkm7qX0RE8mEVecsmeGbegbzU"
-                  alt="Avatar"
-                />
-                Tài khoản của bạn
-              </a>
-              <a
-                href="#"
-                class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-[#28392e] hover:text-white transition-colors"
-              >
-                <span class="material-symbols-outlined mr-3">logout</span>
-                Đăng xuất
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main
-      class="flex-1 flex flex-col w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 gap-8"
-    >
-      <div class="flex items-center gap-2 text-sm text-gray-400">
-        <a
-          class="hover:text-primary transition-colors flex items-center gap-1"
-          href="#"
-        >
-          <span class="material-symbols-outlined text-base">arrow_back</span>
-          Quay lại quét
->>>>>>> 3ae00c3fa4c8794913b66429fe88d58c929742ce
         </a>
         <div class="size-8 flex items-center justify-center text-primary">
           <span class="material-symbols-outlined text-3xl">recycling</span>
@@ -218,7 +106,9 @@
         </div>
       </div>
     </div>
-  </header>
+  </header> -->
+  <div id="header-container"></div>
+
   <main class="flex-1 flex flex-col w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 gap-8">
     <div class="flex items-center gap-2 text-sm text-gray-400">
       <a class="hover:text-primary transition-colors flex items-center gap-1" href="index.html">
@@ -499,7 +389,7 @@
     </div>
 
   </main>
-  <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
+  <!-- <footer class="w-full border-t border-[#28392e] bg-[#0c1a11] py-10 mt-12">
     <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
       <div class="flex flex-col gap-3 items-center md:items-start">
         <div class="flex items-center gap-2 text-white font-bold text-xl">
@@ -532,8 +422,40 @@
         </a>
       </div>
     </div>
-  </footer>
+  </footer> -->
+  <div id="footer-container"></div>
+  <script>
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
 
+      // Nếu là header thì chạy active menu
+      if (id === "header-container") {
+        setActiveMenu();
+      }
+    }
+
+    function setActiveMenu() {
+      const links = document.querySelectorAll(".nav-link");
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+      links.forEach(link => {
+        const linkPage = link.getAttribute("href");
+        if (linkPage === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    window.toggleUserMenu = function () {
+      const menu = document.getElementById("user-menu");
+      menu?.classList.toggle("hidden");
+    };
+
+    loadComponent("header-container", "header.html");
+    loadComponent("footer-container", "footer.html");
+  </script>
   <script>
     // =========================
     // Config

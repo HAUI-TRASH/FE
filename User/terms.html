@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hướng Dẫn Phân Loại Rác Tại Nguồn - EcoScan Blog</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "surface-dark": "#1c2a21",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        display: ["Space Grotesk", "sans-serif"],
+                        body: ["Space Grotesk", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        "2xl": "1rem",
+                        full: "9999px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #102216;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #28392e;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b5443;
+        }
+    </style>
+</head>
+<script>
+    async function loadComponent(id, file) {
+        const res = await fetch(file);
+        const html = await res.text();
+        document.getElementById(id).innerHTML = html;
+
+        // Nếu là header thì chạy active menu
+        if (id === "header-container") {
+            setActiveMenu();
+        }
+    }
+
+    function setActiveMenu() {
+        const links = document.querySelectorAll(".nav-link");
+        const currentPage = window.location.pathname.split("/").pop();
+
+        links.forEach(link => {
+            const linkPage = link.getAttribute("href");
+
+            // Nếu đang ở blog list hoặc blog detail
+            if (
+                (linkPage === "list_blog.html" &&
+                    (currentPage === "list_blog.html" || currentPage.includes("blog")))
+                ||
+                linkPage === currentPage
+            ) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    window.toggleUserMenu = function () {
+        const menu = document.getElementById("user-menu");
+        menu?.classList.toggle("hidden");
+    };
+
+    loadComponent("header-container", "header.html");
+    loadComponent("footer-container", "footer.html");
+</script>
+
+<body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-300">
+
+    <div id="header-container"></div>
+    <main class="flex-1 w-full px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <!-- Title -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                    Điều khoản sử dụng
+                </h1>
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                    Vui lòng đọc kỹ các điều khoản trước khi sử dụng hệ thống EcoScan AI.
+                </p>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-12 leading-relaxed text-slate-700 dark:text-slate-300">
+
+                <!-- 1 -->
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">1. Giới thiệu</h2>
+                    <p>
+                        EcoScan AI là nền tảng ứng dụng trí tuệ nhân tạo hỗ trợ phân loại rác thải thông minh.
+                        Khi truy cập và sử dụng dịch vụ, bạn đồng ý tuân thủ các điều khoản được quy định tại đây.
+                    </p>
+                </section>
+
+                <!-- 2 -->
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">2. Quyền và trách nhiệm của người dùng</h2>
+                    <ul class="space-y-3 list-disc pl-6">
+                        <li>Không sử dụng hệ thống cho mục đích vi phạm pháp luật.</li>
+                        <li>Không tải lên nội dung độc hại, phản cảm hoặc sai sự thật.</li>
+                        <li>Chịu trách nhiệm về nội dung hình ảnh bạn cung cấp.</li>
+                        <li>Không can thiệp, phá hoại hoặc làm gián đoạn hệ thống.</li>
+                    </ul>
+                </section>
+
+                <!-- 3 -->
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">3. Quyền của EcoScan AI</h2>
+                    <ul class="space-y-3 list-disc pl-6">
+                        <li>Cải tiến, thay đổi hoặc tạm ngưng dịch vụ mà không cần báo trước.</li>
+                        <li>Từ chối cung cấp dịch vụ nếu phát hiện hành vi vi phạm điều khoản.</li>
+                        <li>Sử dụng dữ liệu ẩn danh để cải thiện độ chính xác AI.</li>
+                    </ul>
+                </section>
+
+                <!-- 4 -->
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">4. Bảo mật thông tin</h2>
+                    <p>
+                        Chúng tôi cam kết bảo mật thông tin cá nhân của người dùng.
+                        Dữ liệu hình ảnh được sử dụng chỉ nhằm mục đích phân tích và cải thiện hệ thống.
+                    </p>
+                </section>
+
+                <!-- 5 -->
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">5. Giới hạn trách nhiệm</h2>
+                    <p>
+                        EcoScan AI cung cấp kết quả dựa trên mô hình AI.
+                        Mặc dù hệ thống đạt độ chính xác cao, chúng tôi không đảm bảo kết quả tuyệt đối 100%.
+                    </p>
+                </section>
+
+                <!-- 6 -->
+                <section>
+                    <h2 class="text-2xl font-bold text-primary mb-4">6. Thay đổi điều khoản</h2>
+                    <p>
+                        Các điều khoản có thể được cập nhật theo thời gian.
+                        Việc tiếp tục sử dụng dịch vụ đồng nghĩa với việc bạn chấp nhận các thay đổi mới nhất.
+                    </p>
+                </section>
+
+                <!-- Contact -->
+                <section class="bg-primary/10 border border-primary/20 p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-3 text-primary">Liên hệ</h3>
+                    <p>
+                        Nếu bạn có bất kỳ câu hỏi nào liên quan đến điều khoản sử dụng,
+                        vui lòng liên hệ đội ngũ EcoScan AI để được hỗ trợ.
+                    </p>
+                </section>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-20 text-center">
+                <a href="index.html"
+                    class="inline-block bg-primary text-background-dark font-bold px-8 py-4 rounded-xl hover:scale-105 transition-transform">
+                    Quay lại trang chủ
+                </a>
+            </div>
+    </main>
+
+    <div id="footer-container"></div>
+</body>
+
+</html>
