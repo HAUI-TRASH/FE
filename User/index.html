@@ -40,6 +40,7 @@
       },
     };
   </script>
+  <script src="../constants.js"></script>
   <style>
     body {
       font-family: "Space Grotesk", sans-serif;
@@ -143,10 +144,10 @@
         <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
         AI Technology V2.0
       </div>
-      <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
-        Phân loại rác thải bằng <span class="text-primary">AI</span>
-        <br class="hidden md:block" />chỉ trong 1 giây
-      </h2>
+      <h6 class="text-white text-1xl md:text-2xl lg:text-3xl font-black leading-tight tracking-tight">
+        Nhận diện rác sinh hoạt bằng <span class="text-primary">AI</span>
+        <br class="hidden md:block" />Một sản phẩm của GV-SV trường HaUI
+      </h6>
       <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-normal">
         Sử dụng công nghệ trí tuệ nhân tạo tiên tiến để nhận diện và phân loại
         rác thải, góp phần bảo vệ môi trường xanh sạch.
@@ -391,7 +392,7 @@
 </body>
 
 <script>
-  const API_BASE = "http://localhost:8080";
+  // const API_BASE = "http://103.118.28.14";
   const UPLOAD_URL = API_BASE + "/api/v1/ai_request";
   // const PREDICT_URL = API_BASE + "/api/v1/ai_response/predict"; chưa dùng gemini
   const predictUrl = (id) => API_BASE + `/api/v1/ai_requests/${encodeURIComponent(id)}/predict`;
