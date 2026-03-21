@@ -409,22 +409,6 @@
               </div>
             </div>
 
-            <div id="confirmCropWrapper" class="hidden">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="material-symbols-outlined text-primary text-[20px]">crop</span>
-                <p class="text-sm font-bold text-white">Ảnh crop vật thể cần xác nhận</p>
-              </div>
-              <div class="rounded-2xl overflow-hidden border border-[#28392e] bg-[#0b1610]">
-                <img id="confirmCropImage" src="" alt="Crop preview"
-                  class="w-full h-52 sm:h-60 object-contain bg-[#0b1610]" />
-              </div>
-            </div>
-
-            <div id="confirmCropEmpty"
-              class="hidden rounded-2xl border border-dashed border-[#28392e] bg-[#152e20] px-4 py-4 text-sm text-gray-400">
-              Không có ảnh crop cho vật thể này.
-            </div>
-
             <div>
               <label for="confirmCorrectLabel" class="block text-sm font-bold text-white mb-2">
                 Nếu sai, nhập nhãn đúng
@@ -472,29 +456,6 @@
   <div id="footer-container"></div>
 
   <script>
-    function renderAuthUI() {
-      const token = localStorage.getItem("accessToken");
-      const acc = JSON.parse(localStorage.getItem("account") || "{}");
-
-      const btns = document.getElementById("auth-buttons");
-      const userBox = document.getElementById("user-box");
-      const avatar = document.getElementById("user-menu-button");
-
-      if (!btns || !userBox) return;
-
-      if (token) {
-        btns.classList.add("hidden");
-        userBox.classList.remove("hidden");
-
-        const defaultAvatar = "./avt.png";
-        if (avatar) {
-          avatar.style.backgroundImage = `url('${acc?.avatarUrl || defaultAvatar}')`;
-        }
-      } else {
-        btns.classList.remove("hidden");
-        userBox.classList.add("hidden");
-      }
-    }
     async function loadComponent(id, file) {
       const res = await fetch(file);
       const html = await res.text();
@@ -502,9 +463,9 @@
 
       if (id === "header-container") {
         setActiveMenu();
-        renderAuthUI();
       }
     }
+
     function setActiveMenu() {
       const links = document.querySelectorAll(".nav-link");
       const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -519,11 +480,6 @@
 
     window.toggleUserMenu = function () {
       const menu = document.getElementById("user-menu");
-      menu?.classList.toggle("hidden");
-    };
-
-    window.toggleMobileMenu = function () {
-      const menu = document.getElementById("mobile-menu");
       menu?.classList.toggle("hidden");
     };
 
@@ -899,9 +855,6 @@
     const confirmWrongBtn = document.getElementById("confirmWrongBtn");
     const confirmSkipBtn = document.getElementById("confirmSkipBtn");
     const confirmModalDescription = document.getElementById("confirmModalDescription");
-    const confirmCropWrapper = document.getElementById("confirmCropWrapper");
-    const confirmCropImage = document.getElementById("confirmCropImage");
-    const confirmCropEmpty = document.getElementById("confirmCropEmpty");
 
     function openConfirmModal(det) {
       if (!det) return;
@@ -918,16 +871,6 @@
       confirmModalDescription.textContent =
         `Hệ thống nhận diện "${labelText}" với độ tin cậy ${conf != null ? Math.round(conf * 100) + "%" : "--%"}. Vui lòng xác nhận giúp kết quả này.`;
 
-      if (det?.cropUrl) {
-        confirmCropImage.src = det.cropUrl;
-        confirmCropWrapper.classList.remove("hidden");
-        confirmCropEmpty.classList.add("hidden");
-      } else {
-        confirmCropImage.src = "";
-        confirmCropWrapper.classList.add("hidden");
-        confirmCropEmpty.classList.remove("hidden");
-      }
-
       confirmModal.dataset.open = "true";
       confirmModal.classList.remove("hidden");
       document.body.classList.add("overflow-hidden");
@@ -937,9 +880,6 @@
       confirmModal.dataset.open = "false";
       confirmModal.classList.add("hidden");
       currentConfirmDetection = null;
-      confirmCropImage.src = "";
-      confirmCropWrapper.classList.add("hidden");
-      confirmCropEmpty.classList.add("hidden");
       hideConfirmMessage();
       document.body.classList.remove("overflow-hidden");
     }
@@ -965,6 +905,7 @@
       confirmQueue = detectionsState.filter(x => x?.status === "NEEDS_CONFIRM" && x?.id != null);
       showConfirmBanner(confirmQueue.length > 0);
     }
+
     async function submitFeedback(feedbackType) {
       if (!currentConfirmDetection?.id || isSubmittingFeedback) return;
 
@@ -1008,15 +949,34 @@
           return;
         }
 
-        showConfirmMessage(
-          "Cảm ơn bạn đã xác nhận, chúng tôi sẽ ghi nhận kết quả để tối ưu hệ thống",
-          "success"
-        );
+        if (feedbackType === "CONFIRMED") {
+          updateDetectionInState({
+            id: detectionId,
+            status: "CONFIRMED"
+          });
+        } else if (feedbackType === "CORRECTED") {
+          updateDetectionInState({
+            id: detectionId,
+            status: "CORRECTED",
+            label: confirmedLabel,
+            labelDisplay: confirmedLabel
+          });
+        } else {
+          updateDetectionInState({
+            id: detectionId,
+            status: "REJECTED"
+          });
+        }
 
-        setTimeout(async () => {
-          closeConfirmModal();
-          await loadResult();
-        }, 1200);
+        renderChips(detectionsState);
+
+        const currentSelected = detectionsState.find(x => x?.id === detectionId);
+        if (currentSelected) {
+          renderDetectionDetail(currentSelected);
+        }
+
+        syncBannerAndQueue();
+        closeConfirmModal();
 
       } catch (e) {
         console.error(e);
