@@ -40,6 +40,7 @@
       },
     };
   </script>
+  <script src="../constants.js"></script>
   <style>
     body {
       font-family: "Space Grotesk", sans-serif;
@@ -420,12 +421,10 @@
 </body>
 
 <script>
-  // const API_BASE = "http://localhost:8080";
-  // const UPLOAD_URL = API_BASE + "/api/v1/ai_request";
-  // // const PREDICT_URL = API_BASE + "/api/v1/ai_response/predict"; chưa dùng gemini
-  // const predictUrl = (id) => API_BASE + `/api/v1/ai_requests/${encodeURIComponent(id)}/predict`;
-
-  const API_BASE = "http://localhost:8080";
+  // const API_BASE = "http://103.118.28.14";
+  const UPLOAD_URL = API_BASE + "/api/v1/ai_request";
+  // const PREDICT_URL = API_BASE + "/api/v1/ai_response/predict"; chưa dùng gemini
+  const predictUrl = (id) => API_BASE + `/api/v1/ai_requests/${encodeURIComponent(id)}/predict`;
 
   // thống nhất plural theo backend mới
   const UPLOAD_URL = API_BASE + "/api/v1/ai_request";

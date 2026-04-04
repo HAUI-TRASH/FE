@@ -44,7 +44,7 @@
       },
     };
   </script>
-
+   <script src="../constants.js"></script>
   <style>
     body {
       font-family: "Space Grotesk", sans-serif;
@@ -615,7 +615,12 @@
   </script>
 
   <script>
-    const API_BASE = "http://localhost:8080";
+    // =========================
+    // Config
+    // =========================
+    // const API_BASE = "http://103.118.28.14";
+
+    // GET detail
     const DETAIL_URL = (id) => API_BASE + `/api/v1/ai_response/${encodeURIComponent(id)}/detail`;
     const FEEDBACK_URL = (id) => API_BASE + `/api/v1/detections/${encodeURIComponent(id)}/feedback`;
     const token = localStorage.getItem("accessToken") || "";
