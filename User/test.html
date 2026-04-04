@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
@@ -44,7 +43,6 @@
       },
     };
   </script>
-   <script src="../constants.js"></script>
   <style>
     body {
       font-family: "Space Grotesk", sans-serif;
@@ -73,88 +71,11 @@
         transform: translateY(0) scale(1);
       }
     }
-
-    .confirm-modal-panel {
-      width: 100%;
-      max-width: 720px;
-      max-height: min(88vh, 820px);
-    }
-
-    .confirm-modal-body {
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #3b5443 transparent;
-    }
-
-    .confirm-modal-body::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .confirm-modal-body::-webkit-scrollbar-thumb {
-      background: #3b5443;
-      border-radius: 999px;
-    }
-
-    .confirm-crop-box {
-      width: 100%;
-      height: 240px;
-      background: #0b1610;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-radius: 16px;
-      position: relative;
-    }
-
-    .confirm-crop-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      cursor: zoom-in;
-    }
-
-    .confirm-crop-box img {
-      transition: transform 0.3s ease;
-    }
-
-    .confirm-crop-box:hover img {
-      transform: scale(1.1);
-    }
-
-    .confirm-crop-zoom-hint {
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
-      background: rgba(0, 0, 0, 0.55);
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      pointer-events: none;
-    }
-
-    @media (max-width: 640px) {
-      .confirm-modal-panel {
-        max-width: 100%;
-        max-height: 92vh;
-        border-radius: 24px;
-      }
-
-      .confirm-crop-box {
-        height: 180px;
-      }
-    }
   </style>
 </head>
 
 <body
   class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-800 dark:text-gray-100">
-
   <div id="header-container"></div>
 
   <main class="flex-1 flex flex-col w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 gap-8">
@@ -239,16 +160,23 @@
             <div class="p-4 rounded-2xl bg-yellow-900/20 border border-yellow-700/30 flex items-start gap-3">
               <span class="material-symbols-outlined text-yellow-500 mt-0.5">warning</span>
               <div>
-                <h4 class="text-yellow-500 font-bold text-sm mb-1">Lưu ý xử lý</h4>
-                <p id="noteText" class="text-gray-300 text-sm">Chưa có lưu ý.</p>
+                <h4 class="text-yellow-500 font-bold text-sm mb-1">
+                  Lưu ý xử lý
+                </h4>
+                <p id="noteText" class="text-gray-300 text-sm">
+                  Chưa có lưu ý.
+                </p>
               </div>
             </div>
-
             <div class="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex items-start gap-3">
               <span class="material-symbols-outlined text-primary mt-0.5">verified</span>
               <div>
-                <h4 class="text-primary font-bold text-sm mb-1">Hành động đề xuất</h4>
-                <p id="actionText" class="text-gray-300 text-sm">Chưa có hướng dẫn.</p>
+                <h4 class="text-primary font-bold text-sm mb-1">
+                  Hành động đề xuất
+                </h4>
+                <p id="actionText" class="text-gray-300 text-sm">
+                  Chưa có hướng dẫn.
+                </p>
               </div>
             </div>
           </div>
@@ -261,11 +189,12 @@
             <span class="material-symbols-outlined text-primary">analytics</span>
             Phân tích chi tiết
           </h2>
-
           <div class="space-y-8">
             <div class="relative pl-8 border-l-2 border-[#28392e]">
               <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"></div>
-              <h3 class="text-lg font-bold text-white mb-2">Tác động môi trường &amp; Kinh tế</h3>
+              <h3 class="text-lg font-bold text-white mb-2">
+                Tác động môi trường &amp; Kinh tế
+              </h3>
               <p id="impactText" class="text-gray-400 text-sm leading-relaxed mb-4">
                 Không có dữ liệu tác động.
               </p>
@@ -273,25 +202,23 @@
 
             <div class="relative pl-8 border-l-2 border-[#28392e]">
               <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"></div>
-              <h3 class="text-lg font-bold text-white mb-2">Mức độ độc hại</h3>
+              <h3 class="text-lg font-bold text-white mb-2">
+                Mức độ độc hại
+              </h3>
               <p id="toxicityText" class="text-gray-400 text-sm leading-relaxed">
                 Không có dữ liệu độc hại.
               </p>
             </div>
 
             <div class="relative pl-8 border-l-2 border-[#28392e]">
-              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-green-500 rounded-full w-4 h-4">
-              </div>
-              <h3 class="text-lg font-bold text-white mb-2">Quy trình xử lý an toàn</h3>
+              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-green-500 rounded-full w-4 h-4"></div>
+              <h3 class="text-lg font-bold text-white mb-2">
+                Quy trình xử lý an toàn
+              </h3>
               <ul id="safeStepsList" class="list-disc list-outside ml-4 text-gray-400 text-sm space-y-2">
                 <li>Không có hướng dẫn an toàn.</li>
               </ul>
             </div>
-          </div>
-
-          <div id="feedbackThankYouMessage"
-            class="hidden mt-6 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-200">
-            Cảm ơn bạn đã xác nhận, hệ thống đã cập nhật lại kết quả và nội dung liên quan.
           </div>
 
           <img src="stepbottle.jpg" alt="Infographic" class="mt-6 rounded-lg border border-[#28392e] cursor-zoom-in"
@@ -302,25 +229,25 @@
           class="bg-gradient-to-br from-[#152e20] to-[#0f2117] border border-[#28392e] rounded-3xl p-6 md:p-8 relative overflow-hidden">
           <div class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
           </div>
-
           <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
             <span class="material-symbols-outlined text-yellow-400">lightbulb</span>
             Câu chuyện tái chế &amp; Ý tưởng
           </h2>
-
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
             <div
               class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
               <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
                 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
-                </div>
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
+                  "></div>
               </div>
               <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
                 Làm chậu cây tự động tưới
               </h4>
               <p class="text-gray-400 text-xs line-clamp-2">
-                Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho vườn rau tại nhà.
+                Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho
+                vườn rau tại nhà.
               </p>
             </div>
 
@@ -328,20 +255,24 @@
               class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
               <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
                 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
-                </div>
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
+                  "></div>
               </div>
               <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
                 Adidas &amp; Giày từ rác thải biển
               </h4>
               <p class="text-gray-400 text-xs line-clamp-2">
-                Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những đôi giày thể thao bền vững.
+                Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những
+                đôi giày thể thao bền vững.
               </p>
             </div>
           </div>
 
           <div class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p class="text-gray-400 text-xs italic">"Rác thải chỉ là tài nguyên đặt sai chỗ."</p>
+            <p class="text-gray-400 text-xs italic">
+              "Rác thải chỉ là tài nguyên đặt sai chỗ."
+            </p>
             <button
               class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group">
               Xem thêm ý tưởng
@@ -366,7 +297,9 @@
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');">
             </div>
             <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">Ly nhựa PP</h4>
+              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+                Ly nhựa PP
+              </h4>
               <span class="text-xs text-gray-500">Tái chế được</span>
             </div>
           </div>
@@ -379,7 +312,9 @@
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
             </div>
             <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">Hộp xốp</h4>
+              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+                Hộp xốp
+              </h4>
               <span class="text-xs text-red-400">Rác thải</span>
             </div>
           </div>
@@ -392,7 +327,9 @@
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
             </div>
             <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">Nắp chai HDPE</h4>
+              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+                Nắp chai HDPE
+              </h4>
               <span class="text-xs text-gray-500">Tái chế được</span>
             </div>
           </div>
@@ -405,7 +342,9 @@
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');">
             </div>
             <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">Túi ni lông</h4>
+              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+                Túi ni lông
+              </h4>
               <span class="text-xs text-yellow-500">Khó tái chế</span>
             </div>
           </div>
@@ -434,11 +373,11 @@
     <div id="confirmModal" class="fixed inset-0 z-[1000] hidden" data-open="false">
       <div id="confirmModalOverlay" class="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
 
-      <div class="absolute inset-0 flex items-center justify-center px-4 py-6 sm:px-6 sm:py-8">
+      <div class="absolute inset-0 flex items-center justify-center px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
         <div
-          class="confirm-modal-panel bg-surface-dark border border-[#28392e] rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+          class="confirm-modal-panel w-full max-w-xl max-h-[calc(100vh-3rem)] sm:max-h-[calc(100vh-4rem)] bg-surface-dark border border-[#28392e] rounded-3xl shadow-2xl overflow-hidden flex flex-col">
 
-          <div class="shrink-0 px-5 py-5 md:px-6 md:py-6 border-b border-[#28392e]">
+          <div class="shrink-0 p-6 md:p-8 border-b border-[#28392e]">
             <div class="flex items-start justify-between gap-4">
               <div class="min-w-0">
                 <div
@@ -446,16 +385,11 @@
                   <span class="material-symbols-outlined text-yellow-400 text-[18px]">warning</span>
                   <span class="text-yellow-400 font-bold text-sm">Cần xác nhận</span>
                 </div>
-
-                <h3 class="text-xl md:text-2xl font-black text-white leading-tight">
-                  Xác nhận kết quả nhận diện
-                </h3>
-
-                <p id="confirmModalDescription" class="text-gray-400 text-sm mt-2 leading-relaxed">
+                <h3 class="text-2xl font-black text-white">Xác nhận kết quả nhận diện</h3>
+                <p id="confirmModalDescription" class="text-gray-400 text-sm mt-2">
                   Hệ thống cần bạn xác nhận lại kết quả này.
                 </p>
               </div>
-
               <button id="confirmModalClose"
                 class="shrink-0 size-10 rounded-full bg-[#152e20] border border-[#28392e] flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors">
                 <span class="material-symbols-outlined">close</span>
@@ -463,55 +397,27 @@
             </div>
           </div>
 
-          <div class="confirm-modal-body flex-1 px-5 py-5 md:px-6 md:py-6 space-y-5">
+          <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
                 <span class="text-gray-400 text-xs uppercase block mb-1">Nhãn hiện tại</span>
                 <span id="confirmCurrentLabel" class="text-white font-bold text-lg break-words">—</span>
               </div>
-
               <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
                 <span class="text-gray-400 text-xs uppercase block mb-1">Độ tin cậy</span>
                 <span id="confirmCurrentConfidence" class="text-white font-bold text-lg">—</span>
               </div>
             </div>
 
-            <div id="confirmCropWrapper" class="hidden">
-              <div class="flex items-center justify-between gap-2 mb-3">
-                <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-primary text-[20px]">crop</span>
-                  <p class="text-sm font-bold text-white">Ảnh crop vật thể cần xác nhận</p>
-                </div>
-                <button id="confirmCropZoomBtn" type="button"
-                  class="px-3 py-1.5 rounded-xl bg-[#152e20] border border-[#28392e] text-white text-xs font-bold hover:border-primary/60 transition">
-                  Phóng to
-                </button>
-              </div>
-
-              <div class="confirm-crop-box border border-[#28392e]">
-                <img id="confirmCropImage" src="" alt="Crop preview" />
-                <span class="confirm-crop-zoom-hint">
-                  <span class="material-symbols-outlined text-[16px]">zoom_in</span>
-                  Nhấn để phóng to
-                </span>
-              </div>
-            </div>
-
-            <div id="confirmCropEmpty"
-              class="hidden rounded-2xl border border-dashed border-[#28392e] bg-[#152e20] px-4 py-4 text-sm text-gray-400">
-              Không có ảnh crop cho vật thể này.
-            </div>
-
             <div>
               <label for="confirmCorrectLabel" class="block text-sm font-bold text-white mb-2">
-                Nhãn đúng
+                Nếu sai, nhập nhãn đúng
               </label>
               <input id="confirmCorrectLabel" type="text"
                 class="w-full rounded-2xl bg-[#152e20] border border-[#28392e] text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                placeholder="Ví dụ: Chai nhựa, Giấy, Lon..." />
-              <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                Nếu kết quả đúng, bấm “Đúng”. Nếu sai, nhập tên đúng của vật thể
-                rồi bấm “Sai / Sửa nhãn”.
+                placeholder="Ví dụ: plastic, paper, metal..." />
+              <p class="text-xs text-gray-400 mt-2">
+                Nếu kết quả đúng, bấm “Đúng”. Nếu sai, nhập nhãn đúng rồi bấm “Sai / Sửa nhãn”.
               </p>
             </div>
 
@@ -527,23 +433,20 @@
             <div id="confirmMessage" class="hidden rounded-2xl px-4 py-3 text-sm font-medium border"></div>
           </div>
 
-          <div class="shrink-0 px-5 pb-5 md:px-6 md:pb-6 pt-3 bg-surface-dark border-t border-[#28392e]">
-            <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
-              <button id="confirmCorrectBtn"
-                class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-primary text-[#051d0e] font-black hover:opacity-90 transition disabled:opacity-50">
-                Đúng
-              </button>
-
-              <button id="confirmWrongBtn"
-                class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-yellow-400 text-black font-black hover:opacity-90 transition disabled:opacity-50">
-                Sai / Sửa nhãn
-              </button>
-
-              <button id="confirmSkipBtn"
-                class="w-full sm:w-auto px-6 py-3 rounded-2xl border border-[#28392e] text-white font-bold hover:border-primary/60 transition">
-                Để sau
-              </button>
-            </div>
+          <div
+            class="shrink-0 p-6 md:p-8 pt-0 flex flex-col sm:flex-row gap-3 sm:justify-end border-t border-transparent bg-surface-dark">
+            <button id="confirmCorrectBtn"
+              class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-primary text-[#051d0e] font-black hover:opacity-90 transition disabled:opacity-50">
+              Đúng
+            </button>
+            <button id="confirmWrongBtn"
+              class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-yellow-400 text-black font-black hover:opacity-90 transition disabled:opacity-50">
+              Sai / Sửa nhãn
+            </button>
+            <button id="confirmSkipBtn"
+              class="w-full sm:w-auto px-5 py-3 rounded-2xl border border-[#28392e] text-white font-bold hover:border-primary/60 transition">
+              Để sau
+            </button>
           </div>
         </div>
       </div>
@@ -553,30 +456,6 @@
   <div id="footer-container"></div>
 
   <script>
-    function renderAuthUI() {
-      const token = localStorage.getItem("accessToken");
-      const acc = JSON.parse(localStorage.getItem("account") || "{}");
-
-      const btns = document.getElementById("auth-buttons");
-      const userBox = document.getElementById("user-box");
-      const avatar = document.getElementById("user-menu-button");
-
-      if (!btns || !userBox) return;
-
-      if (token) {
-        btns.classList.add("hidden");
-        userBox.classList.remove("hidden");
-
-        const defaultAvatar = "./avt.png";
-        if (avatar) {
-          avatar.style.backgroundImage = `url('${acc?.avatarUrl || defaultAvatar}')`;
-        }
-      } else {
-        btns.classList.remove("hidden");
-        userBox.classList.add("hidden");
-      }
-    }
-
     async function loadComponent(id, file) {
       const res = await fetch(file);
       const html = await res.text();
@@ -584,7 +463,6 @@
 
       if (id === "header-container") {
         setActiveMenu();
-        renderAuthUI();
       }
     }
 
@@ -605,32 +483,15 @@
       menu?.classList.toggle("hidden");
     };
 
-    window.toggleMobileMenu = function () {
-      const menu = document.getElementById("mobile-menu");
-      menu?.classList.toggle("hidden");
-    };
-
     loadComponent("header-container", "header.html");
     loadComponent("footer-container", "footer.html");
   </script>
 
   <script>
-    // =========================
-    // Config
-    // =========================
-    // const API_BASE = "http://103.118.28.14";
-
-    // GET detail
+    const API_BASE = "http://localhost:8080";
     const DETAIL_URL = (id) => API_BASE + `/api/v1/ai_response/${encodeURIComponent(id)}/detail`;
     const FEEDBACK_URL = (id) => API_BASE + `/api/v1/detections/${encodeURIComponent(id)}/feedback`;
     const token = localStorage.getItem("accessToken") || "";
-
-    let detectionsState = [];
-    let selectedIndex = 0;
-    let requiresConfirmationState = false;
-    let confirmQueue = [];
-    let currentConfirmDetection = null;
-    let isSubmittingFeedback = false;
 
     function qs(name) {
       return new URLSearchParams(window.location.search).get(name);
@@ -659,9 +520,7 @@
 
     function prettifyLabel(label) {
       if (!label) return "Không xác định";
-      const text = String(label).replaceAll("_", " ").trim();
-      if (text.toLowerCase() === "ok") return "OK";
-      return text.charAt(0).toUpperCase() + text.slice(1);
+      return String(label).replaceAll("_", " ");
     }
 
     function normalizeSafeSteps(steps) {
@@ -731,10 +590,59 @@
       setText("materialText", det?.material || "Chưa có dữ liệu");
       setText("noteText", det?.note || "Chưa có lưu ý");
       setText("actionText", det?.action || "Chưa có hướng dẫn");
+
       setText("impactText", det?.detail?.impact || "Không có dữ liệu tác động.");
       setText("toxicityText", det?.detail?.toxicity || "Không có dữ liệu độc hại.");
 
       renderSafeSteps(det?.detail?.safeSteps);
+    }
+
+    let detectionsState = [];
+    let selectedIndex = 0;
+    let requiresConfirmationState = false;
+    let confirmQueue = [];
+    let currentConfirmDetection = null;
+    let isSubmittingFeedback = false;
+
+    function getHeaders() {
+      const headers = {
+        "Content-Type": "application/json"
+      };
+      if (token) headers.Authorization = "Bearer " + token;
+      return headers;
+    }
+
+    function showConfirmBanner(show) {
+      const banner = document.getElementById("confirmBanner");
+      if (!banner) return;
+      banner.classList.toggle("hidden", !show);
+    }
+
+    function showConfirmMessage(text, type = "info") {
+      const el = document.getElementById("confirmMessage");
+      if (!el) return;
+
+      const base = "rounded-2xl px-4 py-3 text-sm font-medium border";
+      let extra = "bg-[#152e20] border-[#28392e] text-gray-200";
+
+      if (type === "success") {
+        extra = "bg-primary/10 border-primary/20 text-primary";
+      } else if (type === "error") {
+        extra = "bg-red-900/20 border-red-700/30 text-red-300";
+      } else if (type === "warning") {
+        extra = "bg-yellow-900/20 border-yellow-700/30 text-yellow-300";
+      }
+
+      el.className = `${base} ${extra}`;
+      el.textContent = text;
+      el.classList.remove("hidden");
+    }
+
+    function hideConfirmMessage() {
+      const el = document.getElementById("confirmMessage");
+      if (!el) return;
+      el.classList.add("hidden");
+      el.textContent = "";
     }
 
     function renderChips(detections) {
@@ -793,15 +701,6 @@
           btn.appendChild(ok);
         }
 
-        if (det?.status === "CORRECTED") {
-          const edit = document.createElement("span");
-          edit.className =
-            "ml-1 inline-flex items-center justify-center size-5 rounded-full " +
-            (isActive ? "bg-[#051d0e]/15" : "bg-white/10");
-          edit.innerHTML = `<span class="material-symbols-outlined text-[16px] ${isActive ? "text-[#051d0e]" : "text-blue-400"}">edit</span>`;
-          btn.appendChild(edit);
-        }
-
         btn.addEventListener("click", () => {
           selectedIndex = idx;
           renderChips(detectionsState);
@@ -814,69 +713,22 @@
 
     function mergeSameLabelDetections(detections) {
       const arr = Array.isArray(detections) ? detections : [];
-      return arr.map((det) => ({
-        ...det,
-        quantity: safeNum(det?.quantity, 1) ?? 1
-      }));
+      const map = new Map();
+
+      arr.forEach((det, idx) => {
+        const key = (det?.label || det?.labelDisplay || "unknown") + "__" + idx;
+
+        map.set(key, {
+          ...det,
+          quantity: safeNum(det?.quantity, 1) ?? 1
+        });
+      });
+
+      return Array.from(map.values());
     }
 
-    function getHeaders() {
-      const headers = {
-        "Content-Type": "application/json"
-      };
-      if (token) headers.Authorization = "Bearer " + token;
-      return headers;
-    }
-
-    function showConfirmBanner(show) {
-      const banner = document.getElementById("confirmBanner");
-      if (!banner) return;
-      banner.classList.toggle("hidden", !show);
-    }
-
-    function showConfirmMessage(text, type = "info") {
-      const el = document.getElementById("confirmMessage");
-      if (!el) return;
-
-      const base = "rounded-2xl px-4 py-3 text-sm font-medium border";
-      let extra = "bg-[#152e20] border-[#28392e] text-gray-200";
-
-      if (type === "success") {
-        extra = "bg-primary/10 border-primary/20 text-primary";
-      } else if (type === "error") {
-        extra = "bg-red-900/20 border-red-700/30 text-red-300";
-      } else if (type === "warning") {
-        extra = "bg-yellow-900/20 border-yellow-700/30 text-yellow-300";
-      }
-
-      el.className = `${base} ${extra}`;
-      el.textContent = text;
-      el.classList.remove("hidden");
-    }
-
-    function hideConfirmMessage() {
-      const el = document.getElementById("confirmMessage");
-      if (!el) return;
-      el.classList.add("hidden");
-      el.textContent = "";
-    }
-
-    function showFeedbackThankYouMessage() {
-      const el = document.getElementById("feedbackThankYouMessage");
-      if (!el) return;
-      el.classList.remove("hidden");
-
-      clearTimeout(showFeedbackThankYouMessage._t);
-      showFeedbackThankYouMessage._t = setTimeout(() => {
-        el.classList.add("hidden");
-      }, 3500);
-    }
-
-    function renderFromApi(payload, options = {}) {
+    function renderFromApi(payload) {
       const d = payload?.data ?? payload;
-      const updatedDetectionId = options.updatedDetectionId ?? null;
-      const keepSelection = options.keepSelection ?? false;
-      const autoOpenConfirm = options.autoOpenConfirm ?? true;
 
       const imageUrl =
         d?.annotatedUrl ||
@@ -888,19 +740,12 @@
       setBgImage("resultImage", imageUrl);
 
       requiresConfirmationState = Boolean(d?.requiresConfirmation);
-      detectionsState = mergeSameLabelDetections(d?.detections);
 
-      if (updatedDetectionId != null) {
-        const updatedIndex = detectionsState.findIndex(x => x?.id === updatedDetectionId);
-        selectedIndex = updatedIndex >= 0 ? updatedIndex : 0;
-      } else if (!keepSelection) {
-        selectedIndex = 0;
-      } else if (selectedIndex >= detectionsState.length) {
-        selectedIndex = 0;
-      }
+      detectionsState = mergeSameLabelDetections(d?.detections);
+      selectedIndex = 0;
 
       const firstNeedConfirmIndex = detectionsState.findIndex(x => x?.status === "NEEDS_CONFIRM");
-      if (updatedDetectionId == null && firstNeedConfirmIndex >= 0 && !keepSelection) {
+      if (firstNeedConfirmIndex >= 0) {
         selectedIndex = firstNeedConfirmIndex;
       }
 
@@ -923,11 +768,9 @@
       confirmQueue = detectionsState.filter(x => x?.status === "NEEDS_CONFIRM" && x?.id != null);
       showConfirmBanner(confirmQueue.length > 0 || requiresConfirmationState);
 
-      if (autoOpenConfirm && confirmQueue.length > 0) {
+      if (confirmQueue.length > 0) {
         setTimeout(() => {
-          if (confirmQueue.length > 0) {
-            openConfirmModal(confirmQueue[0]);
-          }
+          openConfirmModal(confirmQueue[0]);
         }, 500);
       }
     }
@@ -954,7 +797,7 @@
           return;
         }
 
-        renderFromApi(json, { autoOpenConfirm: true });
+        renderFromApi(json);
       } catch (e) {
         console.error(e);
         setText("mainLabel", "Lỗi kết nối server");
@@ -985,9 +828,7 @@
     function closeImgModal() {
       imgModal.classList.add("hidden");
       imgModalSrc.src = "";
-      if (confirmModal.classList.contains("hidden")) {
-        document.body.classList.remove("overflow-hidden");
-      }
+      document.body.classList.remove("overflow-hidden");
     }
 
     resultImageEl?.addEventListener("click", () => {
@@ -1014,10 +855,6 @@
     const confirmWrongBtn = document.getElementById("confirmWrongBtn");
     const confirmSkipBtn = document.getElementById("confirmSkipBtn");
     const confirmModalDescription = document.getElementById("confirmModalDescription");
-    const confirmCropWrapper = document.getElementById("confirmCropWrapper");
-    const confirmCropImage = document.getElementById("confirmCropImage");
-    const confirmCropEmpty = document.getElementById("confirmCropEmpty");
-    const confirmCropZoomBtn = document.getElementById("confirmCropZoomBtn");
 
     function openConfirmModal(det) {
       if (!det) return;
@@ -1029,20 +866,10 @@
 
       confirmCurrentLabel.textContent = labelText;
       confirmCurrentConfidence.textContent = conf != null ? `${Math.round(conf * 100)}%` : "--%";
-      confirmCorrectLabel.value = det?.labelDisplay || det?.label || "";
+      confirmCorrectLabel.value = det?.label || "";
       confirmComment.value = "";
       confirmModalDescription.textContent =
         `Hệ thống nhận diện "${labelText}" với độ tin cậy ${conf != null ? Math.round(conf * 100) + "%" : "--%"}. Vui lòng xác nhận giúp kết quả này.`;
-
-      if (det?.cropUrl) {
-        confirmCropImage.src = det.cropUrl;
-        confirmCropWrapper.classList.remove("hidden");
-        confirmCropEmpty.classList.add("hidden");
-      } else {
-        confirmCropImage.src = "";
-        confirmCropWrapper.classList.add("hidden");
-        confirmCropEmpty.classList.remove("hidden");
-      }
 
       confirmModal.dataset.open = "true";
       confirmModal.classList.remove("hidden");
@@ -1053,14 +880,8 @@
       confirmModal.dataset.open = "false";
       confirmModal.classList.add("hidden");
       currentConfirmDetection = null;
-      confirmCropImage.src = "";
-      confirmCropWrapper.classList.add("hidden");
-      confirmCropEmpty.classList.add("hidden");
       hideConfirmMessage();
-
-      if (imgModal.classList.contains("hidden")) {
-        document.body.classList.remove("overflow-hidden");
-      }
+      document.body.classList.remove("overflow-hidden");
     }
 
     function updateConfirmButtonsDisabled(disabled) {
@@ -1070,34 +891,30 @@
       confirmModalClose.disabled = disabled;
     }
 
-    function openCurrentCropZoom() {
-      const url = currentConfirmDetection?.cropUrl || confirmCropImage?.src || "";
-      if (!url) return;
-      openImgModal(url);
+    function updateDetectionInState(updatedDet) {
+      const idx = detectionsState.findIndex(x => x?.id === updatedDet?.id);
+      if (idx >= 0) {
+        detectionsState[idx] = {
+          ...detectionsState[idx],
+          ...updatedDet
+        };
+      }
     }
 
-    confirmCropImage?.addEventListener("click", openCurrentCropZoom);
-    confirmCropZoomBtn?.addEventListener("click", openCurrentCropZoom);
+    function syncBannerAndQueue() {
+      confirmQueue = detectionsState.filter(x => x?.status === "NEEDS_CONFIRM" && x?.id != null);
+      showConfirmBanner(confirmQueue.length > 0);
+    }
 
-    async function submitFeedback(mode) {
+    async function submitFeedback(feedbackType) {
       if (!currentConfirmDetection?.id || isSubmittingFeedback) return;
 
       const detectionId = currentConfirmDetection.id;
-      const typedLabel = String(confirmCorrectLabel.value || "").trim();
+      const confirmedLabel = String(confirmCorrectLabel.value || "").trim();
       const comment = String(confirmComment.value || "").trim();
 
-      if (mode === "wrong" && !typedLabel) {
-        showConfirmMessage("Vui lòng nhập nhãn đúng trước khi gửi.", "error");
-        return;
-      }
-
-      const finalConfirmedLabel =
-        mode === "correct"
-          ? String(currentConfirmDetection.labelDisplay || currentConfirmDetection.label || "").trim()
-          : typedLabel;
-
-      if (!finalConfirmedLabel) {
-        showConfirmMessage("Không tìm thấy nhãn để gửi xác nhận.", "error");
+      if (feedbackType === "CORRECTED" && !confirmedLabel) {
+        showConfirmMessage("Vui lòng nhập nhãn đúng trước khi gửi chỉnh sửa.", "warning");
         return;
       }
 
@@ -1107,8 +924,11 @@
 
       try {
         const body = {
-          confirmedLabel: finalConfirmedLabel,
-          feedbackType: "CONFIRMED",
+          confirmedLabel:
+            feedbackType === "CONFIRMED"
+              ? (currentConfirmDetection.label || confirmedLabel || "")
+              : confirmedLabel,
+          feedbackType,
           comment
         };
 
@@ -1125,28 +945,42 @@
 
         if (!res.ok) {
           console.error("Submit feedback failed:", json);
-          showConfirmMessage(
-            json?.message || "Gửi xác nhận thất bại. Vui lòng thử lại.",
-            "error"
-          );
+          showConfirmMessage("Gửi xác nhận thất bại. Vui lòng thử lại.", "error");
           return;
         }
 
+        if (feedbackType === "CONFIRMED") {
+          updateDetectionInState({
+            id: detectionId,
+            status: "CONFIRMED"
+          });
+        } else if (feedbackType === "CORRECTED") {
+          updateDetectionInState({
+            id: detectionId,
+            status: "CORRECTED",
+            label: confirmedLabel,
+            labelDisplay: confirmedLabel
+          });
+        } else {
+          updateDetectionInState({
+            id: detectionId,
+            status: "REJECTED"
+          });
+        }
+
+        renderChips(detectionsState);
+
+        const currentSelected = detectionsState.find(x => x?.id === detectionId);
+        if (currentSelected) {
+          renderDetectionDetail(currentSelected);
+        }
+
+        syncBannerAndQueue();
         closeConfirmModal();
-        showFeedbackThankYouMessage();
-
-        renderFromApi(json, {
-          updatedDetectionId: detectionId,
-          keepSelection: true,
-          autoOpenConfirm: false
-        });
-
-        confirmQueue = detectionsState.filter(x => x?.status === "NEEDS_CONFIRM" && x?.id != null);
-        showConfirmBanner(confirmQueue.length > 0 || requiresConfirmationState);
 
       } catch (e) {
         console.error(e);
-        showConfirmMessage("Lỗi kết nối server.", "error");
+        showConfirmMessage("Lỗi kết nối server khi gửi feedback.", "error");
       } finally {
         isSubmittingFeedback = false;
         updateConfirmButtonsDisabled(false);
@@ -1162,20 +996,20 @@
       }
     });
 
-    confirmCorrectBtn?.addEventListener("click", () => submitFeedback("correct"));
-    confirmWrongBtn?.addEventListener("click", () => submitFeedback("wrong"));
+    confirmCorrectBtn?.addEventListener("click", () => submitFeedback("CONFIRMED"));
+    confirmWrongBtn?.addEventListener("click", () => submitFeedback("CORRECTED"));
     confirmSkipBtn?.addEventListener("click", closeConfirmModal);
     confirmModalClose?.addEventListener("click", closeConfirmModal);
     confirmModalOverlay?.addEventListener("click", closeConfirmModal);
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        if (!imgModal.classList.contains("hidden")) {
-          closeImgModal();
-          return;
-        }
         if (!confirmModal.classList.contains("hidden")) {
           closeConfirmModal();
+          return;
+        }
+        if (!imgModal.classList.contains("hidden")) {
+          closeImgModal();
         }
       }
     });
