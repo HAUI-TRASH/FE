@@ -169,7 +169,7 @@
       <div
         class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
         <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-        AI Technology V2.0
+        AI Technology V1.0
       </div>
       <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
         Phân loại rác thải bằng <span class="text-primary">AI</span>
@@ -238,14 +238,14 @@
             <div>
               <h4 class="text-white font-bold text-lg">Độ chính xác 98%</h4>
               <p class="text-sm text-gray-400 mt-1">
-                AI được huấn luyện trên 10 triệu mẫu dữ liệu rác thải.
+                AI được huấn luyện trên 1000 mẫu dữ liệu rác thải.
               </p>
             </div>
           </div>
           <div class="space-y-3">
             <div class="flex justify-between text-xs font-medium text-gray-400 uppercase tracking-wide">
               <span>Độ tin cậy</span>
-              <span class="text-primary">Tuyệt đối</span>
+              <span class="text-primary">Cao</span>
             </div>
             <div class="w-full bg-gray-800/50 h-2 rounded-full overflow-hidden backdrop-blur-sm">
               <div
@@ -421,10 +421,6 @@
 </body>
 
 <script>
-  // const API_BASE = "http://103.118.28.14";
-  const UPLOAD_URL = API_BASE + "/api/v1/ai_request";
-  // const PREDICT_URL = API_BASE + "/api/v1/ai_response/predict"; chưa dùng gemini
-  const predictUrl = (id) => API_BASE + `/api/v1/ai_requests/${encodeURIComponent(id)}/predict`;
 
   // thống nhất plural theo backend mới
   const UPLOAD_URL = API_BASE + "/api/v1/ai_request";

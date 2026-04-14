@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Đăng Nhập - EcoScan AI</title>
+    <title>Đăng Nhập - SmartDisposal </title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -108,7 +109,7 @@
               <h1
                 class="text-white text-xl font-bold leading-tight tracking-tight hidden sm:block"
               >
-                EcoScan AI
+                SmartDisposal 
               </h1>
             </a>
           </div>
@@ -273,6 +274,8 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
               <button
+                id="btn-google"
+                type="button"
                 class="flex items-center justify-center gap-2 bg-[#102216] border border-[#28392e] hover:border-gray-500 text-white rounded-xl py-2.5 transition-all text-sm font-medium"
               >
                 <svg
@@ -301,6 +304,8 @@
                 Google
               </button>
               <button
+                id="btn-facebook"
+                type="button"
                 class="flex items-center justify-center gap-2 bg-[#102216] border border-[#28392e] hover:border-gray-500 text-white rounded-xl py-2.5 transition-all text-sm font-medium"
               >
                 <svg
@@ -328,10 +333,10 @@
             <span class="material-symbols-outlined text-primary text-3xl"
               >eco</span
             >
-            EcoScan AI
+            SmartDisposal 
           </div>
           <p class="text-gray-500 text-sm">
-            © 2024 EcoScan. Giải pháp xanh cho tương lai.
+            © 2024 SmartDisposal. Giải pháp xanh cho tương lai.
           </p>
         </div>
         <div class="flex flex-wrap justify-center gap-8">
@@ -462,5 +467,91 @@
         setLoading(false);
       }
     });
+
+    // --- GOOGLE LOGIN ---
+    let tokenClient;
+    window.onload = function () {
+      tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: typeof GOOGLE_CLIENT_ID !== 'undefined' ? GOOGLE_CLIENT_ID : "",
+        scope: "email profile",
+        callback: async (tokenResponse) => {
+          if (tokenResponse && tokenResponse.access_token) {
+            handleSocialLogin(tokenResponse.access_token, "google");
+          }
+        },
+      });
+    };
+
+    document.getElementById("btn-google").addEventListener("click", () => {
+      if(tokenClient) {
+        tokenClient.requestAccessToken();
+      }
+    });
+
+    // --- FACEBOOK LOGIN ---
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : typeof FACEBOOK_APP_ID !== 'undefined' ? FACEBOOK_APP_ID : "",
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v19.0'
+      });
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/vi_VN/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    document.getElementById("btn-facebook").addEventListener("click", () => {
+      FB.login(function(response) {
+        if (response.authResponse) {
+          handleSocialLogin(response.authResponse.accessToken, "facebook");
+        } else {
+          showMsg("Bạn đã hủy đăng nhập Facebook.", "error");
+        }
+      }, {scope: 'public_profile,email'});
+    });
+    
+    // Hàm dùng chung để gửi Token lên BE
+    async function handleSocialLogin(token, provider) {
+      msg.classList.add("hidden");
+      setLoading(true);
+      try {
+        const url = provider === "google" 
+                ? API_BASE + "/api/v1/auth/login/google" 
+                : API_BASE + "/api/v1/auth/login/facebook";
+                
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token }),
+        });
+        
+        const json = await res.json().catch(() => null);
+        if (!res.ok) {
+          showMsg(json?.message || `Đăng nhập ${provider} thất bại.`, "error");
+          return;
+        }
+
+        const data = json?.data;
+        if (data?.token) {
+          localStorage.setItem("accessToken", data.token);
+          localStorage.setItem("account", JSON.stringify(data.account || {}));
+        }
+        showMsg(`Đăng nhập bằng ${provider} thành công!`, "success");
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 600);
+      } catch (err) {
+        showMsg(`Lỗi kết nối Server khi đăng nhập ${provider}.`, "error");
+      } finally {
+        setLoading(false);
+      }
+    }
   </script>
 </html>
