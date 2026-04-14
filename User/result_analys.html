@@ -12,6 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Thêm thư viện Vanilla Tilt để làm hiệu ứng ảnh 3D -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
   <script id="tailwind-config">
     tailwind.config = {
@@ -44,7 +46,7 @@
       },
     };
   </script>
-   <script src="../constants.js"></script>
+  <script src="../constants.js"></script>
   <style>
     body {
       font-family: "Space Grotesk", sans-serif;
@@ -110,7 +112,7 @@
     .confirm-crop-box img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       cursor: zoom-in;
     }
@@ -169,14 +171,21 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <div class="lg:col-span-5 flex flex-col gap-6">
-        <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-2 shadow-2xl overflow-hidden relative group">
+        <!-- Khởi tạo Vanilla Tilt qua thẻ html data-tilt -->
+        <div data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-perspective="1000" data-tilt-glare="true" data-tilt-max-glare="0.2"
+          class="bg-surface-dark border border-[#28392e] rounded-3xl p-2 shadow-2xl relative group cursor-crosshair"
+          style="transform-style: preserve-3d;">
+          
           <div
-            class="absolute top-6 right-6 z-10 bg-primary text-[#051d0e] text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+            class="absolute top-6 right-6 z-20 bg-primary text-[#051d0e] text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2"
+            style="transform: translateZ(40px);">
             <span class="material-symbols-outlined filled-icon text-lg">check_circle</span>
             <span id="confidenceText">Độ chính xác --%</span>
           </div>
-          <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-gray-800 relative">
-            <div id="resultImage" class="absolute inset-0 bg-contain bg-top bg-no-repeat cursor-zoom-in"></div>
+          
+          <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-gray-800 relative transition-transform duration-300"
+               style="transform: translateZ(20px);">
+            <div id="resultImage" class="absolute inset-0 bg-contain bg-center bg-no-repeat cursor-zoom-in hover:scale-105 transition-transform duration-500"></div>
           </div>
         </div>
 
@@ -216,8 +225,16 @@
                 Chưa có kết quả
               </h1>
             </div>
-            <div class="bg-[#28392e] p-3 rounded-xl">
-              <span class="material-symbols-outlined text-4xl text-primary">recycling</span>
+            <div class="flex items-center gap-3">
+              <button id="speakBtn"
+                class="bg-[#152e20] hover:bg-primary/20 border border-[#28392e] p-3 rounded-xl transition-colors text-primary active:scale-95 group"
+                title="Đọc thông tin" aria-label="Đọc thông tin">
+                <span
+                  class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">volume_up</span>
+              </button>
+              <div class="bg-[#28392e] p-3 rounded-xl">
+                <span class="material-symbols-outlined text-4xl text-primary">recycling</span>
+              </div>
             </div>
           </div>
 
@@ -294,260 +311,271 @@
             Cảm ơn bạn đã xác nhận, hệ thống đã cập nhật lại kết quả và nội dung liên quan.
           </div>
 
-          <img src="stepbottle.jpg" alt="Infographic" class="mt-6 rounded-lg border border-[#28392e] cursor-zoom-in"
+          <div id="trashStepsWrapper" class="hidden mt-6 border-t border-[#28392e] pt-6">
+            <h3 class="text-white text-lg font-bold mb-4 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">imagesmode</span>
+              Các bước tái chế & xử lý
+            </h3>
+            <div id="trashStepsList" class="flex flex-col gap-4"></div>
+            <!-- </div>
+          <img src="stepbottle.jpg" alt="Infographic" class="mt-6 rounded-lg border border-[#28392e] cursor-zoom-in hidden"
             id="infographicImage">
-        </div>
-
-        <div
-          class="bg-gradient-to-br from-[#152e20] to-[#0f2117] border border-[#28392e] rounded-3xl p-6 md:p-8 relative overflow-hidden">
-          <div class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
-          </div>
-
-          <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
-            <span class="material-symbols-outlined text-yellow-400">lightbulb</span>
-            Câu chuyện tái chế &amp; Ý tưởng
-          </h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-            <div
-              class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
-              <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
-                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
-                </div>
-              </div>
-              <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
-                Làm chậu cây tự động tưới
-              </h4>
-              <p class="text-gray-400 text-xs line-clamp-2">
-                Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho vườn rau tại nhà.
-              </p>
-            </div>
+        </div> -->
 
             <div
-              class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
-              <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
-                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
-                </div>
+              class="bg-gradient-to-br from-[#152e20] to-[#0f2117] border border-[#28392e] rounded-3xl p-6 md:p-8 relative overflow-hidden">
+              <div
+                class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
               </div>
-              <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
-                Adidas &amp; Giày từ rác thải biển
-              </h4>
-              <p class="text-gray-400 text-xs line-clamp-2">
-                Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những đôi giày thể thao bền vững.
-              </p>
-            </div>
-          </div>
 
-          <div class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p class="text-gray-400 text-xs italic">"Rác thải chỉ là tài nguyên đặt sai chỗ."</p>
-            <button
-              class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group">
-              Xem thêm ý tưởng
-              <span
-                class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+              <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
+                <span class="material-symbols-outlined text-yellow-400">lightbulb</span>
+                Câu chuyện tái chế &amp; Ý tưởng
+              </h2>
 
-    <div class="mt-8 border-t border-[#28392e] pt-10">
-      <h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
-        <span class="material-symbols-outlined text-gray-400">category</span>
-        Các vật dụng tương tự
-      </h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-          href="#">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');">
-            </div>
-            <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">Ly nhựa PP</h4>
-              <span class="text-xs text-gray-500">Tái chế được</span>
-            </div>
-          </div>
-        </a>
-
-        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-          href="#">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
-            </div>
-            <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">Hộp xốp</h4>
-              <span class="text-xs text-red-400">Rác thải</span>
-            </div>
-          </div>
-        </a>
-
-        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-          href="#">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
-            </div>
-            <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">Nắp chai HDPE</h4>
-              <span class="text-xs text-gray-500">Tái chế được</span>
-            </div>
-          </div>
-        </a>
-
-        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-          href="#">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');">
-            </div>
-            <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">Túi ni lông</h4>
-              <span class="text-xs text-yellow-500">Khó tái chế</span>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <div id="imgModal" class="fixed inset-0 z-[999] hidden">
-      <div id="imgModalOverlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
-      <div class="absolute inset-0 flex items-center justify-center p-4">
-        <div class="relative w-full max-w-5xl">
-          <button id="imgModalClose"
-            class="absolute -top-4 -right-4 md:top-2 md:right-2 z-10 size-10 rounded-full bg-surface-dark border border-[#28392e] flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors"
-            aria-label="Close">
-            <span class="material-symbols-outlined">close</span>
-          </button>
-
-          <div class="rounded-2xl overflow-hidden border border-[#28392e] bg-black shadow-2xl">
-            <img id="imgModalSrc" src="" alt="Zoomed image"
-              class="w-full h-auto max-h-[85vh] object-contain select-none" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="confirmModal" class="fixed inset-0 z-[1000] hidden" data-open="false">
-      <div id="confirmModalOverlay" class="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
-
-      <div class="absolute inset-0 flex items-center justify-center px-4 py-6 sm:px-6 sm:py-8">
-        <div
-          class="confirm-modal-panel bg-surface-dark border border-[#28392e] rounded-3xl shadow-2xl overflow-hidden flex flex-col">
-
-          <div class="shrink-0 px-5 py-5 md:px-6 md:py-6 border-b border-[#28392e]">
-            <div class="flex items-start justify-between gap-4">
-              <div class="min-w-0">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
                 <div
-                  class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-900/20 border border-yellow-700/30 mb-3">
-                  <span class="material-symbols-outlined text-yellow-400 text-[18px]">warning</span>
-                  <span class="text-yellow-400 font-bold text-sm">Cần xác nhận</span>
+                  class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
+                  <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
+                    <div
+                      class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
+                    </div>
+                  </div>
+                  <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
+                    Làm chậu cây tự động tưới
+                  </h4>
+                  <p class="text-gray-400 text-xs line-clamp-2">
+                    Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho vườn rau tại nhà.
+                  </p>
                 </div>
 
-                <h3 class="text-xl md:text-2xl font-black text-white leading-tight">
-                  Xác nhận kết quả nhận diện
-                </h3>
-
-                <p id="confirmModalDescription" class="text-gray-400 text-sm mt-2 leading-relaxed">
-                  Hệ thống cần bạn xác nhận lại kết quả này.
-                </p>
-              </div>
-
-              <button id="confirmModalClose"
-                class="shrink-0 size-10 rounded-full bg-[#152e20] border border-[#28392e] flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors">
-                <span class="material-symbols-outlined">close</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="confirm-modal-body flex-1 px-5 py-5 md:px-6 md:py-6 space-y-5">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                <span class="text-gray-400 text-xs uppercase block mb-1">Nhãn hiện tại</span>
-                <span id="confirmCurrentLabel" class="text-white font-bold text-lg break-words">—</span>
-              </div>
-
-              <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                <span class="text-gray-400 text-xs uppercase block mb-1">Độ tin cậy</span>
-                <span id="confirmCurrentConfidence" class="text-white font-bold text-lg">—</span>
-              </div>
-            </div>
-
-            <div id="confirmCropWrapper" class="hidden">
-              <div class="flex items-center justify-between gap-2 mb-3">
-                <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-primary text-[20px]">crop</span>
-                  <p class="text-sm font-bold text-white">Ảnh crop vật thể cần xác nhận</p>
+                <div
+                  class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
+                  <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
+                    <div
+                      class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
+                    </div>
+                  </div>
+                  <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
+                    Adidas &amp; Giày từ rác thải biển
+                  </h4>
+                  <p class="text-gray-400 text-xs line-clamp-2">
+                    Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những đôi giày thể thao bền vững.
+                  </p>
                 </div>
-                <button id="confirmCropZoomBtn" type="button"
-                  class="px-3 py-1.5 rounded-xl bg-[#152e20] border border-[#28392e] text-white text-xs font-bold hover:border-primary/60 transition">
-                  Phóng to
+              </div>
+
+              <div
+                class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-gray-400 text-xs italic">"Rác thải chỉ là tài nguyên đặt sai chỗ."</p>
+                <button
+                  class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group">
+                  Xem thêm ý tưởng
+                  <span
+                    class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </button>
               </div>
-
-              <div class="confirm-crop-box border border-[#28392e]">
-                <img id="confirmCropImage" src="" alt="Crop preview" />
-                <span class="confirm-crop-zoom-hint">
-                  <span class="material-symbols-outlined text-[16px]">zoom_in</span>
-                  Nhấn để phóng to
-                </span>
-              </div>
-            </div>
-
-            <div id="confirmCropEmpty"
-              class="hidden rounded-2xl border border-dashed border-[#28392e] bg-[#152e20] px-4 py-4 text-sm text-gray-400">
-              Không có ảnh crop cho vật thể này.
-            </div>
-
-            <div>
-              <label for="confirmCorrectLabel" class="block text-sm font-bold text-white mb-2">
-                Nhãn đúng
-              </label>
-              <input id="confirmCorrectLabel" type="text"
-                class="w-full rounded-2xl bg-[#152e20] border border-[#28392e] text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                placeholder="Ví dụ: Chai nhựa, Giấy, Lon..." />
-              <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                Nếu kết quả đúng, bấm “Đúng”. Nếu sai, nhập tên đúng của vật thể
-                rồi bấm “Sai / Sửa nhãn”.
-              </p>
-            </div>
-
-            <div>
-              <label for="confirmComment" class="block text-sm font-bold text-white mb-2">
-                Ghi chú
-              </label>
-              <textarea id="confirmComment" rows="3"
-                class="w-full rounded-2xl bg-[#152e20] border border-[#28392e] text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                placeholder="Ghi chú thêm nếu cần"></textarea>
-            </div>
-
-            <div id="confirmMessage" class="hidden rounded-2xl px-4 py-3 text-sm font-medium border"></div>
-          </div>
-
-          <div class="shrink-0 px-5 pb-5 md:px-6 md:pb-6 pt-3 bg-surface-dark border-t border-[#28392e]">
-            <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
-              <button id="confirmCorrectBtn"
-                class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-primary text-[#051d0e] font-black hover:opacity-90 transition disabled:opacity-50">
-                Đúng
-              </button>
-
-              <button id="confirmWrongBtn"
-                class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-yellow-400 text-black font-black hover:opacity-90 transition disabled:opacity-50">
-                Sai / Sửa nhãn
-              </button>
-
-              <button id="confirmSkipBtn"
-                class="w-full sm:w-auto px-6 py-3 rounded-2xl border border-[#28392e] text-white font-bold hover:border-primary/60 transition">
-                Để sau
-              </button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+
+        <div class="mt-8 border-t border-[#28392e] pt-10">
+          <h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-gray-400">category</span>
+            Các vật dụng tương tự
+          </h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+              href="#">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');">
+                </div>
+                <div>
+                  <h4 class="text-white font-bold text-sm group-hover:text-primary">Ly nhựa PP</h4>
+                  <span class="text-xs text-gray-500">Tái chế được</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+              href="#">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
+                </div>
+                <div>
+                  <h4 class="text-white font-bold text-sm group-hover:text-primary">Hộp xốp</h4>
+                  <span class="text-xs text-red-400">Rác thải</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+              href="#">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
+                </div>
+                <div>
+                  <h4 class="text-white font-bold text-sm group-hover:text-primary">Nắp chai HDPE</h4>
+                  <span class="text-xs text-gray-500">Tái chế được</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+              href="#">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');">
+                </div>
+                <div>
+                  <h4 class="text-white font-bold text-sm group-hover:text-primary">Túi ni lông</h4>
+                  <span class="text-xs text-yellow-500">Khó tái chế</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div id="imgModal" class="fixed inset-0 z-[999] hidden">
+          <div id="imgModalOverlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+          <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="relative w-full max-w-5xl">
+              <button id="imgModalClose"
+                class="absolute -top-4 -right-4 md:top-2 md:right-2 z-10 size-10 rounded-full bg-surface-dark border border-[#28392e] flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors"
+                aria-label="Close">
+                <span class="material-symbols-outlined">close</span>
+              </button>
+
+              <div class="rounded-2xl overflow-hidden border border-[#28392e] bg-black shadow-2xl">
+                <img id="imgModalSrc" src="" alt="Zoomed image"
+                  class="w-full h-auto max-h-[85vh] object-contain select-none" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="confirmModal" class="fixed inset-0 z-[1000] hidden" data-open="false">
+          <div id="confirmModalOverlay" class="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
+
+          <div class="absolute inset-0 flex items-center justify-center px-4 py-6 sm:px-6 sm:py-8">
+            <div
+              class="confirm-modal-panel bg-surface-dark border border-[#28392e] rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+
+              <div class="shrink-0 px-5 py-5 md:px-6 md:py-6 border-b border-[#28392e]">
+                <div class="flex items-start justify-between gap-4">
+                  <div class="min-w-0">
+                    <div
+                      class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-900/20 border border-yellow-700/30 mb-3">
+                      <span class="material-symbols-outlined text-yellow-400 text-[18px]">warning</span>
+                      <span class="text-yellow-400 font-bold text-sm">Cần xác nhận</span>
+                    </div>
+
+                    <h3 class="text-xl md:text-2xl font-black text-white leading-tight">
+                      Xác nhận kết quả nhận diện
+                    </h3>
+
+                    <p id="confirmModalDescription" class="text-gray-400 text-sm mt-2 leading-relaxed">
+                      Hệ thống cần bạn xác nhận lại kết quả này.
+                    </p>
+                  </div>
+
+                  <button id="confirmModalClose"
+                    class="shrink-0 size-10 rounded-full bg-[#152e20] border border-[#28392e] flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="confirm-modal-body flex-1 px-5 py-5 md:px-6 md:py-6 space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
+                    <span class="text-gray-400 text-xs uppercase block mb-1">Nhãn hiện tại</span>
+                    <span id="confirmCurrentLabel" class="text-white font-bold text-lg break-words">—</span>
+                  </div>
+
+                  <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
+                    <span class="text-gray-400 text-xs uppercase block mb-1">Độ tin cậy</span>
+                    <span id="confirmCurrentConfidence" class="text-white font-bold text-lg">—</span>
+                  </div>
+                </div>
+
+                <div id="confirmCropWrapper" class="hidden">
+                  <div class="flex items-center justify-between gap-2 mb-3">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-primary text-[20px]">crop</span>
+                      <p class="text-sm font-bold text-white">Ảnh crop vật thể cần xác nhận</p>
+                    </div>
+                    <button id="confirmCropZoomBtn" type="button"
+                      class="px-3 py-1.5 rounded-xl bg-[#152e20] border border-[#28392e] text-white text-xs font-bold hover:border-primary/60 transition">
+                      Phóng to
+                    </button>
+                  </div>
+
+                  <div class="confirm-crop-box border border-[#28392e]">
+                    <img id="confirmCropImage" src="" alt="Crop preview" />
+                    <span class="confirm-crop-zoom-hint">
+                      <span class="material-symbols-outlined text-[16px]">zoom_in</span>
+                      Nhấn để phóng to
+                    </span>
+                  </div>
+                </div>
+
+                <div id="confirmCropEmpty"
+                  class="hidden rounded-2xl border border-dashed border-[#28392e] bg-[#152e20] px-4 py-4 text-sm text-gray-400">
+                  Không có ảnh crop cho vật thể này.
+                </div>
+
+                <div>
+                  <label for="confirmCorrectLabel" class="block text-sm font-bold text-white mb-2">
+                    Nhãn đúng
+                  </label>
+                  <input id="confirmCorrectLabel" type="text"
+                    class="w-full rounded-2xl bg-[#152e20] border border-[#28392e] text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
+                    placeholder="Ví dụ: Chai nhựa, Giấy, Lon..." />
+                  <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                    Nếu kết quả đúng, bấm “Đúng”. Nếu sai, nhập tên đúng của vật thể
+                    rồi bấm “Sai / Sửa nhãn”.
+                  </p>
+                </div>
+
+                <div>
+                  <label for="confirmComment" class="block text-sm font-bold text-white mb-2">
+                    Ghi chú
+                  </label>
+                  <textarea id="confirmComment" rows="3"
+                    class="w-full rounded-2xl bg-[#152e20] border border-[#28392e] text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
+                    placeholder="Ghi chú thêm nếu cần"></textarea>
+                </div>
+
+                <div id="confirmMessage" class="hidden rounded-2xl px-4 py-3 text-sm font-medium border"></div>
+              </div>
+
+              <div class="shrink-0 px-5 pb-5 md:px-6 md:pb-6 pt-3 bg-surface-dark border-t border-[#28392e]">
+                <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
+                  <button id="confirmCorrectBtn"
+                    class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-primary text-[#051d0e] font-black hover:opacity-90 transition disabled:opacity-50">
+                    Đúng
+                  </button>
+
+                  <button id="confirmWrongBtn"
+                    class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-yellow-400 text-black font-black hover:opacity-90 transition disabled:opacity-50">
+                    Sai / Sửa nhãn
+                  </button>
+
+                  <button id="confirmSkipBtn"
+                    class="w-full sm:w-auto px-6 py-3 rounded-2xl border border-[#28392e] text-white font-bold hover:border-primary/60 transition">
+                    Để sau
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
   </main>
 
   <div id="footer-container"></div>
@@ -735,6 +763,32 @@
       setText("toxicityText", det?.detail?.toxicity || "Không có dữ liệu độc hại.");
 
       renderSafeSteps(det?.detail?.safeSteps);
+
+      const trashStepsWrapper = document.getElementById("trashStepsWrapper");
+      const trashStepsList = document.getElementById("trashStepsList");
+      if (trashStepsWrapper && trashStepsList) {
+        trashStepsList.innerHTML = "";
+        const steps = det?.detail?.trashSteps;
+        if (Array.isArray(steps) && steps.length > 0) {
+          steps.forEach(step => {
+            if (step.imageUrl) {
+              const img = document.createElement("img");
+              img.src = step.imageUrl;
+              img.alt = step.labelDisplay || step.label || "Trash Step";
+              img.className = "w-full rounded-lg border border-[#28392e] cursor-zoom-in hover:border-primary/50 transition-colors";
+              img.addEventListener("click", () => openImgModal(img.src));
+              trashStepsList.appendChild(img);
+            }
+          });
+          if (trashStepsList.childElementCount > 0) {
+            trashStepsWrapper.classList.remove("hidden");
+          } else {
+            trashStepsWrapper.classList.add("hidden");
+          }
+        } else {
+          trashStepsWrapper.classList.add("hidden");
+        }
+      }
     }
 
     function renderChips(detections) {
@@ -1104,6 +1158,7 @@
       isSubmittingFeedback = true;
       updateConfirmButtonsDisabled(true);
       hideConfirmMessage();
+      showConfirmMessage("Đang cập nhật dữ liệu. Nếu nhãn mới chưa có trong hệ thống, AI sẽ tự động phân tích và lấy thông tin, quá trình này có thể mất vài giây...", "info");
 
       try {
         const body = {
@@ -1185,6 +1240,70 @@
       localStorage.removeItem("account");
       window.location.href = "login.html";
     };
+
+    // --- Text to Speech Logic ---
+    const speakBtn = document.getElementById("speakBtn");
+    let isSpeaking = false;
+
+    speakBtn?.addEventListener("click", () => {
+      if ('speechSynthesis' in window) {
+        if (speechSynthesis.speaking) {
+          speechSynthesis.cancel();
+          isSpeaking = false;
+          updateSpeakerIcon();
+          return;
+        }
+
+        const label = document.getElementById("mainLabel")?.innerText?.replace(/\(.*\)/g, '')?.trim() || "";
+        const type = document.getElementById("trashTypeText")?.innerText || "";
+        const material = document.getElementById("materialText")?.innerText || "";
+        const note = document.getElementById("noteText")?.innerText || "";
+        const action = document.getElementById("actionText")?.innerText || "";
+        const impact = document.getElementById("impactText")?.innerText || "";
+        const toxicity = document.getElementById("toxicityText")?.innerText || "";
+        const safeStepsItems = Array.from(document.querySelectorAll("#safeStepsList li")).map(li => li.innerText).join(". ");
+
+        let textToRead = "Đang xem chi tiết. " + label + ". ";
+        if (type && type !== "—" && type !== "Chưa phân loại") textToRead += "Loại rác. " + type + ". ";
+        if (material && material !== "—" && material !== "Chưa có dữ liệu") textToRead += "Chất liệu. " + material + ". ";
+        if (note && note !== "Chưa có lưu ý") textToRead += "Lưu ý xử lý. " + note + ". ";
+        if (action && action !== "Chưa có hướng dẫn") textToRead += "Hành động đề xuất. " + action + ". ";
+
+        textToRead += "Phân tích chi tiết. ";
+        if (impact && impact !== "Không có dữ liệu tác động.") textToRead += "Tác động môi trường và kinh tế. " + impact + ". ";
+        if (toxicity && toxicity !== "Không có dữ liệu độc hại.") textToRead += "Mức độ độc hại. " + toxicity + ". ";
+        if (safeStepsItems && safeStepsItems !== "Không có hướng dẫn an toàn.") textToRead += "Quy trình xử lý an toàn. " + safeStepsItems + ". ";
+
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+        utterance.lang = 'vi-VN';
+
+        utterance.onstart = () => {
+          isSpeaking = true;
+          updateSpeakerIcon();
+        };
+
+        utterance.onend = () => {
+          isSpeaking = false;
+          updateSpeakerIcon();
+        };
+
+        utterance.onerror = () => {
+          isSpeaking = false;
+          updateSpeakerIcon();
+        }
+
+        speechSynthesis.speak(utterance);
+      } else {
+        alert("Trình duyệt của bạn không hỗ trợ tính năng đọc văn bản.");
+      }
+    });
+
+    function updateSpeakerIcon() {
+      const iconSpan = speakBtn?.querySelector("span");
+      if (iconSpan) {
+        iconSpan.textContent = isSpeaking ? "volume_off" : "volume_up";
+      }
+    }
 
     loadResult();
   </script>
