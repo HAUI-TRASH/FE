@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="vi">
+<html class="light" lang="vi">
 
 <head>
   <meta charset="utf-8" />
@@ -21,15 +21,15 @@
       theme: {
         extend: {
           colors: {
-            primary: "#13ec5b",
-            secondary: "#28392e",
-            "background-light": "#f6f8f6",
-            "background-dark": "#102216",
-            "surface-dark": "#1c2a21",
+            primary: "#3B82F6",
+            secondary: "#64748B",
+            "background-light": "#E2E8F0",
+            "background-dark": "#E2E8F0",
+            "surface-dark": "#FFFFFF",
             "surface-light": "#ffffff",
-            "accent-blue": "#3b82f6",
-            "accent-yellow": "#eab308",
-            "accent-red": "#ef4444",
+            "accent-blue": "#3B82F6",
+            "accent-yellow": "#F59E0B",
+            "accent-red": "#EF4444",
           },
           fontFamily: {
             display: ["Space Grotesk", "sans-serif"],
@@ -85,7 +85,7 @@
     .confirm-modal-body {
       overflow-y: auto;
       scrollbar-width: thin;
-      scrollbar-color: #3b5443 transparent;
+      scrollbar-color: #CBD5E1 transparent;
     }
 
     .confirm-modal-body::-webkit-scrollbar {
@@ -93,14 +93,14 @@
     }
 
     .confirm-modal-body::-webkit-scrollbar-thumb {
-      background: #3b5443;
+      background: #CBD5E1;
       border-radius: 999px;
     }
 
     .confirm-crop-box {
       width: 100%;
       height: 240px;
-      background: #0b1610;
+      background: #F8FAFC;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -129,7 +129,7 @@
       position: absolute;
       right: 12px;
       bottom: 12px;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(30, 41, 59, 0.7);
       color: #fff;
       padding: 6px 10px;
       border-radius: 999px;
@@ -151,22 +151,64 @@
         height: 180px;
       }
     }
+
+    /* Toast Styles */
+    #toast-container {
+      position: fixed;
+      top: 5.5rem;
+      right: 1.5rem;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      pointer-events: none;
+      align-items: flex-end;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background: white;
+      border: 1px solid #CBD5E1;
+      padding: 1rem 1.25rem;
+      border-radius: 1.25rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 300px;
+      max-width: 90vw;
+      animation: toast-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .toast.hide {
+      animation: toast-out 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+    }
+
+    @keyframes toast-in {
+      from { transform: translateX(1.5rem); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes toast-out {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(1.5rem); opacity: 0; }
+    }
   </style>
 </head>
 
 <body
-  class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-800 dark:text-gray-100">
+  class="bg-[#E2E8F0] min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 antialiased font-display text-[#1E293B]">
 
   <div id="header-container"></div>
 
   <main class="flex-1 flex flex-col w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 gap-8">
-    <div class="flex items-center gap-2 text-sm text-gray-400">
+    <div class="flex items-center gap-2 text-sm text-slate-500">
       <a class="hover:text-primary transition-colors flex items-center gap-1" href="index.html">
         <span class="material-symbols-outlined text-base">arrow_back</span>
         Quay lại quét
       </a>
       <span class="mx-2">/</span>
-      <span class="text-white">Kết quả phân tích</span>
+      <span class="text-[#1E293B] font-medium">Kết quả phân tích</span>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -174,17 +216,17 @@
         <!-- Khởi tạo Vanilla Tilt qua thẻ html data-tilt -->
         <div data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-perspective="1000" data-tilt-glare="true"
           data-tilt-max-glare="0.2"
-          class="bg-surface-dark border border-[#28392e] rounded-3xl p-2 shadow-2xl relative group cursor-crosshair"
+          class="bg-white border border-[#CBD5E1] rounded-3xl p-2 shadow-xl shadow-slate-200/50 relative group cursor-crosshair"
           style="transform-style: preserve-3d;">
 
           <div
-            class="absolute top-6 right-6 z-20 bg-primary text-[#051d0e] text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2"
+            class="absolute top-6 right-6 z-20 bg-primary text-white text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-xl shadow-blue-400/30 flex items-center gap-2 border-2 border-white/20 transition-all hover:scale-105 active:scale-95"
             style="transform: translateZ(40px);">
-            <span class="material-symbols-outlined filled-icon text-lg">check_circle</span>
+            <span class="material-symbols-outlined filled-icon text-base">verified</span>
             <span id="confidenceText">Độ chính xác --%</span>
           </div>
 
-          <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-gray-800 relative transition-transform duration-300"
+          <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-slate-100 relative transition-transform duration-300"
             style="transform: translateZ(20px);">
             <div id="resultImage"
               class="absolute inset-0 bg-contain bg-center bg-no-repeat cursor-zoom-in hover:scale-105 transition-transform duration-500">
@@ -192,27 +234,27 @@
           </div>
         </div>
 
-        <div id="confirmBanner" class="hidden bg-yellow-900/20 border border-yellow-700/30 rounded-3xl p-5 shadow-xl">
+        <div id="confirmBanner" class="hidden bg-amber-50 border border-amber-200 rounded-3xl p-5 shadow-sm">
           <div class="flex items-start justify-between gap-4">
             <div class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-yellow-400 mt-0.5">warning</span>
+              <span class="material-symbols-outlined text-amber-500 mt-0.5">warning</span>
               <div>
-                <h3 class="text-yellow-400 font-bold text-base mb-1">Có kết quả cần xác nhận</h3>
-                <p class="text-gray-300 text-sm">
+                <h3 class="text-amber-800 font-bold text-base mb-1">Có kết quả cần xác nhận</h3>
+                <p class="text-amber-700/80 text-sm">
                   Hệ thống phát hiện một hoặc nhiều vật dụng có độ tin cậy thấp. Vui lòng xác nhận để cải thiện kết quả.
                 </p>
               </div>
             </div>
             <button id="openConfirmBtn"
-              class="shrink-0 px-4 py-2 rounded-xl bg-yellow-400 text-black font-bold hover:opacity-90 transition">
+              class="shrink-0 px-4 py-2 rounded-xl bg-amber-500 text-white font-bold hover:bg-amber-600 transition shadow-lg shadow-amber-200">
               Xác nhận ngay
             </button>
           </div>
         </div>
 
         <div class="mb-6">
-          <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
-            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+          <div class="bg-white border border-[#CBD5E1] rounded-3xl p-6 md:p-8 shadow-sm">
+            <h2 class="text-xl font-bold text-[#1E293B] mb-6 flex items-center gap-2">
               <span class="material-symbols-outlined text-primary">recycling</span>
               Danh sách rác đã nhận diện
             </h2>
@@ -220,55 +262,55 @@
           </div>
         </div>
 
-        <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
+        <div class="bg-white border border-[#CBD5E1] rounded-3xl p-6 md:p-8 shadow-sm">
           <div class="flex items-center justify-between mb-6">
             <div class="flex flex-col">
-              <span class="text-primary font-bold text-sm tracking-wider uppercase mb-1">Đang xem chi tiết</span>
-              <h1 id="mainLabel" class="text-3xl md:text-4xl font-black text-white leading-tight">
+              <span class="text-primary font-bold text-xs tracking-wider uppercase mb-1">Đang xem chi tiết</span>
+              <h1 id="mainLabel" class="text-2xl md:text-3xl font-black text-[#1E293B] leading-tight">
                 Chưa có kết quả
               </h1>
             </div>
             <div class="flex items-center gap-3">
               <button id="speakBtn"
-                class="bg-[#152e20] hover:bg-primary/20 border border-[#28392e] p-3 rounded-xl transition-colors text-primary active:scale-95 group"
+                class="bg-slate-50 hover:bg-slate-100 border border-[#CBD5E1] p-3 rounded-xl transition-all text-primary active:scale-95 group shadow-sm"
                 title="Đọc thông tin" aria-label="Đọc thông tin">
                 <span
-                  class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">volume_up</span>
+                  class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">volume_up</span>
               </button>
-              <div class="bg-[#28392e] p-3 rounded-xl">
-                <span class="material-symbols-outlined text-4xl text-primary">recycling</span>
+              <div class="bg-blue-50 p-3 rounded-xl border border-blue-100">
+                <span class="material-symbols-outlined text-3xl text-primary">recycling</span>
               </div>
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-              <span class="text-gray-400 text-xs uppercase block mb-1">Loại rác</span>
-              <span class="text-white font-bold text-lg flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-primary"></span>
+            <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100 shadow-sm transition-all hover:shadow-md">
+              <span class="text-primary text-[10px] uppercase font-black tracking-widest block mb-1">Loại rác</span>
+              <span class="text-[#1E293B] font-bold text-lg flex items-center gap-2">
+                <span id="trashTypeDot" class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
                 <span id="trashTypeText">—</span>
               </span>
             </div>
-            <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-              <span class="text-gray-400 text-xs uppercase block mb-1">Chất liệu</span>
-              <span id="materialText" class="text-white font-bold text-lg">—</span>
+            <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100 shadow-sm transition-all hover:shadow-md">
+              <span class="text-primary text-[10px] uppercase font-black tracking-widest block mb-1">Chất liệu</span>
+              <span id="materialText" class="text-[#1E293B] font-bold text-lg">—</span>
             </div>
           </div>
 
           <div class="space-y-4">
-            <div class="p-4 rounded-2xl bg-yellow-900/20 border border-yellow-700/30 flex items-start gap-3">
-              <span class="material-symbols-outlined text-yellow-500 mt-0.5">warning</span>
+            <div class="p-4 rounded-2xl bg-amber-50 border border-amber-100 flex items-start gap-3">
+              <span class="material-symbols-outlined text-amber-500 mt-0.5">warning</span>
               <div>
-                <h4 class="text-yellow-500 font-bold text-sm mb-1">Lưu ý xử lý</h4>
-                <p id="noteText" class="text-gray-300 text-sm">Chưa có lưu ý.</p>
+                <h4 class="text-amber-800 font-bold text-sm mb-1">Lưu ý xử lý</h4>
+                <p id="noteText" class="text-amber-700/80 text-sm">Chưa có lưu ý.</p>
               </div>
             </div>
 
-            <div class="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex items-start gap-3">
-              <span class="material-symbols-outlined text-primary mt-0.5">verified</span>
+            <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100 flex items-start gap-3">
+              <span class="material-symbols-outlined text-blue-500 mt-0.5">verified</span>
               <div>
-                <h4 class="text-primary font-bold text-sm mb-1">Hành động đề xuất</h4>
-                <p id="actionText" class="text-gray-300 text-sm">Chưa có hướng dẫn.</p>
+                <h4 class="text-blue-800 font-bold text-sm mb-1">Hành động đề xuất</h4>
+                <p id="actionText" class="text-blue-700/80 text-sm">Chưa có hướng dẫn.</p>
               </div>
             </div>
           </div>
@@ -276,310 +318,309 @@
       </div>
 
       <div class="lg:col-span-7 flex flex-col gap-6">
-        <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
-          <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+        <div class="bg-white border border-[#CBD5E1] rounded-3xl p-6 md:p-8 shadow-sm">
+          <h2 class="text-xl font-bold text-[#1E293B] mb-6 flex items-center gap-2">
             <span class="material-symbols-outlined text-primary">analytics</span>
             Phân tích chi tiết
           </h2>
 
           <div class="space-y-8">
-            <div class="relative pl-8 border-l-2 border-[#28392e]">
-              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"></div>
-              <h3 class="text-lg font-bold text-white mb-2">Tác động môi trường &amp; Kinh tế</h3>
-              <p id="impactText" class="text-gray-400 text-sm leading-relaxed mb-4">
+            <div class="relative pl-8 border-l-2 border-slate-100">
+              <div class="absolute -left-[9px] top-0 bg-white border-2 border-primary rounded-full w-4 h-4 shadow-sm"></div>
+              <h3 class="text-lg font-bold text-[#1E293B] mb-2">Tác động môi trường &amp; Kinh tế</h3>
+              <p id="impactText" class="text-slate-600 text-sm leading-relaxed mb-4">
                 Không có dữ liệu tác động.
               </p>
             </div>
 
-            <div class="relative pl-8 border-l-2 border-[#28392e]">
-              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"></div>
-              <h3 class="text-lg font-bold text-white mb-2">Mức độ độc hại</h3>
-              <p id="toxicityText" class="text-gray-400 text-sm leading-relaxed">
+            <div class="relative pl-8 border-l-2 border-slate-100">
+              <div class="absolute -left-[9px] top-0 bg-white border-2 border-primary rounded-full w-4 h-4 shadow-sm"></div>
+              <h3 class="text-lg font-bold text-[#1E293B] mb-2">Mức độ độc hại</h3>
+              <p id="toxicityText" class="text-slate-600 text-sm leading-relaxed">
                 Không có dữ liệu độc hại.
               </p>
             </div>
 
-            <div class="relative pl-8 border-l-2 border-[#28392e]">
-              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-green-500 rounded-full w-4 h-4">
+            <div class="relative pl-8 border-l-2 border-slate-100">
+              <div class="absolute -left-[9px] top-0 bg-white border-2 border-green-500 rounded-full w-4 h-4 shadow-sm">
               </div>
-              <h3 class="text-lg font-bold text-white mb-2">Quy trình xử lý an toàn</h3>
-              <ul id="safeStepsList" class="list-disc list-outside ml-4 text-gray-400 text-sm space-y-2">
+              <h3 class="text-lg font-bold text-[#1E293B] mb-2">Quy trình xử lý an toàn</h3>
+              <ul id="safeStepsList" class="list-disc list-outside ml-4 text-slate-600 text-sm space-y-2">
                 <li>Không có hướng dẫn an toàn.</li>
               </ul>
             </div>
           </div>
 
-          <div id="feedbackThankYouMessage"
-            class="hidden mt-6 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-200">
-            Cảm ơn bạn đã xác nhận, hệ thống đã cập nhật lại kết quả và nội dung liên quan.
-          </div>
 
-          <div id="trashStepsWrapper" class="hidden mt-6 border-t border-[#28392e] pt-6">
-            <h3 class="text-white text-lg font-bold mb-4 flex items-center gap-2">
+
+          <div id="trashStepsWrapper" class="hidden mt-6 border-t border-slate-100 pt-6">
+            <h3 class="text-[#1E293B] text-lg font-bold mb-4 flex items-center gap-2">
               <span class="material-symbols-outlined text-primary">imagesmode</span>
               Các bước tái chế & xử lý
             </h3>
             <div id="trashStepsList" class="flex flex-col gap-4"></div>
-            <!-- </div>
-          <img src="stepbottle.jpg" alt="Infographic" class="mt-6 rounded-lg border border-[#28392e] cursor-zoom-in hidden"
-            id="infographicImage">
-        </div> -->
           </div>
         </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-white border border-[#CBD5E1] rounded-3xl p-6 md:p-8 relative overflow-hidden shadow-sm">
+          <div
+            class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
+          </div>
+
+          <h2 class="text-xl font-bold text-[#1E293B] mb-6 flex items-center gap-2 relative z-10">
+            <span class="material-symbols-outlined text-amber-500">lightbulb</span>
+            Câu chuyện tái chế &amp; Ý tưởng
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
             <div
-              class="bg-gradient-to-br from-[#152e20] to-[#0f2117] border border-[#28392e] rounded-3xl p-6 md:p-8 relative overflow-hidden">
-              <div
-                class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
-              </div>
-
-              <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
-                <span class="material-symbols-outlined text-yellow-400">lightbulb</span>
-                Câu chuyện tái chế &amp; Ý tưởng
-              </h2>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+              class="bg-white p-4 rounded-xl border border-slate-100 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/5 group cursor-pointer shadow-sm">
+              <div class="aspect-video bg-slate-100 rounded-lg mb-3 overflow-hidden">
                 <div
-                  class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
-                  <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
-                    <div
-                      class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
-                    </div>
-                  </div>
-                  <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
-                    Làm chậu cây tự động tưới
-                  </h4>
-                  <p class="text-gray-400 text-xs line-clamp-2">
-                    Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho vườn rau tại nhà.
-                  </p>
-                </div>
-
-                <div
-                  class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
-                  <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
-                    <div
-                      class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
-                    </div>
-                  </div>
-                  <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
-                    Adidas &amp; Giày từ rác thải biển
-                  </h4>
-                  <p class="text-gray-400 text-xs line-clamp-2">
-                    Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những đôi giày thể thao bền vững.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p class="text-gray-400 text-xs italic">"Rác thải chỉ là tài nguyên đặt sai chỗ."</p>
-                <button
-                  class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group">
-                  Xem thêm ý tưởng
-                  <span
-                    class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-        <div class="mt-8 border-t border-[#28392e] pt-10">
-          <h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
-            <span class="material-symbols-outlined text-gray-400">category</span>
-            Các vật dụng tương tự
-          </h3>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-              href="#">
-              <div class="flex items-center gap-3 mb-2">
-                <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');">
-                </div>
-                <div>
-                  <h4 class="text-white font-bold text-sm group-hover:text-primary">Ly nhựa PP</h4>
-                  <span class="text-xs text-gray-500">Tái chế được</span>
-                </div>
-              </div>
-            </a>
-
-            <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-              href="#">
-              <div class="flex items-center gap-3 mb-2">
-                <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+                  class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                   style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
                 </div>
-                <div>
-                  <h4 class="text-white font-bold text-sm group-hover:text-primary">Hộp xốp</h4>
-                  <span class="text-xs text-red-400">Rác thải</span>
-                </div>
               </div>
-            </a>
+              <h4 class="text-[#1E293B] font-bold text-sm mb-1 group-hover:text-primary transition-colors">
+                Làm chậu cây tự động tưới
+              </h4>
+              <p class="text-slate-500 text-xs line-clamp-2">
+                Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho vườn rau tại nhà.
+              </p>
+            </div>
 
-            <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-              href="#">
-              <div class="flex items-center gap-3 mb-2">
-                <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+            <div
+              class="bg-white p-4 rounded-xl border border-slate-100 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/5 group cursor-pointer shadow-sm">
+              <div class="aspect-video bg-slate-100 rounded-lg mb-3 overflow-hidden">
+                <div
+                  class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                   style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
                 </div>
-                <div>
-                  <h4 class="text-white font-bold text-sm group-hover:text-primary">Nắp chai HDPE</h4>
-                  <span class="text-xs text-gray-500">Tái chế được</span>
-                </div>
               </div>
-            </a>
+              <h4 class="text-[#1E293B] font-bold text-sm mb-1 group-hover:text-primary transition-colors">
+                Adidas &amp; Giày từ rác thải biển
+              </h4>
+              <p class="text-slate-500 text-xs line-clamp-2">
+                Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những đôi giày thể thao bền vững.
+              </p>
+            </div>
+          </div>
 
-            <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
-              href="#">
-              <div class="flex items-center gap-3 mb-2">
-                <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
-                  style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');">
-                </div>
-                <div>
-                  <h4 class="text-white font-bold text-sm group-hover:text-primary">Túi ni lông</h4>
-                  <span class="text-xs text-yellow-500">Khó tái chế</span>
-                </div>
-              </div>
-            </a>
+          <div
+            class="mt-6 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-slate-400 text-xs italic">"Rác thải chỉ là tài nguyên đặt sai chỗ."</p>
+            <button
+              class="text-primary text-sm font-bold hover:text-[#1E293B] transition-colors flex items-center gap-1 group">
+              Xem thêm ý tưởng
+              <span
+                class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div id="imgModal" class="fixed inset-0 z-[999] hidden">
-          <div id="imgModalOverlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
-          <div class="absolute inset-0 flex items-center justify-center p-4">
-            <div class="relative w-full max-w-5xl">
-              <button id="imgModalClose"
-                class="absolute -top-4 -right-4 md:top-2 md:right-2 z-10 size-10 rounded-full bg-surface-dark border border-[#28392e] flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors"
-                aria-label="Close">
+    <div class="mt-8 border-t border-slate-200 pt-10 px-4">
+      <h3 class="text-[#1E293B] text-xl font-bold mb-6 flex items-center gap-2">
+        <span class="material-symbols-outlined text-slate-400">category</span>
+        Các vật dụng tương tự
+      </h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <a class="group bg-white border border-[#CBD5E1] p-4 rounded-xl hover:border-primary/50 transition-all hover:shadow-md shadow-sm"
+          href="#">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="bg-slate-100 w-10 h-10 rounded-lg bg-cover bg-center"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');">
+            </div>
+            <div>
+              <h4 class="text-[#1E293B] font-bold text-sm group-hover:text-primary transition-colors">Ly nhựa PP</h4>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tái chế</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="group bg-white border border-[#CBD5E1] p-4 rounded-xl hover:border-primary/50 transition-all hover:shadow-md shadow-sm"
+          href="#">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="bg-slate-100 w-10 h-10 rounded-lg bg-cover bg-center"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
+            </div>
+            <div>
+              <h4 class="text-[#1E293B] font-bold text-sm group-hover:text-primary transition-colors">Hộp xốp</h4>
+              <span class="text-[10px] font-bold text-red-400 uppercase tracking-widest">Rác thải</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="group bg-white border border-[#CBD5E1] p-4 rounded-xl hover:border-primary/50 transition-all hover:shadow-md shadow-sm"
+          href="#">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="bg-slate-100 w-10 h-10 rounded-lg bg-cover bg-center"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
+            </div>
+            <div>
+              <h4 class="text-[#1E293B] font-bold text-sm group-hover:text-primary transition-colors">Nắp chai HDPE</h4>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tái chế</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="group bg-white border border-[#CBD5E1] p-4 rounded-xl hover:border-primary/50 transition-all hover:shadow-md shadow-sm"
+          href="#">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="bg-slate-100 w-10 h-10 rounded-lg bg-cover bg-center"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');">
+            </div>
+            <div>
+              <h4 class="text-[#1E293B] font-bold text-sm group-hover:text-primary transition-colors">Túi ni lông</h4>
+              <span class="text-[10px] font-bold text-amber-500 uppercase tracking-widest">Khó tái chế</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div id="imgModal" class="fixed inset-0 z-[999] hidden">
+      <div id="imgModalOverlay" class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm"></div>
+      <div class="absolute inset-0 flex items-center justify-center p-4">
+        <div class="relative w-full max-w-5xl">
+          <button id="imgModalClose"
+            class="absolute -top-4 -right-4 md:top-2 md:right-2 z-10 size-10 rounded-full bg-white border border-[#CBD5E1] flex items-center justify-center text-[#1E293B] hover:border-primary/60 hover:text-primary transition-colors shadow-lg"
+            aria-label="Close">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+
+          <div class="rounded-2xl overflow-hidden border border-[#CBD5E1] bg-white shadow-2xl">
+            <img id="imgModalSrc" src="" alt="Zoomed image"
+              class="w-full h-auto max-h-[85vh] object-contain select-none" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="confirmModal" class="fixed inset-0 z-[1000] hidden" data-open="false">
+      <div id="confirmModalOverlay" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+
+      <div class="absolute inset-0 flex items-center justify-center px-4 py-6 sm:px-6 sm:py-8">
+        <div
+          class="confirm-modal-panel bg-white border border-[#CBD5E1] rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+
+          <div class="shrink-0 px-5 py-5 md:px-6 md:py-6 border-b border-slate-100">
+            <div class="flex items-start justify-between gap-4">
+              <div class="min-w-0">
+                <div
+                  class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-100 mb-3">
+                  <span class="material-symbols-outlined text-amber-500 text-[18px]">warning</span>
+                  <span class="text-amber-600 font-bold text-xs uppercase tracking-widest">Cần xác nhận</span>
+                </div>
+
+                <h3 class="text-xl md:text-2xl font-black text-[#1E293B] leading-tight">
+                  Xác nhận kết quả nhận diện
+                </h3>
+
+                <p id="confirmModalDescription" class="text-slate-500 text-sm mt-2 leading-relaxed">
+                  Hệ thống cần bạn xác nhận lại kết quả này.
+                </p>
+              </div>
+
+              <button id="confirmModalClose"
+                class="shrink-0 size-10 rounded-full bg-slate-50 border border-[#CBD5E1] flex items-center justify-center text-[#1E293B] hover:border-primary/60 hover:text-primary transition-colors shadow-sm">
                 <span class="material-symbols-outlined">close</span>
               </button>
+            </div>
+          </div>
 
-              <div class="rounded-2xl overflow-hidden border border-[#28392e] bg-black shadow-2xl">
-                <img id="imgModalSrc" src="" alt="Zoomed image"
-                  class="w-full h-auto max-h-[85vh] object-contain select-none" />
+          <div class="confirm-modal-body flex-1 px-5 py-5 md:px-6 md:py-6 space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span class="text-slate-500 text-[10px] uppercase font-bold tracking-widest block mb-1">Nhãn hiện tại</span>
+                <span id="confirmCurrentLabel" class="text-[#1E293B] font-bold text-lg break-words">—</span>
               </div>
+
+              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span class="text-slate-500 text-[10px] uppercase font-bold tracking-widest block mb-1">Độ tin cậy</span>
+                <span id="confirmCurrentConfidence" class="text-[#1E293B] font-bold text-lg">—</span>
+              </div>
+            </div>
+
+            <div id="confirmCropWrapper" class="hidden">
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[20px]">crop</span>
+                  <p class="text-sm font-bold text-[#1E293B]">Ảnh crop vật thể cần xác nhận</p>
+                </div>
+                <button id="confirmCropZoomBtn" type="button"
+                  class="px-3 py-1.5 rounded-xl bg-slate-50 border border-[#CBD5E1] text-[#1E293B] text-xs font-bold hover:border-primary/60 transition shadow-sm">
+                  Phóng to
+                </button>
+              </div>
+
+              <div class="confirm-crop-box border border-[#CBD5E1]">
+                <img id="confirmCropImage" src="" alt="Crop preview" />
+                <span class="confirm-crop-zoom-hint">
+                  <span class="material-symbols-outlined text-[16px]">zoom_in</span>
+                  Nhấn để phóng to
+                </span>
+              </div>
+            </div>
+
+            <div id="confirmCropEmpty"
+              class="hidden rounded-2xl border border-dashed border-[#CBD5E1] bg-slate-50 px-4 py-8 text-sm text-slate-400 text-center">
+              Không có ảnh crop cho vật thể này.
+            </div>
+
+            <div>
+              <label for="confirmCorrectLabel" class="block text-sm font-bold text-[#1E293B] mb-2">
+                Nhãn đúng
+              </label>
+              <input id="confirmCorrectLabel" type="text"
+                class="w-full rounded-2xl bg-white border border-[#CBD5E1] text-[#1E293B] placeholder:text-slate-400 focus:border-primary focus:ring-primary shadow-sm"
+                placeholder="Ví dụ: Chai nhựa, Giấy, Lon..." />
+              <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                Nếu kết quả đúng, bấm “Đúng”. Nếu sai, nhập tên đúng của vật thể
+                rồi bấm “Sai / Sửa nhãn”.
+              </p>
+            </div>
+
+            <div>
+              <label for="confirmComment" class="block text-sm font-bold text-[#1E293B] mb-2">
+                Ghi chú
+              </label>
+              <textarea id="confirmComment" rows="3"
+                class="w-full rounded-2xl bg-white border border-[#CBD5E1] text-[#1E293B] placeholder:text-slate-400 focus:border-primary focus:ring-primary shadow-sm"
+                placeholder="Ghi chú thêm nếu cần"></textarea>
+            </div>
+
+            <div id="confirmMessage" class="hidden rounded-2xl px-4 py-3 text-sm font-medium border"></div>
+          </div>
+
+          <div class="shrink-0 px-5 pb-5 md:px-6 md:pb-6 pt-3 bg-slate-50 border-t border-slate-100">
+            <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
+              <button id="confirmCorrectBtn"
+                class="w-full sm:w-auto px-8 py-3 rounded-2xl bg-primary text-white font-black hover:opacity-90 transition disabled:opacity-50 shadow-lg shadow-blue-100">
+                Đúng
+              </button>
+
+              <button id="confirmWrongBtn"
+                class="w-full sm:w-auto px-8 py-3 rounded-2xl bg-amber-500 text-white font-black hover:opacity-90 transition disabled:opacity-50 shadow-lg shadow-amber-100">
+                Sai / Sửa nhãn
+              </button>
+
+              <button id="confirmSkipBtn"
+                class="w-full sm:w-auto px-8 py-3 rounded-2xl border border-[#CBD5E1] text-slate-600 font-bold hover:bg-white transition shadow-sm">
+                Để sau
+              </button>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+      </div>
+    </div>
 
-        <div id="confirmModal" class="fixed inset-0 z-[1000] hidden" data-open="false">
-          <div id="confirmModalOverlay" class="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
-
-          <div class="absolute inset-0 flex items-center justify-center px-4 py-6 sm:px-6 sm:py-8">
-            <div
-              class="confirm-modal-panel bg-surface-dark border border-[#28392e] rounded-3xl shadow-2xl overflow-hidden flex flex-col">
-
-              <div class="shrink-0 px-5 py-5 md:px-6 md:py-6 border-b border-[#28392e]">
-                <div class="flex items-start justify-between gap-4">
-                  <div class="min-w-0">
-                    <div
-                      class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-900/20 border border-yellow-700/30 mb-3">
-                      <span class="material-symbols-outlined text-yellow-400 text-[18px]">warning</span>
-                      <span class="text-yellow-400 font-bold text-sm">Cần xác nhận</span>
-                    </div>
-
-                    <h3 class="text-xl md:text-2xl font-black text-white leading-tight">
-                      Xác nhận kết quả nhận diện
-                    </h3>
-
-                    <p id="confirmModalDescription" class="text-gray-400 text-sm mt-2 leading-relaxed">
-                      Hệ thống cần bạn xác nhận lại kết quả này.
-                    </p>
-                  </div>
-
-                  <button id="confirmModalClose"
-                    class="shrink-0 size-10 rounded-full bg-[#152e20] border border-[#28392e] flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="confirm-modal-body flex-1 px-5 py-5 md:px-6 md:py-6 space-y-5">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                    <span class="text-gray-400 text-xs uppercase block mb-1">Nhãn hiện tại</span>
-                    <span id="confirmCurrentLabel" class="text-white font-bold text-lg break-words">—</span>
-                  </div>
-
-                  <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                    <span class="text-gray-400 text-xs uppercase block mb-1">Độ tin cậy</span>
-                    <span id="confirmCurrentConfidence" class="text-white font-bold text-lg">—</span>
-                  </div>
-                </div>
-
-                <div id="confirmCropWrapper" class="hidden">
-                  <div class="flex items-center justify-between gap-2 mb-3">
-                    <div class="flex items-center gap-2">
-                      <span class="material-symbols-outlined text-primary text-[20px]">crop</span>
-                      <p class="text-sm font-bold text-white">Ảnh crop vật thể cần xác nhận</p>
-                    </div>
-                    <button id="confirmCropZoomBtn" type="button"
-                      class="px-3 py-1.5 rounded-xl bg-[#152e20] border border-[#28392e] text-white text-xs font-bold hover:border-primary/60 transition">
-                      Phóng to
-                    </button>
-                  </div>
-
-                  <div class="confirm-crop-box border border-[#28392e]">
-                    <img id="confirmCropImage" src="" alt="Crop preview" />
-                    <span class="confirm-crop-zoom-hint">
-                      <span class="material-symbols-outlined text-[16px]">zoom_in</span>
-                      Nhấn để phóng to
-                    </span>
-                  </div>
-                </div>
-
-                <div id="confirmCropEmpty"
-                  class="hidden rounded-2xl border border-dashed border-[#28392e] bg-[#152e20] px-4 py-4 text-sm text-gray-400">
-                  Không có ảnh crop cho vật thể này.
-                </div>
-
-                <div>
-                  <label for="confirmCorrectLabel" class="block text-sm font-bold text-white mb-2">
-                    Nhãn đúng
-                  </label>
-                  <input id="confirmCorrectLabel" type="text"
-                    class="w-full rounded-2xl bg-[#152e20] border border-[#28392e] text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                    placeholder="Ví dụ: Chai nhựa, Giấy, Lon..." />
-                  <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                    Nếu kết quả đúng, bấm “Đúng”. Nếu sai, nhập tên đúng của vật thể
-                    rồi bấm “Sai / Sửa nhãn”.
-                  </p>
-                </div>
-
-                <div>
-                  <label for="confirmComment" class="block text-sm font-bold text-white mb-2">
-                    Ghi chú
-                  </label>
-                  <textarea id="confirmComment" rows="3"
-                    class="w-full rounded-2xl bg-[#152e20] border border-[#28392e] text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                    placeholder="Ghi chú thêm nếu cần"></textarea>
-                </div>
-
-                <div id="confirmMessage" class="hidden rounded-2xl px-4 py-3 text-sm font-medium border"></div>
-              </div>
-
-              <div class="shrink-0 px-5 pb-5 md:px-6 md:pb-6 pt-3 bg-surface-dark border-t border-[#28392e]">
-                <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
-                  <button id="confirmCorrectBtn"
-                    class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-primary text-[#051d0e] font-black hover:opacity-90 transition disabled:opacity-50">
-                    Đúng
-                  </button>
-
-                  <button id="confirmWrongBtn"
-                    class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-yellow-400 text-black font-black hover:opacity-90 transition disabled:opacity-50">
-                    Sai / Sửa nhãn
-                  </button>
-
-                  <button id="confirmSkipBtn"
-                    class="w-full sm:w-auto px-6 py-3 rounded-2xl border border-[#28392e] text-white font-bold hover:border-primary/60 transition">
-                    Để sau
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
   </main>
 
   <div id="footer-container"></div>
@@ -814,10 +855,10 @@
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className =
-          "relative flex items-center gap-2 px-4 py-2 rounded-full border transition-colors text-sm font-bold " +
+          "relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all text-sm font-bold shadow-sm " +
           (isActive
-            ? "bg-primary text-[#051d0e] border-primary"
-            : "bg-[#152e20] text-gray-200 border-[#28392e] hover:border-primary/50 hover:text-white");
+            ? "bg-primary text-white border-primary shadow-lg shadow-blue-100"
+            : "bg-white text-slate-600 border-[#CBD5E1] hover:border-primary/50 hover:text-primary");
 
         const name = document.createElement("span");
         name.textContent = det?.labelDisplay || prettifyLabel(det?.label);
@@ -827,8 +868,8 @@
         if (quantity > 1) {
           const badge = document.createElement("span");
           badge.className =
-            "ml-1 px-2 py-0.5 rounded-full text-xs font-black " +
-            (isActive ? "bg-[#051d0e]/15 text-[#051d0e]" : "bg-black/20 text-gray-200");
+            "ml-1 px-2 py-0.5 rounded-full text-[10px] font-black " +
+            (isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500");
           badge.textContent = `x${quantity}`;
           btn.appendChild(badge);
         }
@@ -837,8 +878,8 @@
           const warn = document.createElement("span");
           warn.className =
             "ml-1 inline-flex items-center justify-center size-5 rounded-full " +
-            (isActive ? "bg-[#051d0e]/15" : "bg-white/10");
-          warn.innerHTML = `<span class="material-symbols-outlined text-[16px] ${isActive ? "text-[#051d0e]" : "text-yellow-400"}">warning</span>`;
+            (isActive ? "bg-white/20" : "bg-amber-50");
+          warn.innerHTML = `<span class="material-symbols-outlined text-[16px] ${isActive ? "text-white" : "text-amber-500"}">warning</span>`;
           btn.appendChild(warn);
         }
 
@@ -846,8 +887,8 @@
           const ok = document.createElement("span");
           ok.className =
             "ml-1 inline-flex items-center justify-center size-5 rounded-full " +
-            (isActive ? "bg-[#051d0e]/15" : "bg-white/10");
-          ok.innerHTML = `<span class="material-symbols-outlined text-[16px] ${isActive ? "text-[#051d0e]" : "text-primary"}">check_circle</span>`;
+            (isActive ? "bg-white/20" : "bg-blue-50");
+          ok.innerHTML = `<span class="material-symbols-outlined text-[16px] ${isActive ? "text-white" : "text-primary"}">check_circle</span>`;
           btn.appendChild(ok);
         }
 
@@ -855,8 +896,8 @@
           const edit = document.createElement("span");
           edit.className =
             "ml-1 inline-flex items-center justify-center size-5 rounded-full " +
-            (isActive ? "bg-[#051d0e]/15" : "bg-white/10");
-          edit.innerHTML = `<span class="material-symbols-outlined text-[16px] ${isActive ? "text-[#051d0e]" : "text-blue-400"}">edit</span>`;
+            (isActive ? "bg-white/20" : "bg-slate-50");
+          edit.innerHTML = `<span class="material-symbols-outlined text-[16px] ${isActive ? "text-white" : "text-slate-400"}">edit</span>`;
           btn.appendChild(edit);
         }
 
@@ -897,14 +938,14 @@
       if (!el) return;
 
       const base = "rounded-2xl px-4 py-3 text-sm font-medium border";
-      let extra = "bg-[#152e20] border-[#28392e] text-gray-200";
+      let extra = "bg-slate-50 border-[#CBD5E1] text-slate-700";
 
       if (type === "success") {
-        extra = "bg-primary/10 border-primary/20 text-primary";
+        extra = "bg-blue-50 border-blue-100 text-blue-800";
       } else if (type === "error") {
-        extra = "bg-red-900/20 border-red-700/30 text-red-300";
+        extra = "bg-red-50 border-red-100 text-red-800";
       } else if (type === "warning") {
-        extra = "bg-yellow-900/20 border-yellow-700/30 text-yellow-300";
+        extra = "bg-amber-50 border-amber-100 text-amber-800";
       }
 
       el.className = `${base} ${extra}`;
@@ -919,15 +960,42 @@
       el.textContent = "";
     }
 
-    function showFeedbackThankYouMessage() {
-      const el = document.getElementById("feedbackThankYouMessage");
-      if (!el) return;
-      el.classList.remove("hidden");
+    function showToast(message, type = "success") {
+      const container = document.getElementById("toast-container");
+      if (!container) return;
 
-      clearTimeout(showFeedbackThankYouMessage._t);
-      showFeedbackThankYouMessage._t = setTimeout(() => {
-        el.classList.add("hidden");
+      const toast = document.createElement("div");
+      toast.className = "toast";
+
+      let icon = "info";
+      let iconClass = "text-primary";
+      if (type === "success") {
+        icon = "check_circle";
+        iconClass = "text-green-500";
+      } else if (type === "error") {
+        icon = "error";
+        iconClass = "text-red-500";
+      } else if (type === "warning") {
+        icon = "warning";
+        iconClass = "text-amber-500";
+      }
+
+      toast.innerHTML = `
+        <span class="material-symbols-outlined ${iconClass}">${icon}</span>
+        <span class="text-slate-700 text-sm font-bold">${message}</span>
+      `;
+
+      container.appendChild(toast);
+
+      // Auto hide after 3.5s
+      setTimeout(() => {
+        toast.classList.add("hide");
+        setTimeout(() => toast.remove(), 310);
       }, 3500);
+    }
+
+    function showFeedbackThankYouMessage() {
+      showToast("Cảm ơn bạn đã xác nhận, hệ thống đã cập nhật lại kết quả và nội dung liên quan.", "success");
     }
 
     function renderFromApi(payload, options = {}) {

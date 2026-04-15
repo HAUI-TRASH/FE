@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="dark" lang="vi">
+<html class="light" lang="vi">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Hướng Dẫn Phân Loại Rác Tại Nguồn - SmartDisposal </title>
+    <title>Điều khoản sử dụng - SmartDisposal</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
@@ -19,10 +19,10 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#13ec5b",
-                        "background-light": "#f6f8f6",
-                        "background-dark": "#102216",
-                        "surface-dark": "#1c2a21",
+                        primary: "#3B82F6",
+                        "background-light": "#E2E8F0",
+                        "background-dark": "#E2E8F0",
+                        "surface-dark": "#FFFFFF",
                         "surface-light": "#ffffff",
                     },
                     fontFamily: {
@@ -55,16 +55,16 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #102216;
+            background: #E2E8F0;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #28392e;
+            background: #CBD5E1;
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #3b5443;
+            background: #94A3B8;
         }
     </style>
 </head>
@@ -74,7 +74,6 @@
         const html = await res.text();
         document.getElementById(id).innerHTML = html;
 
-        // Nếu là header thì chạy active menu
         if (id === "header-container") {
             setActiveMenu();
         }
@@ -87,7 +86,6 @@
         links.forEach(link => {
             const linkPage = link.getAttribute("href");
 
-            // Nếu đang ở blog list hoặc blog detail
             if (
                 (linkPage === "list_blog.html" &&
                     (currentPage === "list_blog.html" || currentPage.includes("blog")))
@@ -109,99 +107,131 @@
 </script>
 
 <body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-300">
+    class="bg-[#E2E8F0] min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-[#1E293B] antialiased">
 
     <div id="header-container"></div>
     <main class="flex-1 w-full px-4 py-12">
         <div class="max-w-4xl mx-auto">
             <!-- Title -->
             <div class="text-center mb-16">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                    Điều khoản sử dụng
+                <h1 class="text-4xl md:text-6xl font-black text-[#1E293B] mb-6 tracking-tighter">
+                    Điều khoản <span class="text-primary">Sử dụng</span>
                 </h1>
-                <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                    Vui lòng đọc kỹ các điều khoản trước khi sử dụng hệ thống SmartDisposal .
+                <p class="text-slate-500 max-w-2xl mx-auto font-medium text-lg leading-relaxed">
+                    Vui lòng đọc kỹ các điều khoản trước khi sử dụng hệ thống SmartDisposal để đảm bảo trải nghiệm tốt nhất.
                 </p>
             </div>
 
-            <!-- Content -->
-            <div class="space-y-12 leading-relaxed text-slate-700 dark:text-slate-300">
-
-                <!-- 1 -->
-                <section>
-                    <h2 class="text-2xl font-bold text-primary mb-4">1. Giới thiệu</h2>
-                    <p>
-                        EcoScan AI là nền tảng ứng dụng trí tuệ nhân tạo hỗ trợ phân loại rác thải thông minh.
-                        Khi truy cập và sử dụng dịch vụ, bạn đồng ý tuân thủ các điều khoản được quy định tại đây.
+            <!-- Content Cards -->
+            <div class="space-y-8">
+                <section class="bg-white border border-[#CBD5E1] p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200 hover:border-primary/30 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-blue-50 p-3 rounded-2xl text-primary">
+                            <span class="material-symbols-outlined font-black text-[24px]">info</span>
+                        </div>
+                        <h2 class="text-2xl font-black text-[#1E293B] tracking-tight">1. Giới thiệu</h2>
+                    </div>
+                    <p class="text-slate-600 font-medium leading-relaxed">
+                        EcoScan AI là nền tảng ứng dụng trí tuệ nhân tạo (AI) hỗ trợ phân loại rác thải thông minh.
+                        Khi truy cập và sử dụng dịch vụ, bạn đồng ý tuân thủ các điều khoản được quy định tại đây nhằm xây dựng một cộng đồng văn minh và bảo vệ môi trường.
                     </p>
                 </section>
 
-                <!-- 2 -->
-                <section>
-                    <h2 class="text-2xl font-bold text-primary mb-4">2. Quyền và trách nhiệm của người dùng</h2>
-                    <ul class="space-y-3 list-disc pl-6">
-                        <li>Không sử dụng hệ thống cho mục đích vi phạm pháp luật.</li>
-                        <li>Không tải lên nội dung độc hại, phản cảm hoặc sai sự thật.</li>
-                        <li>Chịu trách nhiệm về nội dung hình ảnh bạn cung cấp.</li>
-                        <li>Không can thiệp, phá hoại hoặc làm gián đoạn hệ thống.</li>
+                <section class="bg-white border border-[#CBD5E1] p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200 hover:border-primary/30 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-blue-50 p-3 rounded-2xl text-primary">
+                            <span class="material-symbols-outlined font-black text-[24px]">gavel</span>
+                        </div>
+                        <h2 class="text-2xl font-black text-[#1E293B] tracking-tight">2. Quyền và trách nhiệm</h2>
+                    </div>
+                    <ul class="space-y-4 list-none font-medium text-slate-600">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-[20px] font-black">check_circle</span>
+                            <span>Không sử dụng hệ thống cho bất kỳ mục đích vi phạm pháp luật hiện hành nào.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-[20px] font-black">check_circle</span>
+                            <span>Không tải lên nội dung độc hại, phản cảm hoặc chứa thông tin sai sự thật.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-[20px] font-black">check_circle</span>
+                            <span>Chịu trách nhiệm hoàn toàn về tính chính xác của hình ảnh bạn cung cấp cho hệ thống.</span>
+                        </li>
                     </ul>
                 </section>
 
-                <!-- 3 -->
-                <section>
-                    <h2 class="text-2xl font-bold text-primary mb-4">3. Quyền của SmartDisposal </h2>
-                    <ul class="space-y-3 list-disc pl-6">
-                        <li>Cải tiến, thay đổi hoặc tạm ngưng dịch vụ mà không cần báo trước.</li>
-                        <li>Từ chối cung cấp dịch vụ nếu phát hiện hành vi vi phạm điều khoản.</li>
-                        <li>Sử dụng dữ liệu ẩn danh để cải thiện độ chính xác AI.</li>
+                <section class="bg-white border border-[#CBD5E1] p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200 hover:border-primary/30 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-blue-50 p-3 rounded-2xl text-primary">
+                            <span class="material-symbols-outlined font-black text-[24px]">shield</span>
+                        </div>
+                        <h2 class="text-2xl font-black text-[#1E293B] tracking-tight">3. Quyền của SmartDisposal</h2>
+                    </div>
+                    <ul class="space-y-4 list-none font-medium text-slate-600">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-[20px] font-black">check_circle</span>
+                            <span>Có quyền cải tiến, thay đổi hoặc tạm ngưng một phần dịch vụ để bảo trì hệ thống.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-[20px] font-black">check_circle</span>
+                            <span>Từ chối cung cấp dịch vụ nếu phát hiện hành vi vi phạm nghiêm trọng các điều khoản.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-[20px] font-black">check_circle</span>
+                            <span>Sử dụng dữ liệu ẩn danh để đào tạo mô hình AI, giúp ứng dụng nhận diện chuẩn xác hơn.</span>
+                        </li>
                     </ul>
                 </section>
 
-                <!-- 4 -->
-                <section>
-                    <h2 class="text-2xl font-bold text-primary mb-4">4. Bảo mật thông tin</h2>
-                    <p>
-                        Chúng tôi cam kết bảo mật thông tin cá nhân của người dùng.
-                        Dữ liệu hình ảnh được sử dụng chỉ nhằm mục đích phân tích và cải thiện hệ thống.
+                <section class="bg-white border border-[#CBD5E1] p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200 hover:border-primary/30 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-blue-50 p-3 rounded-2xl text-primary">
+                            <span class="material-symbols-outlined font-black text-[24px]">lock</span>
+                        </div>
+                        <h2 class="text-2xl font-black text-[#1E293B] tracking-tight">4. Bảo mật thông tin</h2>
+                    </div>
+                    <p class="text-slate-600 font-medium leading-relaxed">
+                        Chúng tôi cam kết bảo mật tuyệt đối thông tin cá nhân của người dùng.
+                        Dữ liệu hình ảnh được sử dụng chỉ nhằm mục đích phân tích rác thải và cải thiện độ thông minh của hệ thống EcoScan.
                     </p>
                 </section>
 
-                <!-- 5 -->
-                <section>
-                    <h2 class="text-2xl font-bold text-primary mb-4">5. Giới hạn trách nhiệm</h2>
-                    <p>
-                        SmartDisposal  cung cấp kết quả dựa trên mô hình AI.
-                        Mặc dù hệ thống đạt độ chính xác cao, chúng tôi không đảm bảo kết quả tuyệt đối 100%.
+                <section class="bg-white border border-[#CBD5E1] p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200 hover:border-primary/30 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-blue-50 p-3 rounded-2xl text-primary">
+                            <span class="material-symbols-outlined font-black text-[24px]">priority_high</span>
+                        </div>
+                        <h2 class="text-2xl font-black text-[#1E293B] tracking-tight">5. Giới hạn trách nhiệm</h2>
+                    </div>
+                    <p class="text-slate-600 font-medium leading-relaxed">
+                        SmartDisposal cung cấp kết quả phân tích dựa trên các mô hình AI tiên tiến nhất.
+                        Mặc dù hệ thống đạt sự ổn định cao, chúng tôi không cam kết kết quả luôn chính xác 100% trong mọi điều kiện ánh sáng và góc chụp.
                     </p>
                 </section>
 
-                <!-- 6 -->
-                <section>
-                    <h2 class="text-2xl font-bold text-primary mb-4">6. Thay đổi điều khoản</h2>
-                    <p>
-                        Các điều khoản có thể được cập nhật theo thời gian.
-                        Việc tiếp tục sử dụng dịch vụ đồng nghĩa với việc bạn chấp nhận các thay đổi mới nhất.
+                <!-- Contact CTA Card -->
+                <section class="bg-primary p-8 md:p-12 rounded-[2.5rem] text-white shadow-xl shadow-blue-200 text-center relative overflow-hidden group">
+                  <div class="absolute inset-0 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                  <div class="relative z-10">
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 tracking-tight">Liên hệ hợp tác?</h3>
+                    <p class="text-blue-50 font-medium mb-8 max-w-xl mx-auto">
+                      Nếu bạn là tổ chức môi trường muốn tích hợp công nghệ EcoScan AI, hãy kết nối với chúng tôi ngay hôm nay.
                     </p>
+                    <a href="mailto:contact@smartdisposal.com" class="inline-block bg-white text-primary font-black uppercase tracking-widest text-[10px] px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-all">
+                      Gửi thư hỗ trợ
+                    </a>
+                  </div>
                 </section>
-
-                <!-- Contact -->
-                <section class="bg-primary/10 border border-primary/20 p-6 rounded-xl">
-                    <h3 class="text-xl font-bold mb-3 text-primary">Liên hệ</h3>
-                    <p>
-                        Nếu bạn có bất kỳ câu hỏi nào liên quan đến điều khoản sử dụng,
-                        vui lòng liên hệ đội ngũ SmartDisposal  để được hỗ trợ.
-                    </p>
-                </section>
-
             </div>
 
-            <!-- CTA -->
-            <div class="mt-20 text-center">
-                <a href="index.html"
-                    class="inline-block bg-primary text-background-dark font-bold px-8 py-4 rounded-xl hover:scale-105 transition-transform">
+            <!-- Back Link -->
+            <div class="mt-16 text-center">
+                <a href="index.html" class="inline-flex items-center gap-2 text-slate-400 hover:text-primary font-black uppercase tracking-widest text-[10px] transition-colors">
+                    <span class="material-symbols-outlined text-lg">arrow_back</span>
                     Quay lại trang chủ
                 </a>
             </div>
+        </div>
     </main>
 
     <div id="footer-container"></div>
