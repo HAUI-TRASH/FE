@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Lịch Sử Nhận Diện Rác (Tối Giản)</title>
+    <title>Lịch Sử Nhận Diện Rác - SmartDisposal </title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
@@ -12,6 +12,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    
+    <!-- Flatpickr for Date Range -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/vn.js"></script>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -59,17 +66,39 @@
 </head>
 
 <script>
+    function renderAuthUI() {
+        const token = localStorage.getItem("accessToken");
+        const acc = JSON.parse(localStorage.getItem("account") || "{}");
+
+        const btns = document.getElementById("auth-buttons");
+        const userBox = document.getElementById("user-box");
+        const avatar = document.getElementById("user-menu-button");
+
+        if (!btns || !userBox) return;
+
+        if (token) {
+            btns.classList.add("hidden");
+            userBox.classList.remove("hidden");
+
+            const defaultAvatar = "./avt.png";
+            if (avatar) {
+                avatar.style.backgroundImage = `url('${acc?.avatarUrl || defaultAvatar}')`;
+            }
+        } else {
+            btns.classList.remove("hidden");
+            userBox.classList.add("hidden");
+        }
+    }
     async function loadComponent(id, file) {
         const res = await fetch(file);
         const html = await res.text();
         document.getElementById(id).innerHTML = html;
 
-        // Nếu là header thì chạy active menu
         if (id === "header-container") {
             setActiveMenu();
+            renderAuthUI();
         }
     }
-
     function setActiveMenu() {
         const links = document.querySelectorAll(".nav-link");
         const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -86,6 +115,12 @@
         const menu = document.getElementById("user-menu");
         menu?.classList.toggle("hidden");
     };
+
+    window.toggleMobileMenu = function () {
+        const menu = document.getElementById("mobile-menu");
+        menu?.classList.toggle("hidden");
+    };
+
 
     loadComponent("header-container", "header.html");
     loadComponent("footer-container", "footer.html");
@@ -127,12 +162,9 @@
                     </p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <div class="flex items-center gap-3 px-4 py-2.5 bg-surface-dark rounded-xl border border-[#28392e]">
-                        <span class="material-symbols-outlined text-primary text-sm">calendar_month</span>
-                        <span class="text-gray-300 text-sm font-medium">01/05/2024 - 31/05/2024</span>
-                        <button class="text-gray-500 hover:text-white transition-colors ml-2">
-                            <span class="material-symbols-outlined text-lg">expand_more</span>
-                        </button>
+                    <div class="relative flex items-center px-4 py-2 bg-surface-dark rounded-xl border border-[#28392e] cursor-pointer hover:border-primary/50 transition-colors">
+                        <span class="material-symbols-outlined text-primary text-[20px] mr-2">calendar_month</span>
+                        <input type="text" id="dateFilterInput" class="bg-transparent border-none text-gray-300 text-sm font-medium focus:ring-0 w-[190px] cursor-pointer p-0 m-0" placeholder="Lọc theo khoảng ngày..." readonly>
                     </div>
                 </div>
             </div>
@@ -159,178 +191,10 @@
                                     Chi tiết</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-[#28392e]">
-                            <tr class="hover:bg-white/5 transition-colors group">
-                                <td class="px-6 py-5">
-                                    <div class="flex flex-col">
-                                        <span class="text-white font-medium">15/05/2024</span>
-                                        <span class="text-gray-500 text-xs">14:30 PM</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div
-                                        class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-primary/50 transition-colors bg-gray-800">
-                                        <div class="w-full h-full bg-cover bg-center"
-                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx");'>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <span class="text-white font-semibold">Nhựa PET</span>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div class="flex items-center gap-2">
-                                        <div
-                                            class="size-7 rounded-md bg-primary/20 flex items-center justify-center text-primary">
-                                            <span class="material-symbols-outlined text-lg">delete</span>
-                                        </div>
-                                        <span class="text-gray-300 text-sm">Thùng Tái Chế</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div
-                                            class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
-                                            <div class="bg-primary h-full w-[98%] shadow-[0_0_8px_rgba(19,236,91,0.5)]">
-                                            </div>
-                                        </div>
-                                        <span class="text-primary font-bold text-sm">98%</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5 text-right">
-                                    <button
-                                        class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
-                                        <span class="material-symbols-outlined text-xl">visibility</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-white/5 transition-colors group">
-                                <td class="px-6 py-5">
-                                    <div class="flex flex-col">
-                                        <span class="text-white font-medium">14/05/2024</span>
-                                        <span class="text-gray-500 text-xs">09:15 AM</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div
-                                        class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-yellow-500/50 transition-colors bg-gray-800">
-                                        <div class="w-full h-full bg-cover bg-center"
-                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh");'>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <span class="text-white font-semibold">Hữu cơ</span>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div class="flex items-center gap-2">
-                                        <div
-                                            class="size-7 rounded-md bg-yellow-500/20 flex items-center justify-center text-yellow-500">
-                                            <span class="material-symbols-outlined text-lg">compost</span>
-                                        </div>
-                                        <span class="text-gray-300 text-sm">Thùng Hữu Cơ</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div
-                                            class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
-                                            <div class="bg-yellow-500 h-full w-[95%]"></div>
-                                        </div>
-                                        <span class="text-yellow-500 font-bold text-sm">95%</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5 text-right">
-                                    <button
-                                        class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
-                                        <span class="material-symbols-outlined text-xl">visibility</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-white/5 transition-colors group">
-                                <td class="px-6 py-5">
-                                    <div class="flex flex-col">
-                                        <span class="text-white font-medium">12/05/2024</span>
-                                        <span class="text-gray-500 text-xs">18:45 PM</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div
-                                        class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-primary/50 transition-colors bg-gray-800">
-                                        <div class="w-full h-full bg-cover bg-center"
-                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy");'>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <span class="text-white font-semibold">Thủy tinh</span>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div class="flex items-center gap-2">
-                                        <div
-                                            class="size-7 rounded-md bg-primary/20 flex items-center justify-center text-primary">
-                                            <span class="material-symbols-outlined text-lg">liquor</span>
-                                        </div>
-                                        <span class="text-gray-300 text-sm">Thùng Tái Chế</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div
-                                            class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
-                                            <div class="bg-primary h-full w-[92%]"></div>
-                                        </div>
-                                        <span class="text-primary font-bold text-sm">92%</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5 text-right">
-                                    <button
-                                        class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
-                                        <span class="material-symbols-outlined text-xl">visibility</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-white/5 transition-colors group border-none">
-                                <td class="px-6 py-5">
-                                    <div class="flex flex-col">
-                                        <span class="text-white font-medium">10/05/2024</span>
-                                        <span class="text-gray-500 text-xs">08:00 AM</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div
-                                        class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] group-hover:border-red-500/50 transition-colors bg-gray-800">
-                                        <div class="w-full h-full bg-cover bg-center"
-                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X");'>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <span class="text-white font-semibold">Pin - Nguy hại</span>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div class="flex items-center gap-2">
-                                        <div
-                                            class="size-7 rounded-md bg-red-500/20 flex items-center justify-center text-red-500">
-                                            <span class="material-symbols-outlined text-lg">dangerous</span>
-                                        </div>
-                                        <span class="text-gray-300 text-sm">Thùng Nguy Hại</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div
-                                            class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
-                                            <div class="bg-red-500 h-full w-[100%]"></div>
-                                        </div>
-                                        <span class="text-red-500 font-bold text-sm">100%</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-5 text-right">
-                                    <button
-                                        class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
-                                        <span class="material-symbols-outlined text-xl">visibility</span>
-                                    </button>
+                        <tbody id="history-body" class="divide-y divide-[#28392e]">
+                            <tr>
+                                <td colspan="6" class="px-6 py-10 text-center text-gray-500">
+                                    Đang tải dữ liệu...
                                 </td>
                             </tr>
                         </tbody>
@@ -356,5 +220,146 @@
     </main>
     <div id="footer-container"></div>
 </body>
+
+<script>
+    function formatDate(isoString) {
+        if (!isoString) return { date: "", time: "" };
+        const d = new Date(isoString);
+        return {
+            date: d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+            time: d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+        };
+    }
+
+    function getBinStyle(trashType) {
+        if (!trashType) return { color: "#6b7280", bg: "bg-gray-500", icon: "delete" }; // gray
+        const t = trashType.toLowerCase();
+        if (t.includes("hữu cơ")) return { color: "#eab308", bg: "bg-yellow-500", icon: "compost" }; // yellow
+        if (t.includes("nguy hại")) return { color: "#ef4444", bg: "bg-red-500", icon: "dangerous" }; // red
+        if (t.includes("tái chế")) return { color: "#13ec5b", bg: "bg-primary", icon: "recycling" }; // green
+        return { color: "#6b7280", bg: "bg-gray-500", icon: "delete" };
+    }
+
+    let allHistoryData = [];
+
+    async function loadHistory() {
+        const tbody = document.getElementById("history-body");
+        const token = localStorage.getItem("accessToken");
+
+        if (!token) {
+            tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-gray-400">Bạn chưa đăng nhập. Vui lòng <a href="login.html" class="text-primary underline">Đăng nhập</a> để xem lịch sử.</td></tr>`;
+            return;
+        }
+
+        try {
+            const res = await fetch(API_BASE + "/api/v1/user/history", {
+                headers: { "Authorization": "Bearer " + token }
+            });
+
+            if (!res.ok) {
+                if(res.status === 401) {
+                    localStorage.removeItem("accessToken");
+                    window.location.href = "login.html";
+                }
+                throw new Error("Không thể tải lịch sử");
+            }
+
+            const json = await res.json();
+            allHistoryData = json.data || [];
+            
+            // Re-render empty or full
+            renderTable(allHistoryData);
+
+        } catch (err) {
+            tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-red-400">Lỗi: ${err.message}</td></tr>`;
+        }
+    }
+
+    function renderTable(dataArray) {
+        const tbody = document.getElementById("history-body");
+        if (!dataArray || dataArray.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-gray-500">Chưa có dữ liệu nào trong khoảng thời gian này.</td></tr>`;
+            return;
+        }
+        let html = "";
+        dataArray.forEach(item => {
+            const dt = formatDate(item.createdAt);
+            const conf = item.confidence ? Math.round(item.confidence * 100) : 0;
+            const style = getBinStyle(item.trashType);
+
+            html += `
+            <tr class="hover:bg-white/5 transition-colors group cursor-pointer" onclick="window.location.href='result_analys.html?id=${item.aiRequestId}'">
+                <td class="px-6 py-5">
+                    <div class="flex flex-col">
+                        <span class="text-white font-medium">${dt.date}</span>
+                        <span class="text-gray-500 text-xs">${dt.time}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-5">
+                    <div class="size-12 mx-auto rounded-lg overflow-hidden border border-[#3b5443] transition-colors bg-gray-800">
+                        <div class="w-full h-full bg-cover bg-center" style='background-image: url("${item.cloudinaryUrl}");'></div>
+                    </div>
+                </td>
+                <td class="px-6 py-5">
+                    <span class="text-white font-semibold">${item.labelDisplay}</span>
+                </td>
+                <td class="px-6 py-5">
+                    <div class="flex items-center gap-2">
+                        <div class="size-7 rounded-md flex items-center justify-center border" style="border-color:${style.color}40; background-color:${style.color}20; color:${style.color}">
+                            <span class="material-symbols-outlined text-lg">${style.icon}</span>
+                        </div>
+                        <span class="text-gray-300 text-sm">${item.trashType}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                        <div class="flex-1 w-20 bg-gray-800 h-1 rounded-full overflow-hidden hidden lg:block">
+                            <div class="h-full" style="width: ${conf}%; background-color: ${style.color}; box-shadow: 0 0 8px ${style.color}80"></div>
+                        </div>
+                        <span class="font-bold text-sm" style="color: ${style.color}">${conf}%</span>
+                    </div>
+                </td>
+                <td class="px-6 py-5 text-right">
+                    <button class="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-all">
+                        <span class="material-symbols-outlined text-xl">visibility</span>
+                    </button>
+                </td>
+            </tr>
+            `;
+        });
+        tbody.innerHTML = html;
+    }
+
+    function initDatePicker() {
+        flatpickr("#dateFilterInput", {
+            mode: "range",
+            dateFormat: "d/m/Y",
+            locale: "vn",
+            onChange: function(selectedDates, dateStr, instance) {
+                // If the user clears the input or selects a full range
+                if (selectedDates.length === 0) {
+                    renderTable(allHistoryData);
+                } else if (selectedDates.length === 2) {
+                    const start = selectedDates[0];
+                    const end = selectedDates[1];
+                    // end date should be included up to 23:59:59
+                    end.setHours(23, 59, 59, 999);
+
+                    const filtered = allHistoryData.filter(item => {
+                        const itemDate = new Date(item.createdAt);
+                        return itemDate >= start && itemDate <= end;
+                    });
+                    renderTable(filtered);
+                }
+            }
+        });
+    }
+
+    // Load data after component loads
+    window.addEventListener("DOMContentLoaded", () => {
+        initDatePicker();
+        setTimeout(() => loadHistory(), 300); // Wait a bit for constants.js/header just in case
+    });
+</script>
 
 </html>

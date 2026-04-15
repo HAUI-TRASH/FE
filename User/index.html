@@ -52,17 +52,39 @@
   </style>
 </head>
 <script>
+  function renderAuthUI() {
+    const token = localStorage.getItem("accessToken");
+    const acc = JSON.parse(localStorage.getItem("account") || "{}");
+
+    const btns = document.getElementById("auth-buttons");
+    const userBox = document.getElementById("user-box");
+    const avatar = document.getElementById("user-menu-button");
+
+    if (!btns || !userBox) return;
+
+    if (token) {
+      btns.classList.add("hidden");
+      userBox.classList.remove("hidden");
+
+      const defaultAvatar = "./avt.png";
+      if (avatar) {
+        avatar.style.backgroundImage = `url('${acc?.avatarUrl || defaultAvatar}')`;
+      }
+    } else {
+      btns.classList.remove("hidden");
+      userBox.classList.add("hidden");
+    }
+  }
   async function loadComponent(id, file) {
     const res = await fetch(file);
     const html = await res.text();
     document.getElementById(id).innerHTML = html;
 
-    // Nếu là header thì chạy active menu
     if (id === "header-container") {
       setActiveMenu();
+      renderAuthUI();
     }
   }
-
   function setActiveMenu() {
     const links = document.querySelectorAll(".nav-link");
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -77,6 +99,11 @@
 
   window.toggleUserMenu = function () {
     const menu = document.getElementById("user-menu");
+    menu?.classList.toggle("hidden");
+  };
+
+  window.toggleMobileMenu = function () {
+    const menu = document.getElementById("mobile-menu");
     menu?.classList.toggle("hidden");
   };
 
@@ -142,12 +169,14 @@
       <div
         class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
         <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-        AI Technology V2.0
+        AI Technology V1.0
       </div>
-      <h6 class="text-white text-1xl md:text-2xl lg:text-3xl font-black leading-tight tracking-tight">
-        Nhận diện rác sinh hoạt bằng <span class="text-primary">AI</span>
-        <br class="hidden md:block" />Một sản phẩm của GV-SV trường HaUI
-      </h6>
+      <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
+        Phân loại rác thải bằng <span class="text-primary">AI</span>
+        <br class="hidden md:block" />
+      </h2>
+      <p class="text-white text-2xl md:text-2xl lg:text-2xl font-black leading-tight tracking-tight">Sản phẩm của Sinh
+        viên và Giảng viên Đại học Công nghiệp Hà Nội</p>
       <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-normal">
         Sử dụng công nghệ trí tuệ nhân tạo tiên tiến để nhận diện và phân loại
         rác thải, góp phần bảo vệ môi trường xanh sạch.
@@ -175,7 +204,7 @@
             <button id="btnPick"
               class="bg-primary hover:bg-[#11d852] text-[#051d0e] font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40 hover:-translate-y-1 flex items-center gap-2.5 text-base">
               <span class="material-symbols-outlined">folder_open</span>
-              Chọn tệp từ máy tính
+              Chọn tệp để tải lên
             </button>
           </div>
         </div>
@@ -209,14 +238,14 @@
             <div>
               <h4 class="text-white font-bold text-lg">Độ chính xác 98%</h4>
               <p class="text-sm text-gray-400 mt-1">
-                AI được huấn luyện trên 10 triệu mẫu dữ liệu rác thải.
+                AI được huấn luyện trên 1000 mẫu dữ liệu rác thải.
               </p>
             </div>
           </div>
           <div class="space-y-3">
             <div class="flex justify-between text-xs font-medium text-gray-400 uppercase tracking-wide">
               <span>Độ tin cậy</span>
-              <span class="text-primary">Tuyệt đối</span>
+              <span class="text-primary">Cao</span>
             </div>
             <div class="w-full bg-gray-800/50 h-2 rounded-full overflow-hidden backdrop-blur-sm">
               <div
@@ -392,16 +421,25 @@
 </body>
 
 <script>
-  // const API_BASE = "http://103.118.28.14";
-  const UPLOAD_URL = API_BASE + "/api/v1/ai_request";
-  // const PREDICT_URL = API_BASE + "/api/v1/ai_response/predict"; chưa dùng gemini
-  const predictUrl = (id) => API_BASE + `/api/v1/ai_requests/${encodeURIComponent(id)}/predict`;
 
+  // thống nhất plural theo backend mới
+  const UPLOAD_URL = API_BASE + "/api/v1/ai_request";
+  const PREDICT_URL = (id) => API_BASE + `/api/v1/ai_requests/${encodeURIComponent(id)}/predict`;
+  const DETAIL_PAGE_URL = (id) => `result_analys.html?id=${encodeURIComponent(id)}`;
 
   const dropZone = document.getElementById("dropZone");
   const btnPick = document.getElementById("btnPick");
   const avatarBox = document.getElementById("user-menu-button");
-  const token = localStorage.getItem("accessToken") || "";
+  const getToken = () => localStorage.getItem("accessToken") || "";
+
+  function requireLogin() {
+    const currentToken = getToken();
+    if (!currentToken) {
+      showToast("Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện các chức năng của hệ thống", "error");
+      return false;
+    }
+    return true;
+  }
   const fileInput = document.createElement("input");
   fileInput.type = "file";
   fileInput.accept = "image/*";
@@ -498,10 +536,14 @@
     `;
 
     document.getElementById("btnPickAgain").onclick = () => fileInput.click();
-    document.getElementById("btnUploadNow").onclick = () => uploadFile(file);
+    document.getElementById("btnUploadNow").onclick = () => {
+      if (!requireLogin()) return;
+      uploadFile(file);
+    };
   }
-
   async function uploadFile(file) {
+    if (!requireLogin()) return;
+
     if (!isValidImage(file)) {
       showToast("Ảnh không hợp lệ (chỉ JPG/PNG/WEBP, tối đa 10MB).", "error");
       return;
@@ -511,17 +553,24 @@
     showToast("Đang tải ảnh lên...", "info");
 
     try {
+      const currentToken = getToken();
+
       // 1) Upload -> create ai_request
       const fd = new FormData();
       fd.append("file", file);
 
-
-      const headers = {};
-      if (token) headers.Authorization = "Bearer " + token;
-
+      const headers = {
+        Authorization: "Bearer " + currentToken
+      };
 
       const upRes = await fetch(UPLOAD_URL, { method: "POST", headers, body: fd });
       const upJson = await upRes.json().catch(() => null);
+
+      if (upRes.status === 401 || upRes.status === 403) {
+        showToast("Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện các chức năng của hệ thống", "error");
+        return;
+      }
+
       if (!upRes.ok) {
         showToast(upJson?.message || "Upload thất bại.", "error");
         return;
@@ -531,12 +580,10 @@
       const aiRequestId = upData?.id;
       const imageUrl = upData?.cloudinaryUrl;
 
-
       if (!aiRequestId || !imageUrl) {
         showToast("Upload OK nhưng thiếu id/cloudinaryUrl.", "error");
         return;
       }
-
 
       // 2) Call predict
       showToast("Đang nhận diện bằng AI...", "info");
@@ -548,36 +595,34 @@
         iou: 0.6,
       };
 
-      const predictHeaders = { "Content-Type": "application/json" };
-      if (token) predictHeaders.Authorization = "Bearer " + token;
+      const predictHeaders = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + currentToken
+      };
 
-      const prRes = await fetch(predictUrl(aiRequestId), {
+      const prRes = await fetch(PREDICT_URL(aiRequestId), {
         method: "POST",
         headers: predictHeaders,
         body: JSON.stringify(predictBody),
       });
 
-
       const prJson = await prRes.json().catch(() => null);
+
+      if (prRes.status === 401 || prRes.status === 403) {
+        showToast("Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện các chức năng của hệ thống", "error");
+        return;
+      }
+
       if (!prRes.ok) {
         showToast(prJson?.message || "AI predict thất bại.", "error");
         return;
       }
 
-
       showToast("Xong! Đang chuyển sang trang kết quả...", "success");
 
-
-      // Option A: redirect bằng id (result page GET /ai_response/{id})
       setTimeout(() => {
-        window.location.href = `result_analys.html?id=${encodeURIComponent(aiRequestId)}`;
+        window.location.href = DETAIL_PAGE_URL(aiRequestId);
       }, 500);
-
-
-      // Option B (nếu muốn khỏi GET lại): lưu vào sessionStorage
-      // sessionStorage.setItem("last_ai_result", JSON.stringify(prJson));
-      // window.location.href = `result_analys.html?id=${encodeURIComponent(aiRequestId)}`;
-
 
     } catch (e) {
       console.error(e);
@@ -586,6 +631,7 @@
       setUploading(false);
     }
   }
+
   if (btnPick) btnPick.addEventListener("click", () => fileInput.click());
 
   fileInput.addEventListener("change", () => {
@@ -743,6 +789,8 @@
   // click "Kích hoạt Camera"
   if (btnCamera) {
     btnCamera.addEventListener("click", async () => {
+      if (!requireLogin()) return;
+
       if (!navigator.mediaDevices?.getUserMedia) {
         showToast("Trình duyệt không hỗ trợ camera.", "error");
         return;
