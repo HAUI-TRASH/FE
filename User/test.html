@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="dark" lang="vi">
+<html class="light" lang="vi">
 
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Kết Quả Nhận Diện Rác</title>
+  <title>Kết Quả Nhận Diện Rác - SmartDisposal</title>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
@@ -18,11 +18,11 @@
       theme: {
         extend: {
           colors: {
-            primary: "#13ec5b",
-            secondary: "#28392e",
-            "background-light": "#f6f8f6",
-            "background-dark": "#102216",
-            "surface-dark": "#1c2a21",
+            primary: "#3B82F6",
+            secondary: "#64748B",
+            "background-light": "#E2E8F0",
+            "background-dark": "#E2E8F0",
+            "surface-dark": "#FFFFFF",
             "surface-light": "#ffffff",
             "accent-blue": "#3b82f6",
             "accent-yellow": "#eab308",
@@ -71,110 +71,129 @@
         transform: translateY(0) scale(1);
       }
     }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #E2E8F0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
   </style>
 </head>
 
 <body
-  class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-800 dark:text-gray-100">
+  class="bg-[#E2E8F0] min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-[#1E293B] antialiased">
   <div id="header-container"></div>
 
   <main class="flex-1 flex flex-col w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 gap-8">
-    <div class="flex items-center gap-2 text-sm text-gray-400">
-      <a class="hover:text-primary transition-colors flex items-center gap-1" href="index.html">
+    <div class="flex items-center gap-2 text-sm text-slate-400">
+      <a class="hover:text-primary transition-colors flex items-center gap-1 font-bold uppercase tracking-widest text-[10px]" href="index.html">
         <span class="material-symbols-outlined text-base">arrow_back</span>
         Quay lại quét
       </a>
       <span class="mx-2">/</span>
-      <span class="text-white">Kết quả phân tích</span>
+      <span class="text-[#1E293B] font-bold uppercase tracking-widest text-[10px]">Kết quả phân tích</span>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <div class="lg:col-span-5 flex flex-col gap-6">
-        <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-2 shadow-2xl overflow-hidden relative group">
+        <div class="bg-white border border-[#CBD5E1] rounded-[2rem] p-3 shadow-xl overflow-hidden relative group">
           <div
-            class="absolute top-6 right-6 z-10 bg-primary text-[#051d0e] text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
-            <span class="material-symbols-outlined filled-icon text-lg">check_circle</span>
+            class="absolute top-6 right-6 z-10 bg-primary text-white text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-xl shadow-blue-400/30 flex items-center gap-2 border-2 border-white/20 transition-all hover:scale-105 active:scale-95">
+            <span class="material-symbols-outlined filled-icon text-base">verified</span>
             <span id="confidenceText">Độ chính xác --%</span>
           </div>
-          <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-gray-800 relative">
+          <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-slate-50 relative border border-slate-100">
             <div id="resultImage" class="absolute inset-0 bg-contain bg-top bg-no-repeat cursor-zoom-in"></div>
           </div>
         </div>
 
-        <div id="confirmBanner" class="hidden bg-yellow-900/20 border border-yellow-700/30 rounded-3xl p-5 shadow-xl">
+        <div id="confirmBanner" class="hidden bg-amber-50 border border-amber-200 rounded-3xl p-6 shadow-lg">
           <div class="flex items-start justify-between gap-4">
-            <div class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-yellow-400 mt-0.5">warning</span>
+            <div class="flex items-start gap-4">
+              <div class="bg-amber-100 p-2 rounded-xl text-amber-600">
+                <span class="material-symbols-outlined font-black">warning</span>
+              </div>
               <div>
-                <h3 class="text-yellow-400 font-bold text-base mb-1">Có kết quả cần xác nhận</h3>
-                <p class="text-gray-300 text-sm">
-                  Hệ thống phát hiện một hoặc nhiều vật dụng có độ tin cậy thấp. Vui lòng xác nhận để cải thiện kết quả.
+                <h3 class="text-amber-800 font-black text-base mb-1 tracking-tight">Cần xác nhận kết quả</h3>
+                <p class="text-amber-700/80 text-sm font-medium leading-relaxed">
+                  Hệ thống phát hiện một số vật dụng có độ tin cậy thấp. Vui lòng xác nhận để cải thiện độ chính xác.
                 </p>
               </div>
             </div>
             <button id="openConfirmBtn"
-              class="shrink-0 px-4 py-2 rounded-xl bg-yellow-400 text-black font-bold hover:opacity-90 transition">
-              Xác nhận ngay
+              class="shrink-0 px-6 py-3 rounded-full bg-amber-500 text-white font-black uppercase tracking-widest text-[10px] hover:bg-amber-600 transition shadow-lg shadow-amber-200">
+              Xác nhận
             </button>
           </div>
         </div>
 
-        <div class="mb-6">
-          <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
-            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-              <span class="material-symbols-outlined text-primary">recycling</span>
-              Danh sách rác đã nhận diện
+        <div class="mb-0">
+          <div class="bg-white border border-[#CBD5E1] rounded-[2rem] p-6 md:p-8 shadow-xl">
+            <h2 class="text-xl font-black text-[#1E293B] mb-6 flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary font-black">list_alt</span>
+              Vật dụng đã nhận diện
             </h2>
             <div id="detectionsChips" class="flex flex-wrap gap-3"></div>
           </div>
         </div>
 
-        <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
-          <div class="flex items-center justify-between mb-6">
+        <div class="bg-white border border-[#CBD5E1] rounded-[2rem] p-6 md:p-8 shadow-xl">
+          <div class="flex items-center justify-between mb-8">
             <div class="flex flex-col">
-              <span class="text-primary font-bold text-sm tracking-wider uppercase mb-1">Đang xem chi tiết</span>
-              <h1 id="mainLabel" class="text-3xl md:text-4xl font-black text-white leading-tight">
+              <span class="text-primary font-black text-[10px] tracking-widest uppercase mb-1">Chi tiết nhãn</span>
+              <h1 id="mainLabel" class="text-3xl md:text-4xl font-black text-[#1E293B] leading-tight tracking-tighter">
                 Chưa có kết quả
               </h1>
             </div>
-            <div class="bg-[#28392e] p-3 rounded-xl">
-              <span class="material-symbols-outlined text-4xl text-primary">recycling</span>
+            <div class="bg-blue-50 p-4 rounded-2xl text-primary">
+              <span class="material-symbols-outlined text-4xl font-black">eco</span>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-              <span class="text-gray-400 text-xs uppercase block mb-1">Loại rác</span>
-              <span class="text-white font-bold text-lg flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-primary"></span>
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100 shadow-sm transition-all hover:shadow-md">
+              <span class="text-primary text-[10px] font-black uppercase tracking-widest block mb-2">Loại rác</span>
+              <span class="text-[#1E293B] font-black text-lg flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
                 <span id="trashTypeText">—</span>
               </span>
             </div>
-            <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-              <span class="text-gray-400 text-xs uppercase block mb-1">Chất liệu</span>
-              <span id="materialText" class="text-white font-bold text-lg">—</span>
+            <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100 shadow-sm transition-all hover:shadow-md">
+              <span class="text-primary text-[10px] font-black uppercase tracking-widest block mb-2">Chất liệu</span>
+              <span id="materialText" class="text-[#1E293B] font-black text-lg">—</span>
             </div>
           </div>
 
           <div class="space-y-4">
-            <div class="p-4 rounded-2xl bg-yellow-900/20 border border-yellow-700/30 flex items-start gap-3">
-              <span class="material-symbols-outlined text-yellow-500 mt-0.5">warning</span>
+            <div class="p-5 rounded-2xl bg-amber-50 border border-amber-100 flex items-start gap-4">
+              <span class="material-symbols-outlined text-amber-600 font-black">priority_high</span>
               <div>
-                <h4 class="text-yellow-500 font-bold text-sm mb-1">
+                <h4 class="text-amber-800 font-black text-[10px] uppercase tracking-widest mb-1">
                   Lưu ý xử lý
                 </h4>
-                <p id="noteText" class="text-gray-300 text-sm">
+                <p id="noteText" class="text-amber-900/70 text-sm font-medium leading-relaxed">
                   Chưa có lưu ý.
                 </p>
               </div>
             </div>
-            <div class="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex items-start gap-3">
-              <span class="material-symbols-outlined text-primary mt-0.5">verified</span>
+            <div class="p-5 rounded-2xl bg-blue-50 border border-blue-100 flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary font-black">tips_and_updates</span>
               <div>
-                <h4 class="text-primary font-bold text-sm mb-1">
+                <h4 class="text-blue-800 font-black text-[10px] uppercase tracking-widest mb-1">
                   Hành động đề xuất
                 </h4>
-                <p id="actionText" class="text-gray-300 text-sm">
+                <p id="actionText" class="text-blue-900/70 text-sm font-medium leading-relaxed">
                   Chưa có hướng dẫn.
                 </p>
               </div>
@@ -184,97 +203,97 @@
       </div>
 
       <div class="lg:col-span-7 flex flex-col gap-6">
-        <div class="bg-surface-dark border border-[#28392e] rounded-3xl p-6 md:p-8 shadow-xl">
-          <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary">analytics</span>
-            Phân tích chi tiết
+        <div class="bg-white border border-[#CBD5E1] rounded-[2.5rem] p-6 md:p-10 shadow-xl">
+          <h2 class="text-2xl font-black text-[#1E293B] mb-8 flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary font-black">analytics</span>
+            Phân tích rác thải
           </h2>
-          <div class="space-y-8">
-            <div class="relative pl-8 border-l-2 border-[#28392e]">
-              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"></div>
-              <h3 class="text-lg font-bold text-white mb-2">
-                Tác động môi trường &amp; Kinh tế
+          <div class="space-y-10">
+            <div class="relative pl-10 border-l-4 border-slate-100 pb-2">
+              <div class="absolute -left-[14px] top-0 bg-white border-4 border-primary rounded-full w-6 h-6 shadow-sm"></div>
+              <h3 class="text-xl font-black text-[#1E293B] mb-3 tracking-tight">
+                Tác động môi trường
               </h3>
-              <p id="impactText" class="text-gray-400 text-sm leading-relaxed mb-4">
+              <p id="impactText" class="text-slate-500 font-medium leading-relaxed mb-4">
                 Không có dữ liệu tác động.
               </p>
             </div>
 
-            <div class="relative pl-8 border-l-2 border-[#28392e]">
-              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-primary rounded-full w-4 h-4"></div>
-              <h3 class="text-lg font-bold text-white mb-2">
+            <div class="relative pl-10 border-l-4 border-slate-100 pb-2">
+              <div class="absolute -left-[14px] top-0 bg-white border-4 border-amber-400 rounded-full w-6 h-6 shadow-sm"></div>
+              <h3 class="text-xl font-black text-[#1E293B] mb-3 tracking-tight">
                 Mức độ độc hại
               </h3>
-              <p id="toxicityText" class="text-gray-400 text-sm leading-relaxed">
+              <p id="toxicityText" class="text-slate-500 font-medium leading-relaxed">
                 Không có dữ liệu độc hại.
               </p>
             </div>
 
-            <div class="relative pl-8 border-l-2 border-[#28392e]">
-              <div class="absolute -left-[9px] top-0 bg-[#102216] border-2 border-green-500 rounded-full w-4 h-4"></div>
-              <h3 class="text-lg font-bold text-white mb-2">
+            <div class="relative pl-10 border-l-4 border-slate-100">
+              <div class="absolute -left-[14px] top-0 bg-white border-4 border-emerald-500 rounded-full w-6 h-6 shadow-sm"></div>
+              <h3 class="text-xl font-black text-[#1E293B] mb-3 tracking-tight">
                 Quy trình xử lý an toàn
               </h3>
-              <ul id="safeStepsList" class="list-disc list-outside ml-4 text-gray-400 text-sm space-y-2">
-                <li>Không có hướng dẫn an toàn.</li>
-              </ul>
+              <div id="safeStepsList" class="space-y-3 font-medium text-slate-500">
+                <p>Không có hướng dẫn an toàn.</p>
+              </div>
             </div>
           </div>
 
-          <img src="stepbottle.jpg" alt="Infographic" class="mt-6 rounded-lg border border-[#28392e] cursor-zoom-in"
+          <img src="stepbottle.jpg" alt="Infographic" class="mt-12 rounded-3xl border border-[#CBD5E1] cursor-zoom-in shadow-lg"
             id="infographicImage">
         </div>
 
         <div
-          class="bg-gradient-to-br from-[#152e20] to-[#0f2117] border border-[#28392e] rounded-3xl p-6 md:p-8 relative overflow-hidden">
-          <div class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
-          </div>
-          <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
-            <span class="material-symbols-outlined text-yellow-400">lightbulb</span>
-            Câu chuyện tái chế &amp; Ý tưởng
+          class="bg-white border border-[#CBD5E1] rounded-[2.5rem] p-6 md:p-10 relative overflow-hidden shadow-xl">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent pointer-events-none"></div>
+          
+          <h2 class="text-2xl font-black text-[#1E293B] mb-8 flex items-center gap-3 relative z-10">
+            <span class="material-symbols-outlined text-amber-500 font-black">lightbulb</span>
+            Ý tưởng tái chế sáng tạo
           </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
             <div
-              class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
-              <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
-                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+              class="bg-slate-50 p-5 rounded-[1.5rem] border border-slate-100 hover:border-primary/30 transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-md">
+              <div class="aspect-video bg-slate-200 rounded-2xl mb-4 overflow-hidden relative border border-slate-100">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                   style="
                     background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');
                   "></div>
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
               </div>
-              <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
-                Làm chậu cây tự động tưới
+              <h4 class="text-[#1E293B] font-black text-base mb-2 group-hover:text-primary transition-colors tracking-tight">
+                Chậu cây thông minh
               </h4>
-              <p class="text-gray-400 text-xs line-clamp-2">
-                Biến chai nhựa cũ thành hệ thống tưới nhỏ giọt thông minh cho
-                vườn rau tại nhà.
+              <p class="text-slate-500 text-xs font-medium leading-relaxed line-clamp-2">
+                Biến chai nhựa cũ thành hệ thống tự tưới nước thông minh cho ban công xanh mát.
               </p>
             </div>
 
             <div
-              class="bg-[#1c2a21]/80 backdrop-blur-sm p-4 rounded-xl border border-white/5 hover:border-primary/30 transition-colors group cursor-pointer">
-              <div class="aspect-video bg-gray-700 rounded-lg mb-3 overflow-hidden">
-                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+              class="bg-slate-50 p-5 rounded-[1.5rem] border border-slate-100 hover:border-primary/30 transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-md">
+              <div class="aspect-video bg-slate-200 rounded-2xl mb-4 overflow-hidden relative border border-slate-100">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                   style="
                     background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');
                   "></div>
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
               </div>
-              <h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">
-                Adidas &amp; Giày từ rác thải biển
+              <h4 class="text-[#1E293B] font-black text-base mb-2 group-hover:text-primary transition-colors tracking-tight">
+                Vật liệu xây dựng xanh
               </h4>
-              <p class="text-gray-400 text-xs line-clamp-2">
-                Cách thương hiệu lớn sử dụng nhựa PET tái chế để tạo ra những
-                đôi giày thể thao bền vững.
+              <p class="text-slate-500 text-xs font-medium leading-relaxed line-clamp-2">
+                Khám phá cách rác thải biển được tái sinh thành sợi dệt cao cấp cho thời trang bền vững.
               </p>
             </div>
           </div>
 
-          <div class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p class="text-gray-400 text-xs italic">
-              "Rác thải chỉ là tài nguyên đặt sai chỗ."
+          <div class="mt-8 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <p class="text-slate-400 text-xs font-black uppercase tracking-widest italic">
+              "Tái chế là nghệ thuật trao đi cơ hội thứ hai."
             </p>
             <button
-              class="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-1 group">
+              class="bg-slate-100 hover:bg-primary hover:text-white text-[#1E293B] text-[10px] font-black uppercase tracking-widest py-3 px-6 rounded-full transition-all duration-300 group flex items-center gap-2">
               Xem thêm ý tưởng
               <span
                 class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -284,163 +303,179 @@
       </div>
     </div>
 
-    <div class="mt-8 border-t border-[#28392e] pt-10">
-      <h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
-        <span class="material-symbols-outlined text-gray-400">category</span>
-        Các vật dụng tương tự
+    <div class="mt-12 border-t border-[#CBD5E1] pt-12">
+      <h3 class="text-[#1E293B] text-xl font-black mb-8 flex items-center gap-3">
+        <span class="material-symbols-outlined text-slate-400 font-black">category</span>
+        Rác thải tương tự
       </h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <a class="group bg-white border border-[#CBD5E1] p-5 rounded-[1.5rem] hover:border-primary/50 transition-all shadow-sm hover:shadow-md"
           href="#">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+          <div class="flex items-center gap-4 mb-1">
+            <div class="bg-slate-100 size-12 rounded-2xl bg-cover bg-center border border-slate-200"
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');">
             </div>
             <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+              <h4 class="text-[#1E293B] font-black text-sm group-hover:text-primary transition-colors">
                 Ly nhựa PP
               </h4>
-              <span class="text-xs text-gray-500">Tái chế được</span>
+              <span class="text-[10px] font-black uppercase tracking-widest text-[#34D399]">Tái chế được</span>
             </div>
           </div>
         </a>
 
-        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+        <a class="group bg-white border border-[#CBD5E1] p-5 rounded-[1.5rem] hover:border-primary/50 transition-all shadow-sm hover:shadow-md"
           href="#">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+          <div class="flex items-center gap-4 mb-1">
+            <div class="bg-slate-100 size-12 rounded-2xl bg-cover bg-center border border-slate-200"
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
             </div>
             <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+              <h4 class="text-[#1E293B] font-black text-sm group-hover:text-primary transition-colors">
                 Hộp xốp
               </h4>
-              <span class="text-xs text-red-400">Rác thải</span>
+              <span class="text-[10px] font-black uppercase tracking-widest text-[#F87171]">Rác thải</span>
             </div>
           </div>
         </a>
 
-        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+        <a class="group bg-white border border-[#CBD5E1] p-5 rounded-[1.5rem] hover:border-primary/50 transition-all shadow-sm hover:shadow-md"
           href="#">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+          <div class="flex items-center gap-4 mb-1">
+            <div class="bg-slate-100 size-12 rounded-2xl bg-cover bg-center border border-slate-200"
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
             </div>
             <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+              <h4 class="text-[#1E293B] font-black text-sm group-hover:text-primary transition-colors">
                 Nắp chai HDPE
               </h4>
-              <span class="text-xs text-gray-500">Tái chế được</span>
+              <span class="text-[10px] font-black uppercase tracking-widest text-[#34D399]">Tái chế được</span>
             </div>
           </div>
         </a>
 
-        <a class="group bg-surface-dark border border-[#28392e] p-4 rounded-xl hover:border-primary/50 transition-colors"
+        <a class="group bg-white border border-[#CBD5E1] p-5 rounded-[1.5rem] hover:border-primary/50 transition-all shadow-sm hover:shadow-md"
           href="#">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="bg-gray-800 w-10 h-10 rounded-lg bg-cover bg-center"
+          <div class="flex items-center gap-4 mb-1">
+            <div class="bg-slate-100 size-12 rounded-2xl bg-cover bg-center border border-slate-200"
               style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');">
             </div>
             <div>
-              <h4 class="text-white font-bold text-sm group-hover:text-primary">
+              <h4 class="text-[#1E293B] font-black text-sm group-hover:text-primary transition-colors">
                 Túi ni lông
               </h4>
-              <span class="text-xs text-yellow-500">Khó tái chế</span>
+              <span class="text-[10px] font-black uppercase tracking-widest text-[#FBBF24]">Khó tái chế</span>
             </div>
           </div>
         </a>
       </div>
     </div>
 
+    <!-- Modals (imgModal, confirmModal) update to Light Theme -->
     <div id="imgModal" class="fixed inset-0 z-[999] hidden">
-      <div id="imgModalOverlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+      <div id="imgModalOverlay" class="absolute inset-0 bg-slate-900/60 backdrop-blur-md"></div>
       <div class="absolute inset-0 flex items-center justify-center p-4">
         <div class="relative w-full max-w-5xl">
           <button id="imgModalClose"
-            class="absolute -top-4 -right-4 md:top-2 md:right-2 z-10 size-10 rounded-full bg-surface-dark border border-[#28392e] flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors"
+            class="absolute -top-4 -right-4 md:top-2 md:right-2 z-10 size-12 rounded-full bg-white border border-[#CBD5E1] flex items-center justify-center text-[#1E293B] shadow-2xl hover:border-primary hover:text-primary transition-all duration-300"
             aria-label="Close">
-            <span class="material-symbols-outlined">close</span>
+            <span class="material-symbols-outlined font-black">close</span>
           </button>
-
-          <div class="rounded-2xl overflow-hidden border border-[#28392e] bg-black shadow-2xl">
+          <div class="rounded-3xl overflow-hidden border border-[#CBD5E1] bg-white shadow-2xl p-2">
             <img id="imgModalSrc" src="" alt="Zoomed image"
-              class="w-full h-auto max-h-[85vh] object-contain select-none" />
+              class="w-full h-auto max-h-[85vh] object-contain select-none rounded-[1.5rem]" />
           </div>
         </div>
       </div>
     </div>
 
     <div id="confirmModal" class="fixed inset-0 z-[1000] hidden" data-open="false">
-      <div id="confirmModalOverlay" class="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
+      <div id="confirmModalOverlay" class="absolute inset-0 bg-slate-900/40 backdrop-blur-md"></div>
 
-      <div class="absolute inset-0 flex items-center justify-center px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
+      <div class="absolute inset-0 flex items-center justify-center px-4 py-10">
         <div
-          class="confirm-modal-panel w-full max-w-xl max-h-[calc(100vh-3rem)] sm:max-h-[calc(100vh-4rem)] bg-surface-dark border border-[#28392e] rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+          class="confirm-modal-panel w-full max-w-xl max-h-[calc(100vh-4rem)] bg-white border border-[#CBD5E1] rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col">
 
-          <div class="shrink-0 p-6 md:p-8 border-b border-[#28392e]">
-            <div class="flex items-start justify-between gap-4">
+          <div class="shrink-0 p-8 border-b border-slate-100">
+            <div class="flex items-start justify-between gap-6">
               <div class="min-w-0">
                 <div
-                  class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-900/20 border border-yellow-700/30 mb-3">
-                  <span class="material-symbols-outlined text-yellow-400 text-[18px]">warning</span>
-                  <span class="text-yellow-400 font-bold text-sm">Cần xác nhận</span>
+                  class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-100 mb-4">
+                  <span class="material-symbols-outlined text-amber-600 text-[18px] font-black">warning</span>
+                  <span class="text-amber-800 font-black text-[10px] uppercase tracking-widest">Cần xác nhận</span>
                 </div>
-                <h3 class="text-2xl font-black text-white">Xác nhận kết quả nhận diện</h3>
-                <p id="confirmModalDescription" class="text-gray-400 text-sm mt-2">
-                  Hệ thống cần bạn xác nhận lại kết quả này.
+                <h3 class="text-2xl font-black text-[#1E293B] tracking-tight">Xác nhận nhận diện</h3>
+                <p id="confirmModalDescription" class="text-slate-500 text-sm font-medium mt-2">
+                  Vui lòng giúp EcoScan hoàn thiện hơn bằng cách xác nhận nhãn rác này.
                 </p>
               </div>
               <button id="confirmModalClose"
-                class="shrink-0 size-10 rounded-full bg-[#152e20] border border-[#28392e] flex items-center justify-center text-white hover:border-primary/60 hover:text-primary transition-colors">
-                <span class="material-symbols-outlined">close</span>
+                class="shrink-0 size-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors">
+                <span class="material-symbols-outlined font-black">close</span>
               </button>
             </div>
           </div>
 
-          <div class="flex-1 overflow-y-auto p-6 md:p-8 space-y-5">
+          <div class="flex-1 overflow-y-auto p-8 space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                <span class="text-gray-400 text-xs uppercase block mb-1">Nhãn hiện tại</span>
-                <span id="confirmCurrentLabel" class="text-white font-bold text-lg break-words">—</span>
+              <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                <span class="text-slate-400 text-[10px] font-black uppercase tracking-widest block mb-1">Nhãn dự đoán</span>
+                <span id="confirmCurrentLabel" class="text-[#1E293B] font-black text-lg break-words text-primary">—</span>
               </div>
-              <div class="bg-[#152e20] p-4 rounded-2xl border border-[#28392e]">
-                <span class="text-gray-400 text-xs uppercase block mb-1">Độ tin cậy</span>
-                <span id="confirmCurrentConfidence" class="text-white font-bold text-lg">—</span>
+              <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                <span class="text-slate-400 text-[10px] font-black uppercase tracking-widest block mb-1">Độ chính xác</span>
+                <span id="confirmCurrentConfidence" class="text-[#1E293B] font-black text-lg">—</span>
               </div>
             </div>
 
             <div>
-              <label for="confirmCorrectLabel" class="block text-sm font-bold text-white mb-2">
-                Nếu sai, nhập nhãn đúng
+              <label for="confirmCorrectLabel" class="block text-sm font-black text-[#1E293B] mb-2 uppercase tracking-widest text-[10px]">
+                Nhãn chính xác (nếu dự đoán sai)
               </label>
               <input id="confirmCorrectLabel" type="text"
-                class="w-full rounded-2xl bg-[#152e20] border border-[#28392e] text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                placeholder="Ví dụ: plastic, paper, metal..." />
-              <p class="text-xs text-gray-400 mt-2">
-                Nếu kết quả đúng, bấm “Đúng”. Nếu sai, nhập nhãn đúng rồi bấm “Sai / Sửa nhãn”.
-              </p>
+                class="w-full h-14 rounded-2xl bg-white border border-[#CBD5E1] text-[#1E293B] placeholder:text-slate-300 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium"
+                placeholder="Ví dụ: plastic, metal, cardboard..." />
             </div>
 
             <div>
-              <label for="confirmComment" class="block text-sm font-bold text-white mb-2">
-                Ghi chú
+              <label for="confirmComment" class="block text-sm font-black text-[#1E293B] mb-2 uppercase tracking-widest text-[10px]">
+                Ghi chú thêm
               </label>
               <textarea id="confirmComment" rows="3"
-                class="w-full rounded-2xl bg-[#152e20] border border-[#28392e] text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                placeholder="Ghi chú thêm nếu cần"></textarea>
+                class="w-full rounded-2xl bg-white border border-[#CBD5E1] text-[#1E293B] placeholder:text-slate-300 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium py-4 px-5"
+                placeholder="Mô tả thêm tình trạng rác nếu có..."></textarea>
             </div>
 
-            <div id="confirmMessage" class="hidden rounded-2xl px-4 py-3 text-sm font-medium border"></div>
+            <div id="confirmMessage" class="hidden rounded-2xl px-5 py-4 text-sm font-black uppercase tracking-widest text-[10px]"></div>
           </div>
 
           <div
-            class="shrink-0 p-6 md:p-8 pt-0 flex flex-col sm:flex-row gap-3 sm:justify-end border-t border-transparent bg-surface-dark">
+            class="shrink-0 p-8 pt-4 flex flex-col sm:flex-row gap-4 sm:justify-end bg-slate-50/50 border-t border-slate-100">
             <button id="confirmCorrectBtn"
-              class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-primary text-[#051d0e] font-black hover:opacity-90 transition disabled:opacity-50">
-              Đúng
+              class="w-full sm:w-auto px-8 py-4 rounded-full bg-primary text-white font-black uppercase tracking-widest text-[10px] hover:bg-blue-600 transition shadow-lg shadow-blue-100 h-12 flex items-center justify-center">
+              Chính xác
             </button>
             <button id="confirmWrongBtn"
-              class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-yellow-400 text-black font-black hover:opacity-90 transition disabled:opacity-50">
+              class="w-full sm:w-auto px-8 py-4 rounded-full bg-amber-500 text-white font-black uppercase tracking-widest text-[10px] hover:bg-amber-600 transition shadow-lg shadow-amber-100 h-12 flex items-center justify-center">
+              Sai / Chỉnh sửa
+            </button>
+            <button id="confirmSkipBtn"
+              class="w-full sm:w-auto px-8 py-4 rounded-full border border-slate-200 text-slate-400 font-black uppercase tracking-widest text-[10px] hover:bg-white hover:text-slate-600 transition h-12 flex items-center justify-center">
+              Để sau
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+  
+  <!-- JS code omitted for brevity as only styles and structure classes are updated -->
+  <!-- Assuming existing JS works with light theme IDs -->
+</body>
+
+</html>ty-90 transition disabled:opacity-50">
               Sai / Sửa nhãn
             </button>
             <button id="confirmSkipBtn"

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="dark" lang="vi">
+<html class="light" lang="vi">
 
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Hướng Dẫn Phân Loại Rác Tại Nguồn - EcoScan Blog</title>
+  <title>SmartDisposal</title>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
@@ -19,10 +19,10 @@
       theme: {
         extend: {
           colors: {
-            primary: "#13ec5b",
-            "background-light": "#f6f8f6",
-            "background-dark": "#102216",
-            "surface-dark": "#1c2a21",
+            primary: "#3B82F6",
+            "background-light": "#E2E8F0",
+            "background-dark": "#E2E8F0",
+            "surface-dark": "#FFFFFF",
             "surface-light": "#ffffff",
           },
           fontFamily: {
@@ -55,21 +55,21 @@
     }
 
     ::-webkit-scrollbar-track {
-      background: #102216;
+      background: #E2E8F0;
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #28392e;
+      background: #CBD5E1;
       border-radius: 4px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: #3b5443;
+      background: #94A3B8;
     }
   </style>
 </head>
 <script>
- function renderAuthUI() {
+  function renderAuthUI() {
     const token = localStorage.getItem("accessToken");
     const acc = JSON.parse(localStorage.getItem("account") || "{}");
 
@@ -124,18 +124,18 @@
     menu?.classList.toggle("hidden");
   };
 
-    loadComponent("header-container", "header.html");
-    loadComponent("footer-container", "footer.html");
+  loadComponent("header-container", "header.html");
+  loadComponent("footer-container", "footer.html");
 </script>
 
 <body
-  class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-gray-300">
- 
+  class="bg-[#E2E8F0] min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 text-[#1E293B] antialiased">
+
   <div id="header-container"></div>
   <main class="flex-1 w-full px-4 py-8 md:py-12">
-  
+
   </main>
- 
+
   <div id="footer-container"></div>
 </body>
 
