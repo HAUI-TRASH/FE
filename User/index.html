@@ -73,8 +73,8 @@
         Phân loại rác thải bằng <span class="text-primary">AI</span>
         <br class="hidden md:block" />
       </h2>
-      <p class="text-[#1E293B] text-2xl md:text-2xl lg:text-2xl font-black leading-tight tracking-tight">Sản phẩm của Sinh
-        viên và Giảng viên Đại học Công nghiệp Hà Nội</p>
+      <!-- <p class="text-[#1E293B] text-2xl md:text-2xl lg:text-2xl font-black leading-tight tracking-tight">Sản phẩm của Sinh
+        viên và Giảng viên Đại học Công nghiệp Hà Nội</p> -->
       <p class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-normal">
         Sử dụng công nghệ trí tuệ nhân tạo tiên tiến để nhận diện và phân loại
         rác thải, góp phần bảo vệ môi trường xanh sạch.
@@ -519,8 +519,18 @@
 
   const btnCamera = document.getElementById("btnCamera");
   let cameraStream = null;
+  let realtimeInterval = null;
+  let wsSocket = null;
 
   function stopCamera() {
+    if (realtimeInterval) {
+      clearInterval(realtimeInterval);
+      realtimeInterval = null;
+    }
+    if (wsSocket) {
+      wsSocket.close();
+      wsSocket = null;
+    }
     if (cameraStream) {
       cameraStream.getTracks().forEach((t) => t.stop());
       cameraStream = null;
@@ -529,9 +539,20 @@
 
   function renderCameraUI() {
     dropZone.innerHTML = `
-      <div class="relative z-10 w-full max-w-2xl">
-        <div class="rounded-2xl overflow-hidden border border-[#CBD5E1] bg-slate-50 shadow-inner">
-          <video id="camVideo" autoplay playsinline class="w-full h-auto block"></video>
+        <div class="rounded-2xl overflow-hidden border border-[#CBD5E1] bg-slate-50 shadow-inner relative">
+          <video id="camVideo" autoplay playsinline class="w-full h-auto block relative z-0"></video>
+          
+          <!-- Overlay Canvas for Bounding Boxes -->
+          <canvas id="overlayCanvas" class="absolute top-0 left-0 w-full h-full pointer-events-none z-10"></canvas>
+
+          <!-- Real-time Badge -->
+          <div id="realtimeBadge" class="absolute top-4 left-4 z-20 bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-3 transform transition-all duration-500 opacity-0 translate-y-2">
+            <span id="realtimeStatusDot" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <div class="flex flex-col">
+              <span id="realtimeText" class="text-white text-xs font-bold uppercase tracking-wider">Đang chờ rác...</span>
+              <span id="realtimeConf" class="text-white/70 text-[10px] font-medium leading-none"></span>
+            </div>
+          </div>
         </div>
 
         <div class="mt-4 flex flex-wrap items-center gap-3">
@@ -589,6 +610,10 @@
 
       document.getElementById("btnSnap").onclick = async () => {
         try {
+          if (realtimeInterval) {
+            clearInterval(realtimeInterval);
+            realtimeInterval = null;
+          }
           const v = document.getElementById("camVideo");
           const canvas = document.createElement("canvas");
           canvas.width = v.videoWidth || 1280;
@@ -615,6 +640,116 @@
           showToast("Chụp ảnh thất bại.", "error");
         }
       };
+
+      // Real-time loop
+      const badge = document.getElementById("realtimeBadge");
+      const textEl = document.getElementById("realtimeText");
+      const confEl = document.getElementById("realtimeConf");
+      const dot = document.getElementById("realtimeStatusDot");
+      const canvasOverlay = document.getElementById("overlayCanvas");
+      const ctxOverlay = canvasOverlay.getContext("2d");
+
+      const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
+      const wsUrl = API_BASE.replace(/^http(s?):\/\//, wsProtocol) + "/ws/detect";
+      
+      wsSocket = new WebSocket(wsUrl);
+
+      wsSocket.onopen = () => {
+        realtimeInterval = setInterval(async () => {
+          if (!video || video.paused || video.ended || wsSocket.readyState !== WebSocket.OPEN) return;
+
+          // Resize overlay to match video's visible CSS dimensions
+          if (canvasOverlay.width !== video.clientWidth) {
+              canvasOverlay.width = video.clientWidth;
+              canvasOverlay.height = video.clientHeight;
+          }
+          ctxOverlay.clearRect(0, 0, canvasOverlay.width, canvasOverlay.height);
+
+          try {
+            const tempCanvas = document.createElement("canvas");
+            // Scale down for faster processing
+            const scale = 0.5; 
+            tempCanvas.width = video.videoWidth * scale || 640;
+            tempCanvas.height = video.videoHeight * scale || 360;
+            const tCtx = tempCanvas.getContext("2d");
+            tCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+
+            const blob = await new Promise(r => tempCanvas.toBlob(r, "image/jpeg", 0.7));
+            if (!blob) return;
+
+            // Send binary blob via WebSocket
+            wsSocket.send(blob);
+            
+            // Save dimensions to scale boxes when response arrives
+            wsSocket.lastSendDimensions = { w: tempCanvas.width, h: tempCanvas.height };
+          } catch (err) {
+            console.error(err);
+          }
+        }, 1500);
+      };
+
+      wsSocket.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+
+            if (data && data.labelDisplay) {
+              badge.classList.remove("opacity-0", "translate-y-2");
+              badge.classList.add("opacity-100", "translate-y-0");
+              
+              textEl.textContent = data.labelDisplay;
+              if (data.confidence > 0) {
+                confEl.textContent = `Độ tin cậy: ${(data.confidence * 100).toFixed(1)}%`;
+                dot.classList.replace("bg-slate-400", "bg-emerald-500");
+                dot.classList.add("animate-pulse");
+              } else {
+                confEl.textContent = "";
+                dot.classList.replace("bg-emerald-500", "bg-slate-400");
+                dot.classList.remove("animate-pulse");
+              }
+
+              // Draw bounding box if coordinates are provided
+              if (data.x1 != null && data.x2 != null && data.y1 != null && data.y2 != null && wsSocket.lastSendDimensions) {
+                // Scale coordinates from tempCanvas to canvasOverlay
+                const scaleX = canvasOverlay.width / wsSocket.lastSendDimensions.w;
+                const scaleY = canvasOverlay.height / wsSocket.lastSendDimensions.h;
+                
+                const x = data.x1 * scaleX;
+                const y = data.y1 * scaleY;
+                const w = (data.x2 - data.x1) * scaleX;
+                const h = (data.y2 - data.y1) * scaleY;
+                
+                // Draw Box
+                ctxOverlay.strokeStyle = "#FFFFFF";
+                ctxOverlay.lineWidth = 3;
+                ctxOverlay.strokeRect(x, y, w, h);
+                
+                // Draw Label Pill (White bg, Blue text)
+                const labelText = `${data.labelDisplay} ${data.confidence.toFixed(2)}`;
+                ctxOverlay.font = "bold 16px sans-serif";
+                const textWidth = ctxOverlay.measureText(labelText).width;
+                
+                const textBgHeight = 24;
+                ctxOverlay.fillStyle = "#FFFFFF";
+                ctxOverlay.fillRect(x, Math.max(0, y - textBgHeight), textWidth + 10, textBgHeight);
+                
+                ctxOverlay.fillStyle = "#1E3B8A"; 
+                ctxOverlay.fillText(labelText, x + 5, Math.max(0, y - textBgHeight) + 17);
+              }
+            } else {
+              // Hide badge if no box
+              badge.classList.add("opacity-0", "translate-y-2");
+              badge.classList.remove("opacity-100", "translate-y-0");
+            }
+          } catch(e) {
+            console.error("Lỗi parse WS message", e);
+          }
+      };
+
+      wsSocket.onclose = () => {
+         console.log("WebSocket Disconnected");
+      };
+
+
     } catch (err) {
       console.error(err);
       let msg = "Không thể mở camera.";
@@ -646,9 +781,6 @@
 
 // khi rời trang -> tắt camera
 window.addEventListener("beforeunload", () => stopCamera());
-</script>
-
-</html>addEventListener("beforeunload", () => stopCamera());
 </script>
 
 </html>
