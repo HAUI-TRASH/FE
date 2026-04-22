@@ -1,8 +1,39 @@
+/**
+ * Giải mã JWT và kiểm tra xem token có hết hạn chưa.
+ * Trả về true nếu token KHÔNG hợp lệ hoặc đã hết hạn.
+ */
+function isTokenExpired(token) {
+  if (!token || token === "null" || token === "undefined") return true;
+  try {
+    // JWT gồm 3 phần: header.payload.signature — lấy phần giữa
+    const payloadBase64 = token.split(".")[1];
+    if (!payloadBase64) return true;
+
+    // Base64url → Base64 chuẩn rồi decode
+    const base64 = payloadBase64.replace(/-/g, "+").replace(/_/g, "/");
+    const payload = JSON.parse(atob(base64));
+
+    // `exp` là số giây Unix, Date.now() trả về milli-giây
+    if (!payload.exp) return true;
+    return Date.now() >= payload.exp * 1000;
+  } catch (e) {
+    console.warn("Không thể giải mã JWT:", e);
+    return true; // Coi như hết hạn nếu lỗi
+  }
+}
+
 function renderAuthUI() {
   const token = localStorage.getItem("accessToken");
-  
-  // Robust check: token must exist and not be the string "null" or "undefined"
-  const isLoggedIn = token && token !== "null" && token !== "undefined";
+
+  // Kiểm tra token có tồn tại VÀ chưa hết hạn
+  if (isTokenExpired(token)) {
+    // Xóa token hết hạn để trang hiển thị đúng trạng thái "chưa đăng nhập"
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("account");
+  }
+
+  const freshToken = localStorage.getItem("accessToken");
+  const isLoggedIn = freshToken && freshToken !== "null" && freshToken !== "undefined";
   const acc = JSON.parse(localStorage.getItem("account") || "{}");
 
   const btns = document.getElementById("auth-buttons");
