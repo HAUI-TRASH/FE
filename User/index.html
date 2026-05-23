@@ -1,361 +1,458 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="light" lang="vi">
-
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Trang Chủ Nhận Diện Rác</title>
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            primary: "#3B82F6",
-            "background-light": "#E2E8F0",
-            "background-dark": "#E2E8F0",
-            "surface-dark": "#FFFFFF",
-            "surface-light": "#ffffff",
-          },
-          fontFamily: {
-            display: ["Space Grotesk", "sans-serif"],
-            body: ["Space Grotesk", "sans-serif"],
-          },
-          borderRadius: {
-            DEFAULT: "0.25rem",
-            lg: "0.5rem",
-            xl: "0.75rem",
-            "2xl": "1rem",
-            full: "9999px",
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Trang Chủ Nhận Diện Rác</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3B82F6",
+              "background-light": "#E2E8F0",
+              "background-dark": "#E2E8F0",
+              "surface-dark": "#FFFFFF",
+              "surface-light": "#ffffff",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              full: "9999px",
+            },
           },
         },
-      },
-    };
-  </script>
-  <script src="../constants.js"></script>
-  <style>
-    body {
-      font-family: "Space Grotesk", sans-serif;
-    }
+      };
+    </script>
+    <script src="../constants.js"></script>
+    <style>
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
 
-    .material-symbols-outlined {
-      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-    }
-  </style>
-  <script src="common.js"></script>
-  <script>
-    loadComponent("header-container", "header.html");
-    loadComponent("footer-container", "footer.html");
-  </script>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+    <script src="common.js"></script>
+    <script>
+      loadComponent("header-container", "header.html");
+      loadComponent("footer-container", "footer.html");
+    </script>
+  </head>
 
-</head>
+  <body
+    class="bg-[#E2E8F0] min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 antialiased font-display text-[#1E293B]"
+  >
+    <div id="header-container"></div>
 
-<body
-  class="bg-[#E2E8F0] min-h-screen flex flex-col overflow-x-hidden transition-colors duration-300 antialiased font-display text-[#1E293B]">
-  <div id="header-container"></div>
-
-  <main class="flex-1 flex flex-col items-center w-full px-4 py-8 md:py-12">
-    <div class="max-w-4xl w-full text-center mb-10 space-y-4 animate-fade-in-up">
+    <main class="flex-1 flex flex-col items-center w-full px-4 py-8 md:py-12">
       <div
-        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
-        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-        AI Technology V1.0
-      </div>
-      <h2 class="text-[#1E293B] text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
-        Phân loại rác thải bằng <span class="text-primary">AI</span>
-        <br class="hidden md:block" />
-      </h2>
-      <!-- <p class="text-[#1E293B] text-2xl md:text-2xl lg:text-2xl font-black leading-tight tracking-tight">Sản phẩm của Sinh
+        class="max-w-4xl w-full text-center mb-10 space-y-4 animate-fade-in-up"
+      >
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2"
+        >
+          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          AI Technology V1.0
+        </div>
+        <h2
+          class="text-[#1E293B] text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight"
+        >
+          Phân loại rác thải bằng <span class="text-primary">AI</span>
+          <br class="hidden md:block" />
+        </h2>
+        <!-- <p class="text-[#1E293B] text-2xl md:text-2xl lg:text-2xl font-black leading-tight tracking-tight">Sản phẩm của Sinh
         viên và Giảng viên Đại học Công nghiệp Hà Nội</p> -->
-      <p class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-normal">
-        Sử dụng công nghệ trí tuệ nhân tạo tiên tiến để nhận diện và phân loại
-        rác thải, góp phần bảo vệ môi trường xanh sạch.
-      </p>
-    </div>
-    <div class="max-w-[1100px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16">
-      <div class="lg:col-span-8 flex flex-col">
-        <div id="dropZone"
-          class="bg-white border-2 border-dashed border-[#CBD5E1] hover:border-primary/50 transition-all duration-300 rounded-3xl flex flex-col items-center justify-center py-12 px-6 h-full min-h-[400px] group cursor-pointer relative overflow-hidden shadow-xl shadow-black/5">
+        <p
+          class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-normal"
+        >
+          Sử dụng công nghệ trí tuệ nhân tạo tiên tiến để nhận diện và phân loại
+          rác thải, góp phần bảo vệ môi trường xanh sạch.
+        </p>
+      </div>
+      <div
+        class="max-w-[1100px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16"
+      >
+        <div class="lg:col-span-8 flex flex-col">
           <div
-            class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-          </div>
-          <div class="relative z-10 flex flex-col items-center">
+            id="dropZone"
+            class="bg-white border-2 border-dashed border-[#CBD5E1] hover:border-primary/50 transition-all duration-300 rounded-3xl flex flex-col items-center justify-center py-12 px-6 h-full min-h-[400px] group cursor-pointer relative overflow-hidden shadow-xl shadow-black/5"
+          >
             <div
-              class="bg-slate-50 p-6 rounded-full mb-6 group-hover:scale-110 group-hover:bg-slate-100 transition-all duration-300 shadow-inner">
-              <span class="material-symbols-outlined text-5xl text-primary">cloud_upload</span>
+              class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+            ></div>
+            <div class="relative z-10 flex flex-col items-center">
+              <div
+                class="bg-slate-50 p-6 rounded-full mb-6 group-hover:scale-110 group-hover:bg-slate-100 transition-all duration-300 shadow-inner"
+              >
+                <span class="material-symbols-outlined text-5xl text-primary"
+                  >cloud_upload</span
+                >
+              </div>
+              <h3 class="text-[#1E293B] text-2xl font-bold mb-3">
+                Kéo thả ảnh vào đây
+              </h3>
+              <p
+                class="text-slate-500 text-center max-w-sm mb-8 text-sm leading-relaxed"
+              >
+                Hoặc nhấp vào nút bên dưới để chọn ảnh từ thư viện của bạn.
+                <br /><span class="text-slate-400 text-xs mt-2 block"
+                  >Hỗ trợ JPG, PNG, WEBP tối đa 10MB.</span
+                >
+              </p>
+              <button
+                id="btnPick"
+                class="bg-primary hover:opacity-90 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-primary/20 transition-all hover:-translate-y-1 flex items-center gap-2.5 text-base"
+              >
+                <span class="material-symbols-outlined">folder_open</span>
+                Chọn tệp để tải lên
+              </button>
             </div>
-            <h3 class="text-[#1E293B] text-2xl font-bold mb-3">
-              Kéo thả ảnh vào đây
+          </div>
+        </div>
+        <div class="lg:col-span-4 flex flex-col gap-6">
+          <div
+            class="bg-white border border-[#CBD5E1] p-8 rounded-3xl flex flex-col items-center text-center hover:border-primary/30 transition-all duration-300 shadow-xl shadow-black/5 flex-1 justify-center relative overflow-hidden group"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-b from-slate-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+            ></div>
+            <div
+              class="bg-slate-50 p-4 rounded-full mb-5 group-hover:bg-slate-100 transition-colors relative z-10"
+            >
+              <span class="material-symbols-outlined text-4xl text-[#1E293B]"
+                >photo_camera</span
+              >
+            </div>
+            <h3 class="text-[#1E293B] text-xl font-bold mb-2 relative z-10">
+              Chụp ảnh trực tiếp
             </h3>
-            <p class="text-slate-500 text-center max-w-sm mb-8 text-sm leading-relaxed">
-              Hoặc nhấp vào nút bên dưới để chọn ảnh từ thư viện của bạn.
-              <br /><span class="text-slate-400 text-xs mt-2 block">Hỗ trợ JPG, PNG, WEBP tối đa 10MB.</span>
+            <p class="text-slate-600 text-sm mb-8 relative z-10">
+              Sử dụng camera thiết bị để nhận diện ngay lập tức.
             </p>
-            <button id="btnPick"
-              class="bg-primary hover:opacity-90 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-primary/20 transition-all hover:-translate-y-1 flex items-center gap-2.5 text-base">
-              <span class="material-symbols-outlined">folder_open</span>
-              Chọn tệp để tải lên
+            <button
+              id="btnCamera"
+              class="w-full bg-slate-50 hover:bg-slate-100 hover:text-primary text-[#1E293B] font-bold py-3.5 px-4 rounded-xl border border-[#CBD5E1] transition-all flex items-center justify-center gap-2 relative z-10"
+            >
+              <span class="material-symbols-outlined">shutter_speed</span>
+              Kích hoạt Camera
             </button>
           </div>
-        </div>
-      </div>
-      <div class="lg:col-span-4 flex flex-col gap-6">
-        <div
-          class="bg-white border border-[#CBD5E1] p-8 rounded-3xl flex flex-col items-center text-center hover:border-primary/30 transition-all duration-300 shadow-xl shadow-black/5 flex-1 justify-center relative overflow-hidden group">
           <div
-            class="absolute inset-0 bg-gradient-to-b from-slate-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-          </div>
-          <div class="bg-slate-50 p-4 rounded-full mb-5 group-hover:bg-slate-100 transition-colors relative z-10">
-            <span class="material-symbols-outlined text-4xl text-[#1E293B]">photo_camera</span>
-          </div>
-          <h3 class="text-[#1E293B] text-xl font-bold mb-2 relative z-10">
-            Chụp ảnh trực tiếp
-          </h3>
-          <p class="text-slate-600 text-sm mb-8 relative z-10">
-            Sử dụng camera thiết bị để nhận diện ngay lập tức.
-          </p>
-          <button id="btnCamera"
-            class="w-full bg-slate-50 hover:bg-slate-100 hover:text-primary text-[#1E293B] font-bold py-3.5 px-4 rounded-xl border border-[#CBD5E1] transition-all flex items-center justify-center gap-2 relative z-10">
-            <span class="material-symbols-outlined">shutter_speed</span>
-            Kích hoạt Camera
-          </button>
-        </div>
-        <div class="bg-white p-6 rounded-3xl border border-[#CBD5E1] shadow-xl shadow-black/5">
-          <div class="flex items-start gap-4 mb-5">
-            <div class="bg-primary/10 p-2 rounded-lg">
-              <span class="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
+            class="bg-white p-6 rounded-3xl border border-[#CBD5E1] shadow-xl shadow-black/5"
+          >
+            <div class="flex items-start gap-4 mb-5">
+              <div class="bg-primary/10 p-2 rounded-lg">
+                <span class="material-symbols-outlined text-primary text-2xl"
+                  >auto_awesome</span
+                >
+              </div>
+              <div>
+                <h4 class="text-[#1E293B] font-bold text-lg">
+                  Độ chính xác 98%
+                </h4>
+                <p class="text-sm text-slate-600 mt-1">
+                  AI được huấn luyện trên 1000 mẫu dữ liệu rác thải.
+                </p>
+              </div>
             </div>
-            <div>
-              <h4 class="text-[#1E293B] font-bold text-lg">Độ chính xác 98%</h4>
-              <p class="text-sm text-slate-600 mt-1">
-                AI được huấn luyện trên 1000 mẫu dữ liệu rác thải.
-              </p>
-            </div>
-          </div>
-          <div class="space-y-3">
-            <div class="flex justify-between text-xs font-medium text-gray-400 uppercase tracking-wide">
-              <span>Độ tin cậy</span>
-              <span class="text-primary">Cao</span>
-            </div>
-            <div class="w-full bg-gray-800/50 h-2 rounded-full overflow-hidden backdrop-blur-sm">
+            <div class="space-y-3">
               <div
-                class="bg-gradient-to-r from-primary to-[#86efac] h-full w-[98%] shadow-[0_0_15px_rgba(19,236,91,0.5)]">
+                class="flex justify-between text-xs font-medium text-gray-400 uppercase tracking-wide"
+              >
+                <span>Độ tin cậy</span>
+                <span class="text-primary">Cao</span>
+              </div>
+              <div
+                class="w-full bg-gray-800/50 h-2 rounded-full overflow-hidden backdrop-blur-sm"
+              >
+                <div
+                  class="bg-gradient-to-r from-primary to-[#86efac] h-full w-[98%] shadow-[0_0_15px_rgba(19,236,91,0.5)]"
+                ></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="max-w-[1200px] w-full mt-8">
-      <div class="flex items-center justify-between mb-8 px-4 border-b border-[#CBD5E1] pb-4">
-        <h2 class="text-[#1E293B] text-2xl font-bold flex items-center gap-3">
-          <span class="bg-slate-50 p-1.5 rounded-lg text-primary flex items-center justify-center">
-            <span class="material-symbols-outlined">grid_view</span>
-          </span>
-          Các loại rác phổ biến
-        </h2>
-        <a class="text-primary text-sm font-bold hover:text-[#1E293B] transition-colors flex items-center gap-1 group"
-          href="#">
-          Xem thư viện
-          <span
-            class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
-        </a>
+      <div class="max-w-[1200px] w-full mt-8">
+        <div
+          class="flex items-center justify-between mb-8 px-4 border-b border-[#CBD5E1] pb-4"
+        >
+          <h2 class="text-[#1E293B] text-2xl font-bold flex items-center gap-3">
+            <span
+              class="bg-slate-50 p-1.5 rounded-lg text-primary flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined">grid_view</span>
+            </span>
+            Các loại rác phổ biến
+          </h2>
+          <a
+            class="text-primary text-sm font-bold hover:text-[#1E293B] transition-colors flex items-center gap-1 group"
+            href="#"
+          >
+            Xem thư viện
+            <span
+              class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform"
+              >arrow_right_alt</span
+            >
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+          <div
+            class="group bg-white border border-[#CBD5E1] rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full shadow-sm"
+          >
+            <div class="aspect-[4/3] bg-gray-100 relative overflow-hidden">
+              <div
+                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx&quot;);
+                "
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+              ></div>
+              <div
+                class="absolute top-3 right-3 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                Tái chế
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col">
+              <h3
+                class="text-[#1E293B] font-bold text-lg mb-2 group-hover:text-primary transition-colors"
+              >
+                Chai Nhựa PET
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
+                Nhựa dẻo trong suốt, có thể tái chế thành sợi vải polyester.
+              </p>
+              <div
+                class="mt-auto flex items-center gap-2 text-xs text-slate-500 font-medium border-t border-slate-100 pt-3"
+              >
+                <span class="material-symbols-outlined text-base">info</span>
+                Cần làm sạch trước khi bỏ
+              </div>
+            </div>
+          </div>
+          <div
+            class="group bg-white border border-[#CBD5E1] rounded-2xl overflow-hidden hover:border-yellow-500/50 hover:shadow-lg hover:shadow-yellow-500/5 transition-all duration-300 flex flex-col h-full shadow-sm"
+          >
+            <div class="aspect-[4/3] bg-gray-100 relative overflow-hidden">
+              <div
+                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh&quot;);
+                "
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+              ></div>
+              <div
+                class="absolute top-3 right-3 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                Hữu cơ
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col">
+              <h3
+                class="text-[#1E293B] font-bold text-lg mb-2 group-hover:text-yellow-600 transition-colors"
+              >
+                Vỏ Chuối
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
+                Rác thải thực phẩm, dễ phân hủy tự nhiên làm phân bón.
+              </p>
+              <div
+                class="mt-auto flex items-center gap-2 text-xs text-slate-500 font-medium border-t border-slate-100 pt-3"
+              >
+                <span class="material-symbols-outlined text-base">compost</span>
+                Ủ phân compost
+              </div>
+            </div>
+          </div>
+          <div
+            class="group bg-white border border-[#CBD5E1] rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full shadow-sm"
+          >
+            <div class="aspect-[4/3] bg-gray-100 relative overflow-hidden">
+              <div
+                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy&quot;);
+                "
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+              ></div>
+              <div
+                class="absolute top-3 right-3 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                Tái chế
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col">
+              <h3
+                class="text-[#1E293B] font-bold text-lg mb-2 group-hover:text-primary transition-colors"
+              >
+                Chai Thủy Tinh
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
+                Có thể tái chế vô hạn 100% nếu được phân loại đúng.
+              </p>
+              <div
+                class="mt-auto flex items-center gap-2 text-xs text-slate-500 font-medium border-t border-slate-100 pt-3"
+              >
+                <span class="material-symbols-outlined text-base">warning</span>
+                Cẩn thận vỡ
+              </div>
+            </div>
+          </div>
+          <div
+            class="group bg-white border border-[#CBD5E1] rounded-2xl overflow-hidden hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/5 transition-all duration-300 flex flex-col h-full shadow-sm"
+          >
+            <div class="aspect-[4/3] bg-gray-100 relative overflow-hidden">
+              <div
+                class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X&quot;);
+                "
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+              ></div>
+              <div
+                class="absolute top-3 right-3 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                Nguy hại
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col">
+              <h3
+                class="text-[#1E293B] font-bold text-lg mb-2 group-hover:text-red-500 transition-colors"
+              >
+                Pin Cũ
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
+                Chứa chì, thủy ngân. Tuyệt đối không bỏ chung rác thường.
+              </p>
+              <div
+                class="mt-auto flex items-center gap-2 text-xs text-slate-500 font-medium border-t border-slate-100 pt-3"
+              >
+                <span class="material-symbols-outlined text-base"
+                  >delete_forever</span
+                >
+                Thu gom riêng
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
-        <div
-          class="group bg-white border border-[#CBD5E1] rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full shadow-sm">
-          <div class="aspect-[4/3] bg-gray-100 relative overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0JIF39seDjTtatMgs3n-VI7xxoulAVTEC4TFhLQFSrOM8oHJAtYj_fCEI_QSQn69Xu1AlAgcoW28og0z2v8BkcSuoOxNKW1xZVUyyJI--01eTZ232dK_ehE2mnmQkp_KOWDGdJzZsm4ZZ7q_cblFEoiKK61Yct-tmw-KVyk6_CnAQYC0IoYnKVQ09uDO-G2duGMdJmJnP4tRkQVVWxRL3y4cBNnO_llkYpiWirH2nWY3SA1cpIKuH59D3fFMszHlosjSqi75Ds1Lx');">
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div
-              class="absolute top-3 right-3 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-              Tái chế
-            </div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <h3 class="text-[#1E293B] font-bold text-lg mb-2 group-hover:text-primary transition-colors">
-              Chai Nhựa PET
-            </h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
-              Nhựa dẻo trong suốt, có thể tái chế thành sợi vải polyester.
-            </p>
-            <div
-              class="mt-auto flex items-center gap-2 text-xs text-slate-500 font-medium border-t border-slate-100 pt-3">
-              <span class="material-symbols-outlined text-base">info</span>
-              Cần làm sạch trước khi bỏ
-            </div>
-          </div>
-        </div>
-        <div
-          class="group bg-white border border-[#CBD5E1] rounded-2xl overflow-hidden hover:border-yellow-500/50 hover:shadow-lg hover:shadow-yellow-500/5 transition-all duration-300 flex flex-col h-full shadow-sm">
-          <div class="aspect-[4/3] bg-gray-100 relative overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCXOuJpl96ZUWO9rj-DQlVu6ChONWAug6NFLf9VRfNifTVQRqg8RhOGkJaWNmHyLPavqxjE6SehM_JzpihDJg3XnUWSwjGuGEGQpiq6UH9OMqWgYHSC38-VBLgwazCly5ekifPqUwt5s54YwSbGHccgRl-5eJik0bMfJ3spWEPDc1i_EdikXA8NN8H6f4goXGIOH1HjNQE-2HOK3Tpiz9GwuFNYAvmUZHxC-ZJQe1cIRgfF3P062mMUNfPzJdIJ1A27BOLr3goLpcrh');">
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div
-              class="absolute top-3 right-3 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
-              Hữu cơ
-            </div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <h3 class="text-[#1E293B] font-bold text-lg mb-2 group-hover:text-yellow-600 transition-colors">
-              Vỏ Chuối
-            </h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
-              Rác thải thực phẩm, dễ phân hủy tự nhiên làm phân bón.
-            </p>
-            <div
-              class="mt-auto flex items-center gap-2 text-xs text-slate-500 font-medium border-t border-slate-100 pt-3">
-              <span class="material-symbols-outlined text-base">compost</span>
-              Ủ phân compost
-            </div>
-          </div>
-        </div>
-        <div
-          class="group bg-white border border-[#CBD5E1] rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col h-full shadow-sm">
-          <div class="aspect-[4/3] bg-gray-100 relative overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div
-              class="absolute top-3 right-3 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-              Tái chế
-            </div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <h3 class="text-[#1E293B] font-bold text-lg mb-2 group-hover:text-primary transition-colors">
-              Chai Thủy Tinh
-            </h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
-              Có thể tái chế vô hạn 100% nếu được phân loại đúng.
-            </p>
-            <div
-              class="mt-auto flex items-center gap-2 text-xs text-slate-500 font-medium border-t border-slate-100 pt-3">
-              <span class="material-symbols-outlined text-base">warning</span>
-              Cẩn thận vỡ
-            </div>
-          </div>
-        </div>
-        <div
-          class="group bg-white border border-[#CBD5E1] rounded-2xl overflow-hidden hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/5 transition-all duration-300 flex flex-col h-full shadow-sm">
-          <div class="aspect-[4/3] bg-gray-100 relative overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div
-              class="absolute top-3 right-3 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-              Nguy hại
-            </div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <h3 class="text-[#1E293B] font-bold text-lg mb-2 group-hover:text-red-500 transition-colors">
-              Pin Cũ
-            </h3>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
-              Chứa chì, thủy ngân. Tuyệt đối không bỏ chung rác thường.
-            </p>
-            <div
-              class="mt-auto flex items-center gap-2 text-xs text-slate-500 font-medium border-t border-slate-100 pt-3">
-              <span class="material-symbols-outlined text-base">delete_forever</span>
-              Thu gom riêng
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-  <div id="footer-container"></div>
-</body>
+    </main>
+    <div id="footer-container"></div>
+  </body>
 
-<script>
+  <script>
+    // thống nhất plural theo backend mới
+    const UPLOAD_URL = API_BASE + "/api/v1/ai_request";
+    const PREDICT_URL = (id) =>
+      API_BASE + `/api/v1/ai_requests/${encodeURIComponent(id)}/predict`;
+    const DETAIL_PAGE_URL = (id) =>
+      `result_analys.html?id=${encodeURIComponent(id)}`;
 
-  // thống nhất plural theo backend mới
-  const UPLOAD_URL = API_BASE + "/api/v1/ai_request";
-  const PREDICT_URL = (id) => API_BASE + `/api/v1/ai_requests/${encodeURIComponent(id)}/predict`;
-  const DETAIL_PAGE_URL = (id) => `result_analys.html?id=${encodeURIComponent(id)}`;
+    const dropZone = document.getElementById("dropZone");
+    const btnPick = document.getElementById("btnPick");
+    const avatarBox = document.getElementById("user-menu-button");
+    const getToken = () => localStorage.getItem("accessToken") || "";
 
-  const dropZone = document.getElementById("dropZone");
-  const btnPick = document.getElementById("btnPick");
-  const avatarBox = document.getElementById("user-menu-button");
-  const getToken = () => localStorage.getItem("accessToken") || "";
-
-  function requireLogin() {
-    const currentToken = getToken();
-    if (!currentToken) {
-      showToast("Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện các chức năng của hệ thống", "error");
-      return false;
+    function requireLogin() {
+      const currentToken = getToken();
+      if (!currentToken) {
+        showToast(
+          "Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện các chức năng của hệ thống",
+          "error",
+        );
+        return false;
+      }
+      return true;
     }
-    return true;
-  }
-  const fileInput = document.createElement("input");
-  fileInput.type = "file";
-  fileInput.accept = "image/*";
-  fileInput.style.display = "none";
-  document.body.appendChild(fileInput);
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.style.display = "none";
+    document.body.appendChild(fileInput);
 
-  // Avatar logic removed, handled by renderAuthUI() in loadComponent
+    // Avatar logic removed, handled by renderAuthUI() in loadComponent
 
-  function showToast(message, type = "info") {
-    const t = document.createElement("div");
-    t.className =
-      "fixed z-[9999] left-1/2 -translate-x-1/2 top-6 px-4 py-3 rounded-xl border text-sm shadow-2xl backdrop-blur-md";
-    if (type === "success") {
-      t.classList.add(
-        "border-blue-500/30",
-        "bg-blue-500/10",
-        "text-blue-900"
-      );
-    } else if (type === "error") {
-      t.classList.add("border-red-500/30", "bg-red-500/10", "text-red-900");
-    } else {
-      t.classList.add("border-slate-200", "bg-white/80", "text-slate-900");
+    function showToast(message, type = "info") {
+      const t = document.createElement("div");
+      t.className =
+        "fixed z-[9999] left-1/2 -translate-x-1/2 top-6 px-4 py-3 rounded-xl border text-sm shadow-2xl backdrop-blur-md";
+      if (type === "success") {
+        t.classList.add(
+          "border-blue-500/30",
+          "bg-blue-500/10",
+          "text-blue-900",
+        );
+      } else if (type === "error") {
+        t.classList.add("border-red-500/30", "bg-red-500/10", "text-red-900");
+      } else {
+        t.classList.add("border-slate-200", "bg-white/80", "text-slate-900");
+      }
+      t.textContent = message;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2200);
     }
-    t.textContent = message;
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 2200);
-  }
-  function isValidImage(file) {
-    if (!file) return false;
+    function isValidImage(file) {
+      if (!file) return false;
 
-    const max = 10 * 1024 * 1024; // 10MB
-    if (file.size <= 0 || file.size > max) return false;
+      const max = 10 * 1024 * 1024; // 10MB
+      if (file.size <= 0 || file.size > max) return false;
 
-    const mime = (file.type || "").toLowerCase();
-    if (mime) return mime.startsWith("image/");
+      const mime = (file.type || "").toLowerCase();
+      if (mime) return mime.startsWith("image/");
 
-    const name = (file.name || "").toLowerCase();
-    const okExt = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".heic"];
-    return okExt.some(ext => name.endsWith(ext));
-  }
+      const name = (file.name || "").toLowerCase();
+      const okExt = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".heic"];
+      return okExt.some((ext) => name.endsWith(ext));
+    }
 
-  function setUploading(isUploading) {
-    if (!dropZone) return;
-    dropZone.classList.toggle("opacity-70", isUploading);
-    dropZone.classList.toggle("pointer-events-none", isUploading);
-    if (btnPick) btnPick.disabled = isUploading;
-  }
+    function setUploading(isUploading) {
+      if (!dropZone) return;
+      dropZone.classList.toggle("opacity-70", isUploading);
+      dropZone.classList.toggle("pointer-events-none", isUploading);
+      if (btnPick) btnPick.disabled = isUploading;
+    }
 
-  function renderPreview(file) {
-    const url = URL.createObjectURL(file);
+    function renderPreview(file) {
+      const url = URL.createObjectURL(file);
 
-    dropZone.innerHTML = `
+      dropZone.innerHTML = `
       <div class="relative z-10 w-full max-w-md">
         <div class="rounded-2xl overflow-hidden border border-[#CBD5E1] bg-slate-50 shadow-inner">
           <img src="${url}" alt="preview" class="w-full h-auto block" />
@@ -380,173 +477,185 @@
       </div>
     `;
 
-    document.getElementById("btnPickAgain").onclick = () => fileInput.click();
-    document.getElementById("btnUploadNow").onclick = () => {
+      document.getElementById("btnPickAgain").onclick = () => fileInput.click();
+      document.getElementById("btnUploadNow").onclick = () => {
+        if (!requireLogin()) return;
+        uploadFile(file);
+      };
+    }
+    async function uploadFile(file) {
       if (!requireLogin()) return;
-      uploadFile(file);
-    };
-  }
-  async function uploadFile(file) {
-    if (!requireLogin()) return;
 
-    if (!isValidImage(file)) {
-      showToast("Ảnh không hợp lệ (chỉ JPG/PNG/WEBP, tối đa 10MB).", "error");
-      return;
-    }
-
-    setUploading(true);
-    showToast("Đang tải ảnh lên...", "info");
-
-    try {
-      const currentToken = getToken();
-
-      // 1) Upload -> create ai_request
-      const fd = new FormData();
-      fd.append("file", file);
-
-      const headers = {
-        Authorization: "Bearer " + currentToken
-      };
-
-      const upRes = await fetch(UPLOAD_URL, { method: "POST", headers, body: fd });
-      const upJson = await upRes.json().catch(() => null);
-
-      if (upRes.status === 401 || upRes.status === 403) {
-        showToast("Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện các chức năng của hệ thống", "error");
-        return;
-      }
-
-      if (!upRes.ok) {
-        showToast(upJson?.message || "Upload thất bại.", "error");
-        return;
-      }
-
-      const upData = upJson?.data ?? upJson;
-      const aiRequestId = upData?.id;
-      const imageUrl = upData?.cloudinaryUrl;
-
-      if (!aiRequestId || !imageUrl) {
-        showToast("Upload OK nhưng thiếu id/cloudinaryUrl.", "error");
-        return;
-      }
-
-      // 2) Call predict
-      showToast("Đang nhận diện bằng AI...", "info");
-
-      const predictBody = {
-        aiRequestId,
-        imageUrl,
-        conf: 0.25,
-        iou: 0.6,
-      };
-
-      const predictHeaders = {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + currentToken
-      };
-
-      const prRes = await fetch(PREDICT_URL(aiRequestId), {
-        method: "POST",
-        headers: predictHeaders,
-        body: JSON.stringify(predictBody),
-      });
-
-      const prJson = await prRes.json().catch(() => null);
-
-      if (prRes.status === 401 || prRes.status === 403) {
-        showToast("Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện các chức năng của hệ thống", "error");
-        return;
-      }
-
-      if (!prRes.ok) {
-        showToast(prJson?.message || "AI predict thất bại.", "error");
-        return;
-      }
-
-      showToast("Xong! Đang chuyển sang trang kết quả...", "success");
-
-      setTimeout(() => {
-        window.location.href = DETAIL_PAGE_URL(aiRequestId);
-      }, 500);
-
-    } catch (e) {
-      console.error(e);
-      showToast("Không thể kết nối server. Kiểm tra API_BASE.", "error");
-    } finally {
-      setUploading(false);
-    }
-  }
-
-  if (btnPick) btnPick.addEventListener("click", () => fileInput.click());
-
-  fileInput.addEventListener("change", () => {
-    const file = fileInput.files?.[0];
-    if (!isValidImage(file)) {
-      showToast("Ảnh không hợp lệ (chỉ JPG/PNG/WEBP, tối đa 10MB).", "error");
-      fileInput.value = "";
-      return;
-    }
-    renderPreview(file);
-  });
-
-  ["dragenter", "dragover"].forEach((evt) => {
-    if (dropZone) {
-      dropZone.addEventListener(evt, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        dropZone.classList.add("border-primary");
-      });
-    }
-  });
-
-  ["dragleave", "drop"].forEach((evt) => {
-    if (dropZone) {
-      dropZone.addEventListener(evt, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        dropZone.classList.remove("border-primary");
-      });
-    }
-  });
-
-  if (dropZone) {
-    dropZone.addEventListener("drop", (e) => {
-      const file = e.dataTransfer?.files?.[0];
       if (!isValidImage(file)) {
         showToast("Ảnh không hợp lệ (chỉ JPG/PNG/WEBP, tối đa 10MB).", "error");
         return;
       }
+
+      setUploading(true);
+      showToast("Đang tải ảnh lên...", "info");
+
+      try {
+        const currentToken = getToken();
+
+        // 1) Upload -> create ai_request
+        const fd = new FormData();
+        fd.append("file", file);
+
+        const headers = {
+          Authorization: "Bearer " + currentToken,
+        };
+
+        const upRes = await fetch(UPLOAD_URL, {
+          method: "POST",
+          headers,
+          body: fd,
+        });
+        const upJson = await upRes.json().catch(() => null);
+
+        if (upRes.status === 401 || upRes.status === 403) {
+          showToast(
+            "Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện các chức năng của hệ thống",
+            "error",
+          );
+          return;
+        }
+
+        if (!upRes.ok) {
+          showToast(upJson?.message || "Upload thất bại.", "error");
+          return;
+        }
+
+        const upData = upJson?.data ?? upJson;
+        const aiRequestId = upData?.id;
+        const imageUrl = upData?.cloudinaryUrl;
+
+        if (!aiRequestId || !imageUrl) {
+          showToast("Upload OK nhưng thiếu id/cloudinaryUrl.", "error");
+          return;
+        }
+
+        // 2) Call predict
+        showToast("Đang nhận diện bằng AI...", "info");
+
+        const predictBody = {
+          aiRequestId,
+          imageUrl,
+          conf: 0.25,
+          iou: 0.6,
+        };
+
+        const predictHeaders = {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + currentToken,
+        };
+
+        const prRes = await fetch(PREDICT_URL(aiRequestId), {
+          method: "POST",
+          headers: predictHeaders,
+          body: JSON.stringify(predictBody),
+        });
+
+        const prJson = await prRes.json().catch(() => null);
+
+        if (prRes.status === 401 || prRes.status === 403) {
+          showToast(
+            "Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện các chức năng của hệ thống",
+            "error",
+          );
+          return;
+        }
+
+        if (!prRes.ok) {
+          showToast(prJson?.message || "AI predict thất bại.", "error");
+          return;
+        }
+
+        showToast("Xong! Đang chuyển sang trang kết quả...", "success");
+
+        setTimeout(() => {
+          window.location.href = DETAIL_PAGE_URL(aiRequestId);
+        }, 500);
+      } catch (e) {
+        console.error(e);
+        showToast("Không thể kết nối server. Kiểm tra API_BASE.", "error");
+      } finally {
+        setUploading(false);
+      }
+    }
+
+    if (btnPick) btnPick.addEventListener("click", () => fileInput.click());
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files?.[0];
+      if (!isValidImage(file)) {
+        showToast("Ảnh không hợp lệ (chỉ JPG/PNG/WEBP, tối đa 10MB).", "error");
+        fileInput.value = "";
+        return;
+      }
       renderPreview(file);
     });
-  }
-  window.ecoscanLogout = function () {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("account");
-    window.location.href = "login.html";
-  };
 
-  const btnCamera = document.getElementById("btnCamera");
-  let cameraStream = null;
-  let realtimeInterval = null;
-  let wsSocket = null;
+    ["dragenter", "dragover"].forEach((evt) => {
+      if (dropZone) {
+        dropZone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.add("border-primary");
+        });
+      }
+    });
 
-  function stopCamera() {
-    if (realtimeInterval) {
-      clearInterval(realtimeInterval);
-      realtimeInterval = null;
-    }
-    if (wsSocket) {
-      wsSocket.close();
-      wsSocket = null;
-    }
-    if (cameraStream) {
-      cameraStream.getTracks().forEach((t) => t.stop());
-      cameraStream = null;
-    }
-  }
+    ["dragleave", "drop"].forEach((evt) => {
+      if (dropZone) {
+        dropZone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.remove("border-primary");
+        });
+      }
+    });
 
-  function renderCameraUI() {
-    dropZone.innerHTML = `
+    if (dropZone) {
+      dropZone.addEventListener("drop", (e) => {
+        const file = e.dataTransfer?.files?.[0];
+        if (!isValidImage(file)) {
+          showToast(
+            "Ảnh không hợp lệ (chỉ JPG/PNG/WEBP, tối đa 10MB).",
+            "error",
+          );
+          return;
+        }
+        renderPreview(file);
+      });
+    }
+    window.ecoscanLogout = function () {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("account");
+      window.location.href = "login.html";
+    };
+
+    const btnCamera = document.getElementById("btnCamera");
+    let cameraStream = null;
+    let realtimeInterval = null;
+    let wsSocket = null;
+
+    function stopCamera() {
+      if (realtimeInterval) {
+        clearInterval(realtimeInterval);
+        realtimeInterval = null;
+      }
+      if (wsSocket) {
+        wsSocket.close();
+        wsSocket = null;
+      }
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((t) => t.stop());
+        cameraStream = null;
+      }
+    }
+
+    function renderCameraUI() {
+      dropZone.innerHTML = `
         <div class="rounded-2xl overflow-hidden border border-[#CBD5E1] bg-slate-50 shadow-inner relative">
           <video id="camVideo" autoplay playsinline class="w-full h-auto block relative z-0"></video>
           
@@ -588,214 +697,238 @@
         </p>
       </div>
     `;
-  }
-
-  async function startCamera(facingMode = "environment") {
-    try {
-      stopCamera();
-      renderCameraUI();
-
-      const constraints = {
-        video: { facingMode },
-        audio: false,
-      };
-
-      cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
-
-      const video = document.getElementById("camVideo");
-      video.srcObject = cameraStream;
-
-      document.getElementById("btnCloseCam").onclick = () => {
-        stopCamera();
-        window.location.reload();
-      };
-
-      document.getElementById("btnSwitchCam").onclick = async () => {
-        const current = constraints.video.facingMode;
-        const next = current === "environment" ? "user" : "environment";
-        await startCamera(next);
-      };
-
-      document.getElementById("btnSnap").onclick = async () => {
-        try {
-          if (realtimeInterval) {
-            clearInterval(realtimeInterval);
-            realtimeInterval = null;
-          }
-          const v = document.getElementById("camVideo");
-          const canvas = document.createElement("canvas");
-          canvas.width = v.videoWidth || 1280;
-          canvas.height = v.videoHeight || 720;
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
-
-          const blob = await new Promise((resolve) =>
-            canvas.toBlob(resolve, "image/jpeg", 0.92)
-          );
-
-          if (!blob) {
-            showToast("Không thể chụp ảnh. Thử lại.", "error");
-            return;
-          }
-
-          const file = new File([blob], `camera_${Date.now()}.jpg`, {
-            type: "image/jpeg",
-          });
-
-          stopCamera();
-          renderPreview(file);
-        } catch (e) {
-          showToast("Chụp ảnh thất bại.", "error");
-        }
-      };
-
-      // Real-time loop
-      const badge = document.getElementById("realtimeBadge");
-      const textEl = document.getElementById("realtimeText");
-      const confEl = document.getElementById("realtimeConf");
-      const dot = document.getElementById("realtimeStatusDot");
-      const canvasOverlay = document.getElementById("overlayCanvas");
-      const ctxOverlay = canvasOverlay.getContext("2d");
-
-      // Biến dùng chung để lưu kích thước frame đã gửi - truy cập được bởi cả onopen và onmessage
-      let lastFrameDims = { w: 512, h: 512 };
-
-      const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
-      const wsUrl = API_BASE.replace(/^http(s?):\/\//, wsProtocol) + "/ws/detect";
-
-      wsSocket = new WebSocket(wsUrl);
-
-      wsSocket.onopen = () => {
-        realtimeInterval = setInterval(async () => {
-          if (!video || video.paused || video.ended || wsSocket.readyState !== WebSocket.OPEN) return;
-
-          // Resize overlay canvas để khớp kích thước hiển thị video
-          if (canvasOverlay.width !== video.clientWidth) {
-            canvasOverlay.width = video.clientWidth;
-            canvasOverlay.height = video.clientHeight;
-          }
-          ctxOverlay.clearRect(0, 0, canvasOverlay.width, canvasOverlay.height);
-
-          try {
-            const tempCanvas = document.createElement("canvas");
-            // Giữ max cạnh lớn nhất là 512px để khớp với model đã train
-            const MAX_DIM = 512;
-            let fw = video.videoWidth;
-            let fh = video.videoHeight;
-
-            if (fw > MAX_DIM || fh > MAX_DIM) {
-              const ratio = Math.min(MAX_DIM / fw, MAX_DIM / fh);
-              fw = fw * ratio;
-              fh = fh * ratio;
-            }
-
-            tempCanvas.width = fw || 512;
-            tempCanvas.height = fh || 512;
-            const tCtx = tempCanvas.getContext("2d");
-            tCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
-
-            // Lưu kích thước frame vào biến ngoài để onmessage dùng
-            lastFrameDims = { w: tempCanvas.width, h: tempCanvas.height };
-
-            // Gửi blob lên backend qua WebSocket
-            const blob = await new Promise(r => tempCanvas.toBlob(r, "image/jpeg", 0.85));
-            if (!blob) return;
-            wsSocket.send(blob);
-          } catch (err) {
-            console.error("WS send error:", err);
-          }
-        }, 1500);
-      };
-
-      wsSocket.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-
-          if (data && data.labelDisplay) {
-            badge.classList.remove("opacity-0", "translate-y-2");
-            badge.classList.add("opacity-100", "translate-y-0");
-
-            textEl.textContent = data.labelDisplay;
-            if (data.confidence > 0) {
-              confEl.textContent = `Độ tin cậy: ${(data.confidence * 100).toFixed(1)}%`;
-              dot.classList.replace("bg-slate-400", "bg-emerald-500");
-              dot.classList.add("animate-pulse");
-            } else {
-              confEl.textContent = "";
-              dot.classList.replace("bg-emerald-500", "bg-slate-400");
-              dot.classList.remove("animate-pulse");
-            }
-
-            // Vẽ bounding box nếu có tọa độ
-            if (data.x1 != null && data.x2 != null && data.y1 != null && data.y2 != null) {
-              const scaleX = canvasOverlay.width / lastFrameDims.w;
-              const scaleY = canvasOverlay.height / lastFrameDims.h;
-
-              const x = data.x1 * scaleX;
-              const y = data.y1 * scaleY;
-              const w = (data.x2 - data.x1) * scaleX;
-              const h = (data.y2 - data.y1) * scaleY;
-
-              // Vẽ khung trắng
-              ctxOverlay.strokeStyle = "#FFFFFF";
-              ctxOverlay.lineWidth = 3;
-              ctxOverlay.strokeRect(x, y, w, h);
-
-              // Vẽ nhãn (nền trắng, chữ xanh)
-              const labelText = `${data.labelDisplay} ${(data.confidence).toFixed(2)}`;
-              ctxOverlay.font = "bold 16px sans-serif";
-              const textWidth = ctxOverlay.measureText(labelText).width;
-              const textBgHeight = 24;
-              ctxOverlay.fillStyle = "#FFFFFF";
-              ctxOverlay.fillRect(x, Math.max(0, y - textBgHeight), textWidth + 10, textBgHeight);
-              ctxOverlay.fillStyle = "#1E3B8A";
-              ctxOverlay.fillText(labelText, x + 5, Math.max(0, y - textBgHeight) + 17);
-            }
-          } else {
-            badge.classList.add("opacity-0", "translate-y-2");
-            badge.classList.remove("opacity-100", "translate-y-0");
-          }
-        } catch (e) {
-          console.error("Lỗi parse WS message", e);
-        }
-      };
-
-      wsSocket.onclose = () => {
-        console.log("WebSocket Disconnected");
-      };
-
-
-    } catch (err) {
-      console.error(err);
-      let msg = "Không thể mở camera.";
-      if (err?.name === "NotAllowedError")
-        msg = "Bạn đã từ chối quyền camera.";
-      if (err?.name === "NotFoundError")
-        msg = "Không tìm thấy camera trên thiết bị.";
-      if (err?.name === "NotReadableError")
-        msg = "Camera đang được app khác sử dụng.";
-      if (err?.name === "SecurityError")
-        msg = "Camera cần https hoặc localhost.";
-      showToast(msg, "error");
     }
-  }
 
-  if (btnCamera) {
-    btnCamera.addEventListener("click", async () => {
-      if (!requireLogin()) return;
+    async function startCamera(facingMode = "environment") {
+      try {
+        stopCamera();
+        renderCameraUI();
 
-      if (!navigator.mediaDevices?.getUserMedia) {
-        showToast("Trình duyệt không hỗ trợ camera.", "error");
-        return;
+        const constraints = {
+          video: { facingMode },
+          audio: false,
+        };
+
+        cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+
+        const video = document.getElementById("camVideo");
+        video.srcObject = cameraStream;
+
+        document.getElementById("btnCloseCam").onclick = () => {
+          stopCamera();
+          window.location.reload();
+        };
+
+        document.getElementById("btnSwitchCam").onclick = async () => {
+          const current = constraints.video.facingMode;
+          const next = current === "environment" ? "user" : "environment";
+          await startCamera(next);
+        };
+
+        document.getElementById("btnSnap").onclick = async () => {
+          try {
+            if (realtimeInterval) {
+              clearInterval(realtimeInterval);
+              realtimeInterval = null;
+            }
+            const v = document.getElementById("camVideo");
+            const canvas = document.createElement("canvas");
+            canvas.width = v.videoWidth || 1280;
+            canvas.height = v.videoHeight || 720;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
+
+            const blob = await new Promise((resolve) =>
+              canvas.toBlob(resolve, "image/jpeg", 0.92),
+            );
+
+            if (!blob) {
+              showToast("Không thể chụp ảnh. Thử lại.", "error");
+              return;
+            }
+
+            const file = new File([blob], `camera_${Date.now()}.jpg`, {
+              type: "image/jpeg",
+            });
+
+            stopCamera();
+            renderPreview(file);
+          } catch (e) {
+            showToast("Chụp ảnh thất bại.", "error");
+          }
+        };
+
+        // Real-time loop
+        const badge = document.getElementById("realtimeBadge");
+        const textEl = document.getElementById("realtimeText");
+        const confEl = document.getElementById("realtimeConf");
+        const dot = document.getElementById("realtimeStatusDot");
+        const canvasOverlay = document.getElementById("overlayCanvas");
+        const ctxOverlay = canvasOverlay.getContext("2d");
+
+        // Biến dùng chung để lưu kích thước frame đã gửi - truy cập được bởi cả onopen và onmessage
+        let lastFrameDims = { w: 512, h: 512 };
+
+        const wsProtocol =
+          window.location.protocol === "https:" ? "wss://" : "ws://";
+        const wsUrl =
+          API_BASE.replace(/^http(s?):\/\//, wsProtocol) + "/ws/detect";
+
+        wsSocket = new WebSocket(wsUrl);
+
+        wsSocket.onopen = () => {
+          realtimeInterval = setInterval(async () => {
+            if (
+              !video ||
+              video.paused ||
+              video.ended ||
+              wsSocket.readyState !== WebSocket.OPEN
+            )
+              return;
+
+            // Resize overlay canvas để khớp kích thước hiển thị video
+            if (canvasOverlay.width !== video.clientWidth) {
+              canvasOverlay.width = video.clientWidth;
+              canvasOverlay.height = video.clientHeight;
+            }
+            ctxOverlay.clearRect(
+              0,
+              0,
+              canvasOverlay.width,
+              canvasOverlay.height,
+            );
+
+            try {
+              const tempCanvas = document.createElement("canvas");
+              // Giữ max cạnh lớn nhất là 512px để khớp với model đã train
+              const MAX_DIM = 512;
+              let fw = video.videoWidth;
+              let fh = video.videoHeight;
+
+              if (fw > MAX_DIM || fh > MAX_DIM) {
+                const ratio = Math.min(MAX_DIM / fw, MAX_DIM / fh);
+                fw = fw * ratio;
+                fh = fh * ratio;
+              }
+
+              tempCanvas.width = fw || 512;
+              tempCanvas.height = fh || 512;
+              const tCtx = tempCanvas.getContext("2d");
+              tCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+
+              // Lưu kích thước frame vào biến ngoài để onmessage dùng
+              lastFrameDims = { w: tempCanvas.width, h: tempCanvas.height };
+
+              // Gửi blob lên backend qua WebSocket
+              const blob = await new Promise((r) =>
+                tempCanvas.toBlob(r, "image/jpeg", 0.85),
+              );
+              if (!blob) return;
+              wsSocket.send(blob);
+            } catch (err) {
+              console.error("WS send error:", err);
+            }
+          }, 1500);
+        };
+
+        wsSocket.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+
+            if (data && data.labelDisplay) {
+              badge.classList.remove("opacity-0", "translate-y-2");
+              badge.classList.add("opacity-100", "translate-y-0");
+
+              textEl.textContent = data.labelDisplay;
+              if (data.confidence > 0) {
+                confEl.textContent = `Độ tin cậy: ${(data.confidence * 100).toFixed(1)}%`;
+                dot.classList.replace("bg-slate-400", "bg-emerald-500");
+                dot.classList.add("animate-pulse");
+              } else {
+                confEl.textContent = "";
+                dot.classList.replace("bg-emerald-500", "bg-slate-400");
+                dot.classList.remove("animate-pulse");
+              }
+
+              // Vẽ bounding box nếu có tọa độ
+              if (
+                data.x1 != null &&
+                data.x2 != null &&
+                data.y1 != null &&
+                data.y2 != null
+              ) {
+                const scaleX = canvasOverlay.width / lastFrameDims.w;
+                const scaleY = canvasOverlay.height / lastFrameDims.h;
+
+                const x = data.x1 * scaleX;
+                const y = data.y1 * scaleY;
+                const w = (data.x2 - data.x1) * scaleX;
+                const h = (data.y2 - data.y1) * scaleY;
+
+                // Vẽ khung trắng
+                ctxOverlay.strokeStyle = "#FFFFFF";
+                ctxOverlay.lineWidth = 3;
+                ctxOverlay.strokeRect(x, y, w, h);
+
+                // Vẽ nhãn (nền trắng, chữ xanh)
+                const labelText = `${data.labelDisplay} ${data.confidence.toFixed(2)}`;
+                ctxOverlay.font = "bold 16px sans-serif";
+                const textWidth = ctxOverlay.measureText(labelText).width;
+                const textBgHeight = 24;
+                ctxOverlay.fillStyle = "#FFFFFF";
+                ctxOverlay.fillRect(
+                  x,
+                  Math.max(0, y - textBgHeight),
+                  textWidth + 10,
+                  textBgHeight,
+                );
+                ctxOverlay.fillStyle = "#1E3B8A";
+                ctxOverlay.fillText(
+                  labelText,
+                  x + 5,
+                  Math.max(0, y - textBgHeight) + 17,
+                );
+              }
+            } else {
+              badge.classList.add("opacity-0", "translate-y-2");
+              badge.classList.remove("opacity-100", "translate-y-0");
+            }
+          } catch (e) {
+            console.error("Lỗi parse WS message", e);
+          }
+        };
+
+        wsSocket.onclose = () => {
+          console.log("WebSocket Disconnected");
+        };
+      } catch (err) {
+        console.error(err);
+        let msg = "Không thể mở camera.";
+        if (err?.name === "NotAllowedError")
+          msg = "Bạn đã từ chối quyền camera.";
+        if (err?.name === "NotFoundError")
+          msg = "Không tìm thấy camera trên thiết bị.";
+        if (err?.name === "NotReadableError")
+          msg = "Camera đang được app khác sử dụng.";
+        if (err?.name === "SecurityError")
+          msg = "Camera cần https hoặc localhost.";
+        showToast(msg, "error");
       }
-      await startCamera("environment");
-    });
-  }
+    }
 
+    if (btnCamera) {
+      btnCamera.addEventListener("click", async () => {
+        if (!requireLogin()) return;
 
+        if (!navigator.mediaDevices?.getUserMedia) {
+          showToast("Trình duyệt không hỗ trợ camera.", "error");
+          return;
+        }
+        await startCamera("environment");
+      });
+    }
 
-  // khi rời trang -> tắt camera
-  window.addEventListener("beforeunload", () => stopCamera());
-</script>
-
+    // khi rời trang -> tắt camera
+    window.addEventListener("beforeunload", () => stopCamera());
+  </script>
 </html>

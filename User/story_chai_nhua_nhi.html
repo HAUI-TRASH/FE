@@ -14,6 +14,34 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3B82F6",
+              "background-light": "#E2E8F0",
+              "background-dark": "#E2E8F0",
+              "surface-dark": "#FFFFFF",
+              "surface-light": "#ffffff",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
 
     <style>
       /* ── RESET & VARIABLES ── */
@@ -192,74 +220,6 @@
         z-index: 5;
         pointer-events: none;
         animation: swim 5s ease-in-out infinite;
-      }
-
-      /* ════════════════════════
-       HEADER  (site-wide)
-    ════════════════════════ */
-      .site-header {
-        background: white;
-        border-bottom: 1.5px solid var(--green-border);
-        padding: 14px 28px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        position: sticky;
-        top: 0;
-        z-index: 200;
-        box-shadow: 0 2px 16px var(--shadow-g);
-      }
-      .site-logo {
-        font-family: "Space Grotesk", sans-serif;
-        font-weight: 900;
-        font-size: 18px;
-        color: var(--text);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .site-logo em {
-        font-style: normal;
-        color: var(--green);
-      }
-      .site-header nav {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      .nav-link {
-        font-size: 12px;
-        font-weight: 700;
-        text-decoration: none;
-        color: var(--muted);
-        padding: 6px 14px;
-        border-radius: 999px;
-        border: 1.5px solid transparent;
-        transition: all 0.2s;
-      }
-      .nav-link:hover {
-        color: var(--green);
-        border-color: var(--green-border);
-        background: var(--green-light);
-      }
-      .nav-link.active {
-        background: var(--green);
-        color: white;
-        border-color: var(--green);
-      }
-      .header-tag {
-        font-size: 10px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        background: #dcfce7;
-        color: var(--green);
-        border: 1px solid var(--green-border);
-        padding: 4px 12px;
-        border-radius: 999px;
       }
 
       /* ════════════════════════
@@ -1154,268 +1114,15 @@
       .toast.show {
         display: flex;
       }
-
-      /* ════════════════════════
-       FOOTER  (site-wide)
-    ════════════════════════ */
-      .site-footer {
-        background: white;
-        border-top: 1.5px solid var(--green-border);
-        padding: 36px 28px;
-      }
-      .footer-inner {
-        max-width: 900px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-      }
-      .footer-logo {
-        font-family: "Space Grotesk", sans-serif;
-        font-weight: 900;
-        font-size: 22px;
-        color: var(--text);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .footer-logo em {
-        font-style: normal;
-        color: var(--green);
-      }
-      .footer-desc {
-        font-size: 13px;
-        color: var(--muted);
-        font-weight: 500;
-        text-align: center;
-        max-width: 400px;
-      }
-      .footer-links {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .footer-link {
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.07em;
-        text-transform: uppercase;
-        color: var(--green);
-        text-decoration: none;
-        padding: 6px 14px;
-        border-radius: 999px;
-        border: 1.5px solid var(--green-border);
-        transition: all 0.2s;
-      }
-      .footer-link:hover {
-        background: var(--green);
-        color: white;
-        border-color: var(--green);
-      }
-      .footer-copy {
-        font-size: 11px;
-        color: #94a3b8;
-        font-weight: 600;
-        border-top: 1px solid var(--green-border);
-        width: 100%;
-        padding-top: 18px;
-        text-align: center;
-      }
     </style>
+    <script src="../constants.js"></script>
+    <script src="common.js"></script>
   </head>
   <body>
     <!-- Decorative floating bottle -->
     <div class="bottle-deco" aria-hidden="true">🍶</div>
 
-    <style>
-      .sd-nav-link {
-        position: relative;
-        font-size: 14px;
-        font-weight: 500;
-        color: #475569;
-        transition: color 0.3s;
-        white-space: nowrap;
-        text-decoration: none;
-      }
-      .sd-nav-link:hover {
-        color: #3b82f6;
-        text-decoration: none;
-      }
-      .sd-nav-link.active {
-        color: #3b82f6;
-        font-weight: 700;
-        text-decoration: none;
-      }
-      .sd-nav-link.active::after {
-        content: "";
-        position: absolute;
-        bottom: -6px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: #3b82f6;
-        border-radius: 2px;
-      }
-      .sd-mobile-link {
-        display: block;
-        padding: 12px 16px;
-        font-size: 14px;
-        font-weight: 500;
-        color: #475569;
-        border-radius: 8px;
-        transition: 0.3s;
-        text-decoration: none;
-      }
-      .sd-mobile-link:hover,
-      .sd-mobile-link.active {
-        background: #f1f5f9;
-        color: #3b82f6;
-        text-decoration: none;
-      }
-    </style>
-
-    <header
-      style="
-        position: sticky;
-        top: 0;
-        z-index: 200;
-        width: 100%;
-        border-bottom: 1px solid #cbd5e1;
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(12px);
-      "
-    >
-      <div
-        style="
-          padding: 12px 40px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          max-width: 1200px;
-          margin: 0 auto;
-          width: 100%;
-          gap: 12px;
-        "
-      >
-        <a
-          href="index.html"
-          style="
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-          "
-        >
-          <span
-            class="material-symbols-outlined"
-            style="font-size: 28px; color: #3b82f6"
-            >recycling</span
-          >
-          <span style="color: #1e293b; font-size: 18px; font-weight: 700"
-            >SmartDisposal</span
-          >
-        </a>
-
-        <nav
-          id="sd-desktop-nav"
-          style="display: flex; gap: 28px; align-items: center"
-        >
-          <a class="sd-nav-link" href="index.html">Trang chủ</a>
-          <a class="sd-nav-link" href="result_analys.html">Kết quả</a>
-          <a class="sd-nav-link" href="list_blog.html">Blog</a>
-          <a class="sd-nav-link active" href="list_story.html">Câu truyện</a>
-          <a class="sd-nav-link" href="history.html">Lịch sử</a>
-          <a class="sd-nav-link" href="guide.html">Hướng dẫn</a>
-          <a class="sd-nav-link" href="about-us.html">Về chúng tôi</a>
-        </nav>
-
-        <div style="display: flex; align-items: center; gap: 8px">
-          <button
-            id="sd-mobile-btn"
-            onclick="sdToggleMenu()"
-            style="
-              display: none;
-              padding: 8px;
-              border-radius: 8px;
-              border: none;
-              background: transparent;
-              cursor: pointer;
-            "
-          >
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-          <a
-            href="login.html"
-            style="
-              padding: 8px 16px;
-              font-size: 14px;
-              color: #1e293b;
-              border: 1px solid #cbd5e1;
-              border-radius: 8px;
-              text-decoration: none;
-            "
-            onmouseover="this.style.background = '#F1F5F9'"
-            onmouseout="this.style.background = 'transparent'"
-            >Đăng nhập</a
-          >
-          <a
-            href="register.html"
-            style="
-              padding: 8px 16px;
-              font-size: 14px;
-              background: #3b82f6;
-              color: white;
-              font-weight: 600;
-              border-radius: 8px;
-              text-decoration: none;
-            "
-            >Đăng ký</a
-          >
-        </div>
-      </div>
-      <div
-        id="sd-mobile-menu"
-        style="
-          display: none;
-          border-top: 1px solid #cbd5e1;
-          background: white;
-          padding: 12px 16px;
-        "
-      >
-        <nav style="display: flex; flex-direction: column; gap: 4px">
-          <a class="sd-mobile-link" href="index.html">Trang chủ</a>
-          <a class="sd-mobile-link" href="result_analys.html">Kết quả</a>
-          <a class="sd-mobile-link" href="list_blog.html">Blog</a>
-          <a class="sd-mobile-link active" href="list_story.html">Câu truyện</a>
-          <a class="sd-mobile-link" href="history.html">Lịch sử</a>
-          <a class="sd-mobile-link" href="guide.html">Hướng dẫn</a>
-          <a class="sd-mobile-link" href="about-us.html">Về chúng tôi</a>
-        </nav>
-      </div>
-    </header>
-    <script>
-      function sdToggleMenu() {
-        const m = document.getElementById("sd-mobile-menu");
-        m.style.display = m.style.display === "none" ? "block" : "none";
-      }
-      function sdResize() {
-        const btn = document.getElementById("sd-mobile-btn");
-        const nav = document.getElementById("sd-desktop-nav");
-        if (window.innerWidth < 768) {
-          btn.style.display = "block";
-          nav.style.display = "none";
-        } else {
-          btn.style.display = "none";
-          nav.style.display = "flex";
-          document.getElementById("sd-mobile-menu").style.display = "none";
-        }
-      }
-      window.addEventListener("resize", sdResize);
-      sdResize();
-    </script>
+    <div id="header-container"></div>
 
     <!-- ════════════════════════════════
        HERO
@@ -1900,170 +1607,7 @@
     </div>
     <!-- end story-wrap -->
 
-    <footer
-      style="
-        width: 100%;
-        border-top: 1px solid #e2e8f0;
-        background: white;
-        padding: 56px 0;
-        margin-top: 0;
-      "
-    >
-      <div
-        style="
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 24px;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-          gap: 48px;
-          align-items: start;
-        "
-      >
-        <div style="display: flex; flex-direction: column; gap: 16px">
-          <a
-            href="index.html"
-            style="
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              text-decoration: none;
-              color: #1e293b;
-              font-weight: 700;
-              font-size: 18px;
-            "
-          >
-            <span
-              class="material-symbols-outlined"
-              style="font-size: 24px; color: #3b82f6"
-              >recycling</span
-            >
-            SmartDisposal
-          </a>
-          <p
-            style="
-              color: #475569;
-              font-size: 14px;
-              line-height: 1.7;
-              max-width: 320px;
-            "
-          >
-            SmartDisposal là nền tảng ứng dụng trí tuệ nhân tạo hỗ trợ phân loại
-            rác thải, góp phần xây dựng môi trường xanh và bền vững.
-          </p>
-          <p style="color: #94a3b8; font-size: 13px">
-            © 2026 SmartDisposal. All rights reserved.
-          </p>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 12px">
-          <h4
-            style="
-              color: #1e293b;
-              font-weight: 600;
-              font-size: 15px;
-              margin-bottom: 8px;
-            "
-          >
-            Chính sách
-          </h4>
-          <a
-            href="terms.html"
-            style="color: #475569; font-size: 14px; text-decoration: none"
-            onmouseover="this.style.color = '#3B82F6'"
-            onmouseout="this.style.color = '#475569'"
-            >Điều khoản sử dụng</a
-          >
-          <a
-            href="privacy-policy.html"
-            style="color: #475569; font-size: 14px; text-decoration: none"
-            onmouseover="this.style.color = '#3B82F6'"
-            onmouseout="this.style.color = '#475569'"
-            >Chính sách bảo mật</a
-          >
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 16px">
-          <h4
-            style="
-              color: #1e293b;
-              font-weight: 600;
-              font-size: 15px;
-              margin-bottom: 8px;
-            "
-          >
-            Liên hệ
-          </h4>
-          <div
-            style="
-              display: flex;
-              align-items: flex-start;
-              gap: 8px;
-              color: #475569;
-              font-size: 14px;
-            "
-          >
-            <span
-              class="material-symbols-outlined"
-              style="
-                font-size: 18px;
-                color: #3b82f6;
-                flex-shrink: 0;
-                margin-top: 2px;
-              "
-              >location_on</span
-            >
-            Đại học Công nghiệp Hà Nội - Số 298 Đường Cầu Diễn, Phường Tây Tựu,
-            Thành phố Hà Nội
-          </div>
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              color: #475569;
-              font-size: 14px;
-            "
-          >
-            <span
-              class="material-symbols-outlined"
-              style="font-size: 18px; color: #3b82f6"
-              >mail</span
-            >dhcnhn@haui.edu.vn
-          </div>
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              color: #475569;
-              font-size: 14px;
-            "
-          >
-            <span
-              class="material-symbols-outlined"
-              style="font-size: 18px; color: #3b82f6"
-              >call</span
-            >02437655391
-          </div>
-          <div
-            style="
-              width: 100%;
-              height: 160px;
-              border-radius: 12px;
-              overflow: hidden;
-              border: 1px solid #e2e8f0;
-              margin-top: 8px;
-            "
-          >
-            <iframe
-              style="width: 100%; height: 100%"
-              src="https://www.google.com/maps?q=Đại+học+Công+nghiệp+Hà+Nội&output=embed"
-              allowfullscreen=""
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <div id="footer-container"></div>
 
     <!-- ════════════════════════════════
        JAVASCRIPT
@@ -2197,6 +1741,21 @@
         const n = parseInt(el.textContent) + delta;
         el.textContent = `${n} bình luận`;
       }
+    </script>
+    <script>
+      // Trang này thuộc mục "Câu truyện" (list_story.html)
+      // nhưng tên file khác → override setActiveMenu để highlight đúng
+      window.setActiveMenu = function () {
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          if (link.getAttribute("href") === "list_story.html") {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      };
+      loadComponent("header-container", "header.html");
+      loadComponent("footer-container", "footer.html");
     </script>
   </body>
 </html>
