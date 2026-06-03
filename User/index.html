@@ -69,8 +69,10 @@
     <div id="header-container"></div>
 
     <main class="flex-1 flex flex-col items-center w-full px-4 py-8 md:py-12">
+      <!-- ── HERO: SmartDisposal-U ── -->
       <div
         class="max-w-4xl w-full text-center mb-10 space-y-4 animate-fade-in-up"
+        data-brand-section="U"
       >
         <div
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2"
@@ -84,8 +86,6 @@
           Phân loại rác thải bằng <span class="text-primary">AI</span>
           <br class="hidden md:block" />
         </h2>
-        <!-- <p class="text-[#1E293B] text-2xl md:text-2xl lg:text-2xl font-black leading-tight tracking-tight">Sản phẩm của Sinh
-        viên và Giảng viên Đại học Công nghiệp Hà Nội</p> -->
         <p
           class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-normal"
         >
@@ -93,8 +93,57 @@
           rác thải, góp phần bảo vệ môi trường xanh sạch.
         </p>
       </div>
+
+      <!-- ── HERO: SmartDisposal-P ── -->
+      <div
+        class="max-w-4xl w-full text-center mb-10 space-y-4 animate-fade-in-up hidden"
+        data-brand-section="P"
+      >
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 text-xs font-bold uppercase tracking-wider mb-2"
+        >
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Trạm phân loại thông minh
+        </div>
+        <h2
+          class="text-[#1E293B] text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight"
+        >
+          Trạm phân loại rác <span class="text-emerald-500">thông minh</span>
+        </h2>
+        <p
+          class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed"
+        >
+          SmartDisposal-P – trạm phân loại rác thông minh đặt tại trường học, chung cư, nhà ga, sân bay và các điểm công cộng. Người dùng không cần tải app hay có điện thoại, trạm vẫn có thể hướng dẫn phân loại trực tiếp. Điều này đặc biệt hữu ích với học sinh, cư dân và cộng đồng.
+        </p>
+      </div>
+
+      <!-- ── HERO: SmartDisposal-I ── -->
+      <div
+        class="max-w-4xl w-full text-center mb-10 space-y-4 animate-fade-in-up hidden"
+        data-brand-section="I"
+      >
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 text-xs font-bold uppercase tracking-wider mb-2"
+        >
+          <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
+          Giải pháp AI công nghiệp
+        </div>
+        <h2
+          class="text-[#1E293B] text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight"
+        >
+          AI xử lý rác <span class="text-purple-500">quy mô lớn</span>
+        </h2>
+        <p
+          class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed"
+        >
+          SmartDisposal-I – giải pháp AI dành cho nhà máy xử lý rác, giúp nhận diện, phân loại và tối ưu dòng rác đầu vào ở quy mô lớn.
+        </p>
+      </div>
+
+      <!-- ── UPLOAD SECTION: SmartDisposal-U ── -->
       <div
         class="max-w-[1100px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16"
+        data-brand-section="U"
       >
         <div class="lg:col-span-8 flex flex-col">
           <div
@@ -197,6 +246,85 @@
           </div>
         </div>
       </div>
+
+      <!-- ── STATION SECTION: SmartDisposal-P ── -->
+      <div
+        class="max-w-[1100px] w-full mb-16 hidden"
+        data-brand-section="P"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Station feature 1 -->
+          <div class="bg-white border border-[#CBD5E1] p-8 rounded-3xl flex flex-col items-center text-center shadow-xl shadow-black/5">
+            <div class="bg-emerald-50 p-5 rounded-full mb-5">
+              <span class="material-symbols-outlined text-4xl text-emerald-600">touch_app</span>
+            </div>
+            <h3 class="text-[#1E293B] text-xl font-bold mb-2">Không cần điện thoại</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Trạm có màn hình cảm ứng trực quan, hướng dẫn phân loại rác ngay tại chỗ. Phù hợp với học sinh, cư dân và mọi lứa tuổi.
+            </p>
+          </div>
+          <!-- Station feature 2 -->
+          <div class="bg-white border border-[#CBD5E1] p-8 rounded-3xl flex flex-col items-center text-center shadow-xl shadow-black/5">
+            <div class="bg-emerald-50 p-5 rounded-full mb-5">
+              <span class="material-symbols-outlined text-4xl text-emerald-600">camera</span>
+            </div>
+            <h3 class="text-[#1E293B] text-xl font-bold mb-2">Camera AI tích hợp</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Camera trên trạm tự động nhận diện vật thể khi người dùng đưa rác vào. AI phân loại tức thì và mở đúng ngăn chứa.
+            </p>
+          </div>
+          <!-- Station feature 3 -->
+          <div class="bg-white border border-[#CBD5E1] p-8 rounded-3xl flex flex-col items-center text-center shadow-xl shadow-black/5">
+            <div class="bg-emerald-50 p-5 rounded-full mb-5">
+              <span class="material-symbols-outlined text-4xl text-emerald-600">location_on</span>
+            </div>
+            <h3 class="text-[#1E293B] text-xl font-bold mb-2">Đặt tại điểm công cộng</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Trường học, chung cư, nhà ga, sân bay — bất kỳ nơi đâu có nhu cầu phân loại rác tập trung và giáo dục cộng đồng.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FACTORY SECTION: SmartDisposal-I ── -->
+      <div
+        class="max-w-[1100px] w-full mb-16 hidden"
+        data-brand-section="I"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Factory feature 1 -->
+          <div class="bg-white border border-[#CBD5E1] p-8 rounded-3xl flex flex-col items-center text-center shadow-xl shadow-black/5">
+            <div class="bg-purple-50 p-5 rounded-full mb-5">
+              <span class="material-symbols-outlined text-4xl text-purple-600">precision_manufacturing</span>
+            </div>
+            <h3 class="text-[#1E293B] text-xl font-bold mb-2">Nhận diện đa vật thể</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              AI phát hiện đồng thời hàng chục vật thể trên băng chuyền, phân loại chính xác theo danh mục rác thải công nghiệp.
+            </p>
+          </div>
+          <!-- Factory feature 2 -->
+          <div class="bg-white border border-[#CBD5E1] p-8 rounded-3xl flex flex-col items-center text-center shadow-xl shadow-black/5">
+            <div class="bg-purple-50 p-5 rounded-full mb-5">
+              <span class="material-symbols-outlined text-4xl text-purple-600">speed</span>
+            </div>
+            <h3 class="text-[#1E293B] text-xl font-bold mb-2">Tối ưu dòng rác đầu vào</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Phân tích thành phần rác theo thời gian thực, đề xuất điều chỉnh tham số dây chuyền để đạt hiệu suất phân loại tối đa.
+            </p>
+          </div>
+          <!-- Factory feature 3 -->
+          <div class="bg-white border border-[#CBD5E1] p-8 rounded-3xl flex flex-col items-center text-center shadow-xl shadow-black/5">
+            <div class="bg-purple-50 p-5 rounded-full mb-5">
+              <span class="material-symbols-outlined text-4xl text-purple-600">analytics</span>
+            </div>
+            <h3 class="text-[#1E293B] text-xl font-bold mb-2">Báo cáo &amp; phân tích</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Dashboard trực quan về khối lượng, tỷ lệ phân loại đúng, và xu hướng rác thải theo ca, ngày, tháng cho nhà quản lý.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div class="max-w-[1200px] w-full mt-8">
         <div
           class="flex items-center justify-between mb-8 px-4 border-b border-[#CBD5E1] pb-4"
@@ -930,5 +1058,15 @@
 
     // khi rời trang -> tắt camera
     window.addEventListener("beforeunload", () => stopCamera());
+
+    // ── Brand init: apply immediately (before header loads async) ──
+    (function() {
+      const saved = localStorage.getItem("ecoscan_brand") || "SmartDisposal-U";
+      const suffix = saved.replace("SmartDisposal-", "");
+      document.querySelectorAll("[data-brand-section]").forEach(el => {
+        const allowed = el.getAttribute("data-brand-section").split(",");
+        el.classList.toggle("hidden", !allowed.includes(suffix));
+      });
+    })();
   </script>
 </html>
