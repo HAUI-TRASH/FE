@@ -25,16 +25,14 @@ function isTokenExpired(token) {
 function renderAuthUI() {
   const token = localStorage.getItem("accessToken");
 
-  // Kiểm tra token có tồn tại VÀ chưa hết hạn
+  // Check if token exists AND not expired
   if (isTokenExpired(token)) {
-    // Xóa token hết hạn để trang hiển thị đúng trạng thái "chưa đăng nhập"
     localStorage.removeItem("accessToken");
     localStorage.removeItem("account");
   }
 
   const freshToken = localStorage.getItem("accessToken");
   const isLoggedIn = freshToken && freshToken !== "null" && freshToken !== "undefined";
-  const acc = JSON.parse(localStorage.getItem("account") || "{}");
 
   const btns = document.getElementById("auth-buttons");
   const userBox = document.getElementById("user-box");
@@ -43,14 +41,64 @@ function renderAuthUI() {
   if (!btns || !userBox) return;
 
   if (isLoggedIn) {
+    // Show user box, hide login buttons immediately
     btns.classList.add("hidden");
     userBox.classList.remove("hidden");
 
+    // Set default avatar while fetching
     const defaultAvatar = "./avt.png";
     if (avatar) {
-      avatar.style.backgroundImage = `url('${acc?.avatarUrl || defaultAvatar}')`;
+      avatar.style.backgroundImage = `url('${defaultAvatar}')`;
     }
+
+    // Call GET /me to fetch fresh user info
+    fetch(API_BASE + "/api/v1/auth/me", {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + freshToken,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.status === 401 || res.status === 403) {
+          // Token invalid → force logout
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("account");
+          btns.classList.remove("hidden");
+          userBox.classList.add("hidden");
+          return null;
+        }
+        return res.json();
+      })
+      .then(json => {
+        if (!json) return;
+        const account = json?.data || json;
+        // Save fresh account info
+        localStorage.setItem("account", JSON.stringify(account));
+        // Update avatar
+        if (avatar && account?.avatarUrl) {
+          avatar.style.backgroundImage = `url('${account.avatarUrl}')`;
+        }
+        // Update name + email in dropdown
+        const userNameEl = document.getElementById("user-menu-name");
+        if (userNameEl && account?.fullName) {
+          userNameEl.textContent = account.fullName;
+        } else if (userNameEl && account?.username) {
+          userNameEl.textContent = account.username;
+        } else if (userNameEl) {
+          userNameEl.textContent = "Người dùng";
+        }
+        const userEmailEl = document.getElementById("user-menu-email");
+        if (userEmailEl && account?.email) {
+          userEmailEl.textContent = account.email;
+        }
+      })
+      .catch(err => {
+        console.warn("Failed to fetch /me:", err);
+        // Keep showing default avatar on network error
+      });
   } else {
+    // Not logged in → show login/register buttons
     btns.classList.remove("hidden");
     userBox.classList.add("hidden");
   }
@@ -94,6 +142,8 @@ function selectBrand(brand, el) {
   const menu = document.getElementById("brand-menu");
   const arrow = document.getElementById("brand-arrow");
   if (!label || !menu || !arrow) return;
+
+  const oldBrand = label.textContent;
   label.textContent = brand;
   menu.classList.add("hidden");
   arrow.classList.remove("rotate-180");
@@ -104,9 +154,13 @@ function selectBrand(brand, el) {
   el.classList.add("bg-[#F1F5F9]");
   // Persist selection
   localStorage.setItem("ecoscan_brand", brand);
-  // Apply nav visibility
-  applyBrandNav(brand);
-  // Dispatch event for other components
+
+  // Reload page if brand actually changed
+  if (oldBrand !== brand) {
+    window.location.reload();
+    return;
+  }
+  // Dispatch event for other components (if same brand, just close dropdown)
   window.dispatchEvent(new CustomEvent("brandChanged", { detail: { brand } }));
 }
 

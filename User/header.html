@@ -172,20 +172,30 @@
 
           <div
             id="user-menu"
-            class="absolute right-0 mt-2 w-56 bg-white border border-[#CBD5E1] rounded-lg shadow-lg py-1 z-50 hidden"
+            class="absolute right-0 mt-2 w-64 bg-white border border-[#CBD5E1] rounded-xl shadow-xl shadow-slate-200/50 py-2 z-50 hidden"
           >
+            <!-- User info header -->
+            <div class="px-4 py-3 border-b border-[#CBD5E1]">
+              <p id="user-menu-name" class="text-sm font-bold text-[#1E293B]">Đang tải...</p>
+              <p id="user-menu-email" class="text-xs text-slate-500 mt-0.5"></p>
+            </div>
             <a
               href="#"
-              class="flex items-center px-4 py-3 text-sm text-[#1E293B] hover:bg-[#F1F5F9]"
+              class="flex items-center px-4 py-2.5 text-sm text-[#1E293B] hover:bg-[#F1F5F9] transition-colors"
             >
+              <span class="material-symbols-outlined text-lg mr-3 text-slate-400">person</span>
               Tài khoản của bạn
             </a>
             <a
               href="#"
               onclick="ecoscanLogout()"
-              class="flex items-center px-4 py-3 text-sm text-[#1E293B] hover:bg-[#F1F5F9]"
+              class="flex items-center px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors"
             >
+              <span class="material-symbols-outlined text-lg mr-3">logout</span>
               Đăng xuất
+            </a>
+          </div>
+        </div>
             </a>
           </div>
         </div>
