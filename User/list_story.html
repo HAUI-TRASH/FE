@@ -1,0 +1,1672 @@
+<!doctype html>
+<html class="light" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Câu Chuyện Nhỏ - Tái Chế Thông Minh</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0891b2",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <script src="../constants.js"></script>
+    <style>
+      * {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      .font-display {
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(-1deg);
+        }
+        50% {
+          transform: translateY(-8px) rotate(1deg);
+        }
+      }
+      @keyframes float2 {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(1deg);
+        }
+        50% {
+          transform: translateY(-6px) rotate(-1deg);
+        }
+      }
+      .float-badge {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes bubble-rise {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateY(-130px) scale(1.3);
+          opacity: 0;
+        }
+      }
+      .bubble {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.35);
+        animation: bubble-rise 6s ease-in infinite;
+        pointer-events: none;
+      }
+
+      .category-strip {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .category-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 1rem 1.5rem;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        border-radius: 2rem;
+        border: 2px solid rgba(6, 182, 212, 0.2);
+        transition: all 0.25s ease;
+        cursor: pointer;
+        min-width: 90px;
+        box-shadow: 0 4px 15px rgba(6, 182, 212, 0.1);
+      }
+      .category-card:hover {
+        transform: translateY(-5px) scale(1.05);
+        border-color: #06b6d4;
+        box-shadow: 0 12px 30px rgba(6, 182, 212, 0.2);
+      }
+      .category-card .icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+      .category-card .label {
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .story-card {
+        position: relative;
+        border-radius: 2rem;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 8px 30px rgba(6, 182, 212, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        cursor: pointer;
+        display: block;
+      }
+      .story-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(6, 182, 212, 0.25);
+      }
+      .story-card .poster {
+        position: relative;
+        aspect-ratio: 3/4;
+        overflow: hidden;
+      }
+      .story-card .poster svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s ease;
+      }
+      .story-card:hover .poster svg {
+        transform: scale(1.06);
+      }
+      .story-card .poster-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.72) 0%,
+          rgba(0, 0, 0, 0.08) 50%,
+          transparent 100%
+        );
+      }
+      .story-card .poster-tag {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(6px);
+        border-radius: 9999px;
+        padding: 4px 14px;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        border: 1.5px solid rgba(255, 255, 255, 0.6);
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .story-card .poster-stars {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        font-size: 20px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      }
+      .story-card .poster-title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1.5rem 1.2rem 1.2rem;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 17px;
+        font-weight: 800;
+        color: white;
+        line-height: 1.25;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
+      .card-body {
+        padding: 1.2rem;
+      }
+      .card-excerpt {
+        font-size: 13px;
+        line-height: 1.6;
+        color: #475569;
+        font-weight: 600;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 1rem;
+      }
+      .card-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 11px;
+        font-weight: 800;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .read-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 14px;
+        border-radius: 9999px;
+        font-size: 10px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        transition: all 0.2s ease;
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .read-btn:hover {
+        transform: scale(1.08);
+      }
+
+      .pill {
+        transition: all 0.2s ease;
+      }
+      .pill:hover {
+        transform: scale(1.05);
+      }
+
+      .card-hover {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(6, 182, 212, 0.15);
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #e2e8f0;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        border-radius: 1.5rem;
+        padding: 1.2rem;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(6, 182, 212, 0.1);
+        transition: all 0.3s ease;
+      }
+      .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(6, 182, 212, 0.2);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .story-card {
+        animation: fadeUp 0.6s ease both;
+      }
+      .story-card:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .story-card:nth-child(2) {
+        animation-delay: 0.13s;
+      }
+      .story-card:nth-child(3) {
+        animation-delay: 0.21s;
+      }
+      .story-card:nth-child(4) {
+        animation-delay: 0.29s;
+      }
+      .story-card:nth-child(5) {
+        animation-delay: 0.37s;
+      }
+      .story-card:nth-child(6) {
+        animation-delay: 0.45s;
+      }
+    </style>
+    <script src="common.js"></script>
+  </head>
+
+  <body
+    class="bg-[#E2E8F0] min-h-screen flex flex-col overflow-x-hidden text-[#1E293B] antialiased"
+  >
+    <!-- Bubble decorations -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      <div
+        class="bubble"
+        style="
+          width: 18px;
+          height: 18px;
+          left: 8%;
+          bottom: 20%;
+          animation-delay: 0s;
+          animation-duration: 7s;
+        "
+      ></div>
+      <div
+        class="bubble"
+        style="
+          width: 10px;
+          height: 10px;
+          left: 20%;
+          bottom: 35%;
+          animation-delay: 1.5s;
+          animation-duration: 5s;
+        "
+      ></div>
+      <div
+        class="bubble"
+        style="
+          width: 24px;
+          height: 24px;
+          left: 75%;
+          bottom: 15%;
+          animation-delay: 0.8s;
+          animation-duration: 9s;
+        "
+      ></div>
+      <div
+        class="bubble"
+        style="
+          width: 14px;
+          height: 14px;
+          left: 88%;
+          bottom: 40%;
+          animation-delay: 2.3s;
+          animation-duration: 6s;
+        "
+      ></div>
+      <div
+        class="bubble"
+        style="
+          width: 8px;
+          height: 8px;
+          left: 50%;
+          bottom: 25%;
+          animation-delay: 3s;
+          animation-duration: 8s;
+        "
+      ></div>
+      <div
+        class="bubble"
+        style="
+          width: 20px;
+          height: 20px;
+          left: 35%;
+          bottom: 10%;
+          animation-delay: 1s;
+          animation-duration: 10s;
+        "
+      ></div>
+    </div>
+
+    <div id="header-container"></div>
+
+    <main
+      class="relative z-10 flex-1 w-full px-4 py-8 md:py-12 max-w-[1200px] mx-auto"
+    >
+      <!-- HERO -->
+      <section class="mb-12 text-center max-w-2xl mx-auto">
+        <span
+          class="float-badge px-5 py-2 rounded-full bg-white/80 backdrop-blur-sm border-2 border-cyan-300/60 text-cyan-700 text-[11px] font-black uppercase tracking-widest mb-5 inline-block shadow-md"
+        >
+          🌊 Câu Chuyện Kỳ Diệu
+        </span>
+        <h1
+          class="font-display text-4xl md:text-5xl font-black text-[#0e4f6b] mb-4 leading-tight"
+        >
+          Hành Trình Của <span class="text-cyan-500">Những Đồ Vật</span> Nhỏ Bé
+        </h1>
+        <p class="text-cyan-700/80 text-lg font-bold leading-relaxed">
+          ✨ <span class="text-orange-400">Câu Chuyện Nhỏ</span> &nbsp;·&nbsp;
+          <span class="text-teal-500">Nhận Thức Lớn</span> ✨
+        </p>
+        <p class="text-slate-500 text-sm mt-2 font-semibold">
+          Cùng khám phá thế giới tái chế qua những câu chuyện dành cho trẻ em!
+        </p>
+      </section>
+
+      <!-- CATEGORY ICONS -->
+      <section class="mb-12">
+        <div class="category-strip">
+          
+          <div class="category-card" onclick="filterStories('nhua')">
+            <div
+              class="icon"
+              style="background: linear-gradient(135deg, #3b82f6, #93c5fd)"
+            >
+              🥤
+            </div>
+            <span class="label" style="color: #3b82f6">Nhựa</span>
+          </div>
+          <div class="category-card" onclick="filterStories('giay')">
+            <div
+              class="icon"
+              style="background: linear-gradient(135deg, #eab308, #fde047)"
+            >
+              📄
+            </div>
+            <span class="label" style="color: #ca8a04">Giấy</span>
+          </div>
+          <div class="category-card" onclick="filterStories('thuytinh')">
+            <div
+              class="icon"
+              style="background: linear-gradient(135deg, #0ea5e9, #bae6fd)"
+            >
+              🥛
+            </div>
+            <span class="label" style="color: #0284c7">Thủy Tinh</span>
+          </div>
+          <div class="category-card" onclick="filterStories('kimloai')">
+            <div
+              class="icon"
+              style="background: linear-gradient(135deg, #64748b, #cbd5e1)"
+            >
+              🔩
+            </div>
+            <span class="label" style="color: #64748b">Kim Loại</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED STORY -->
+      <section class="mb-14">
+        <a
+          class="group relative flex flex-col md:flex-row bg-white/85 backdrop-blur-sm rounded-3xl overflow-hidden border-2 border-blue-200/70 shadow-2xl shadow-blue-100 card-hover"
+          href="story_chai_nhua_nhi.html"
+        >
+          <div
+            class="relative md:w-[42%] overflow-hidden"
+            style="min-height: 280px"
+          >
+            <svg
+              class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105"
+              viewBox="0 0 420 320"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              <defs>
+                <linearGradient id="bgFeat" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#eff6ff" />
+                  <stop offset="100%" stop-color="#dbeafe" />
+                </linearGradient>
+              </defs>
+              <rect width="420" height="320" fill="url(#bgFeat)" />
+              <!-- Water/sewer ripples -->
+              <ellipse cx="210" cy="260" rx="180" ry="30" fill="#bfdbfe" opacity="0.5"/>
+              <ellipse cx="210" cy="260" rx="120" ry="18" fill="#93c5fd" opacity="0.4"/>
+              <!-- Bottle body -->
+              <rect x="170" y="90" width="80" height="140" rx="18" fill="white" stroke="#3b82f6" stroke-width="2.5"/>
+              <rect x="182" y="80" width="56" height="20" rx="8" fill="#60a5fa"/>
+              <!-- Cap -->
+              <rect x="188" y="66" width="44" height="18" rx="6" fill="#2563eb"/>
+              <!-- Label -->
+              <rect x="178" y="118" width="64" height="44" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+              <text x="210" y="137" font-size="9" fill="#1d4ed8" text-anchor="middle" font-weight="700">NƯỚC</text>
+              <text x="210" y="152" font-size="8" fill="#3b82f6" text-anchor="middle">TINH KHIẾT</text>
+              <!-- Water inside bottle -->
+              <rect x="172" y="175" width="76" height="52" rx="0 0 16 16" fill="#bfdbfe" opacity="0.7"/>
+              <!-- Sparkles -->
+              <text x="60" y="100" font-size="22" fill="#60a5fa">✦</text>
+              <text x="340" y="130" font-size="16" fill="#93c5fd" opacity="0.7">✦</text>
+              <text x="80" y="260" font-size="18" fill="#3b82f6" opacity="0.4">✦</text>
+              <!-- Elephant silhouette (recycled) -->
+              <ellipse cx="320" cy="230" rx="45" ry="32" fill="#60a5fa" opacity="0.85"/>
+              <ellipse cx="295" cy="215" rx="20" ry="22" fill="#60a5fa" opacity="0.85"/>
+              <path d="M285 220 Q278 240 282 255" stroke="#3b82f6" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <circle cx="291" cy="210" r="4" fill="#1e3a5f"/>
+              <polygon points="291,196 285,206 297,206" fill="#93c5fd"/>
+              <!-- Recycle arrows -->
+              <text x="355" y="85" font-size="28" fill="#3b82f6" opacity="0.25">♻</text>
+            </svg>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-white/5"></div>
+            <div class="absolute bottom-4 left-4">
+              <span class="text-[10px] font-black px-3 py-1 rounded-full bg-blue-500/90 text-white shadow">🥤 Nhựa</span>
+            </div>
+            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm border border-blue-200 px-4 py-1.5 rounded-full shadow-sm">
+              <span class="text-blue-700 text-[10px] font-black uppercase tracking-widest">⭐ Câu Chuyện Nổi Bật</span>
+            </div>
+          </div>
+          <div class="p-7 md:p-10 flex flex-col justify-center flex-1">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-blue-700 text-[10px] font-black uppercase tracking-widest bg-blue-100 px-3 py-1 rounded-full">🥤 Nhựa</span>
+              <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+              <span class="text-slate-400 text-xs font-bold uppercase tracking-widest">9 phút đọc</span>
+            </div>
+            <h2 class="font-display text-2xl md:text-4xl font-black text-[#0e4f6b] mb-4 leading-tight group-hover:text-blue-500 transition-colors">
+              Chuyến Phiêu Lưu Của Chai Nhựa Nhí
+            </h2>
+            <p class="text-slate-500 mb-6 font-semibold leading-relaxed text-sm md:text-base">
+              Từ kệ siêu thị lung linh đến lòng cống tối tăm — rồi lại tỏa sáng trên bàn học như một chú voi đáng yêu. Hành trình của chiếc chai nhựa bé nhỏ đầy bất ngờ và cảm hứng!
+            </p>
+            <div class="flex items-center gap-3 mt-auto">
+              <div class="size-10 rounded-xl bg-blue-100 flex items-center justify-center text-xl border border-blue-200">🐘</div>
+              <div class="text-sm">
+                <p class="text-[#1E293B] font-black">Ban Biên Tập</p>
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Câu chuyện về tái chế nhựa</p>
+              </div>
+              <div class="ml-auto">
+                <span class="read-btn bg-blue-500 text-white shadow-lg shadow-blue-200">📖 Đọc Ngay →</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+      <!-- FILTER + SEARCH -->
+      <section
+        class="mb-10 flex flex-col md:flex-row justify-between items-center gap-5 border-b-2 border-cyan-200/60 pb-8"
+      >
+        <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+          <button
+            class="pill px-5 py-2.5 rounded-full bg-cyan-500 text-white text-xs font-black uppercase tracking-widest shadow-lg shadow-cyan-200"
+          >
+            Tất Cả
+          </button>
+          <button
+            class="pill px-5 py-2.5 rounded-full bg-white/80 text-blue-600 text-xs font-bold uppercase tracking-widest border-2 border-blue-200 hover:bg-blue-50 transition-all"
+          >
+            🥤 Nhựa
+          </button>
+          <button
+            class="pill px-5 py-2.5 rounded-full bg-white/80 text-yellow-600 text-xs font-bold uppercase tracking-widest border-2 border-yellow-200 hover:bg-yellow-50 transition-all"
+          >
+            📄 Giấy
+          </button>
+          <button
+            class="pill px-5 py-2.5 rounded-full bg-white/80 text-sky-600 text-xs font-bold uppercase tracking-widest border-2 border-sky-200 hover:bg-sky-50 transition-all"
+          >
+            🥛 Thủy Tinh
+          </button>
+          <button
+            class="pill px-5 py-2.5 rounded-full bg-white/80 text-slate-600 text-xs font-bold uppercase tracking-widest border-2 border-slate-200 hover:bg-slate-50 transition-all"
+          >
+            🔩 Kim Loại
+          </button>
+        </div>
+        <div class="relative w-full md:w-auto min-w-[300px]">
+          <span
+            class="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 material-symbols-outlined text-[20px]"
+            >search</span
+          >
+          <input
+            class="w-full bg-white/80 backdrop-blur-sm border-2 border-cyan-200 rounded-full py-3 pl-12 pr-5 text-[#1E293B] placeholder-slate-400 font-semibold focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/15 outline-none transition-all text-sm"
+            placeholder="Tìm câu chuyện..."
+            type="text"
+          />
+        </div>
+      </section>
+
+      <!-- STORY POSTER GRID -->
+      <section
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 mb-16"
+      >
+        <!-- 1. Giấy Nháp -->
+        <a href="story_may_bay_giay.html" class="story-card" data-category="giay">
+          <div class="poster">
+            <svg
+              viewBox="0 0 300 400"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMidYMid slice"
+              style="position: absolute; inset: 0; width: 100%; height: 100%"
+            >
+              <defs>
+                <linearGradient id="gn1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#fef9c3" />
+                  <stop offset="100%" stop-color="#fde68a" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="400" fill="url(#gn1)" />
+              <line
+                x1="0"
+                y1="60"
+                x2="300"
+                y2="60"
+                stroke="#fbbf24"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <line
+                x1="0"
+                y1="90"
+                x2="300"
+                y2="90"
+                stroke="#fbbf24"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <line
+                x1="0"
+                y1="120"
+                x2="300"
+                y2="120"
+                stroke="#fbbf24"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <polygon
+                points="60,100 240,80 260,280 40,300"
+                fill="white"
+                opacity="0.75"
+                stroke="#e5e7eb"
+                stroke-width="1"
+              />
+              <text
+                x="88"
+                y="155"
+                font-size="15"
+                fill="#94a3b8"
+                font-family="monospace"
+                opacity="0.75"
+              >
+                2 + 3 = 5
+              </text>
+              <text
+                x="82"
+                y="183"
+                font-size="15"
+                fill="#94a3b8"
+                font-family="monospace"
+                opacity="0.75"
+              >
+                4 × 3 = ??
+              </text>
+              <!-- Fish (transformed paper) -->
+              <ellipse
+                cx="150"
+                cy="260"
+                rx="55"
+                ry="28"
+                fill="#f97316"
+                opacity="0.9"
+              />
+              <polygon
+                points="205,260 232,240 232,280"
+                fill="#f97316"
+                opacity="0.9"
+              />
+              <path
+                d="M118,250 Q128,260 118,270"
+                fill="none"
+                stroke="#fb923c"
+                stroke-width="1.5"
+              />
+              <path
+                d="M140,248 Q150,258 140,268"
+                fill="none"
+                stroke="#fb923c"
+                stroke-width="1.5"
+              />
+              <path
+                d="M162,250 Q172,260 162,270"
+                fill="none"
+                stroke="#fb923c"
+                stroke-width="1.5"
+              />
+              <circle cx="118" cy="260" r="5" fill="white" />
+              <circle cx="119" cy="260" r="3" fill="#1e293b" />
+              <line
+                x1="150"
+                y1="232"
+                x2="150"
+                y2="135"
+                stroke="#94a3b8"
+                stroke-width="2"
+                stroke-dasharray="4 3"
+              />
+              <text x="58" y="78" font-size="20" fill="#f59e0b">✦</text>
+              <text x="228" y="98" font-size="14" fill="#fbbf24">★</text>
+              <text x="238" y="198" font-size="18" fill="#f97316" opacity="0.7">
+                ✦
+              </text>
+              <text x="55" y="330" font-size="24" fill="#fbbf24" opacity="0.3">
+                ✦
+              </text>
+            </svg>
+            <div class="poster-overlay"></div>
+            <div class="poster-tag" style="color: #ca8a04">📄 Giấy</div>
+            <div class="poster-stars">⭐</div>
+            <div class="poster-title">
+              Cuộc Phiêu Lưu Của Bạn Giấy Nháp Và Cây Bút Chì Màu
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-excerpt">
+              Tờ giấy nháp nhàu nát bị vò thành quả cầu rồi ném xuống sàn lớp...
+              Nhưng bạn Bình đã nhặt lên và biến nó thành chú cá giấy màu đỏ
+              biết bay trong gió trên sân trường!
+            </p>
+            <div class="card-meta">
+              <span>📅 08 Tháng 05, 2025 · 5 phút</span>
+              <span class="read-btn" style="background: #fbbf24; color: #78350f"
+                >Đọc →</span
+              >
+            </div>
+          </div>
+        </a>
+
+        <!-- 2. Máy Bay Giấy -->
+        <a href="story_may_bay_giay.html" class="story-card" data-category="giay">
+          <div class="poster">
+            <svg
+              viewBox="0 0 300 400"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMidYMid slice"
+              style="position: absolute; inset: 0; width: 100%; height: 100%"
+            >
+              <defs>
+                <linearGradient id="gn2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#e0f2fe" />
+                  <stop offset="100%" stop-color="#7dd3fc" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="400" fill="url(#gn2)" />
+              <ellipse
+                cx="60"
+                cy="80"
+                rx="40"
+                ry="22"
+                fill="white"
+                opacity="0.8"
+              />
+              <ellipse
+                cx="85"
+                cy="72"
+                rx="28"
+                ry="18"
+                fill="white"
+                opacity="0.9"
+              />
+              <ellipse
+                cx="240"
+                cy="110"
+                rx="35"
+                ry="18"
+                fill="white"
+                opacity="0.7"
+              />
+              <ellipse
+                cx="262"
+                cy="103"
+                rx="22"
+                ry="14"
+                fill="white"
+                opacity="0.8"
+              />
+              <g transform="translate(82,160) rotate(-20)">
+                <polygon
+                  points="0,0 120,30 0,60"
+                  fill="white"
+                  stroke="#94a3b8"
+                  stroke-width="1.5"
+                />
+                <polygon
+                  points="0,0 120,30 60,30"
+                  fill="#dbeafe"
+                  stroke="#94a3b8"
+                  stroke-width="1"
+                />
+                <path d="M0,60 L0,0 L40,45 Z" fill="#bfdbfe" />
+                <path
+                  d="M20,20 Q-10,5 -30,15 Q-10,25 20,30"
+                  fill="#fbbf24"
+                  opacity="0.8"
+                />
+                <path
+                  d="M20,40 Q-10,50 -30,40 Q-10,35 20,35"
+                  fill="#fbbf24"
+                  opacity="0.8"
+                />
+                <circle cx="72" cy="30" r="3" fill="#fbbf24" />
+              </g>
+              <path
+                d="M45,310 Q115,260 205,190"
+                fill="none"
+                stroke="#60a5fa"
+                stroke-width="2"
+                stroke-dasharray="6 4"
+                opacity="0.6"
+              />
+              <circle cx="258" cy="52" r="30" fill="#fde68a" opacity="0.65" />
+              <line
+                x1="258"
+                y1="12"
+                x2="258"
+                y2="4"
+                stroke="#fbbf24"
+                stroke-width="2.5"
+              />
+              <line
+                x1="293"
+                y1="52"
+                x2="301"
+                y2="52"
+                stroke="#fbbf24"
+                stroke-width="2.5"
+              />
+              <line
+                x1="281"
+                y1="25"
+                x2="287"
+                y2="19"
+                stroke="#fbbf24"
+                stroke-width="2.5"
+              />
+              <rect
+                x="20"
+                y="340"
+                width="12"
+                height="60"
+                rx="4"
+                fill="#15803d"
+              />
+              <ellipse cx="26" cy="335" rx="22" ry="18" fill="#16a34a" />
+              <rect
+                x="258"
+                y="350"
+                width="10"
+                height="50"
+                rx="4"
+                fill="#15803d"
+              />
+              <ellipse cx="263" cy="344" rx="18" ry="15" fill="#22c55e" />
+              <text x="48" y="368" font-size="22" fill="#fbbf24" opacity="0.4">
+                ✦
+              </text>
+              <text x="240" y="220" font-size="14" fill="#a78bfa" opacity="0.5">
+                ✦
+              </text>
+            </svg>
+            <div class="poster-overlay"></div>
+            <div class="poster-tag" style="color: #ca8a04">📄 Giấy</div>
+            <div class="poster-stars">✈️</div>
+            <div class="poster-title">
+              Chiếc Máy Bay Giấy Và Giấc Mơ Bay Cao
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-excerpt">
+              Đức hay vò nát giấy khi viết sai. Một hôm, cơn gió mang tờ A4 nhàu
+              nát bay đến tay cô bé áo vàng — và kỳ diệu thay, nó biến thành
+              chiếc máy bay vút cao dưới nắng chiều vàng ươm!
+            </p>
+            <div class="card-meta">
+              <span>📅 05 Tháng 05, 2025 · 6 phút</span>
+              <span class="read-btn" style="background: #60a5fa; color: white"
+                >Đọc →</span
+              >
+            </div>
+          </div>
+        </a>
+
+        <!-- 3. Vé Xem Phim -->
+        <a href="story_may_bay_giay.html" class="story-card" data-category="giay">
+          <div class="poster">
+            <svg
+              viewBox="0 0 300 400"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMidYMid slice"
+              style="position: absolute; inset: 0; width: 100%; height: 100%"
+            >
+              <defs>
+                <linearGradient id="gn3" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#fce7f3" />
+                  <stop offset="100%" stop-color="#fbcfe8" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="400" fill="url(#gn3)" />
+              <path
+                d="M0,0 Q40,100 10,200 Q30,300 0,400"
+                fill="#be185d"
+                opacity="0.22"
+              />
+              <path
+                d="M300,0 Q260,100 290,200 Q270,300 300,400"
+                fill="#be185d"
+                opacity="0.22"
+              />
+              <rect
+                x="38"
+                y="78"
+                width="224"
+                height="122"
+                rx="12"
+                fill="white"
+                stroke="#f9a8d4"
+                stroke-width="2"
+              />
+              <circle cx="38" cy="139" r="14" fill="#fce7f3" />
+              <circle cx="262" cy="139" r="14" fill="#fce7f3" />
+              <line
+                x1="52"
+                y1="139"
+                x2="248"
+                y2="139"
+                stroke="#f9a8d4"
+                stroke-width="1.5"
+                stroke-dasharray="6 4"
+              />
+              <text x="88" y="122" font-size="24" fill="#f472b6">🎬</text>
+              <text
+                x="148"
+                y="126"
+                font-size="14"
+                fill="#ec4899"
+                font-weight="bold"
+                font-family="Space Grotesk,sans-serif"
+              >
+                VÉ XEM PHIM
+              </text>
+              <text
+                x="78"
+                y="168"
+                font-size="11"
+                fill="#94a3b8"
+                font-family="Space Grotesk,sans-serif"
+              >
+                Hàng A · Ghế 12 · 15:30
+              </text>
+              <rect
+                x="118"
+                y="238"
+                width="64"
+                height="72"
+                rx="4"
+                fill="#fbbf24"
+                opacity="0.8"
+              />
+              <rect
+                x="113"
+                y="233"
+                width="74"
+                height="12"
+                rx="4"
+                fill="#f59e0b"
+              />
+              <circle cx="130" cy="226" r="12" fill="white" opacity="0.9" />
+              <circle cx="150" cy="220" r="14" fill="white" opacity="0.9" />
+              <circle cx="170" cy="226" r="12" fill="white" opacity="0.9" />
+              <circle cx="140" cy="216" r="10" fill="white" opacity="0.85" />
+              <circle cx="160" cy="216" r="11" fill="white" opacity="0.85" />
+              <rect
+                x="84"
+                y="338"
+                width="132"
+                height="50"
+                rx="6"
+                fill="#7c3aed"
+                opacity="0.75"
+              />
+              <text
+                x="100"
+                y="370"
+                font-size="12"
+                fill="white"
+                font-family="Space Grotesk,sans-serif"
+                font-weight="bold"
+              >
+                📚 Tái Sinh Trang Sách
+              </text>
+              <text x="50" y="60" font-size="20" fill="#f472b6" opacity="0.55">
+                ★
+              </text>
+              <text x="232" y="74" font-size="14" fill="#ec4899" opacity="0.5">
+                ✦
+              </text>
+              <text x="58" y="338" font-size="18" fill="#f472b6" opacity="0.35">
+                ✦
+              </text>
+            </svg>
+            <div class="poster-overlay"></div>
+            <div class="poster-tag" style="color: #be185d">🎬 Giấy</div>
+            <div class="poster-stars">🍿</div>
+            <div class="poster-title">Chuyện Của Chiếc Vé Xem Phim Nhỏ</div>
+          </div>
+          <div class="card-body">
+            <p class="card-excerpt">
+              Chiếc vé xem phim màu hồng đã hoàn thành nhiệm vụ, nhưng bị ném
+              xuống sàn. May thay, bác lao công đưa vào thùng tái chế — và nó
+              tái sinh thành những trang sách cổ tích lung linh!
+            </p>
+            <div class="card-meta">
+              <span>📅 25 Tháng 04, 2025 · 4 phút</span>
+              <span class="read-btn" style="background: #f472b6; color: white"
+                >Đọc →</span
+              >
+            </div>
+          </div>
+        </a>
+
+        <!-- 4. Chai Nhựa -->
+        <a href="story_may_bay_giay.html" class="story-card" data-category="nhua">
+          <div class="poster">
+            <svg
+              viewBox="0 0 300 400"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMidYMid slice"
+              style="position: absolute; inset: 0; width: 100%; height: 100%"
+            >
+              <defs>
+                <linearGradient id="gn4" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#dbeafe" />
+                  <stop offset="65%" stop-color="#bfdbfe" />
+                  <stop offset="100%" stop-color="#7dd3fc" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="400" fill="url(#gn4)" />
+              <!-- Bottle -->
+              <rect
+                x="110"
+                y="55"
+                width="80"
+                height="145"
+                rx="22"
+                fill="rgba(255,255,255,0.6)"
+                stroke="#60a5fa"
+                stroke-width="2"
+              />
+              <rect
+                x="130"
+                y="43"
+                width="40"
+                height="18"
+                rx="7"
+                fill="#1d4ed8"
+                opacity="0.7"
+              />
+              <rect
+                x="112"
+                y="135"
+                width="76"
+                height="63"
+                rx="0"
+                fill="#93c5fd"
+                opacity="0.45"
+              />
+              <path
+                d="M112,150 Q135,142 158,150"
+                fill="none"
+                stroke="#60a5fa"
+                stroke-width="1.5"
+                opacity="0.6"
+              />
+              <!-- Elephant toy -->
+              <ellipse cx="150" cy="315" rx="58" ry="42" fill="#60a5fa" />
+              <ellipse cx="202" cy="288" rx="32" ry="30" fill="#60a5fa" />
+              <path
+                d="M218,305 Q246,328 230,352 Q220,365 232,370"
+                fill="none"
+                stroke="#60a5fa"
+                stroke-width="15"
+                stroke-linecap="round"
+              />
+              <ellipse cx="182" cy="273" rx="19" ry="26" fill="#93c5fd" />
+              <ellipse cx="228" cy="273" rx="15" ry="21" fill="#93c5fd" />
+              <circle cx="210" cy="283" r="5" fill="white" />
+              <circle cx="211" cy="283" r="3" fill="#1e293b" />
+              <rect
+                x="104"
+                y="346"
+                width="20"
+                height="24"
+                rx="10"
+                fill="#1d4ed8"
+                opacity="0.8"
+              />
+              <rect
+                x="136"
+                y="348"
+                width="20"
+                height="24"
+                rx="10"
+                fill="#1d4ed8"
+                opacity="0.8"
+              />
+              <rect
+                x="168"
+                y="348"
+                width="20"
+                height="24"
+                rx="10"
+                fill="#1d4ed8"
+                opacity="0.8"
+              />
+              <rect
+                x="198"
+                y="346"
+                width="20"
+                height="24"
+                rx="10"
+                fill="#1d4ed8"
+                opacity="0.8"
+              />
+              <text x="48" y="198" font-size="22" fill="#fbbf24" opacity="0.8">
+                ✦
+              </text>
+              <text x="238" y="168" font-size="16" fill="#a78bfa" opacity="0.7">
+                ✦
+              </text>
+              <text x="52" y="280" font-size="14" fill="#60a5fa" opacity="0.6">
+                ✦
+              </text>
+              <text x="253" y="340" font-size="18" fill="#fbbf24" opacity="0.6">
+                ⭐
+              </text>
+            </svg>
+            <div class="poster-overlay"></div>
+            <div class="poster-tag" style="color: #2563eb">🥤 Nhựa</div>
+            <div class="poster-stars">🐘</div>
+            <div class="poster-title">
+              Chuyến Phiêu Lưu Của Chai Nhựa Nhí: Từ Rác Thải Thành Chú Voi Đồ
+              Chơi
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-excerpt">
+              Chai nước khoáng bị ném bừa bãi, trôi vào cống, gặp giun đất than
+              thở... Rồi một bạn nhỏ tình nguyện nhặt lên và biến nó thành chú
+              voi đồ chơi xinh xắn trên bàn học!
+            </p>
+            <div class="card-meta">
+              <span>📅 28 Tháng 04, 2025 · 5 phút</span>
+              <span class="read-btn" style="background: #3b82f6; color: white"
+                >Đọc →</span
+              >
+            </div>
+          </div>
+        </a>
+
+        <!-- 5. Túi Ni Lông -->
+        <a href="story_may_bay_giay.html" class="story-card" data-category="nhua">
+          <div class="poster">
+            <svg
+              viewBox="0 0 300 400"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMidYMid slice"
+              style="position: absolute; inset: 0; width: 100%; height: 100%"
+            >
+              <defs>
+                <linearGradient id="gn5sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#e0f2fe" />
+                  <stop offset="55%" stop-color="#bae6fd" />
+                </linearGradient>
+                <linearGradient id="gn5sea" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0ea5e9" />
+                  <stop offset="100%" stop-color="#0369a1" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="400" fill="url(#gn5sky)" />
+              <rect y="240" width="300" height="160" fill="url(#gn5sea)" />
+              <path
+                d="M0,240 Q75,222 150,240 Q225,258 300,240"
+                fill="#7dd3fc"
+                opacity="0.55"
+              />
+              <path
+                d="M0,275 Q60,260 120,275 Q180,290 240,275 Q270,268 300,275"
+                fill="none"
+                stroke="white"
+                stroke-width="2"
+                opacity="0.3"
+              />
+              <!-- Bag (store) -->
+              <path
+                d="M120,58 Q150,38 180,58 L192,132 Q150,148 108,132 Z"
+                fill="#4ade80"
+                opacity="0.85"
+                stroke="#22c55e"
+                stroke-width="1.5"
+              />
+              <path
+                d="M130,63 Q120,46 128,40"
+                fill="none"
+                stroke="#22c55e"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <path
+                d="M170,63 Q180,46 172,40"
+                fill="none"
+                stroke="#22c55e"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <ellipse
+                cx="138"
+                cy="108"
+                rx="14"
+                ry="14"
+                fill="#fbbf24"
+                opacity="0.8"
+              />
+              <rect
+                x="155"
+                y="98"
+                width="20"
+                height="28"
+                rx="4"
+                fill="#a78bfa"
+                opacity="0.8"
+              />
+              <!-- Turtle -->
+              <ellipse cx="150" cy="335" rx="36" ry="26" fill="#166534" />
+              <polygon
+                points="150,320 166,330 166,345 150,354 134,345 134,330"
+                fill="#15803d"
+                stroke="#4ade80"
+                stroke-width="1"
+              />
+              <circle cx="150" cy="337" r="6" fill="#22c55e" />
+              <ellipse cx="186" cy="330" rx="16" ry="13" fill="#166534" />
+              <circle cx="192" cy="325" r="4" fill="white" />
+              <circle cx="193" cy="325" r="2.5" fill="#1e293b" />
+              <ellipse
+                cx="127"
+                cy="352"
+                rx="16"
+                ry="8"
+                fill="#166534"
+                transform="rotate(-25 127 352)"
+              />
+              <ellipse
+                cx="173"
+                cy="352"
+                rx="16"
+                ry="8"
+                fill="#166534"
+                transform="rotate(25 173 352)"
+              />
+              <!-- Ghost bag in water (danger) -->
+              <path
+                d="M48,292 Q68,278 88,288 L93,312 Q68,320 46,312 Z"
+                fill="#4ade80"
+                opacity="0.3"
+                stroke="#22c55e"
+                stroke-width="1"
+                stroke-dasharray="4 3"
+              />
+              <!-- Park bench (result) -->
+              <rect
+                x="28"
+                y="192"
+                width="104"
+                height="12"
+                rx="4"
+                fill="#15803d"
+              />
+              <rect
+                x="38"
+                y="178"
+                width="84"
+                height="10"
+                rx="3"
+                fill="#166534"
+              />
+              <rect
+                x="40"
+                y="204"
+                width="10"
+                height="26"
+                rx="3"
+                fill="#166534"
+              />
+              <rect
+                x="112"
+                y="204"
+                width="10"
+                height="26"
+                rx="3"
+                fill="#166534"
+              />
+              <text x="218" y="80" font-size="20" fill="#fbbf24" opacity="0.55">
+                ☀️
+              </text>
+              <text x="238" y="162" font-size="16" fill="#a7f3d0" opacity="0.5">
+                ✦
+              </text>
+            </svg>
+            <div class="poster-overlay"></div>
+            <div class="poster-tag" style="color: #16a34a">🛍️ Nhựa</div>
+            <div class="poster-stars">🐢</div>
+            <div class="poster-title">
+              Hành Trình Của Chiếc Túi Ni Lông Xanh
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-excerpt">
+              Chiếc túi xanh hãnh diện chở kem và truyện tranh — rồi bị vứt vào
+              thùng rác. Gió cuốn ra đại dương, suýt làm chú rùa biển mất mạng.
+              Kết thúc bất ngờ: nó thành chiếc ghế công viên!
+            </p>
+            <div class="card-meta">
+              <span>📅 01 Tháng 05, 2025 · 7 phút</span>
+              <span class="read-btn" style="background: #22c55e; color: white"
+                >Đọc →</span
+              >
+            </div>
+          </div>
+        </a>
+
+        <!-- 6. Ống Hút Tre -->
+        <a href="story_may_bay_giay.html" class="story-card" data-category="thuytinh">
+          <div class="poster">
+            <svg
+              viewBox="0 0 300 400"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMidYMid slice"
+              style="position: absolute; inset: 0; width: 100%; height: 100%"
+            >
+              <defs>
+                <linearGradient id="gn6" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#ecfdf5" />
+                  <stop offset="100%" stop-color="#bbf7d0" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="400" fill="url(#gn6)" />
+              <ellipse
+                cx="150"
+                cy="430"
+                rx="210"
+                ry="130"
+                fill="#dcfce7"
+                opacity="0.6"
+              />
+              <!-- Background bamboo -->
+              <rect
+                x="18"
+                y="28"
+                width="10"
+                height="372"
+                rx="5"
+                fill="#16a34a"
+                opacity="0.25"
+              />
+              <rect
+                x="272"
+                y="48"
+                width="10"
+                height="352"
+                rx="5"
+                fill="#16a34a"
+                opacity="0.25"
+              />
+              <!-- Glass -->
+              <rect
+                x="98"
+                y="118"
+                width="84"
+                height="185"
+                rx="8"
+                fill="rgba(253,186,116,0.22)"
+                stroke="#fdba74"
+                stroke-width="2"
+              />
+              <rect
+                x="100"
+                y="158"
+                width="80"
+                height="143"
+                rx="0 0 6 6"
+                fill="#fb923c"
+                opacity="0.45"
+              />
+              <path
+                d="M100,198 Q135,183 162,198"
+                fill="none"
+                stroke="#f97316"
+                stroke-width="2"
+                opacity="0.55"
+              />
+              <!-- Bamboo straw -->
+              <rect
+                x="149"
+                y="78"
+                width="12"
+                height="185"
+                rx="6"
+                fill="#d97706"
+              />
+              <rect
+                x="149"
+                y="78"
+                width="12"
+                height="185"
+                rx="6"
+                fill="none"
+                stroke="#fbbf24"
+                stroke-width="1.5"
+                stroke-dasharray="6 10"
+              />
+              <rect
+                x="149"
+                y="108"
+                width="12"
+                height="3"
+                rx="1.5"
+                fill="#92400e"
+                opacity="0.5"
+              />
+              <rect
+                x="149"
+                y="138"
+                width="12"
+                height="3"
+                rx="1.5"
+                fill="#92400e"
+                opacity="0.5"
+              />
+              <rect
+                x="149"
+                y="168"
+                width="12"
+                height="3"
+                rx="1.5"
+                fill="#92400e"
+                opacity="0.5"
+              />
+              <ellipse
+                cx="143"
+                cy="86"
+                rx="17"
+                ry="6"
+                fill="#22c55e"
+                transform="rotate(-30 143 86)"
+              />
+              <ellipse
+                cx="163"
+                cy="82"
+                rx="15"
+                ry="5"
+                fill="#16a34a"
+                transform="rotate(20 163 82)"
+              />
+              <!-- Crossed-out plastic straws -->
+              <rect
+                x="48"
+                y="278"
+                width="8"
+                height="102"
+                rx="4"
+                fill="#f87171"
+                opacity="0.55"
+              />
+              <rect
+                x="64"
+                y="273"
+                width="8"
+                height="102"
+                rx="4"
+                fill="#fb923c"
+                opacity="0.5"
+              />
+              <line
+                x1="40"
+                y1="266"
+                x2="80"
+                y2="392"
+                stroke="#dc2626"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <line
+                x1="80"
+                y1="266"
+                x2="40"
+                y2="392"
+                stroke="#dc2626"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <!-- Earth / compost -->
+              <ellipse
+                cx="228"
+                cy="355"
+                rx="42"
+                ry="22"
+                fill="#92400e"
+                opacity="0.28"
+              />
+              <text x="198" y="360" font-size="13" fill="#78350f">🌱🌱🌱</text>
+              <text x="48" y="78" font-size="18" fill="#4ade80" opacity="0.7">
+                ✦
+              </text>
+              <text x="238" y="138" font-size="14" fill="#fbbf24" opacity="0.7">
+                ⭐
+              </text>
+              <text
+                x="248"
+                y="238"
+                font-size="16"
+                fill="#4ade80"
+                opacity="0.55"
+              >
+                ✦
+              </text>
+            </svg>
+            <div class="poster-overlay"></div>
+            <div class="poster-tag" style="color: #059669">🎋 Tre Xanh</div>
+            <div class="poster-stars">🌿</div>
+            <div class="poster-title">
+              Hành Trình Của Ống Hút Tre: Sứ Mệnh Thay Thế Biệt Đội Nhựa
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-excerpt">
+              Từ bụi tre ở Thanh Hóa đến quán cà phê phố thị, ống hút tre dũng
+              cảm đối đầu biệt đội nhựa. Và kết thúc đẹp nhất: nó trở về lòng
+              đất mẹ — thành chất dinh dưỡng cho mầm cây!
+            </p>
+            <div class="card-meta">
+              <span>📅 20 Tháng 04, 2025 · 8 phút</span>
+              <span class="read-btn" style="background: #10b981; color: white"
+                >Đọc →</span
+              >
+            </div>
+          </div>
+        </a>
+      </section>
+
+      <!-- STATS -->
+      <section class="mb-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="stat-card">
+          <div class="text-3xl mb-2">🥤</div>
+          <div class="text-2xl font-black text-blue-600">450 năm</div>
+          <div
+            class="text-xs font-bold text-slate-500 mt-1 uppercase tracking-wide"
+          >
+            Nhựa phân hủy
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="text-3xl mb-2">📄</div>
+          <div class="text-2xl font-black text-yellow-600">17 cây</div>
+          <div
+            class="text-xs font-bold text-slate-500 mt-1 uppercase tracking-wide"
+          >
+            / tấn giấy tái chế
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="text-3xl mb-2">🪟</div>
+          <div class="text-2xl font-black text-sky-600">∞ lần</div>
+          <div
+            class="text-xs font-bold text-slate-500 mt-1 uppercase tracking-wide"
+          >
+            Thủy tinh tái chế
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="text-3xl mb-2">🎋</div>
+          <div class="text-2xl font-black text-emerald-600">3 tháng</div>
+          <div
+            class="text-xs font-bold text-slate-500 mt-1 uppercase tracking-wide"
+          >
+            Tre phân hủy
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGINATION -->
+      <div class="mt-8 flex justify-center items-center gap-3">
+        <button
+          class="size-10 flex items-center justify-center rounded-full border-2 border-cyan-200 text-slate-400 hover:text-cyan-600 hover:border-cyan-400 transition-all bg-white/80 shadow-sm"
+        >
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <button
+          class="size-10 flex items-center justify-center rounded-full bg-cyan-500 text-white font-black border-2 border-cyan-500 shadow-lg shadow-cyan-200"
+        >
+          1
+        </button>
+        <button
+          class="size-10 flex items-center justify-center rounded-full border-2 border-cyan-200 bg-white/80 text-slate-500 hover:text-cyan-600 hover:border-cyan-400 transition-all font-bold"
+        >
+          2
+        </button>
+        <button
+          class="size-10 flex items-center justify-center rounded-full border-2 border-cyan-200 bg-white/80 text-slate-500 hover:text-cyan-600 hover:border-cyan-400 transition-all font-bold"
+        >
+          3
+        </button>
+        <span class="text-slate-400 font-bold">...</span>
+        <button
+          class="size-10 flex items-center justify-center rounded-full border-2 border-cyan-200 bg-white/80 text-slate-500 hover:text-cyan-600 hover:border-cyan-400 transition-all font-bold"
+        >
+          8
+        </button>
+        <button
+          class="size-10 flex items-center justify-center rounded-full border-2 border-cyan-200 bg-white/80 text-slate-500 hover:text-cyan-600 hover:border-cyan-400 transition-all"
+        >
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
+    </main>
+
+    <div id="footer-container"></div>
+    <script>
+      loadComponent("header-container", "header.html");
+      loadComponent("footer-container", "footer.html");
+
+      // Tự động đánh dấu nav link active theo trang hiện tại
+      function setActiveNavLink() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('#header-container .nav-link, #header-container .mobile-nav-link');
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          const linkPage = link.getAttribute('href').split('/').pop();
+          if (linkPage === currentPage) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      // Dùng MutationObserver để chạy sau khi header được load xong
+      const headerObserver = new MutationObserver(function(mutations) {
+        const hasNav = document.querySelector('#header-container .nav-link');
+        if (hasNav) {
+          setActiveNavLink();
+          headerObserver.disconnect();
+        }
+      });
+      headerObserver.observe(document.getElementById('header-container'), { childList: true, subtree: true });
+    </script>
+  </body>
+</html>

@@ -80,6 +80,71 @@ function toggleMobileMenu() {
   menu?.classList.toggle("hidden");
 }
 
+// ── Brand variant dropdown ──
+function toggleBrandDropdown() {
+  const menu = document.getElementById("brand-menu");
+  const arrow = document.getElementById("brand-arrow");
+  if (!menu || !arrow) return;
+  menu.classList.toggle("hidden");
+  arrow.classList.toggle("rotate-180");
+}
+
+function selectBrand(brand, el) {
+  const label = document.getElementById("brand-label");
+  const menu = document.getElementById("brand-menu");
+  const arrow = document.getElementById("brand-arrow");
+  if (!label || !menu || !arrow) return;
+  label.textContent = brand;
+  menu.classList.add("hidden");
+  arrow.classList.remove("rotate-180");
+  // Highlight active option
+  document.querySelectorAll(".brand-option").forEach(btn => {
+    btn.classList.remove("bg-[#F1F5F9]");
+  });
+  el.classList.add("bg-[#F1F5F9]");
+  // Persist selection
+  localStorage.setItem("ecoscan_brand", brand);
+  // Apply nav visibility
+  applyBrandNav(brand);
+  // Dispatch event for other components
+  window.dispatchEvent(new CustomEvent("brandChanged", { detail: { brand } }));
+}
+
+function restoreBrandSelection() {
+  const saved = localStorage.getItem("ecoscan_brand");
+  const label = document.getElementById("brand-label");
+  if (saved && label) {
+    label.textContent = saved;
+  }
+  applyBrandNav(saved || "SmartDisposal-U");
+}
+
+// Show/hide nav items & page sections based on selected brand
+function applyBrandNav(brand) {
+  // Extract suffix: SmartDisposal-U → U, SmartDisposal-P → P, SmartDisposal-I → I
+  const suffix = brand.replace("SmartDisposal-", "");
+
+  // Desktop + mobile nav links
+  document.querySelectorAll("[data-brand]").forEach(el => {
+    const allowed = el.getAttribute("data-brand").split(",");
+    if (allowed.includes(suffix)) {
+      el.classList.remove("hidden");
+    } else {
+      el.classList.add("hidden");
+    }
+  });
+
+  // Brand-specific page sections
+  document.querySelectorAll("[data-brand-section]").forEach(el => {
+    const allowed = el.getAttribute("data-brand-section").split(",");
+    if (allowed.includes(suffix)) {
+      el.classList.remove("hidden");
+    } else {
+      el.classList.add("hidden");
+    }
+  });
+}
+
 async function loadComponent(id, file) {
   try {
     const res = await fetch(file);
@@ -92,6 +157,7 @@ async function loadComponent(id, file) {
     if (id === "header-container") {
       setActiveMenu();
       renderAuthUI();
+      restoreBrandSelection();
     }
   } catch (err) {
     console.error("Error loading component:", err);
@@ -104,6 +170,9 @@ document.addEventListener("click", function (event) {
   const userMenu = document.getElementById("user-menu");
   const mobileBtn = document.getElementById("mobile-menu-button");
   const mobileMenu = document.getElementById("mobile-menu");
+  const brandBtn = document.getElementById("brand-dropdown-btn");
+  const brandMenu = document.getElementById("brand-menu");
+  const brandArrow = document.getElementById("brand-arrow");
 
   if (userMenu && userBtn && !userBtn.contains(event.target) && !userMenu.contains(event.target)) {
     userMenu.classList.add("hidden");
@@ -111,6 +180,11 @@ document.addEventListener("click", function (event) {
 
   if (mobileMenu && mobileBtn && !mobileBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
     mobileMenu.classList.add("hidden");
+  }
+
+  if (brandMenu && brandBtn && !brandBtn.contains(event.target) && !brandMenu.contains(event.target)) {
+    brandMenu.classList.add("hidden");
+    if (brandArrow) brandArrow.classList.remove("rotate-180");
   }
 });
 

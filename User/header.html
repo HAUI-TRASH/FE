@@ -9,11 +9,11 @@
   }
 
   .nav-link:hover {
-    color: #3B82F6;
+    color: #3b82f6;
   }
 
   .nav-link.active {
-    color: #3B82F6;
+    color: #3b82f6;
     font-weight: 700;
   }
 
@@ -24,7 +24,7 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: #3B82F6;
+    background: #3b82f6;
     border-radius: 2px;
   }
 
@@ -41,130 +41,171 @@
   .mobile-nav-link:hover,
   .mobile-nav-link.active {
     background: #f1f5f9;
-    color: #3B82F6;
+    color: #3b82f6;
+  }
+
+  #brand-arrow {
+    transition: transform 0.2s ease;
+  }
+  #brand-arrow.rotate-180 {
+    transform: rotate(180deg);
   }
 </style>
 
-<header class="sticky top-0 z-50 w-full border-b border-[#CBD5E1] bg-white/80 backdrop-blur-md">
-  <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full gap-3">
-
+<header
+  class="sticky top-0 z-50 w-full border-b border-[#CBD5E1] bg-white/80 backdrop-blur-md"
+>
+  <div
+    class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1200px] mx-auto w-full gap-3"
+  >
     <!-- Left -->
     <div class="flex items-center gap-2 sm:gap-3 min-w-0">
       <a href="https://www.haui.edu.vn/vn" class="flex items-center shrink-0">
         <!-- <img src="../img logo/logoHaUI.png" alt="HaUI Logo" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full" /> -->
       </a>
 
-      <a href="index.html" class="flex items-center gap-2 min-w-0">
-        <span class="material-symbols-outlined text-2xl sm:text-3xl text-[#3B82F6] shrink-0">recycling</span>
-        <h1 class="text-[#1E293B] text-base sm:text-xl font-bold leading-tight tracking-tight truncate">
-          SmartDisposal
-        </h1>
+      <a href="index.html" class="flex items-center gap-2 min-w-0 shrink-0">
+        <span
+          class="material-symbols-outlined text-2xl sm:text-3xl text-[#3B82F6] shrink-0"
+          >recycling</span
+        >
       </a>
+
+      <!-- Brand variant dropdown -->
+      <div class="relative brand-dropdown shrink-0">
+        <button
+          id="brand-dropdown-btn"
+          class="flex items-center gap-1.5 text-[#1E293B] text-base sm:text-xl font-bold leading-tight tracking-tight bg-[#F1F5F9] hover:bg-[#E2E8F0] px-3 py-1.5 rounded-lg transition-colors border border-[#CBD5E1]"
+          onclick="toggleBrandDropdown()"
+        >
+          <span id="brand-label">SmartDisposal-U</span>
+          <span class="material-symbols-outlined text-base sm:text-lg text-slate-400 transition-transform" id="brand-arrow">expand_more</span>
+        </button>
+        <div
+          id="brand-menu"
+          class="absolute left-0 top-full mt-1.5 w-56 bg-white border border-[#CBD5E1] rounded-xl shadow-xl shadow-slate-200/50 py-1.5 z-50 hidden"
+        >
+          <button
+            class="brand-option flex items-center gap-3 w-full px-4 py-2.5 text-sm font-bold text-[#1E293B] hover:bg-[#F1F5F9] transition-colors"
+            data-brand-val="SmartDisposal-U"
+            onclick="selectBrand('SmartDisposal-U', this)"
+          >
+            <span class="material-symbols-outlined text-blue-500 text-lg">person</span>
+            <div class="text-left">
+              <div>SmartDisposal-U</div>
+              <div class="text-[10px] font-medium text-slate-400 normal-case">Người dùng cá nhân </div>
+            </div>
+          </button>
+          <button
+            class="brand-option flex items-center gap-3 w-full px-4 py-2.5 text-sm font-bold text-[#1E293B] hover:bg-[#F1F5F9] transition-colors"
+            data-brand-val="SmartDisposal-P"
+            onclick="selectBrand('SmartDisposal-P', this)"
+          >
+            <span class="material-symbols-outlined text-emerald-500 text-lg">business</span>
+            <div class="text-left">
+              <div>SmartDisposal-P</div>
+              <div class="text-[10px] font-medium text-slate-400 normal-case">Trạm thu gom rác</div>
+            </div>
+          </button>
+          <button
+            class="brand-option flex items-center gap-3 w-full px-4 py-2.5 text-sm font-bold text-[#1E293B] hover:bg-[#F1F5F9] transition-colors"
+            data-brand-val="SmartDisposal-I"
+            onclick="selectBrand('SmartDisposal-I', this)"
+          >
+            <span class="material-symbols-outlined text-purple-500 text-lg">monitoring</span>
+            <div class="text-left">
+              <div>SmartDisposal-I</div>
+              <div class="text-[10px] font-medium text-slate-400 normal-case">Giải pháp AI cho nhà máy</div>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Desktop nav -->
     <nav class="hidden md:flex flex-1 justify-center gap-6 lg:gap-8 px-4">
-      <a class="nav-link" href="index.html">Trang chủ</a>
-      <a class="nav-link" href="result_analys.html">Kết quả</a>
-      <a class="nav-link" href="list_blog.html">Blog</a>
-      <a class="nav-link" href="history.html">Lịch sử</a>
-      <a class="nav-link" href="guide.html">Hướng dẫn</a>
-      <a class="nav-link" href="about-us.html">Về chúng tôi</a>
+      <a class="nav-link" href="index.html" data-brand="U,P,I">Trang chủ</a>
+      <a class="nav-link" href="result_analys.html" data-brand="U">Kết quả</a>
+      <a class="nav-link" href="list_blog.html" data-brand="U,P,I">Blog</a>
+      <a class="nav-link" href="list_story.html" data-brand="U">Câu truyện</a>
+      <a class="nav-link" href="history.html" data-brand="U">Lịch sử</a>
+      <a class="nav-link" href="guide.html" data-brand="U,P,I">Hướng dẫn</a>
+      <a class="nav-link" href="about-us.html" data-brand="U,P,I">Về chúng tôi</a>
     </nav>
 
     <!-- Right -->
     <div class="flex items-center gap-2 sm:gap-4 shrink-0">
-
       <!-- Mobile menu -->
-      <button id="mobile-menu-button"
+      <button
+        id="mobile-menu-button"
         class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-gray-500 hover:bg-[#F1F5F9] hover:text-[#1E293B] transition"
-        onclick="toggleMobileMenu()">
+        onclick="toggleMobileMenu()"
+      >
         <span class="material-symbols-outlined">menu</span>
       </button>
 
       <!-- AUTH AREA -->
       <div id="auth-area" class="flex items-center gap-3">
-
         <!-- NOT LOGIN -->
         <div id="auth-buttons" class="flex items-center gap-2">
-          <a href="login.html"
-            class="px-3 py-2 text-sm text-[#1E293B] border border-[#CBD5E1] rounded-lg hover:bg-[#F1F5F9] transition">
+          <a
+            href="login.html"
+            class="px-3 py-2 text-sm text-[#1E293B] border border-[#CBD5E1] rounded-lg hover:bg-[#F1F5F9] transition"
+          >
             Đăng nhập
           </a>
-          <a href="register.html"
-            class="px-3 py-2 text-sm bg-[#3B82F6] text-white font-semibold rounded-lg hover:opacity-90 transition">
+          <a
+            href="register.html"
+            class="px-3 py-2 text-sm bg-[#3B82F6] text-white font-semibold rounded-lg hover:opacity-90 transition"
+          >
             Đăng ký
           </a>
         </div>
 
         <!-- LOGIN -->
         <div id="user-box" class="relative hidden">
-          <button id="user-menu-button"
+          <button
+            id="user-menu-button"
             class="bg-center bg-no-repeat bg-cover rounded-full w-9 h-9 sm:w-10 sm:h-10 border-2 border-[#CBD5E1]"
-            onclick="toggleUserMenu()"></button>
+            onclick="toggleUserMenu()"
+          ></button>
 
-          <div id="user-menu"
-            class="absolute right-0 mt-2 w-56 bg-white border border-[#CBD5E1] rounded-lg shadow-lg py-1 z-50 hidden">
-            <a href="#" class="flex items-center px-4 py-3 text-sm text-[#1E293B] hover:bg-[#F1F5F9]">
+          <div
+            id="user-menu"
+            class="absolute right-0 mt-2 w-56 bg-white border border-[#CBD5E1] rounded-lg shadow-lg py-1 z-50 hidden"
+          >
+            <a
+              href="#"
+              class="flex items-center px-4 py-3 text-sm text-[#1E293B] hover:bg-[#F1F5F9]"
+            >
               Tài khoản của bạn
             </a>
-            <a href="#" onclick="ecoscanLogout()"
-              class="flex items-center px-4 py-3 text-sm text-[#1E293B] hover:bg-[#F1F5F9]">
+            <a
+              href="#"
+              onclick="ecoscanLogout()"
+              class="flex items-center px-4 py-3 text-sm text-[#1E293B] hover:bg-[#F1F5F9]"
+            >
               Đăng xuất
             </a>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
   <!-- Mobile nav -->
-  <div id="mobile-menu" class="md:hidden hidden border-t border-[#CBD5E1] bg-white px-4 pb-4">
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-[#CBD5E1] bg-white px-4 pb-4"
+  >
     <nav class="flex flex-col gap-1 pt-3">
-      <a class="mobile-nav-link" href="index.html">Trang chủ</a>
-      <a class="mobile-nav-link" href="result_analys.html">Kết quả</a>
-      <a class="mobile-nav-link" href="list_blog.html">Blog</a>
-      <a class="mobile-nav-link" href="history.html">Lịch sử</a>
-      <a class="mobile-nav-link" href="guide.html">Hướng dẫn</a>
-      <a class="mobile-nav-link" href="about-us.html">Về chúng tôi</a>
+      <a class="mobile-nav-link" href="index.html" data-brand="U,P,I">Trang chủ</a>
+      <a class="mobile-nav-link" href="result_analys.html" data-brand="U">Kết quả</a>
+      <a class="mobile-nav-link" href="list_blog.html" data-brand="U,P,I">Blog</a>
+      <a class="mobile-nav-link" href="list_story.html" data-brand="U">Câu truyện</a>
+      <a class="mobile-nav-link" href="history.html" data-brand="U">Lịch sử</a>
+      <a class="mobile-nav-link" href="guide.html" data-brand="U,P,I">Hướng dẫn</a>
+      <a class="mobile-nav-link" href="about-us.html" data-brand="U,P,I">Về chúng tôi</a>
     </nav>
   </div>
 </header>
-
-<script>
-  function toggleMobileMenu() {
-    const menu = document.getElementById("mobile-menu");
-    menu.classList.toggle("hidden");
-  }
-
-  function toggleUserMenu() {
-    const menu = document.getElementById("user-menu");
-    menu.classList.toggle("hidden");
-  }
-
-  document.addEventListener("click", function (event) {
-    const userBtn = document.getElementById("user-menu-button");
-    const userMenu = document.getElementById("user-menu");
-    const mobileBtn = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    if (
-      userMenu &&
-      userBtn &&
-      !userBtn.contains(event.target) &&
-      !userMenu.contains(event.target)
-    ) {
-      userMenu.classList.add("hidden");
-    }
-
-    if (
-      mobileMenu &&
-      mobileBtn &&
-      !mobileBtn.contains(event.target) &&
-      !mobileMenu.contains(event.target)
-    ) {
-      mobileMenu.classList.add("hidden");
-    }
-  });
-</script>
