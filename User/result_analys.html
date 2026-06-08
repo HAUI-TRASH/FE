@@ -185,35 +185,20 @@
     }
 
     @keyframes toast-in {
-      from {
-        transform: translateX(1.5rem);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
+      from { transform: translateX(1.5rem); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
 
     @keyframes toast-out {
-      from {
-        transform: translateX(0);
-        opacity: 1;
-      }
-
-      to {
-        transform: translateX(1.5rem);
-        opacity: 0;
-      }
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(1.5rem); opacity: 0; }
     }
-
-    /* Grid vật thể responsive */
+     /* Grid vật thể responsive */
     #detectedObjectsGrid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0.75rem;
-    }
+    } 
 
     @media (max-width: 640px) {
       #detectedObjectsGrid {
@@ -253,7 +238,7 @@
             <span class="material-symbols-outlined filled-icon text-base">verified</span>
             <span id="confidenceText">Độ chính xác --%</span>
           </div>
-
+          
           <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-slate-100 relative transition-transform duration-300"
             style="transform: translateZ(20px);">
             <div id="resultImage"
@@ -261,7 +246,7 @@
             </div>
           </div>
         </div>
-
+        
         <div id="confirmBanner" class="hidden bg-amber-50 border border-amber-200 rounded-3xl p-5 shadow-sm">
           <div class="flex items-start justify-between gap-4">
             <div class="flex items-start gap-3">
@@ -315,8 +300,7 @@
             <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100 shadow-sm transition-all hover:shadow-md">
               <span class="text-primary text-[10px] uppercase font-black tracking-widest block mb-1">Loại rác</span>
               <span class="text-[#1E293B] font-bold text-lg flex items-center gap-2">
-                <span id="trashTypeDot"
-                  class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
+                <span id="trashTypeDot" class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
                 <span id="trashTypeText">—</span>
               </span>
             </div>
@@ -348,7 +332,15 @@
 
       <div class="lg:col-span-7 flex flex-col gap-6">
         <div class="bg-white border border-[#CBD5E1] rounded-3xl p-5 shadow-sm">
-
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-md font-bold text-[#1E293B] flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-xl">crop</span>
+              Các vật thể phát hiện
+            </h3>
+            <span class="text-xs text-slate-400 bg-slate-50 px-2 py-1 rounded-full">
+              Click vào ảnh để phóng to
+            </span>
+          </div>
           <div id="detectedObjectsGrid" class="grid grid-cols-3 gap-3">
             <div class="col-span-full text-center text-slate-400 py-4 text-sm">
               Đang tải dữ liệu...
@@ -363,8 +355,7 @@
 
           <div class="space-y-8">
             <div class="relative pl-8 border-l-2 border-slate-100">
-              <div class="absolute -left-[9px] top-0 bg-white border-2 border-primary rounded-full w-4 h-4 shadow-sm">
-              </div>
+              <div class="absolute -left-[9px] top-0 bg-white border-2 border-primary rounded-full w-4 h-4 shadow-sm"></div>
               <h3 class="text-lg font-bold text-[#1E293B] mb-2">Tác động môi trường &amp; Kinh tế</h3>
               <p id="impactText" class="text-slate-600 text-sm leading-relaxed mb-4">
                 Không có dữ liệu tác động.
@@ -372,8 +363,7 @@
             </div>
 
             <div class="relative pl-8 border-l-2 border-slate-100">
-              <div class="absolute -left-[9px] top-0 bg-white border-2 border-primary rounded-full w-4 h-4 shadow-sm">
-              </div>
+              <div class="absolute -left-[9px] top-0 bg-white border-2 border-primary rounded-full w-4 h-4 shadow-sm"></div>
               <h3 class="text-lg font-bold text-[#1E293B] mb-2">Mức độ độc hại</h3>
               <p id="toxicityText" class="text-slate-600 text-sm leading-relaxed">
                 Không có dữ liệu độc hại.
@@ -403,7 +393,8 @@
 
         <div
           class="bg-gradient-to-br from-slate-50 to-white border border-[#CBD5E1] rounded-3xl p-6 md:p-8 relative overflow-hidden shadow-sm">
-          <div class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
+          <div
+            class="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none">
           </div>
 
           <h2 class="text-xl font-bold text-[#1E293B] mb-6 flex items-center gap-2 relative z-10">
@@ -415,7 +406,8 @@
             <div
               class="bg-white p-4 rounded-xl border border-slate-100 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/5 group cursor-pointer shadow-sm">
               <div class="aspect-video bg-slate-100 rounded-lg mb-3 overflow-hidden">
-                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                <div
+                  class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                   style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5QxR8sNgXMlRmGNFHDvLjBGzHOW2KwBX4Pkw6FN8sKdSX4pQvwRU0cxZ79gMGY8MRASQh_ZFnfoXxQ0jSADt-ZhN86JjVnQYgJ0tFcQ5FQ2olR6U_fjAaFljKXzNwT9ISokJEyA_-cJmeSiKr27bQvXvn7snWh9w6w8dlQ_SIbzDwLJA1-nPjNaIl1BV5DskvrgXpsk6WWulQRtxyPr9rpUZfZ2C2SFQ26qnKG-7dPocljCg5cTnUiyoF_BD_SC1HTR4xka6WugSy');">
                 </div>
               </div>
@@ -430,7 +422,8 @@
             <div
               class="bg-white p-4 rounded-xl border border-slate-100 hover:border-primary/30 transition-all hover:shadow-lg hover:shadow-primary/5 group cursor-pointer shadow-sm">
               <div class="aspect-video bg-slate-100 rounded-lg mb-3 overflow-hidden">
-                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                <div
+                  class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                   style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGw0wGRGeBFX8hsnCO15nKEr468O-vlbDdgJlDdg1Echlod_-q8MQnQA4DJNSEoRKomPtKKkOBUm1Y0x-GeylbjXeA5YI9uyvniTQnhs3I4DgUIJgfMCgG2glDCpkhp-sEJ0y5WwJjomJRV30jDpzHwr8Ps-IbCO1rfVee9u3l5Iq9i6Gv8tsVfIoyzw4OjHLnZFlRgKlfpYBxHzbuC3gwArdISx2Xlz-UzckmrZBHiWXMxDYPfsuSUORmzk78QjCzmoXq_u02JU8X');">
                 </div>
               </div>
@@ -443,7 +436,8 @@
             </div>
           </div>
 
-          <div class="mt-6 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div
+            class="mt-6 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-slate-400 text-xs italic">"Rác thải chỉ là tài nguyên đặt sai chỗ."</p>
             <button
               class="text-primary text-sm font-bold hover:text-[#1E293B] transition-colors flex items-center gap-1 group">
@@ -569,14 +563,12 @@
           <div class="confirm-modal-body flex-1 px-5 py-5 md:px-6 md:py-6 space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                <span class="text-slate-500 text-[10px] uppercase font-bold tracking-widest block mb-1">Nhãn hiện
-                  tại</span>
+                <span class="text-slate-500 text-[10px] uppercase font-bold tracking-widest block mb-1">Nhãn hiện tại</span>
                 <span id="confirmCurrentLabel" class="text-[#1E293B] font-bold text-lg break-words">—</span>
               </div>
 
               <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                <span class="text-slate-500 text-[10px] uppercase font-bold tracking-widest block mb-1">Độ tin
-                  cậy</span>
+                <span class="text-slate-500 text-[10px] uppercase font-bold tracking-widest block mb-1">Độ tin cậy</span>
                 <span id="confirmCurrentConfidence" class="text-[#1E293B] font-bold text-lg">—</span>
               </div>
             </div>
@@ -653,7 +645,7 @@
         </div>
       </div>
     </div>
-    </div>
+      </div>
     </div>
 
     <!-- Toast Container -->
@@ -662,17 +654,17 @@
 
   <div id="footer-container"></div>
 
-  <script>
+<script>
     loadComponent("header-container", "header.html");
     loadComponent("footer-container", "footer.html");
-  </script>
+</script>
 
   <script>
     // =========================
     // Config
     // =========================
     // const API_BASE = "http://103.118.28.14";
-
+   
     // GET detail
     const DETAIL_URL = (id) => API_BASE + `/api/v1/ai_response/${encodeURIComponent(id)}/detail`;
     const FEEDBACK_URL = (id) => API_BASE + `/api/v1/detections/${encodeURIComponent(id)}/feedback`;
@@ -685,129 +677,161 @@
     let currentConfirmDetection = null;
     let isSubmittingFeedback = false;
     let resultAnnotatedUrl = "";
-    const HARD_PLASTIC_IMAGE = "./anh-chai-nhua.png";
-    const HARD_PAPER_IMAGE = "./chai-giay.png";
-    const HARD_GLASS_IMAGE = "./anh-chai-thuy-tinh.png";
-    const HARD_METAL_IMAGE = "./anh-chai-kim-loai.png";
+    const SAMPLE_IMAGE_API = API_BASE + "/api/v1/images/sample";
+    let sampleImageCache = {
+    plastic: null,
+    paper: null,
+    glass: null,
+    metal: null
+};
 
-    // Part-specific static images per material (swap on click)
-    const PART_IMAGES = {
-      glass: {
-        cap: "./anh-chai-thuy-tinh.png",
-        label: "./anh-chai-thuy-tinh.png",
-        body: "./anh-chai-thuy-tinh.png"
-      },
-      paper: {
-        cap: "./chai-giay.png",
-        label: "./chai-giay.png",
-        body: "./chai-giay.png"
-      },
-      plastic: {
-        cap: "./anh-chai-nhua.png",
-        label: "./anh-chai-nhua.png",
-        body: "./anh-chai-nhua.png"
-      },
-      metal: {
-        cap: "./anh-chai-kim-loai.png",
-        label: "./anh-chai-kim-loai.png",
-        body: "./anh-chai-kim-loai.png"
-      }
-    };
-    function isPlasticBottleDetection(det) {
-      const label = String(det?.labelDisplay || det?.label || "").toLowerCase();
-      const material = String(det?.material || "").toLowerCase();
-
-      return (
-        label.includes("plastic") ||
-        label.includes("nhựa") ||
-        label.includes("nhua") ||
-        material.includes("plastic") ||
-        material.includes("nhựa") ||
-        material.includes("nhua")
-      );
+// Hàm lấy ảnh mẫu từ API
+async function fetchSampleImage(material) {
+    if (sampleImageCache[material]) {
+        return sampleImageCache[material];
     }
-
-    function shouldShowHardPlasticBottleImage(detections) {
-      return Array.isArray(detections) && detections.some(isPlasticBottleDetection);
+    
+    try {
+        const response = await fetch(`${SAMPLE_IMAGE_API}?material=${material}`, {
+            headers: token ? { Authorization: "Bearer " + token } : {}
+        });
+        const result = await response.json();
+        
+        if (result.data?.imageUrl) {
+            sampleImageCache[material] = result.data.imageUrl;
+            return result.data.imageUrl;
+        }
+        return null;
+    } catch (error) {
+        console.error("Lỗi lấy ảnh mẫu:", error);
+        return null;
     }
-    function isPaperDetection(det) {
-      const label = String(det?.labelDisplay || det?.label || "").toLowerCase();
-      const material = String(det?.material || "").toLowerCase();
-      const trashType = String(det?.trashType || "").toLowerCase();
+}
+// ==================== KIỂM TRA LOẠI RÁC ====================
+function isPlasticDetection(det) {
+    const label = String(det?.labelDisplay || det?.label || "").toLowerCase();
+    return label.includes("plastic") || label.includes("nhựa") || label.includes("nhua");
+}
 
-      return (
-        label.includes("paper") ||
-        label.includes("giấy") ||
-        label.includes("giay") ||
-        label.includes("cardboard") ||
-        label.includes("carton") ||
+function isPaperDetection(det) {
+    const label = String(det?.labelDisplay || det?.label || "").toLowerCase();
+    return label.includes("paper") || label.includes("giấy") || label.includes("giay");
+}
 
-        material.includes("paper") ||
-        material.includes("giấy") ||
-        material.includes("giay") ||
-        material.includes("cardboard") ||
-        material.includes("carton") ||
+function isGlassDetection(det) {
+    const label = String(det?.labelDisplay || det?.label || "").toLowerCase();
+    return label.includes("glass") || label.includes("thủy tinh") || label.includes("thuy tinh");
+}
 
-        trashType.includes("paper") ||
-        trashType.includes("giấy") ||
-        trashType.includes("giay")
-      );
+function isMetalDetection(det) {
+    const label = String(det?.labelDisplay || det?.label || "").toLowerCase();
+    return label.includes("metal") || label.includes("kim loại") || label.includes("kim loai");
+}
+
+function shouldShowSampleImage(detections) {
+    if (!Array.isArray(detections) || detections.length === 0) return false;
+ const hasValidMaterial = detections.some(det => 
+        isPlasticDetection(det) || isPaperDetection(det) || 
+        isGlassDetection(det) || isMetalDetection(det)
+    );
+    
+    return hasValidMaterial;
+}
+function getSampleImageUrl(material) {
+    const url = sampleImageCache[material];
+    return url ? 'http://localhost:8080' + url : null;
+}
+
+async function renderSampleImageSection(detections) {
+    const container = document.getElementById("detectedObjectsGrid");
+    if (!container) return;
+    const currentDet = detections[selectedIndex];
+    if (!currentDet) return;
+ let mainMaterial = null;
+    if (isMetalDetection(currentDet)) mainMaterial = "metal";
+    else if (isGlassDetection(currentDet)) mainMaterial = "glass";
+    else if (isPaperDetection(currentDet)) mainMaterial = "paper";
+    else if (isPlasticDetection(currentDet)) mainMaterial = "plastic";
+    
+    console.log("Selected material:", mainMaterial); // Debug
+    
+    const imageUrl = getSampleImageUrl(mainMaterial);
+    if (!imageUrl) {
+        container.innerHTML = `<div class="col-span-full text-center text-slate-400 py-6 text-sm">Không có ảnh mẫu</div>`;
+        return;
     }
+    
+    container.innerHTML = `
+        <div class="col-span-full">
+            <div class="bg-white border border-[#CBD5E1] rounded-3xl p-4 shadow-sm">
+                <h3 class="text-md font-bold text-[#1E293B] flex items-center gap-2 mb-4">
+                    <span class="material-symbols-outlined text-primary text-xl">crop</span>
+                    Vật thể tương tự (Ảnh minh họa)
+                </h3>
+                <div class="rounded-2xl overflow-hidden bg-blue-50 border border-blue-100">
+                    <img id="dynamicSampleImage" src="${imageUrl}" alt="Mẫu ${mainMaterial}" class="w-full h-auto block cursor-zoom-in" />
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+                    <button type="button" data-dynamic-part="cap" data-material="${mainMaterial}" class="part-card flex items-center gap-3 p-3 rounded-2xl bg-white border border-[#CBD5E1] hover:border-primary hover:shadow-md transition text-left w-full">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary">water_bottle</span>
+                        </div>
+                        <div><h4 class="text-sm font-bold text-[#1E293B]">Nắp chai</h4><p class="text-xs text-slate-500">Chi tiết</p></div>
+                    </button>
+                    <button type="button" data-dynamic-part="label" data-material="${mainMaterial}" class="part-card flex items-center gap-3 p-3 rounded-2xl bg-white border border-[#CBD5E1] hover:border-primary hover:shadow-md transition text-left w-full">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-amber-500">sell</span>
+                        </div>
+                        <div><h4 class="text-sm font-bold text-[#1E293B]">Nhãn dán</h4><p class="text-xs text-slate-500">Chi tiết</p></div>
+                    </button>
+                    <button type="button" data-dynamic-part="body" data-material="${mainMaterial}" class="part-card flex items-center gap-3 p-3 rounded-2xl bg-white border border-[#CBD5E1] hover:border-primary hover:shadow-md transition text-left w-full">
+                        <div class="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-green-500">inventory_2</span>
+                        </div>
+                        <div><h4 class="text-sm font-bold text-[#1E293B]">Thân chai</h4><p class="text-xs text-slate-500">Chi tiết</p></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    const sampleImg = document.getElementById("dynamicSampleImage");
+    if (sampleImg) sampleImg.addEventListener("click", () => openImgModal(sampleImg.src));
+    
+    document.querySelectorAll("[data-dynamic-part]").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const part = btn.dataset.dynamicPart;
+            const material = btn.dataset.material;
+            updateDetailFromPart(part, material);
+        });
+    });
+}
 
-    function shouldShowHardPaperImage(detections) {
-      return Array.isArray(detections) && detections.some(isPaperDetection);
+function updateDetailFromPart(partKey, materialType) {
+    if (partKey === "cap") {
+        setText("mainLabel", "Nắp chai");
+        setText("trashTypeText", "Tái chế");
+        setText("materialText", materialType === "glass" ? "Kim loại" : "Nhựa");
+        setText("noteText", "Nên tháo nắp riêng trước khi xử lý.");
+        setText("actionText", "Tháo nắp, làm sạch và bỏ vào thùng rác tái chế.");
+    } else if (partKey === "label") {
+        setText("mainLabel", "Nhãn dán");
+        setText("trashTypeText", "Tái chế (nếu sạch)");
+        setText("materialText", "Nhựa/Giấy");
+        setText("noteText", "Nhãn dán thường khó tái chế do lớp keo.");
+        setText("actionText", "Bóc nhãn, nếu không bóc được thì bỏ vào rác thường.");
+    } else if (partKey === "body") {
+        setText("mainLabel", "Thân chai");
+        setText("trashTypeText", "Tái chế");
+        setText("materialText", materialType === "glass" ? "Thủy tinh" : materialType === "metal" ? "Kim loại" : "Nhựa/Giấy");
+        setText("noteText", "Cần làm sạch và để khô trước khi tái chế.");
+        setText("actionText", "Rửa sạch, làm khô và bỏ vào thùng tái chế.");
     }
-    function isGlassDetection(det) {
-      const label = String(det?.labelDisplay || det?.label || "").toLowerCase();
-      const material = String(det?.material || "").toLowerCase();
-      const trashType = String(det?.trashType || "").toLowerCase();
+    setText("impactText", "Tái chế giúp tiết kiệm tài nguyên và giảm ô nhiễm.");
+    setText("toxicityText", "Không độc hại nếu xử lý đúng cách.");
+    renderSafeSteps(["Phân loại đúng", "Làm sạch trước khi tái chế", "Bỏ vào đúng thùng rác"]);
+}
 
-      return (
-        label.includes("glass") ||
-        label.includes("thủy tinh") ||
-        label.includes("thuy tinh") ||
-        label.includes("thuỷ tinh") ||
-
-        material.includes("glass") ||
-        material.includes("thủy tinh") ||
-        material.includes("thuy tinh") ||
-        material.includes("thuỷ tinh") ||
-
-        trashType.includes("glass") ||
-        trashType.includes("thủy tinh") ||
-        trashType.includes("thuy tinh") ||
-        trashType.includes("thuỷ tinh")
-      );
-    }
-
-    function shouldShowHardGlassImage(detections) {
-      return Array.isArray(detections) && detections.some(isGlassDetection);
-    }
-    function isMetalDetection(det) {
-      const label = String(det?.labelDisplay || det?.label || "").toLowerCase();
-      const material = String(det?.material || "").toLowerCase();
-      const trashType = String(det?.trashType || "").toLowerCase();
-
-      return (
-        label.includes("metal") ||
-        label.includes("kim loại") ||
-        label.includes("kim loai") ||
-        label.includes("lon") ||
-        label.includes("can") ||
-
-        material.includes("metal") ||
-        material.includes("kim loại") ||
-        material.includes("kim loai") ||
-
-        trashType.includes("metal") ||
-        trashType.includes("kim loại") ||
-        trashType.includes("kim loai")
-      );
-    }
-
-    function shouldShowHardMetalImage(detections) {
-      return Array.isArray(detections) && detections.some(isMetalDetection);
-    }
     function qs(name) {
       return new URLSearchParams(window.location.search).get(name);
     }
@@ -839,297 +863,91 @@
       if (text.toLowerCase() === "ok") return "OK";
       return text.charAt(0).toUpperCase() + text.slice(1);
     }
-    function labelToVietnamese(value) {
-      const raw = String(value || "").trim();
-      const key = raw.toLowerCase();
+  function labelToVietnamese(value) {
+    const raw = String(value || "").trim();
+    const key = raw.toLowerCase();
 
-      const map = {
-        "paper": "Giấy",
-        "giay": "Giấy",
-        "giấy": "Giấy",
+    const map = {
+      "paper": "Giấy",
+      "giay": "Giấy",
+      "giấy": "Giấy",
 
-        "plastic": "Nhựa",
-        "nhua": "Nhựa",
-        "nhựa": "Nhựa",
+      "plastic": "Nhựa",
+      "nhua": "Nhựa",
+      "nhựa": "Nhựa",
 
-        "glass": "Thủy tinh",
-        "thuy tinh": "Thủy tinh",
-        "thủy tinh": "Thủy tinh",
+      "glass": "Thủy tinh",
+      "thuy tinh": "Thủy tinh",
+      "thủy tinh": "Thủy tinh",
 
-        "metal": "Kim loại",
-        "kim loai": "Kim loại",
-        "kim loại": "Kim loại",
+      "metal": "Kim loại",
+      "kim loai": "Kim loại",
+      "kim loại": "Kim loại",
 
-        "cardboard": "Bìa carton",
-        "organic": "Hữu cơ",
-        "trash": "Rác",
-        "bottle": "Chai",
-        "can": "Lon",
+      "cardboard": "Bìa carton",
+      "organic": "Hữu cơ",
+      "trash": "Rác",
+      "bottle": "Chai",
+      "can": "Lon",
 
-        "face-mask": "Khẩu trang",
-        "face mask": "Khẩu trang",
+      "face-mask": "Khẩu trang",
+      "face mask": "Khẩu trang",
 
-        "bottle_cap": "Nắp chai",
-        "bottle cap": "Nắp chai",
+      "bottle_cap": "Nắp chai",
+      "bottle cap": "Nắp chai",
 
-        "bottle_body": "Thân chai",
-        "bottle body": "Thân chai",
+      "bottle_body": "Thân chai",
+      "bottle body": "Thân chai",
 
-        "label_sticker": "Nhãn dán",
-        "label sticker": "Nhãn dán"
-      };
+      "label_sticker": "Nhãn dán",
+      "label sticker": "Nhãn dán"
+    };
 
-      return map[key] || raw || "Không xác định";
-    }
+    return map[key] || raw || "Không xác định";
+  }
 
 
-    function getDetectedObjectLabel(det) {
-      return labelToVietnamese(det?.labelDisplay || det?.label);
-    }
+  function getDetectedObjectLabel(det) {
+    return labelToVietnamese(det?.labelDisplay || det?.label);
+  }
 
-    function getDetectedObjectMaterial(value) {
-      if (!value || value === "—") return "—";
-      return labelToVietnamese(value);
-    }
+  function getDetectedObjectMaterial(value) {
+    if (!value || value === "—") return "—";
+    return labelToVietnamese(value);
+  }
     function renderDetectedObjectsGrid(detections) {
-      const container = document.getElementById("detectedObjectsGrid");
-      if (!container) return;
+    const container = document.getElementById("detectedObjectsGrid");
+    if (!container) return;
 
-      if (!detections || detections.length === 0) {
+    if (!detections || detections.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full text-center text-slate-400 py-6 text-sm">
-            Chưa có dữ liệu vật thể
-          </div>
+            <div class="col-span-full text-center text-slate-400 py-6 text-sm">
+                Chưa có dữ liệu vật thể
+            </div>
         `;
         return;
-      }
-
-      // Helper: swap part image + update wrapper + badge + crop position
-      const PART_STYLES = {
-        cap:   { border: "#3b82f6", bg: "#eff6ff", label: "Nắp chai", icon: "radio_button_checked", pos: "50% 12%" },
-        label: { border: "#f59e0b", bg: "#fffbeb", label: "Nhãn dán", icon: "sell", pos: "50% 50%" },
-        body:  { border: "#22c55e", bg: "#f0fdf4", label: "Thân chai", icon: "inventory_2", pos: "50% 88%" }
-      };
-
-      function swapPartImage(imgId, src, partName) {
-        const img = document.getElementById(imgId);
-        if (!img) return;
-        img.src = src;
-        const style = PART_STYLES[partName];
-        if (!style) return;
-
-        // Zoom-crop into the part region
-        img.style.objectFit = 'cover';
-        img.style.objectPosition = style.pos;
-        img.style.transform = 'scale(1.35)';
-        img.style.transition = 'object-position 0.4s ease, transform 0.4s ease';
-
-        // Update wrapper border + background
-        const wrapper = img.closest('.part-image-wrapper');
-        if (wrapper) {
-          wrapper.style.borderColor = style.border;
-          wrapper.style.backgroundColor = style.bg;
-          wrapper.style.borderWidth = '3px';
-          wrapper.style.transition = 'border-color 0.3s, background-color 0.3s';
-        }
-
-        // Update badge
-        const badge = document.getElementById(imgId + '-badge');
-        if (badge) {
-          badge.textContent = style.label;
-          badge.style.backgroundColor = style.border;
-          badge.classList.remove('hidden');
-        }
-      }
-
-      // Helper: build part button HTML
-      function partBtn(dataAttr, partVal, icon, iconBg, iconColor, title, subtitle) {
-        return `
-          <button type="button" data-${dataAttr}="${partVal}"
-            class="part-card flex items-center gap-3 p-3 rounded-2xl bg-white border border-[#CBD5E1] hover:border-primary hover:shadow-md transition text-left">
-            <div class="w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined ${iconColor}">${icon}</span>
-            </div>
-            <div>
-              <h4 class="text-sm font-bold text-[#1E293B]">${title}</h4>
-              <p class="text-xs text-slate-500">${subtitle}</p>
-            </div>
-          </button>`;
-      }
-
-      // ── Pick current detection to determine which material image to show ──
-      const curDet = detections[selectedIndex] || detections[0];
-      const curIsGlass = isGlassDetection(curDet);
-      const curIsPaper = isPaperDetection(curDet);
-      const curIsPlastic = isPlasticBottleDetection(curDet);
-      const curIsMetal = isMetalDetection(curDet);
-
-      // ── 1. GLASS ──
-      if (curIsGlass) {
-        container.innerHTML = `
-          <div class="col-span-full">
-            <div class="bg-white border border-[#CBD5E1] rounded-3xl p-4 shadow-sm">
-              <h3 class="text-md font-bold text-[#1E293B] flex items-center gap-2 mb-4">
-                <span class="material-symbols-outlined text-primary text-xl">crop</span>
-                Vật thể tương tự (Ảnh minh họa)
-              </h3>
-              <div class="rounded-2xl overflow-hidden bg-sky-50 border border-sky-100 part-image-wrapper relative">
-                <img id="hardGlassImage" src="${HARD_GLASS_IMAGE}" alt="Chi tiết chai thủy tinh"
-                  class="w-full h-auto block cursor-zoom-in" />
-                <span id="hardGlassImage-badge"
-                  class="absolute top-3 left-3 px-3 py-1.5 rounded-full text-white text-[10px] font-black uppercase tracking-wider shadow-lg hidden"
-                  style="background:#22c55e">Thân chai</span>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-                ${partBtn("glass-part", "cap", "radio_button_checked", "bg-amber-50", "text-amber-500", "Nắp chai", "Kim loại")}
-                ${partBtn("glass-part", "label", "sell", "bg-green-50", "text-green-500", "Nhãn dán", "Nhựa")}
-                ${partBtn("glass-part", "body", "liquor", "bg-blue-50", "text-primary", "Thân chai", "Thủy tinh")}
-              </div>
-
-            </div>
-          </div>`;
-
-        container.onclick = (e) => {
-          const img = e.target.closest("#hardGlassImage");
-          if (img) { openImgModal(HARD_GLASS_IMAGE); return; }
-          const part = e.target.closest("[data-glass-part]");
-          if (!part) return;
-          const p = part.dataset.glassPart;
-          swapPartImage("hardGlassImage", PART_IMAGES.glass[p], p);
-          if (p === "cap") { setText("mainLabel","Nắp chai"); setText("trashTypeText","Tái chế"); setText("materialText","Kim loại"); setText("noteText","Nắp kim loại nên được tháo riêng khỏi chai thủy tinh trước khi xử lý."); setText("actionText","Tháo nắp và bỏ vào nhóm rác kim loại tái chế."); }
-          if (p === "label") { setText("mainLabel","Nhãn dán"); setText("trashTypeText","Tái chế"); setText("materialText","Nhựa"); setText("noteText","Nhãn nhựa có thể bóc ra nếu cần để phân loại chính xác hơn."); setText("actionText","Bóc nhãn nếu có thể và bỏ vào nhóm rác nhựa tái chế."); }
-          if (p === "body") { setText("mainLabel","Thân chai"); setText("trashTypeText","Tái chế"); setText("materialText","Thủy tinh"); setText("noteText","Thân chai thủy tinh cần được làm sạch và tránh để vỡ khi thu gom."); setText("actionText","Rửa sạch, để khô và bỏ vào nhóm rác thủy tinh tái chế."); }
-        };
+    }
+    
+    // Hiển thị ảnh mẫu từ DB nếu có
+    if (shouldShowSampleImage(detections)) {
+        renderSampleImageSection(detections);
         return;
-      }
+    }
+    
 
-      // ── 2. PAPER ──
-      if (curIsPaper) {
-        container.innerHTML = `
-          <div class="col-span-full">
-            <div class="bg-white border border-[#CBD5E1] rounded-3xl p-4 shadow-sm">
-              <h3 class="text-md font-bold text-[#1E293B] flex items-center gap-2 mb-4">
-                <span class="material-symbols-outlined text-primary text-xl">crop</span>
-                Vật thể tương tự (Ảnh minh họa)
-              </h3>
-              <div class="rounded-2xl overflow-hidden bg-amber-50 border border-amber-100 part-image-wrapper relative">
-                <img id="hardPaperImage" src="${HARD_PAPER_IMAGE}" alt="Chi tiết chai giấy"
-                  class="w-full h-auto block cursor-zoom-in" />
-                <span id="hardPaperImage-badge"
-                  class="absolute top-3 left-3 px-3 py-1.5 rounded-full text-white text-[10px] font-black uppercase tracking-wider shadow-lg hidden"
-                  style="background:#22c55e">Thân chai</span>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-                ${partBtn("paper-part", "cap", "water_bottle", "bg-blue-50", "text-primary", "Nắp chai", "Nhựa")}
-                ${partBtn("paper-part", "label", "sell", "bg-amber-50", "text-amber-500", "Nhãn dán", "Giấy")}
-                ${partBtn("paper-part", "body", "inventory_2", "bg-green-50", "text-green-500", "Thân chai giấy", "Giấy")}
-              </div>
+  
 
-            </div>
-          </div>`;
 
-        container.onclick = (e) => {
-          const img = e.target.closest("#hardPaperImage");
-          if (img) { openImgModal(HARD_PAPER_IMAGE); return; }
-          const part = e.target.closest("[data-paper-part]");
-          if (!part) return;
-          const p = part.dataset.paperPart;
-          swapPartImage("hardPaperImage", PART_IMAGES.paper[p], p);
-          if (p === "cap") { setText("mainLabel","Nắp chai"); setText("trashTypeText","Tái chế"); setText("materialText","Nhựa"); setText("noteText","Có thể tách riêng nắp chai trước khi xử lý giấy."); setText("actionText","Tháo nắp nhựa và bỏ vào nhóm rác nhựa tái chế."); }
-          if (p === "label") { setText("mainLabel","Nhãn dán"); setText("trashTypeText","Tái chế"); setText("materialText","Giấy"); setText("noteText","Nhãn giấy có thể tái chế nếu sạch và không dính nhiều keo."); setText("actionText","Bỏ nhãn vào nhóm rác giấy nếu có thể tách riêng."); }
-          if (p === "body") { setText("mainLabel","Thân chai giấy"); setText("trashTypeText","Tái chế"); setText("materialText","Giấy"); setText("noteText","Thân chai giấy cần được làm sạch và để khô trước khi tái chế."); setText("actionText","Làm sạch, ép gọn và bỏ vào nhóm rác giấy tái chế."); }
-        };
-        return;
-      }
-
-      // ── 3. PLASTIC ──
-      if (curIsPlastic) {
-        container.innerHTML = `
-          <div class="col-span-full">
-            <div class="bg-white border border-[#CBD5E1] rounded-3xl p-4 shadow-sm">
-              <h3 class="text-md font-bold text-[#1E293B] flex items-center gap-2 mb-4">
-                <span class="material-symbols-outlined text-primary text-xl">crop</span>
-                Vật thể tương tự (Ảnh minh họa)
-              </h3>
-              <div class="rounded-2xl overflow-hidden bg-blue-50 border border-blue-100 part-image-wrapper relative">
-                <img id="hardPlasticBottleImage" src="${HARD_PLASTIC_IMAGE}" alt="Chi tiết chai nhựa"
-                  class="w-full h-auto block cursor-zoom-in" />
-                <span id="hardPlasticBottleImage-badge"
-                  class="absolute top-3 left-3 px-3 py-1.5 rounded-full text-white text-[10px] font-black uppercase tracking-wider shadow-lg hidden"
-                  style="background:#22c55e">Thân chai</span>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-                ${partBtn("part", "cap", "water_bottle", "bg-blue-50", "text-primary", "Nắp chai", "Nhựa")}
-                ${partBtn("part", "label", "sell", "bg-amber-50", "text-amber-500", "Nhãn dán", "Nhựa")}
-                ${partBtn("part", "body", "inventory_2", "bg-green-50", "text-green-500", "Thân chai", "Nhựa")}
-              </div>
-
-            </div>
-          </div>`;
-
-        container.onclick = (e) => {
-          const img = e.target.closest("#hardPlasticBottleImage");
-          if (img) { openImgModal(HARD_PLASTIC_IMAGE); return; }
-          const part = e.target.closest("[data-part]");
-          if (!part) return;
-          const p = part.dataset.part;
-          swapPartImage("hardPlasticBottleImage", PART_IMAGES.plastic[p], p);
-          if (p === "cap") { setText("mainLabel","Nắp chai"); setText("trashTypeText","Tái chế"); setText("materialText","Nhựa"); setText("noteText","Có thể tách riêng nắp chai trước khi xử lý."); setText("actionText","Tháo nắp chai và bỏ vào nhóm rác nhựa tái chế."); }
-          if (p === "label") { setText("mainLabel","Nhãn dán"); setText("trashTypeText","Tái chế"); setText("materialText","Nhựa"); setText("noteText","Cần bóc nhãn nếu có thể để phân loại chính xác hơn."); setText("actionText","Bóc nhãn dán và bỏ vào nhóm rác nhựa để tái chế."); }
-          if (p === "body") { setText("mainLabel","Thân chai"); setText("trashTypeText","Tái chế"); setText("materialText","Nhựa"); setText("noteText","Thân chai nhựa nên được làm sạch, bóp gọn nếu có thể trước khi bỏ vào thùng tái chế."); setText("actionText","Rửa sạch, để khô và bỏ vào nhóm rác nhựa."); }
-        };
-        return;
-      }
-
-      // ── 4. METAL ──
-      if (curIsMetal) {
-        container.innerHTML = `
-          <div class="col-span-full">
-            <div class="bg-white border border-[#CBD5E1] rounded-3xl p-4 shadow-sm">
-              <h3 class="text-md font-bold text-[#1E293B] flex items-center gap-2 mb-4">
-                <span class="material-symbols-outlined text-primary text-xl">crop</span>
-                Vật thể tương tự (Ảnh minh họa)
-              </h3>
-              <div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 part-image-wrapper relative">
-                <img id="hardMetalImage" src="${HARD_METAL_IMAGE}" alt="Chi tiết chai kim loại"
-                  class="w-full h-auto block cursor-zoom-in" />
-                <span id="hardMetalImage-badge"
-                  class="absolute top-3 left-3 px-3 py-1.5 rounded-full text-white text-[10px] font-black uppercase tracking-wider shadow-lg hidden"
-                  style="background:#22c55e">Thân chai</span>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-                ${partBtn("metal-part", "cap", "radio_button_checked", "bg-blue-50", "text-primary", "Nắp chai", "Kim loại")}
-                ${partBtn("metal-part", "label", "sell", "bg-amber-50", "text-amber-500", "Nhãn dán", "Nhựa")}
-                ${partBtn("metal-part", "body", "water_bottle", "bg-slate-100", "text-slate-500", "Thân chai", "Kim loại")}
-              </div>
-
-            </div>
-          </div>`;
-
-        container.onclick = (e) => {
-          const img = e.target.closest("#hardMetalImage");
-          if (img) { openImgModal(HARD_METAL_IMAGE); return; }
-          const part = e.target.closest("[data-metal-part]");
-          if (!part) return;
-          const p = part.dataset.metalPart;
-          swapPartImage("hardMetalImage", PART_IMAGES.metal[p], p);
-          if (p === "cap") { setText("mainLabel","Nắp chai"); setText("trashTypeText","Tái chế"); setText("materialText","Kim loại"); setText("noteText","Nắp chai kim loại có thể được tháo riêng trước khi xử lý."); setText("actionText","Tháo nắp và bỏ vào nhóm rác kim loại tái chế."); }
-          if (p === "label") { setText("mainLabel","Nhãn dán"); setText("trashTypeText","Tái chế"); setText("materialText","Nhựa"); setText("noteText","Nhãn nhựa nên được bóc ra nếu có thể để phân loại chính xác hơn."); setText("actionText","Bóc nhãn và bỏ vào nhóm rác nhựa tái chế."); }
-          if (p === "body") { setText("mainLabel","Thân chai"); setText("trashTypeText","Tái chế"); setText("materialText","Kim loại"); setText("noteText","Thân chai kim loại nên được làm sạch, để khô trước khi bỏ vào thùng tái chế."); setText("actionText","Rửa sạch, để khô và bỏ vào nhóm rác kim loại tái chế."); }
-        };
-        return;
-      }
-
-      if (!resultAnnotatedUrl) {
-        container.innerHTML = `
+  if (!resultAnnotatedUrl) {
+    container.innerHTML = `
       <div class="col-span-full text-center text-slate-400 py-6 text-sm">
         Chưa có ảnh để hiển thị vật thể
       </div>
     `;
-        return;
-      }
+    return;
+  }
 
-      container.innerHTML = `
+  container.innerHTML = `
     <div class="col-span-full border border-[#CBD5E1] rounded-2xl overflow-hidden bg-slate-100">
       <canvas
         id="detectedObjectsCanvas"
@@ -1139,8 +957,8 @@
 
     <div class="col-span-full flex flex-wrap gap-2 mt-3">
       ${detections.map((det, idx) => {
-        const label = getDetectedObjectLabel(det);
-        const material = det.material ? getDetectedObjectMaterial(det.material) : "—";
+const label = getDetectedObjectLabel(det);
+const material = det.material ? getDetectedObjectMaterial(det.material) : "—";
         const confidence = det.confidence != null ? Math.round(det.confidence * 100) : null;
         const isSelected = idx === selectedIndex;
 
@@ -1150,8 +968,8 @@
             data-det-index="${idx}"
             class="px-3 py-2 rounded-xl border text-xs font-bold transition
               ${isSelected
-            ? "bg-primary text-white border-primary"
-            : "bg-white text-slate-600 border-[#CBD5E1] hover:border-primary hover:text-primary"}">
+                ? "bg-primary text-white border-primary"
+                : "bg-white text-slate-600 border-[#CBD5E1] hover:border-primary hover:text-primary"}">
             ${label}
             <span class="opacity-70">- ${material}</span>
             ${confidence != null ? `<span class="opacity-70"> ${confidence}%</span>` : ""}
@@ -1161,160 +979,161 @@
     </div>
   `;
 
-      drawDetectedObjectsCanvas(resultAnnotatedUrl, detections);
+  drawDetectedObjectsCanvas(resultAnnotatedUrl, detections);
 
-      container.onclick = (e) => {
-        const btn = e.target.closest("[data-det-index]");
+  container.onclick = (e) => {
+    const btn = e.target.closest("[data-det-index]");
 
-        if (btn) {
-          selectedIndex = Number(btn.dataset.detIndex);
-          renderChips(detectionsState);
-          renderDetectedObjectsGrid(detectionsState);
-          renderDetectionDetail(detectionsState[selectedIndex]);
-          return;
-        }
-
-        const canvas = e.target.closest("#detectedObjectsCanvas");
-        if (canvas) {
-          try {
-            openImgModal(canvas.toDataURL("image/png"));
-          } catch (_) {
-            openImgModal(resultAnnotatedUrl);
-          }
-        }
-      };
-    }
-    function drawDetectedObjectsCanvas(imageUrl, detections) {
-      const canvas = document.getElementById("detectedObjectsCanvas");
-      if (!canvas) return;
-
-      const ctx = canvas.getContext("2d");
-      const img = new Image();
-
-      img.crossOrigin = "anonymous";
-
-      img.onload = () => {
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        detections.forEach((det, idx) => {
-          const x1 = Number(det.x1);
-          const y1 = Number(det.y1);
-          const x2 = Number(det.x2);
-          const y2 = Number(det.y2);
-
-          if (![x1, y1, x2, y2].every(Number.isFinite)) return;
-          if (x2 <= x1 || y2 <= y1) return;
-
-          const colors = [
-            "#3B82F6",
-            "#F59E0B",
-            "#22C55E",
-            "#EF4444",
-            "#8B5CF6"
-          ];
-
-          const color = colors[idx % colors.length];
-
-          const label = getDetectedObjectLabel(det);
-          const material = det.material && det.material !== "—"
-            ? getDetectedObjectMaterial(det.material)
-            : "";
-          const confidence = det.confidence != null ? Math.round(det.confidence * 100) : null;
-
-          const text =
-            `${label}${material ? " - " + material : ""}${confidence != null ? " " + confidence + "%" : ""}`;
-
-          // Phủ màu nhẹ lên vùng vật thể
-          ctx.save();
-          ctx.globalAlpha = 0.18;
-          ctx.fillStyle = color;
-          ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
-          ctx.restore();
-
-          // Viền vật thể
-          ctx.lineWidth = Math.max(3, canvas.width * 0.004);
-          ctx.strokeStyle = color;
-          ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
-
-          // Label
-          const fontSize = Math.max(18, Math.round(canvas.width * 0.024));
-          ctx.font = `bold ${fontSize}px Arial`;
-          ctx.textBaseline = "top";
-
-          const paddingX = 14;
-          const paddingY = 10;
-          const textWidth = ctx.measureText(text).width;
-          const boxWidth = textWidth + paddingX * 2;
-          const boxHeight = fontSize + paddingY * 2;
-
-          let labelX = x1;
-          let labelY = y1 - boxHeight - 12;
-
-          if (labelY < 8) {
-            labelY = y2 + 12;
-          }
-
-          if (labelX + boxWidth > canvas.width - 8) {
-            labelX = canvas.width - boxWidth - 8;
-          }
-
-          if (labelY + boxHeight > canvas.height - 8) {
-            labelY = Math.max(8, y1 + 8);
-          }
-
-          // Nền label bo góc
-          ctx.fillStyle = color;
-          roundRect(ctx, labelX, labelY, boxWidth, boxHeight, 12);
-          ctx.fill();
-
-          // Chữ label
-          ctx.fillStyle = "#FFFFFF";
-          ctx.fillText(text, labelX + paddingX, labelY + paddingY);
-
-          // Đường nối từ label đến vật thể
-          const centerX = (x1 + x2) / 2;
-          const centerY = (y1 + y2) / 2;
-
-          ctx.beginPath();
-          ctx.moveTo(labelX + 18, labelY + boxHeight);
-          ctx.lineTo(centerX, centerY);
-          ctx.strokeStyle = color;
-          ctx.lineWidth = 2;
-          ctx.stroke();
-
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, 5, 0, Math.PI * 2);
-          ctx.fillStyle = color;
-          ctx.fill();
-        });
-      };
-
-      img.onerror = () => {
-        console.error("Không tải được ảnh để vẽ canvas:", imageUrl);
-      };
-
-      img.src = imageUrl;
+    if (btn) {
+      selectedIndex = Number(btn.dataset.detIndex);
+      renderChips(detectionsState);
+      renderDetectedObjectsGrid(detectionsState);
+      renderDetectionDetail(detectionsState[selectedIndex]);
+      return;
     }
 
-    function roundRect(ctx, x, y, width, height, radius) {
-      const r = Math.min(radius, width / 2, height / 2);
+    const canvas = e.target.closest("#detectedObjectsCanvas");
+    if (canvas) {
+      try {
+        openImgModal(canvas.toDataURL("image/png"));
+      } catch (_) {
+        openImgModal(resultAnnotatedUrl);
+      }
+    }
+  };
+}
+
+function drawDetectedObjectsCanvas(imageUrl, detections) {
+  const canvas = document.getElementById("detectedObjectsCanvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  const img = new Image();
+
+  img.crossOrigin = "anonymous";
+
+  img.onload = () => {
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    detections.forEach((det, idx) => {
+      const x1 = Number(det.x1);
+      const y1 = Number(det.y1);
+      const x2 = Number(det.x2);
+      const y2 = Number(det.y2);
+
+      if (![x1, y1, x2, y2].every(Number.isFinite)) return;
+      if (x2 <= x1 || y2 <= y1) return;
+
+      const colors = [
+        "#3B82F6",
+        "#F59E0B",
+        "#22C55E",
+        "#EF4444",
+        "#8B5CF6"
+      ];
+
+      const color = colors[idx % colors.length];
+
+    const label = getDetectedObjectLabel(det);
+    const material = det.material && det.material !== "—"
+      ? getDetectedObjectMaterial(det.material)
+      : "";
+      const confidence = det.confidence != null ? Math.round(det.confidence * 100) : null;
+
+      const text =
+        `${label}${material ? " - " + material : ""}${confidence != null ? " " + confidence + "%" : ""}`;
+
+      // Phủ màu nhẹ lên vùng vật thể
+      ctx.save();
+      ctx.globalAlpha = 0.18;
+      ctx.fillStyle = color;
+      ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
+      ctx.restore();
+
+      // Viền vật thể
+      ctx.lineWidth = Math.max(3, canvas.width * 0.004);
+      ctx.strokeStyle = color;
+      ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+
+      // Label
+      const fontSize = Math.max(18, Math.round(canvas.width * 0.024));
+      ctx.font = `bold ${fontSize}px Arial`;
+      ctx.textBaseline = "top";
+
+      const paddingX = 14;
+      const paddingY = 10;
+      const textWidth = ctx.measureText(text).width;
+      const boxWidth = textWidth + paddingX * 2;
+      const boxHeight = fontSize + paddingY * 2;
+
+      let labelX = x1;
+      let labelY = y1 - boxHeight - 12;
+
+      if (labelY < 8) {
+        labelY = y2 + 12;
+      }
+
+      if (labelX + boxWidth > canvas.width - 8) {
+        labelX = canvas.width - boxWidth - 8;
+      }
+
+      if (labelY + boxHeight > canvas.height - 8) {
+        labelY = Math.max(8, y1 + 8);
+      }
+
+      // Nền label bo góc
+      ctx.fillStyle = color;
+      roundRect(ctx, labelX, labelY, boxWidth, boxHeight, 12);
+      ctx.fill();
+
+      // Chữ label
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillText(text, labelX + paddingX, labelY + paddingY);
+
+      // Đường nối từ label đến vật thể
+      const centerX = (x1 + x2) / 2;
+      const centerY = (y1 + y2) / 2;
 
       ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.lineTo(x + width - r, y);
-      ctx.quadraticCurveTo(x + width, y, x + width, y + r);
-      ctx.lineTo(x + width, y + height - r);
-      ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
-      ctx.lineTo(x + r, y + height);
-      ctx.quadraticCurveTo(x, y + height, x, y + height - r);
-      ctx.lineTo(x, y + r);
-      ctx.quadraticCurveTo(x, y, x + r, y);
-      ctx.closePath();
-    }
+      ctx.moveTo(labelX + 18, labelY + boxHeight);
+      ctx.lineTo(centerX, centerY);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 5, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+    });
+  };
+
+  img.onerror = () => {
+    console.error("Không tải được ảnh để vẽ canvas:", imageUrl);
+  };
+
+  img.src = imageUrl;
+}
+
+function roundRect(ctx, x, y, width, height, radius) {
+  const r = Math.min(radius, width / 2, height / 2);
+
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + width - r, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + r);
+  ctx.lineTo(x + width, y + height - r);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+  ctx.lineTo(x + r, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
     function normalizeSafeSteps(steps) {
       if (!steps) return [];
       if (Array.isArray(steps)) return steps.filter(Boolean);
@@ -1583,35 +1402,35 @@
       const keepSelection = options.keepSelection ?? false;
       const autoOpenConfirm = options.autoOpenConfirm ?? true;
 
-      const originalImageUrl =
-        d?.cloudinaryUrl ||
-        d?.cloudinary_url ||
-        d?.imageUrl ||
-        d?.image_url ||
-        null;
+const originalImageUrl =
+  d?.cloudinaryUrl ||
+  d?.cloudinary_url ||
+  d?.imageUrl ||
+  d?.image_url ||
+  null;
 
-      const annotatedImageUrl =
-        d?.annotatedUrl ||
-        d?.annotated_url ||
-        d?.resultImageUrl ||
-        d?.result_image_url ||
-        null;
+const annotatedImageUrl =
+  d?.annotatedUrl ||
+  d?.annotated_url ||
+  d?.resultImageUrl ||
+  d?.result_image_url ||
+  null;
 
-      // Ảnh kết quả bên trái: giữ form cũ, ưu tiên ảnh YOLO đã vẽ box/label
-      if (annotatedImageUrl) {
-        setBgImage("resultImage", annotatedImageUrl);
-      } else if (originalImageUrl) {
-        setBgImage("resultImage", originalImageUrl);
-      } else {
-        console.warn("Không tìm thấy ảnh trong response:", d);
-      }
+// Ảnh kết quả bên trái: giữ form cũ, ưu tiên ảnh YOLO đã vẽ box/label
+if (annotatedImageUrl) {
+  setBgImage("resultImage", annotatedImageUrl);
+} else if (originalImageUrl) {
+  setBgImage("resultImage", originalImageUrl);
+} else {
+  console.warn("Không tìm thấy ảnh trong response:", d);
+}
 
-      // Phần "Các vật thể phát hiện": dùng ảnh gốc để tự vẽ form mới/canvas
-      resultAnnotatedUrl = originalImageUrl || annotatedImageUrl || "";
+// Phần "Các vật thể phát hiện": dùng ảnh gốc để tự vẽ form mới/canvas
+resultAnnotatedUrl = originalImageUrl || annotatedImageUrl || "";
 
-      requiresConfirmationState = Boolean(d?.requiresConfirmation);
+requiresConfirmationState = Boolean(d?.requiresConfirmation);
 
-      requiresConfirmationState = Boolean(d?.requiresConfirmation);
+requiresConfirmationState = Boolean(d?.requiresConfirmation);
 
       // Giữ lại cropUrl và detail từ state cũ nếu response mới không trả về (tránh mất ảnh/nội dung sau feedback)
       const prevDetections = detectionsState;
@@ -1993,7 +1812,15 @@
       }
     }
 
-    loadResult();
+        async function init() {
+        const materials = ['plastic', 'paper', 'glass', 'metal'];
+        for (const material of materials) {
+            await fetchSampleImage(material);
+        }
+        await loadResult();
+    }
+    
+    init();
   </script>
 </body>
 
