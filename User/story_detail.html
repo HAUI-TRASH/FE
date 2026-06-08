@@ -1,0 +1,386 @@
+<!doctype html>
+<html class="light" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Câu Chuyện - SmartDisposal</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: { primary: "#3B82F6" },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
+              serif: ["Lora", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <script src="../constants.js"></script>
+    <style>
+      * { font-family: "Space Grotesk", sans-serif; }
+      body { background-color: #e2e8f0; }
+
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #e2e8f0; }
+      ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .fade-up { animation: fadeUp 0.6s ease both; }
+      .fade-up:nth-child(2) { animation-delay: 0.1s; }
+      .fade-up:nth-child(3) { animation-delay: 0.2s; }
+
+      /* Story content styling */
+      .story-content { font-family: "Lora", serif; }
+      .story-content h1, .story-content h2, .story-content h3,
+      .story-content h4, .story-content h5, .story-content h6 {
+        font-family: "Space Grotesk", sans-serif;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+      }
+      .story-content h2 { font-size: 1.75rem; font-weight: 800; color: #0e4f6b; }
+      .story-content h3 { font-size: 1.35rem; font-weight: 700; color: #1e293b; }
+      .story-content p { margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.85; color: #334155; }
+      .story-content ul, .story-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+      .story-content li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: #475569; }
+      .story-content strong { color: #0f172a; font-weight: 700; }
+      .story-content em { color: #475569; font-style: italic; }
+      .story-content img { max-width: 100%; border-radius: 1.5rem; margin: 1.5rem 0; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+      .story-content blockquote {
+        border-left: 4px solid #3b82f6;
+        padding: 1rem 1.5rem;
+        margin: 1.5rem 0;
+        background: #f8fafc;
+        border-radius: 0 1rem 1rem 0;
+        font-style: italic;
+        color: #475569;
+      }
+    </style>
+    <script src="common.js"></script>
+  </head>
+
+  <body
+    class="bg-[#E2E8F0] min-h-screen flex flex-col overflow-x-hidden text-[#1E293B] antialiased"
+  >
+    <div id="header-container"></div>
+
+    <main class="flex-1 w-full px-4 py-8 md:py-12 max-w-[840px] mx-auto">
+      <!-- Loading -->
+      <div id="loadingState" class="text-center py-20">
+        <span class="material-symbols-outlined animate-spin text-5xl text-primary">progress_activity</span>
+        <p class="text-slate-500 mt-4 font-semibold">Đang tải câu chuyện...</p>
+      </div>
+
+      <!-- Error -->
+      <div id="errorState" class="hidden text-center py-20">
+        <span class="material-symbols-outlined text-5xl text-red-400">error</span>
+        <p id="errorMsg" class="text-slate-600 mt-4 font-semibold">Không thể tải câu chuyện.</p>
+        <a href="list_story.html" class="inline-block mt-6 px-6 py-3 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition">
+          ← Quay lại danh sách
+        </a>
+      </div>
+
+      <!-- Story content -->
+      <article id="storyContent" class="hidden fade-up">
+        <!-- Back link -->
+        <a href="list_story.html" class="inline-flex items-center gap-2 text-slate-500 hover:text-primary font-bold text-sm mb-6 transition-colors">
+          <span class="material-symbols-outlined text-lg">arrow_back</span>
+          Tất cả câu chuyện
+        </a>
+
+        <!-- Category badge + date -->
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <span id="storyCategory" class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm"></span>
+          <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+          <span id="storyDate" class="text-slate-400 text-xs font-bold uppercase tracking-widest"></span>
+          <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+          <span class="flex items-center gap-1 text-slate-400 text-xs font-bold">
+            <span class="material-symbols-outlined text-[16px]">visibility</span>
+            <span id="storyViews"></span>
+          </span>
+        </div>
+
+        <!-- Title + TTS -->
+        <div class="flex items-start justify-between gap-4 mb-8">
+          <h1 id="storyTitle" class="text-3xl md:text-5xl lg:text-6xl font-black text-[#0e4f6b] leading-[1.1] tracking-tight flex-1"></h1>
+          <button id="ttsBtn"
+            class="shrink-0 flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border-2 border-[#CBD5E1] hover:border-primary hover:shadow-lg hover:shadow-primary/10 text-[#1E293B] font-bold text-sm transition-all"
+            onclick="toggleTTS()" title="Nghe đọc câu chuyện">
+            <span id="ttsIcon" class="material-symbols-outlined text-xl">headphones</span>
+            <span id="ttsLabel">Nghe đọc</span>
+          </button>
+        </div>
+
+        <!-- Thumbnail -->
+        <div id="storyThumbnail" class="rounded-3xl overflow-hidden mb-10 shadow-2xl shadow-slate-300 hidden">
+          <img id="storyThumbImg" src="" alt="" class="w-full h-auto block" />
+        </div>
+
+        <!-- Content -->
+        <div id="storyBody" class="story-content bg-white rounded-3xl p-6 md:p-10 shadow-xl shadow-slate-200/50 border border-[#CBD5E1]">
+        </div>
+
+        <!-- Footer nav -->
+        <div class="mt-10 flex items-center justify-between border-t border-[#CBD5E1] pt-8">
+          <a href="list_story.html" class="inline-flex items-center gap-2 text-slate-500 hover:text-primary font-bold text-sm transition-colors">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Quay lại danh sách
+          </a>
+          <a href="list_story.html" class="inline-flex items-center gap-2 text-primary hover:text-blue-700 font-bold text-sm transition-colors">
+            Khám phá thêm
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script>
+      loadComponent("header-container", "header.html");
+      loadComponent("footer-container", "footer.html");
+
+      // ── Category config ──
+      const CAT_CONFIG = {
+        PLASTIC: { emoji: "🥤", label: "Nhựa", bg: "#eff6ff", color: "#2563eb" },
+        PAPER:   { emoji: "📄", label: "Giấy", bg: "#fefce8", color: "#a16207" },
+        GLASS:   { emoji: "🥛", label: "Thủy Tinh", bg: "#f0f9ff", color: "#0369a1" },
+        METAL:   { emoji: "🔩", label: "Kim Loại", bg: "#f8fafc", color: "#475569" },
+        RECYCLE_TIPS:       { emoji: "💡", label: "Mẹo Tái Chế", bg: "#ecfdf5", color: "#047857" },
+        ENVIRONMENT_IMPACT: { emoji: "🌍", label: "Môi Trường", bg: "#f0fdf4", color: "#15803d" },
+        INSPIRATION:        { emoji: "✨", label: "Cảm Hứng", bg: "#f5f3ff", color: "#6d28d9" },
+        INNOVATION:         { emoji: "🚀", label: "Sáng Tạo", bg: "#fdf2f8", color: "#be185d" },
+        TIPS:               { emoji: "🌱", label: "Sống Xanh", bg: "#f7fee7", color: "#4d7c0f" },
+        EDUCATION:          { emoji: "📚", label: "Giáo Dục", bg: "#ecfeff", color: "#0e7490" }
+      };
+      function getCat(cat) { return CAT_CONFIG[cat] || CAT_CONFIG.EDUCATION; }
+
+      function formatDate(d) {
+        if (!d) return "";
+        return new Date(d).toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric" });
+      }
+
+      // ── Text-to-Speech ──
+      let ttsSpeaking = false;
+      let ttsUtterance = null;
+
+      function toggleTTS() {
+        if (ttsSpeaking) {
+          stopTTS();
+        } else {
+          startTTS();
+        }
+      }
+
+      function startTTS() {
+        const synth = window.speechSynthesis;
+        if (!synth) {
+          alert("Trình duyệt của bạn không hỗ trợ đọc văn bản.");
+          return;
+        }
+
+        // Cancel any existing speech
+        synth.cancel();
+
+        // Get text content from story body (strip HTML)
+        const bodyEl = document.getElementById("storyBody");
+        const titleEl = document.getElementById("storyTitle");
+        if (!bodyEl || !titleEl) return;
+
+        // Build: title + pause + content
+        const title = titleEl.textContent.trim();
+        const content = bodyEl.textContent.trim();
+        const fullText = title + ". " + content;
+
+        if (!fullText.trim()) {
+          alert("Không có nội dung để đọc.");
+          return;
+        }
+
+        // Create utterance
+        ttsUtterance = new SpeechSynthesisUtterance(fullText);
+        ttsUtterance.lang = "vi-VN";
+        ttsUtterance.rate = 0.95;   // Slightly slower for storytelling
+        ttsUtterance.pitch = 1.05;
+
+        // Try to find a good Vietnamese voice
+        const voices = synth.getVoices();
+        const viVoice = voices.find(v => v.lang.startsWith("vi")) || voices[0];
+        if (viVoice) ttsUtterance.voice = viVoice;
+
+        // Events
+        ttsUtterance.onstart = () => updateTTSButton(true);
+        ttsUtterance.onend = () => updateTTSButton(false);
+        ttsUtterance.onerror = () => updateTTSButton(false);
+
+        synth.speak(ttsUtterance);
+      }
+
+      function stopTTS() {
+        window.speechSynthesis.cancel();
+        updateTTSButton(false);
+      }
+
+      function updateTTSButton(speaking) {
+        ttsSpeaking = speaking;
+        const icon = document.getElementById("ttsIcon");
+        const label = document.getElementById("ttsLabel");
+        const btn = document.getElementById("ttsBtn");
+        if (speaking) {
+          icon.textContent = "stop";
+          label.textContent = "Dừng đọc";
+          btn.classList.add("border-primary", "bg-primary/5");
+          btn.classList.remove("border-[#CBD5E1]", "bg-white");
+        } else {
+          icon.textContent = "headphones";
+          label.textContent = "Nghe đọc";
+          btn.classList.remove("border-primary", "bg-primary/5");
+          btn.classList.add("border-[#CBD5E1]", "bg-white");
+          ttsUtterance = null;
+        }
+      }
+
+      // Preload voices
+      if (window.speechSynthesis) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+      }
+
+      // ── Fetch & render ──
+      async function loadStory() {
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get("slug");
+
+        if (!slug) {
+          showError("Không tìm thấy câu chuyện.");
+          return;
+        }
+
+        try {
+          const res = await fetch(API_BASE + "/api/v1/stories/" + encodeURIComponent(slug));
+          if (!res.ok) throw new Error("API error: " + res.status);
+          const json = await res.json();
+          const story = json?.data;
+          if (!story) throw new Error("No data");
+
+          document.title = story.title + " – SmartDisposal";
+          renderStory(story);
+        } catch (err) {
+          console.error("Failed to load story:", err);
+          showError("Không thể tải câu chuyện. Vui lòng thử lại sau.");
+        }
+      }
+
+      function showError(msg) {
+        document.getElementById("loadingState").classList.add("hidden");
+        document.getElementById("errorState").classList.remove("hidden");
+        document.getElementById("errorMsg").textContent = msg;
+      }
+
+      function renderStory(story) {
+        document.getElementById("loadingState").classList.add("hidden");
+        document.getElementById("storyContent").classList.remove("hidden");
+
+        const cat = getCat(story.category);
+
+        // Category badge
+        const badge = document.getElementById("storyCategory");
+        badge.textContent = cat.emoji + " " + cat.label;
+        badge.style.background = cat.bg;
+        badge.style.color = cat.color;
+
+        // Date
+        document.getElementById("storyDate").textContent = "📅 " + formatDate(story.publishedAt);
+
+        // Views
+        document.getElementById("storyViews").textContent = (story.viewCount || 0) + " lượt xem";
+
+        // Title
+        document.getElementById("storyTitle").textContent = story.title;
+
+        // Thumbnail
+        if (story.thumbnailUrl) {
+          document.getElementById("storyThumbnail").classList.remove("hidden");
+          document.getElementById("storyThumbImg").src = story.thumbnailUrl;
+          document.getElementById("storyThumbImg").alt = story.title;
+        }
+
+        // Content
+        const body = document.getElementById("storyBody");
+        if (story.content) {
+          // Convert markdown-like content or render as HTML if it's already HTML
+          body.innerHTML = formatContent(story.content);
+        } else {
+          body.innerHTML = "<p class='text-slate-400 italic'>Chưa có nội dung cho câu chuyện này.</p>";
+        }
+      }
+
+      // Simple markdown → HTML converter for story content
+      function formatContent(content) {
+        if (!content) return "";
+        // If already HTML, return as-is
+        if (/<\/?[a-z][\s\S]*>/i.test(content)) return content;
+
+        // Convert newlines to paragraphs
+        return content
+          .split(/\n\n+/)
+          .map(block => {
+            block = block.trim();
+            if (!block) return "";
+            if (/^#{1,6}\s/.test(block)) {
+              const level = block.match(/^(#{1,6})/)[0].length;
+              const text = block.replace(/^#{1,6}\s+/, "");
+              return `<h${level}>${text}</h${level}>`;
+            }
+            if (/^-\s/.test(block)) {
+              const items = block.split(/\n/).map(line => `<li>${line.replace(/^-\s+/, "")}</li>`).join("");
+              return `<ul>${items}</ul>`;
+            }
+            if (/^\d+\.\s/.test(block)) {
+              const items = block.split(/\n/).map(line => `<li>${line.replace(/^\d+\.\s+/, "")}</li>`).join("");
+              return `<ol>${items}</ol>`;
+            }
+            if (/^>\s/.test(block)) {
+              const text = block.replace(/^>\s+/, "").replace(/\n/g, "<br>");
+              return `<blockquote>${text}</blockquote>`;
+            }
+            // Bold and italic
+            block = block.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+            block = block.replace(/\*(.+?)\*/g, "<em>$1</em>");
+            return `<p>${block.replace(/\n/g, "<br>")}</p>`;
+          })
+          .join("");
+      }
+
+      // ── Init ──
+      loadStory();
+
+      // Stop TTS when leaving page
+      window.addEventListener("beforeunload", () => {
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+      });
+    </script>
+  </body>
+</html>

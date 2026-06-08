@@ -102,6 +102,19 @@ function renderAuthUI() {
         if (userEmailEl && account?.email) {
           userEmailEl.textContent = account.email;
         }
+        // Update points badge
+        const pointsEl = document.getElementById("user-points");
+        const pointsBadge = document.getElementById("user-points-badge");
+        if (pointsEl && account?.points != null) {
+          pointsEl.textContent = account.points.toLocaleString("vi-VN");
+          if (pointsBadge) pointsBadge.classList.remove("hidden");
+        } else if (pointsEl && account?.score != null) {
+          pointsEl.textContent = account.score.toLocaleString("vi-VN");
+          if (pointsBadge) pointsBadge.classList.remove("hidden");
+        } else if (pointsEl && account?.totalPoints != null) {
+          pointsEl.textContent = account.totalPoints.toLocaleString("vi-VN");
+          if (pointsBadge) pointsBadge.classList.remove("hidden");
+        }
         // Update mobile user info
         const mobileAvatar = document.getElementById("mobile-user-avatar");
         if (mobileAvatar && account?.avatarUrl) {
@@ -127,9 +140,11 @@ function renderAuthUI() {
         // Keep showing default avatar on network error
       });
   } else {
-    // Not logged in → show login/register buttons
+    // Not logged in → show login/register buttons, hide points
     btns.classList.remove("hidden");
     userBox.classList.add("hidden");
+    const pointsBadge = document.getElementById("user-points-badge");
+    if (pointsBadge) pointsBadge.classList.add("hidden");
     if (mobileBtns) mobileBtns.classList.remove("hidden");
     if (mobileUserBox) mobileUserBox.classList.add("hidden");
   }
@@ -168,6 +183,18 @@ function toggleMobileMenu() {
       authArea.classList.add("hidden");       // hiding
     }
   }
+}
+
+// ── Points utilities ──
+function addPoints(amount) {
+  const pointsEl = document.getElementById("user-points");
+  if (!pointsEl) return;
+  const current = parseInt(pointsEl.textContent.replace(/\D/g, "")) || 0;
+  const newTotal = current + amount;
+  pointsEl.textContent = newTotal.toLocaleString("vi-VN");
+  // Brief animation
+  pointsEl.classList.add("scale-125", "text-yellow-500");
+  setTimeout(() => pointsEl.classList.remove("scale-125", "text-yellow-500"), 400);
 }
 
 // ── Brand variant dropdown ──

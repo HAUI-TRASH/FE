@@ -899,12 +899,33 @@
 
         const wsProtocol =
           window.location.protocol === "https:" ? "wss://" : "ws://";
+        const token = getToken();
         const wsUrl =
-          API_BASE.replace(/^http(s?):\/\//, wsProtocol) + "/ws/detect";
+          API_BASE.replace(/^http(s?):\/\//, wsProtocol) + "/ws/detect?token=" + encodeURIComponent(token || "");
 
+        console.log("Connecting WebSocket:", wsUrl);
         wsSocket = new WebSocket(wsUrl);
 
+        // Timeout: if WebSocket doesn't connect within 5s, fall back
+        const wsTimeout = setTimeout(() => {
+          if (wsSocket.readyState !== WebSocket.OPEN) {
+            console.warn("WebSocket connection timeout");
+            wsSocket.close();
+            showToast("Real-time không khả dụng. Dùng chế độ chụp ảnh.", "error");
+            stopCamera();
+            window.location.reload();
+          }
+        }, 5000);
+
+        wsSocket.onerror = (err) => {
+          console.error("WebSocket error:", err);
+          clearTimeout(wsTimeout);
+        };
+
         wsSocket.onopen = () => {
+          clearTimeout(wsTimeout);
+          console.log("WebSocket connected:", wsUrl);
+          showToast("Đã kết nối real-time!", "success");
           realtimeInterval = setInterval(async () => {
             if (
               !video ||
@@ -1026,8 +1047,13 @@
           }
         };
 
-        wsSocket.onclose = () => {
-          console.log("WebSocket Disconnected");
+        wsSocket.onclose = (event) => {
+          clearTimeout(wsTimeout);
+          console.log("WebSocket disconnected:", event.code, event.reason);
+          if (event.code !== 1000) {
+            showToast("Mất kết nối real-time. Chuyển sang chụp ảnh.", "error");
+            stopCamera();
+          }
         };
       } catch (err) {
         console.error(err);

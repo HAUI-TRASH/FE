@@ -174,28 +174,36 @@
         </div>
 
         <!-- LOGGED IN -->
-        <div id="user-box" class="relative hidden">
-          <button
-            id="user-menu-button"
-            class="bg-center bg-no-repeat bg-cover rounded-full w-9 h-9 sm:w-10 sm:h-10 border-2 border-[#CBD5E1]"
-            onclick="toggleUserMenu()"></button>
+        <div id="user-box" class="flex items-center gap-3 hidden">
+          <!-- Points badge -->
+          <div id="user-points-badge" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-50 border border-yellow-200 shadow-sm cursor-default" title="Điểm tích lũy">
+            <span class="text-lg">⭐</span>
+            <span id="user-points" class="text-sm font-black text-yellow-600">0</span>
+          </div>
+          <!-- Avatar + dropdown wrapped in relative container -->
+          <div class="relative">
+            <button
+              id="user-menu-button"
+              class="bg-center bg-no-repeat bg-cover rounded-full w-9 h-9 sm:w-10 sm:h-10 border-2 border-[#CBD5E1] hover:border-primary transition-colors"
+              onclick="toggleUserMenu()"></button>
 
-          <div id="user-menu"
-            class="absolute right-0 mt-2 w-64 bg-white border border-[#CBD5E1] rounded-xl shadow-xl shadow-slate-200/50 py-2 z-50 hidden">
-            <div class="px-4 py-3 border-b border-[#CBD5E1]">
-              <p id="user-menu-name" class="text-sm font-bold text-[#1E293B]">Đang tải...</p>
-              <p id="user-menu-email" class="text-xs text-slate-500 mt-0.5"></p>
+            <div id="user-menu"
+              class="absolute right-0 mt-2 w-64 bg-white border border-[#CBD5E1] rounded-xl shadow-xl shadow-slate-200/50 py-2 z-[100] hidden">
+              <div class="px-4 py-3 border-b border-[#CBD5E1]">
+                <p id="user-menu-name" class="text-sm font-bold text-[#1E293B]">Đang tải...</p>
+                <p id="user-menu-email" class="text-xs text-slate-500 mt-0.5"></p>
+              </div>
+              <a href="#"
+                class="flex items-center px-4 py-2.5 text-sm text-[#1E293B] hover:bg-[#F1F5F9] transition-colors">
+                <span class="material-symbols-outlined text-lg mr-3 text-slate-400">person</span>
+                Tài khoản của bạn
+              </a>
+              <a href="#" onclick="ecoscanLogout()"
+                class="flex items-center px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
+                <span class="material-symbols-outlined text-lg mr-3">logout</span>
+                Đăng xuất
+              </a>
             </div>
-            <a href="#"
-              class="flex items-center px-4 py-2.5 text-sm text-[#1E293B] hover:bg-[#F1F5F9] transition-colors">
-              <span class="material-symbols-outlined text-lg mr-3 text-slate-400">person</span>
-              Tài khoản của bạn
-            </a>
-            <a href="#" onclick="ecoscanLogout()"
-              class="flex items-center px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
-              <span class="material-symbols-outlined text-lg mr-3">logout</span>
-              Đăng xuất
-            </a>
           </div>
         </div>
       </div>
