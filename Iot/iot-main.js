@@ -1,732 +1,607 @@
-/**
- * iot-main.js
- * ── IoT Camera & AI Trash Detection Flow ──
- *
- * Luồng xử lý:
- *  1. Mở camera
- *  2. Polling POST /api/v1/iot/realtime mỗi 800ms với frame từ camera
- *  3. Khi phát hiện vật thể (confidence >= threshold) → dừng polling
- *  4. Chờ 2 giây để vật thể ổn định
- *  5. Chụp ảnh chất lượng cao từ camera
- *  6. POST /api/v1/iot/ai_request (upload ảnh) → lấy aiRequestId
- *  7. POST /api/v1/iot/predict (chạy YOLO) → lấy aiResponseId
- *  8. GET /api/v1/iot/ai_response/{id}/detail → lấy kết quả chi tiết
- *  9. Chuyển hướng sang result.html?id={aiResponseId}
- *
- * Yêu cầu: File này cần được load TRƯỚC inline script trong index.html.
- *          Thêm <script src="iot-main.js"></script> vào <head> hoặc đầu <body>.
- */
-
 (function () {
   "use strict";
 
-  // ================================================================
-  // CONSTANTS
-  // ================================================================
-  var REALTIME_POLL_MS = 800; // Khoảng cách giữa các lần gọi realtime API
-  var STABILIZE_DELAY_MS = 2000; // Thời gian chờ ổn định sau khi phát hiện
-  var DETECTION_THRESHOLD = 0.25; // Ngưỡng confidence tối thiểu để coi là phát hiện
-  var FRAME_MAX_DIM = 512; // Kích thước tối đa của frame gửi đi realtime
-  var CAPTURE_MAX_DIM = 1024; // Kích thước tối đa của ảnh chụp để gửi AI
-  var FRAME_QUALITY = 0.85; // Chất lượng JPEG cho realtime
-  var CAPTURE_QUALITY = 0.92; // Chất lượng JPEG cho ảnh chụp AI
+  var SAMPLE_WIDTH = 160;
+  var SAMPLE_HEIGHT = 160;
+  var SAMPLE_INTERVAL_MS = 100;
+  var MOTION_THRESHOLD = 3;
+  var STABLE_THRESHOLD = 3;
+  var STABLE_DURATION_MS = 500;
+  var CAPTURE_MAX_DIM = 1024;
+  var CAPTURE_QUALITY = 0.92;
+  var CAPTURE_ROI_ONLY = true;
+  var DEFAULT_ROIS = [
+    { x: 0.18, y: 0.16, w: 0.64, h: 0.62, label: "ROI trong thung" },
+  ];
+  var ROI_BOXES = normalizeRois(
+    Array.isArray(window.TRASH_ROIS) && window.TRASH_ROIS.length
+      ? window.TRASH_ROIS
+      : DEFAULT_ROIS
+  );
 
-  // ================================================================
-  // STATE
-  // ================================================================
   var cameraStream = null;
-  var pollTimer = null;
-  var isProcessing = false; // Ngăn gọi API lặp khi đang xử lý một ảnh
+  var sampleTimer = null;
   var currentFacingMode = "environment";
-  var lastFrameDims = { w: 512, h: 512 };
-  var processingToast = null; // Tham chiếu tới toast đang hiển thị
+  var previousFrame = null;
+  var hasSeenMotion = false;
+  var stableSince = null;
+  var isProcessing = false;
 
-  // ================================================================
-  // DOM REFS (lấy sau khi DOM sẵn sàng)
-  // ================================================================
   var els = {};
+  var sampleCanvas = document.createElement("canvas");
+  sampleCanvas.width = SAMPLE_WIDTH;
+  sampleCanvas.height = SAMPLE_HEIGHT;
+  var sampleCtx = sampleCanvas.getContext("2d", { willReadFrequently: true });
 
   function cacheDom() {
     els.cameraLoading = document.getElementById("cameraLoading");
     els.cameraError = document.getElementById("cameraError");
     els.cameraErrorMsg = document.getElementById("cameraErrorMsg");
     els.cameraActive = document.getElementById("cameraActive");
-    els.cameraControls = document.getElementById("cameraControls");
-    els.camTip = document.getElementById("camTip");
-    els.cameraZone = document.getElementById("cameraZone");
     els.camVideo = document.getElementById("camVideo");
-    els.overlayCanvas = document.getElementById("overlayCanvas");
-    els.realtimeBadge = document.getElementById("realtimeBadge");
-    els.realtimeText = document.getElementById("realtimeText");
-    els.realtimeConf = document.getElementById("realtimeConf");
-    els.realtimeStatusDot = document.getElementById("realtimeStatusDot");
+    els.roiCanvas = document.getElementById("roiCanvas");
+    els.statusTitle = document.getElementById("statusTitle");
+    els.statusText = document.getElementById("statusText");
+    els.sideStatus = document.getElementById("sideStatus");
+    els.motionValue = document.getElementById("motionValue");
+    els.motionBar = document.getElementById("motionBar");
     els.btnRetry = document.getElementById("btnRetry");
     els.btnSwitchCam = document.getElementById("btnSwitchCam");
-    els.btnCloseCam = document.getElementById("btnCloseCam");
+    els.btnCaptureNow = document.getElementById("btnCaptureNow");
+    els.stepMotion = document.getElementById("stepMotion");
+    els.stepStable = document.getElementById("stepStable");
+    els.stepClassify = document.getElementById("stepClassify");
   }
 
-  // ================================================================
-  // UTILITY HELPERS
-  // ================================================================
   function getToken() {
     return localStorage.getItem("accessToken") || "";
   }
 
   function authHeaders() {
-    var h = {};
-    var t = getToken();
-    if (t) h["Authorization"] = "Bearer " + t;
-    return h;
+    var token = getToken();
+    return token ? { Authorization: "Bearer " + token } : {};
   }
 
-  function sleep(ms) {
-    return new Promise(function (resolve) {
-      setTimeout(resolve, ms);
+  function clamp01(value) {
+    value = Number(value);
+    if (!Number.isFinite(value)) return 0;
+    return Math.max(0, Math.min(1, value));
+  }
+
+  function normalizeRois(rois) {
+    return rois
+      .map(function (roi, index) {
+        var x = clamp01(roi.x);
+        var y = clamp01(roi.y);
+        var w = clamp01(roi.w);
+        var h = clamp01(roi.h);
+        if (x + w > 1) w = 1 - x;
+        if (y + h > 1) h = 1 - y;
+        return {
+          x: x,
+          y: y,
+          w: w,
+          h: h,
+          label: roi.label || "ROI " + (index + 1),
+        };
+      })
+      .filter(function (roi) {
+        return roi.w > 0.02 && roi.h > 0.02;
+      });
+  }
+
+  function getSampleRois() {
+    var rois = ROI_BOXES.length
+      ? ROI_BOXES
+      : DEFAULT_ROIS;
+
+    return rois.map(function (roi) {
+      var x1 = Math.max(0, Math.floor(roi.x * SAMPLE_WIDTH));
+      var y1 = Math.max(0, Math.floor(roi.y * SAMPLE_HEIGHT));
+      var x2 = Math.min(SAMPLE_WIDTH, Math.ceil((roi.x + roi.w) * SAMPLE_WIDTH));
+      var y2 = Math.min(SAMPLE_HEIGHT, Math.ceil((roi.y + roi.h) * SAMPLE_HEIGHT));
+      return {
+        x1: x1,
+        y1: y1,
+        x2: Math.max(x1 + 1, x2),
+        y2: Math.max(y1 + 1, y2),
+      };
     });
   }
 
-  /**
-   * Hiển thị toast nhẹ, không tích lũy quá nhiều toast.
-   * Nếu đang có toast cũ thì thay nội dung thay vì tạo mới.
-   */
-  function showToast(message, type) {
-    type = type || "info";
+  function frameToRoiGrayData(imageData) {
+    var rois = getSampleRois();
+    var totalPixels = 0;
 
-    // Xoá toast cũ nếu có
-    if (processingToast) {
-      processingToast.remove();
-      processingToast = null;
-    }
+    rois.forEach(function (roi) {
+      totalPixels += Math.max(0, roi.x2 - roi.x1) * Math.max(0, roi.y2 - roi.y1);
+    });
 
-    var t = document.createElement("div");
-    t.className =
-      "fixed z-[9999] left-1/2 -translate-x-1/2 top-6 px-4 py-3 rounded-xl border text-sm shadow-2xl backdrop-blur-md transition-all duration-300";
+    var current = new Uint8Array(totalPixels);
+    var cursor = 0;
 
-    if (type === "success") {
-      t.classList.add("border-green-500/30", "bg-green-500/10", "text-green-900");
-    } else if (type === "error") {
-      t.classList.add("border-red-500/30", "bg-red-500/10", "text-red-900");
-    } else if (type === "loading") {
-      t.classList.add("border-blue-500/30", "bg-blue-500/10", "text-blue-900");
-    } else {
-      t.classList.add("border-slate-200", "bg-white/80", "text-slate-900");
-    }
-
-    t.textContent = message;
-    document.body.appendChild(t);
-    processingToast = t;
-
-    // Tự ẩn sau 3.5 giây (trừ khi là loading)
-    if (type !== "loading") {
-      setTimeout(function () {
-        if (processingToast === t) {
-          t.remove();
-          processingToast = null;
+    rois.forEach(function (roi) {
+      for (var y = roi.y1; y < roi.y2; y += 1) {
+        var rowOffset = y * SAMPLE_WIDTH;
+        for (var x = roi.x1; x < roi.x2; x += 1) {
+          var idx = (rowOffset + x) * 4;
+          current[cursor] = (imageData[idx] * 0.299 + imageData[idx + 1] * 0.587 + imageData[idx + 2] * 0.114) | 0;
+          cursor += 1;
         }
-      }, 3500);
-    }
+      }
+    });
 
-    return t;
+    return current;
   }
 
-  function hideToast() {
-    if (processingToast) {
-      processingToast.remove();
-      processingToast = null;
-    }
+  function setVisible(el, visible) {
+    if (!el) return;
+    el.classList.toggle("hidden", !visible);
   }
 
-  // ================================================================
-  // CAMERA MANAGEMENT
-  // ================================================================
+  function setText(el, text) {
+    if (el) el.textContent = text;
+  }
+
+  function setStatus(title, detail, side) {
+    setText(els.statusTitle, title);
+    setText(els.statusText, detail || "");
+    setText(els.sideStatus, side || detail || title);
+  }
+
+  function setStep(el, done, active) {
+    if (!el) return;
+    el.textContent = done ? "check_circle" : active ? "radio_button_checked" : "radio_button_unchecked";
+    el.classList.toggle("text-emerald-500", done);
+    el.classList.toggle("text-blue-500", active && !done);
+    el.classList.toggle("text-slate-300", !done && !active);
+  }
+
+  function resetGate() {
+    previousFrame = null;
+    hasSeenMotion = false;
+    stableSince = null;
+    updateSteps(false, false, false);
+  }
+
+  function updateSteps(motion, stable, classify) {
+    setStep(els.stepMotion, motion, !motion);
+    setStep(els.stepStable, stable, motion && !stable);
+    setStep(els.stepClassify, classify, stable && !classify);
+  }
+
+  function drawVideoCover(ctx, video, width, height) {
+    var videoWidth = video.videoWidth;
+    var videoHeight = video.videoHeight;
+    if (!videoWidth || !videoHeight) return;
+
+    var sourceRatio = videoWidth / videoHeight;
+    var targetRatio = width / height;
+    var sx = 0;
+    var sy = 0;
+    var sw = videoWidth;
+    var sh = videoHeight;
+
+    if (sourceRatio > targetRatio) {
+      sw = videoHeight * targetRatio;
+      sx = (videoWidth - sw) / 2;
+    } else {
+      sh = videoWidth / targetRatio;
+      sy = (videoHeight - sh) / 2;
+    }
+
+    ctx.drawImage(video, sx, sy, sw, sh, 0, 0, width, height);
+  }
+
+  function drawRoiOverlay() {
+    var canvas = els.roiCanvas;
+    if (!canvas || !els.cameraActive || els.cameraActive.classList.contains("hidden")) return;
+
+    var rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    if (canvas.width !== Math.round(rect.width) || canvas.height !== Math.round(rect.height)) {
+      canvas.width = Math.round(rect.width);
+      canvas.height = Math.round(rect.height);
+    }
+
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(2, 6, 23, 0.32)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    var rois = ROI_BOXES.length
+      ? ROI_BOXES
+      : DEFAULT_ROIS;
+
+    rois.forEach(function (roi, index) {
+      var x = roi.x * canvas.width;
+      var y = roi.y * canvas.height;
+      var w = roi.w * canvas.width;
+      var h = roi.h * canvas.height;
+      var label = typeof roi.label === 'string' ? roi.label : ("ROI " + (index + 1));
+
+      ctx.clearRect(x, y, w, h);
+      ctx.fillStyle = "rgba(34, 197, 94, 0.08)";
+      ctx.fillRect(x, y, w, h);
+      ctx.strokeStyle = "#22C55E";
+      ctx.lineWidth = 3;
+      ctx.strokeRect(x, y, w, h);
+
+      if (label) {
+        ctx.font = "700 13px Space Grotesk, sans-serif";
+        var textWidth = ctx.measureText(label).width;
+        var labelY = Math.max(8, y - 28);
+        ctx.fillStyle = "#22C55E";
+        ctx.fillRect(x, labelY, textWidth + 18, 24);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillText(label, x + 9, labelY + 16);
+      }
+    });
+  }
+
+  function calculateRoiMotionScore(previous, current) {
+    var totalDiff = 0;
+    var count = Math.min(previous.length, current.length);
+
+    for (var i = 0; i < count; i += 1) {
+      totalDiff += Math.abs(current[i] - previous[i]);
+    }
+
+    return count > 0 ? totalDiff / count : 0;
+  }
+
+  function getRoiUnion() {
+    var rois = ROI_BOXES.length
+      ? ROI_BOXES
+      : DEFAULT_ROIS;
+    var left = 1;
+    var top = 1;
+    var right = 0;
+    var bottom = 0;
+
+    rois.forEach(function (roi) {
+      left = Math.min(left, roi.x);
+      top = Math.min(top, roi.y);
+      right = Math.max(right, roi.x + roi.w);
+      bottom = Math.max(bottom, roi.y + roi.h);
+    });
+
+    return {
+      x: Math.max(0, left),
+      y: Math.max(0, top),
+      w: Math.min(1, right) - Math.max(0, left),
+      h: Math.min(1, bottom) - Math.max(0, top),
+    };
+  }
+
+  function showError(message) {
+    setVisible(els.cameraLoading, false);
+    setVisible(els.cameraActive, false);
+    setVisible(els.cameraError, true);
+    setText(els.cameraErrorMsg, message);
+  }
+
   function stopCamera() {
-    if (pollTimer) {
-      clearInterval(pollTimer);
-      pollTimer = null;
+    if (sampleTimer) {
+      clearInterval(sampleTimer);
+      sampleTimer = null;
     }
     if (cameraStream) {
-      cameraStream.getTracks().forEach(function (t) {
-        t.stop();
+      cameraStream.getTracks().forEach(function (track) {
+        track.stop();
       });
       cameraStream = null;
     }
   }
 
-  function showError(msg) {
-    if (els.cameraLoading) els.cameraLoading.classList.add("hidden");
-    if (els.cameraActive) els.cameraActive.classList.add("hidden");
-    if (els.cameraControls) els.cameraControls.classList.add("hidden");
-    if (els.camTip) els.camTip.classList.add("hidden");
-    if (els.cameraError) els.cameraError.classList.remove("hidden");
-    if (els.cameraErrorMsg) els.cameraErrorMsg.textContent = msg;
-  }
-
-  /**
-   * Khởi động camera và bắt đầu luồng phát hiện.
-   */
   function startCamera(facingMode) {
-    // Reset state
     stopCamera();
+    resetGate();
     isProcessing = false;
-    hideToast();
 
-    if (els.cameraLoading) els.cameraLoading.classList.remove("hidden");
-    if (els.cameraError) els.cameraError.classList.add("hidden");
-    if (els.cameraActive) els.cameraActive.classList.add("hidden");
-    if (els.cameraControls) els.cameraControls.classList.add("hidden");
-    if (els.camTip) els.camTip.classList.add("hidden");
-
-    var constraints = {
-      video: { facingMode: facingMode },
-      audio: false,
-    };
+    setVisible(els.cameraLoading, true);
+    setVisible(els.cameraError, false);
+    setVisible(els.cameraActive, false);
+    setStatus("Đang mở camera", "Cho phép trình duyệt dùng camera để bắt đầu.", "Đang khởi động camera.");
 
     return navigator.mediaDevices
-      .getUserMedia(constraints)
+      .getUserMedia({ video: { facingMode: facingMode }, audio: false })
       .then(function (stream) {
         cameraStream = stream;
         currentFacingMode = facingMode;
+        els.camVideo.srcObject = stream;
 
-        var video = els.camVideo;
-        video.srcObject = stream;
-
-        video.onloadedmetadata = function () {
-          video.play();
-
-          if (els.cameraLoading) els.cameraLoading.classList.add("hidden");
-          if (els.cameraActive) els.cameraActive.classList.remove("hidden");
-          if (els.cameraControls) els.cameraControls.classList.remove("hidden");
-          if (els.camTip) els.camTip.classList.remove("hidden");
-          if (els.cameraZone) els.cameraZone.classList.add("border-[#3B82F6]");
-
-          // Bắt đầu luồng phát hiện realtime bằng REST
-          startRealtimePolling(video);
+        els.camVideo.onloadedmetadata = function () {
+          els.camVideo.play();
+          setVisible(els.cameraLoading, false);
+          setVisible(els.cameraActive, true);
+          setStatus(
+            "Đang chờ vật đi vào",
+            "Hệ thống sẽ tự chụp khi khung hình đã ổn định.",
+            "Sẵn sàng nhận vật thể."
+          );
+          drawRoiOverlay();
+          startStabilityWatch();
         };
-
-        // Gán sự kiện cho nút điều khiển
-        if (els.btnCloseCam) {
-          els.btnCloseCam.onclick = function () {
-            stopCamera();
-            showError("Camera đã tắt. Tải lại trang để thử lại.");
-          };
-        }
-
-        if (els.btnSwitchCam) {
-          els.btnSwitchCam.onclick = function () {
-            var next =
-              currentFacingMode === "environment" ? "user" : "environment";
-            startCamera(next);
-          };
-        }
       })
       .catch(function (err) {
         console.error("Camera error:", err);
         stopCamera();
-        var msg = "Không thể mở camera.";
-        if (err && err.name === "NotAllowedError")
-          msg =
-            "Bạn đã từ chối quyền truy cập camera. Vào cài đặt trình duyệt để cấp quyền.";
-        if (err && err.name === "NotFoundError")
-          msg = "Không tìm thấy camera trên thiết bị.";
-        if (err && err.name === "NotReadableError")
-          msg = "Camera đang được ứng dụng khác sử dụng.";
-        if (err && err.name === "SecurityError")
-          msg = "Camera yêu cầu kết nối HTTPS hoặc localhost.";
-        showError(msg);
+        var message = "Không thể mở camera.";
+        if (err && err.name === "NotAllowedError") {
+          message = "Bạn đã từ chối quyền truy cập camera.";
+        } else if (err && err.name === "NotFoundError") {
+          message = "Không tìm thấy camera trên thiết bị.";
+        } else if (err && err.name === "NotReadableError") {
+          message = "Camera đang được ứng dụng khác sử dụng.";
+        } else if (err && err.name === "SecurityError") {
+          message = "Camera yêu cầu HTTPS hoặc localhost.";
+        }
+        showError(message);
       });
   }
 
-  // ================================================================
-  // FRAME CAPTURE
-  // ================================================================
+  function startStabilityWatch() {
+    if (sampleTimer) clearInterval(sampleTimer);
+    sampleTimer = setInterval(sampleMotion, SAMPLE_INTERVAL_MS);
+  }
 
-  /**
-   * Chụp một frame từ video, resize về kích thước tối đa, trả về Blob.
-   */
+  function sampleMotion() {
+    if (isProcessing || !els.camVideo || !els.camVideo.videoWidth) return;
+
+    drawVideoCover(sampleCtx, els.camVideo, SAMPLE_WIDTH, SAMPLE_HEIGHT);
+    var imageData = sampleCtx.getImageData(0, 0, SAMPLE_WIDTH, SAMPLE_HEIGHT).data;
+    var current = frameToRoiGrayData(imageData);
+
+    if (!previousFrame) {
+      previousFrame = current;
+      return;
+    }
+
+    var score = calculateRoiMotionScore(previousFrame, current);
+    previousFrame = current;
+    updateMotionMeter(score);
+
+    if (score >= MOTION_THRESHOLD) {
+      hasSeenMotion = true;
+      stableSince = null;
+      updateSteps(true, false, false);
+      setStatus(
+        "Đang nhận vật",
+        "Chờ đến khi vật nằm yên hoàn toàn trong ngăn.",
+        "Đã thấy chuyển động, đang chờ ổn định."
+      );
+      return;
+    }
+
+    if (!hasSeenMotion) {
+      setStatus(
+        "Đang chờ vật đi vào",
+        "Hệ thống sẽ tự chụp khi khung hình đã ổn định.",
+        "Sẵn sàng nhận vật thể."
+      );
+      return;
+    }
+
+    if (score > STABLE_THRESHOLD) {
+      stableSince = null;
+      updateSteps(true, false, false);
+      return;
+    }
+
+    if (!stableSince) {
+      stableSince = Date.now();
+    }
+
+    var elapsed = Date.now() - stableSince;
+    var remaining = Math.max(0, STABLE_DURATION_MS - elapsed);
+    updateSteps(true, remaining === 0, false);
+    setStatus(
+      "Vật đã ổn định",
+      "Phân loại sau " + (remaining / 1000).toFixed(1) + " giây.",
+      "Khung hình ổn định, chuẩn bị phân loại."
+    );
+
+    if (elapsed >= STABLE_DURATION_MS) {
+      classifyCurrentFrame();
+    }
+  }
+
+  function updateMotionMeter(score) {
+    var rounded = score.toFixed(1);
+    var pct = Math.max(0, Math.min(100, (score / (MOTION_THRESHOLD * 2)) * 100));
+    setText(els.motionValue, String(rounded));
+    if (els.motionBar) {
+      els.motionBar.style.width = pct.toFixed(0) + "%";
+      els.motionBar.classList.toggle("bg-amber-400", score >= MOTION_THRESHOLD);
+      els.motionBar.classList.toggle("bg-emerald-400", score < MOTION_THRESHOLD);
+    }
+  }
+
   function captureFrame(video, maxDim, quality) {
-    maxDim = maxDim || FRAME_MAX_DIM;
-    quality = quality || FRAME_QUALITY;
-
     return new Promise(function (resolve, reject) {
-      try {
-        var fw = video.videoWidth;
-        var fh = video.videoHeight;
+      if (!video.videoWidth || !video.videoHeight) {
+        reject(new Error("Camera chưa sẵn sàng"));
+        return;
+      }
 
-        if (!fw || !fh) {
-          reject(new Error("Video chưa sẵn sàng"));
+      var displayRect = video.getBoundingClientRect();
+      var displayRatio = displayRect.width && displayRect.height
+        ? displayRect.width / displayRect.height
+        : video.videoWidth / video.videoHeight;
+      var width;
+      var height;
+
+      if (displayRatio >= 1) {
+        width = maxDim;
+        height = Math.round(maxDim / displayRatio);
+      } else {
+        height = maxDim;
+        width = Math.round(maxDim * displayRatio);
+      }
+
+      var fullCanvas = document.createElement("canvas");
+      fullCanvas.width = width;
+      fullCanvas.height = height;
+      drawVideoCover(fullCanvas.getContext("2d"), video, width, height);
+
+      var outputCanvas = fullCanvas;
+      if (CAPTURE_ROI_ONLY) {
+        var roi = getRoiUnion();
+        var cropX = Math.floor(roi.x * width);
+        var cropY = Math.floor(roi.y * height);
+        var cropW = Math.max(1, Math.ceil(roi.w * width));
+        var cropH = Math.max(1, Math.ceil(roi.h * height));
+        outputCanvas = document.createElement("canvas");
+        outputCanvas.width = cropW;
+        outputCanvas.height = cropH;
+        outputCanvas
+          .getContext("2d")
+          .drawImage(fullCanvas, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
+      }
+
+      outputCanvas.toBlob(function (blob) {
+        if (!blob) {
+          reject(new Error("Không thể tạo ảnh từ camera"));
           return;
         }
-
-        if (fw > maxDim || fh > maxDim) {
-          var ratio = Math.min(maxDim / fw, maxDim / fh);
-          fw = Math.round(fw * ratio);
-          fh = Math.round(fh * ratio);
-        }
-
-        var canvas = document.createElement("canvas");
-        canvas.width = fw || maxDim;
-        canvas.height = fh || maxDim;
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        lastFrameDims = { w: canvas.width, h: canvas.height };
-
-        canvas.toBlob(
-          function (blob) {
-            if (!blob) {
-              reject(new Error("Không thể tạo ảnh từ camera"));
-              return;
-            }
-            resolve(blob);
-          },
-          "image/jpeg",
-          quality
-        );
-      } catch (err) {
-        reject(err);
-      }
+        resolve(blob);
+      }, "image/jpeg", quality);
     });
   }
 
-  // ================================================================
-  // BOUNDING BOX DRAWING (trên overlay canvas)
-  // ================================================================
-  function clearOverlay() {
-    var canvas = els.overlayCanvas;
-    if (!canvas) return;
-    var ctx = canvas.getContext("2d");
-    var rect = els.cameraZone
-      ? els.cameraZone.getBoundingClientRect()
-      : { width: canvas.width, height: canvas.height };
-    if (canvas.width !== rect.width || canvas.height !== rect.height) {
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-    }
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
-  function drawBoundingBox(detection) {
-    var canvas = els.overlayCanvas;
-    if (!canvas) return;
-    var ctx = canvas.getContext("2d");
-
-    var rect = els.cameraZone
-      ? els.cameraZone.getBoundingClientRect()
-      : { width: canvas.width, height: canvas.height };
-    if (canvas.width !== rect.width || canvas.height !== rect.height) {
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-    }
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    if (
-      detection.x1 == null ||
-      detection.x2 == null ||
-      detection.y1 == null ||
-      detection.y2 == null
-    )
-      return;
-
-    var scaleX = canvas.width / lastFrameDims.w;
-    var scaleY = canvas.height / lastFrameDims.h;
-
-    var x = detection.x1 * scaleX;
-    var y = detection.y1 * scaleY;
-    var w = (detection.x2 - detection.x1) * scaleX;
-    var h = (detection.y2 - detection.y1) * scaleY;
-
-    // Vẽ viền
-    ctx.strokeStyle = "#3B82F6";
-    ctx.lineWidth = 3;
-    ctx.strokeRect(x, y, w, h);
-
-    // Vẽ label
-    var conf = detection.confidence
-      ? (detection.confidence * 100).toFixed(0)
-      : "?";
-    var labelText =
-      (detection.labelDisplay || detection.label || "Vật thể") + " " + conf + "%";
-    ctx.font = "bold 16px 'Space Grotesk', sans-serif";
-    var textWidth = ctx.measureText(labelText).width;
-    var textBgHeight = 26;
-    ctx.fillStyle = "#3B82F6";
-    ctx.fillRect(x, Math.max(0, y - textBgHeight), textWidth + 12, textBgHeight);
-    ctx.fillStyle = "#FFFFFF";
-    ctx.fillText(labelText, x + 6, Math.max(0, y - textBgHeight) + 18);
-  }
-
-  // ================================================================
-  // REALTIME BADGE UI
-  // ================================================================
-  function updateRealtimeBadge(detection) {
-    var badge = els.realtimeBadge;
-    var textEl = els.realtimeText;
-    var confEl = els.realtimeConf;
-    var dot = els.realtimeStatusDot;
-
-    if (!badge || !textEl || !confEl || !dot) return;
-
-    if (detection && detection.labelDisplay && detection.confidence >= DETECTION_THRESHOLD) {
-      // Có phát hiện
-      badge.classList.remove("opacity-0", "translate-y-2");
-      badge.classList.add("opacity-100", "translate-y-0");
-      textEl.textContent = detection.labelDisplay;
-      confEl.textContent =
-        "Độ tin cậy: " + (detection.confidence * 100).toFixed(1) + "%";
-      dot.classList.replace("bg-slate-400", "bg-emerald-500");
-      dot.classList.add("animate-pulse");
-    } else {
-      // Không phát hiện
-      badge.classList.add("opacity-0", "translate-y-2");
-      badge.classList.remove("opacity-100", "translate-y-0");
-      textEl.textContent = "Đang chờ rác...";
-      confEl.textContent = "";
-      dot.classList.replace("bg-emerald-500", "bg-slate-400");
-      dot.classList.remove("animate-pulse");
-    }
-  }
-
-  // ================================================================
-  // API: REALTIME POLLING
-  // ================================================================
-
-  /**
-   * Gọi POST /api/v1/iot/realtime để kiểm tra camera có vật thể không.
-   * Trả về dữ liệu detection hoặc null nếu không phát hiện thấy gì.
-   */
-  function callRealtimeAPI(blob) {
-    var formData = new FormData();
-    formData.append("file", blob, "frame.jpg");
-
-    return fetch(API_BASE + "/api/v1/iot/realtime", {
-      method: "POST",
-      headers: authHeaders(),
-      body: formData,
-    })
-      .then(function (res) {
-        if (!res.ok) {
-          throw new Error("Realtime API trả về lỗi: " + res.status);
-        }
-        return res.json();
-      })
-      .then(function (data) {
-        // Nếu có labelDisplay và confidence > 0 thì coi là phát hiện
-        if (
-          data &&
-          data.labelDisplay &&
-          typeof data.confidence === "number" &&
-          data.confidence >= DETECTION_THRESHOLD
-        ) {
-          return data;
-        }
-        return null;
-      })
-      .catch(function (err) {
-        console.error("Realtime API error:", err);
-        return null; // Lỗi mạng -> coi như không phát hiện, tiếp tục poll
-      });
-  }
-
-  /**
-   * Một chu kỳ poll: chụp frame → gọi realtime API → kiểm tra kết quả.
-   */
-  function pollOnce(video) {
+  function classifyCurrentFrame() {
     if (isProcessing) return;
-
-    return captureFrame(video, FRAME_MAX_DIM, FRAME_QUALITY)
-      .then(function (blob) {
-        if (isProcessing) return null;
-        return callRealtimeAPI(blob);
-      })
-      .then(function (detection) {
-        if (isProcessing) return;
-
-        // Luôn clear overlay trước khi vẽ mới
-        clearOverlay();
-
-        if (detection) {
-          // Có vật thể! → dừng polling, xử lý tiếp
-          onObjectDetected(video, detection);
-        } else {
-          // Không có vật thể → cập nhật badge, tiếp tục poll
-          updateRealtimeBadge(null);
-        }
-      })
-      .catch(function (err) {
-        if (!isProcessing) {
-          console.error("Poll error:", err);
-          updateRealtimeBadge(null);
-        }
-      });
-  }
-
-  function startRealtimePolling(video) {
-    // Reset trạng thái badge
-    updateRealtimeBadge(null);
-    clearOverlay();
-
-    // Chạy lần đầu ngay lập tức
-    pollOnce(video);
-
-    // Sau đó poll định kỳ
-    pollTimer = setInterval(function () {
-      pollOnce(video);
-    }, REALTIME_POLL_MS);
-  }
-
-  // ================================================================
-  // OBJECT DETECTED → CAPTURE → AI PIPELINE
-  // ================================================================
-
-  /**
-   * Khi phát hiện vật thể:
-   *  1. Dừng polling
-   *  2. Hiển thị badge + bounding box
-   *  3. Chờ 2 giây
-   *  4. Chụp ảnh → ai_request → predict → detail → redirect
-   */
-  function onObjectDetected(video, detectionData) {
-    // 1. Dừng polling tạm thời
-    if (pollTimer) {
-      clearInterval(pollTimer);
-      pollTimer = null;
-    }
     isProcessing = true;
+    if (sampleTimer) {
+      clearInterval(sampleTimer);
+      sampleTimer = null;
+    }
 
-    // 2. Cập nhật UI
-    updateRealtimeBadge(detectionData);
-    drawBoundingBox(detectionData);
+    updateSteps(true, true, false);
+    setStatus("Đang chụp ảnh", "Giữ nguyên vật trong ngăn.", "Đang chụp ảnh.");
 
-    var labelName = detectionData.labelDisplay || detectionData.label || "vật thể";
-    showToast(
-      "Đã phát hiện " + labelName + "! Đang chờ ổn định...",
-      "loading"
-    );
-
-    // 3. Chờ 2 giây để vật thể ổn định
-    sleep(STABILIZE_DELAY_MS)
-      .then(function () {
-        if (!cameraStream) throw new Error("Camera đã tắt");
-
-        // 4. Chụp ảnh chất lượng cao
-        showToast("Đang chụp ảnh...", "loading");
-        return captureFrame(video, CAPTURE_MAX_DIM, CAPTURE_QUALITY);
+    captureFrame(els.camVideo, CAPTURE_MAX_DIM, CAPTURE_QUALITY)
+      .then(function (blob) {
+        setStatus("Đang gửi ảnh", "Backend đang tạo yêu cầu phân loại.", "Đang gửi ảnh lên server.");
+        return callAiRequestAPI(blob);
       })
-      .then(function (capturedBlob) {
-        // 5. Gọi API ai_request để upload ảnh
-        showToast("Đang gửi ảnh lên server...", "loading");
-        return callAiRequestAPI(capturedBlob);
+      .then(function (created) {
+        setStatus("ResNet50 đang phân loại", "Model chỉ trả về nhãn chất liệu.", "Đang chạy ResNet50.");
+        return callPredictAPI(created.id, created.cloudinaryUrl).then(function () {
+          return created.id;
+        });
       })
       .then(function (aiRequestId) {
-        // 6. Gọi API predict để YOLO dự đoán
-        showToast("AI đang phân tích ảnh...", "loading");
-        return callPredictAPI(aiRequestId);
-      })
-      .then(function (aiResponseId) {
-        // 7. Gọi API detail để lấy kết quả đầy đủ
-        showToast("Đang tải kết quả chi tiết...", "loading");
-        return callDetailAPI(aiResponseId);
-      })
-      .then(function (detailData) {
-        // 8. Thành công → chuyển hướng tới result.html
-        hideToast();
-        showToast("Nhận diện thành công! Đang chuyển đến kết quả...", "success");
-
-        // Lưu dữ liệu vào sessionStorage để result.html có thể dùng
-        try {
-          sessionStorage.setItem(
-            "iot_detail_cache",
-            JSON.stringify(detailData)
-          );
-          sessionStorage.setItem(
-            "iot_detail_id",
-            String(detailData.id || "")
-          );
-        } catch (e) {
-          // ignore storage errors
-        }
-
-        return sleep(600).then(function () {
-          window.location.href =
-            "result.html?id=" + encodeURIComponent(detailData.id || "");
+        updateSteps(true, true, true);
+        return cacheDetail(aiRequestId).then(function () {
+          window.location.href = "result.html?id=" + encodeURIComponent(aiRequestId);
         });
       })
       .catch(function (err) {
-        // Xử lý lỗi ở bất kỳ bước nào
-        console.error("IoT detection pipeline error:", err);
-        hideToast();
-        showToast(
-          "Lỗi: " + (err.message || "Không thể xử lý ảnh") + ". Đang thử lại...",
-          "error"
-        );
-
-        // Reset trạng thái và tiếp tục polling
+        console.error("Classify flow failed:", err);
+        setStatus("Không phân loại được", err.message || "Vui lòng thử lại.", "Có lỗi khi phân loại.");
         isProcessing = false;
-        clearOverlay();
-        updateRealtimeBadge(null);
-
-        if (cameraStream && video) {
-          startRealtimePolling(video);
-        }
+        resetGate();
+        startStabilityWatch();
       });
   }
 
-  // ================================================================
-  // API: AI_REQUEST
-  // ================================================================
-
-  /**
-   * POST /api/v1/iot/ai_request
-   * Upload ảnh lên server, tạo AI request.
-   * Trả về aiRequestId (Integer).
-   */
   function callAiRequestAPI(blob) {
     var formData = new FormData();
-    formData.append("file", blob, "capture.jpg");
+    formData.append("file", blob, "iot-capture.jpg");
 
     return fetch(API_BASE + "/api/v1/iot/ai_request", {
       method: "POST",
       headers: authHeaders(),
       body: formData,
-    }).then(function (res) {
-      if (!res.ok) {
-        return res
-          .json()
-          .catch(function () {
-            return null;
-          })
-          .then(function (json) {
-            var msg =
-              json && json.message
-                ? json.message
-                : "Không thể tạo AI request (HTTP " + res.status + ")";
-            throw new Error(msg);
-          });
-      }
-      return res.json();
-    }).then(function (json) {
-      if (!json || json.id == null) {
-        throw new Error("AI request response không chứa id");
-      }
-      return json.id;
-    });
+    })
+      .then(parseApiResponse)
+      .then(function (data) {
+        if (!data || data.id == null || !data.cloudinaryUrl) {
+          throw new Error("Backend không trả về ảnh đã upload.");
+        }
+        return data;
+      });
   }
 
-  // ================================================================
-  // API: PREDICT
-  // ================================================================
-
-  /**
-   * POST /api/v1/iot/predict
-   * Gửi aiRequestId để YOLO dự đoán và lưu kết quả detection.
-   * Trả về aiResponseId (Integer, field "requestId" trong response).
-   */
-  function callPredictAPI(aiRequestId) {
-    var body = {
-      aiRequestId: aiRequestId,
-      conf: 0.25,
-      iou: 0.6,
-    };
-
+  function callPredictAPI(aiRequestId, imageUrl) {
     var headers = authHeaders();
     headers["Content-Type"] = "application/json";
 
     return fetch(API_BASE + "/api/v1/iot/predict", {
       method: "POST",
       headers: headers,
-      body: JSON.stringify(body),
-    }).then(function (res) {
-      if (!res.ok) {
-        return res
-          .json()
-          .catch(function () {
-            return null;
-          })
-          .then(function (json) {
-            var msg =
-              json && json.message
-                ? json.message
-                : "Không thể chạy dự đoán (HTTP " + res.status + ")";
-            throw new Error(msg);
-          });
-      }
-      return res.json();
-    }).then(function (json) {
-      if (!json || json.requestId == null) {
-        throw new Error("Predict response không chứa requestId");
-      }
-      return json.requestId;
-    });
+      body: JSON.stringify({
+        aiRequestId: aiRequestId,
+        imageUrl: imageUrl,
+      }),
+    }).then(parseApiResponse);
   }
 
-  // ================================================================
-  // API: DETAIL
-  // ================================================================
-
-  /**
-   * GET /api/v1/iot/ai_response/{id}/detail
-   * Lấy chi tiết kết quả detection (bao gồm material, note, action, etc.)
-   */
-  function callDetailAPI(aiResponseId) {
-    return fetch(
-      API_BASE + "/api/v1/iot/ai_response/" + encodeURIComponent(aiResponseId) + "/detail",
-      {
-        method: "GET",
-        headers: authHeaders(),
-      }
-    ).then(function (res) {
-      if (!res.ok) {
-        return res
-          .json()
-          .catch(function () {
-            return null;
-          })
-          .then(function (json) {
-            var msg =
-              json && json.message
-                ? json.message
-                : "Không thể lấy chi tiết kết quả (HTTP " + res.status + ")";
-            throw new Error(msg);
-          });
-      }
-      return res.json();
-    }).then(function (json) {
-      if (!json) {
-        throw new Error("Detail response rỗng");
-      }
-      return json;
-    });
+  function cacheDetail(aiRequestId) {
+    var headers = authHeaders();
+    return fetch(API_BASE + "/api/v1/iot/ai_response/" + encodeURIComponent(aiRequestId) + "/detail", {
+      method: "GET",
+      headers: headers,
+    })
+      .then(parseApiResponse)
+      .then(function (detail) {
+        try {
+          sessionStorage.setItem("iot_detail_cache", JSON.stringify(detail));
+          sessionStorage.setItem("iot_detail_id", String(aiRequestId));
+        } catch (_) {
+          // Storage is an optimization only.
+        }
+      })
+      .catch(function (err) {
+        console.warn("Detail cache skipped:", err.message);
+      });
   }
 
-  // ================================================================
-  // INIT
-  // ================================================================
+  function parseApiResponse(res) {
+    return res.json().catch(function () {
+      return null;
+    }).then(function (json) {
+      if (!res.ok) {
+        var message = json && (json.message || json.error) ? (json.message || json.error) : "HTTP " + res.status;
+        throw new Error(message);
+      }
+      return json && json.data ? json.data : json;
+    });
+  }
 
   function init() {
     cacheDom();
 
-    // Gán sự kiện cho nút retry
     if (els.btnRetry) {
       els.btnRetry.addEventListener("click", function () {
         startCamera(currentFacingMode);
       });
     }
 
-    // Tự động mở camera khi trang load
+    if (els.btnSwitchCam) {
+      els.btnSwitchCam.addEventListener("click", function () {
+        var next = currentFacingMode === "environment" ? "user" : "environment";
+        startCamera(next);
+      });
+    }
+
+    if (els.btnCaptureNow) {
+      els.btnCaptureNow.addEventListener("click", classifyCurrentFrame);
+    }
+
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       showError("Trình duyệt không hỗ trợ camera.");
       return;
     }
 
     startCamera(currentFacingMode);
-
-    // Cleanup khi rời trang
-    window.addEventListener("beforeunload", function () {
-      stopCamera();
-    });
+    window.addEventListener("resize", drawRoiOverlay);
+    window.addEventListener("beforeunload", stopCamera);
   }
 
-  // Chạy sau khi DOM sẵn sàng
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
