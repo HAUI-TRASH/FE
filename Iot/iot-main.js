@@ -151,10 +151,17 @@
 
   function setStep(el, done, active) {
     if (!el) return;
-    el.textContent = done ? "check_circle" : active ? "radio_button_checked" : "radio_button_unchecked";
-    el.classList.toggle("text-emerald-500", done);
-    el.classList.toggle("text-blue-500", active && !done);
-    el.classList.toggle("text-slate-300", !done && !active);
+    var item = el.closest(".step-item");
+    var checked = done || active;
+    el.textContent = checked ? "check_circle" : "radio_button_unchecked";
+    el.classList.toggle("text-emerald-500", checked);
+    el.classList.toggle("text-blue-500", false);
+    el.classList.toggle("text-slate-300", !checked);
+    if (item) {
+      item.classList.toggle("step-done", checked);
+      item.classList.toggle("step-active", false);
+      item.classList.toggle("step-idle", !checked);
+    }
   }
 
   function resetGate() {
