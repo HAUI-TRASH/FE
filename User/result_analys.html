@@ -183,7 +183,24 @@
     .toast.hide {
       animation: toast-out 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards;
     }
+  .bin-card {
+  transition: all 0.3s ease;
+}
+.part-card {
+  pointer-events: none;  /* Không nhận sự kiện click, không đổi giao diện */
+}
+.active-bin {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(34,197,94,0.5);
+  border: 2px solid #22c55e !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
 
+.inactive-bin {
+  opacity: 0.4 !important;
+  filter: grayscale(0.5) !important;
+}
     @keyframes toast-in {
       from {
         transform: translateX(1.5rem);
@@ -289,7 +306,146 @@
             <div id="detectionsChips" class="flex flex-wrap gap-3"></div>
           </div>
         </div>
+        <div id="trashBinGuide" class="mt-6 w-full bg-white border border-[#CBD5E1] rounded-3xl p-4 md:p-6 shadow-sm">
+          <div class="text-center mb-4">
+            <h2 class="text-2xl md:text-3xl font-black text-[#1E293B]">
+              Hướng dẫn bỏ rác vào thùng
+            </h2>
+          </div>
 
+          <!-- AI Notification Banner -->
+          <div id="aiNotification" class="hidden max-w-2xl mx-auto mb-8">
+            <div
+              class="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border-2 border-primary/30 rounded-3xl p-6 text-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+              <div class="relative z-10">
+                <div class="flex items-center justify-center gap-2 text-lg font-bold text-green-600">
+                  <span class="material-symbols-outlined text-2xl bin-checkmark">check_circle</span>
+                  <span id="aiSuggestBin">Đưa rác vào camera để nhận diện</span>
+                </div>
+              </div>
+            </div>
+            <!-- Mũi tên chỉ xuống -->
+            <div id="arrowDown" class="hidden flex justify-center mt-2">
+              <span class="material-symbols-outlined text-4xl text-primary animate-bounce">keyboard_arrow_down</span>
+            </div>
+          </div>
+
+          <!-- 4 Thùng rác -->
+          <div class="grid grid-cols-2 gap-6">
+            <!-- ── Giấy (Xanh dương) ── -->
+            <div id="binGiay" class="bin-card  group" data-tilt data-tilt-max="5" data-tilt-speed="300"
+              data-tilt-glare="true" data-tilt-max-glare="0.08">
+              <div
+                class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border-2 border-transparent h-full flex flex-col">
+                <div class="flex flex-col items-center pt-4 pb-3 px-3 relative"
+                  style="background: linear-gradient(180deg, #EFF6FF 0%, #DBEAFE 100%);">
+                  <span class="material-symbols-outlined text-[120px] md:text-[80px] text-blue-500 mb-1 relative">
+                    delete
+                  </span>
+                  <span class="text-[#1E293B] font-black text-sm">Giấy</span>
+                  <span id="badgeGiay"
+                    class="hidden mt-1 px-2 py-0.5 rounded-full bg-green-500 text-white text-[9px] font-black uppercase tracking-wider">Đề
+                    xuất</span>
+                </div>
+                <div class="px-3 py-2.5 flex-1 border-t border-slate-50">
+                  <ul class="space-y-1 text-[11px] text-slate-500 leading-tight">
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-blue-400 shrink-0"></span>Báo, tạp chí</li>
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-blue-400 shrink-0"></span>Hộp giấy, carton</li>
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-blue-400 shrink-0"></span>Hộp sữa, nước ép</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Nhựa (Xanh lá) ── -->
+            <div id="binNhua" class="bin-card  group" data-tilt data-tilt-max="5" data-tilt-speed="300"
+              data-tilt-glare="true" data-tilt-max-glare="0.08">
+              <div
+                class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border-2 border-transparent h-full flex flex-col">
+                <div class="flex flex-col items-center pt-4 pb-3 px-3 relative"
+                  style="background: linear-gradient(180deg, #F0FDF4 0%, #DCFCE7 100%);">
+                  <span class="material-symbols-outlined text-[120px] md:text-[80px] text-green-500 mb-1 relative">
+                    delete
+                  </span>
+                  <span class="text-[#1E293B] font-black text-sm">Nhựa</span>
+                  <span id="badgeNhua"
+                    class="hidden mt-1 px-2 py-0.5 rounded-full bg-green-500 text-white text-[9px] font-black uppercase tracking-wider">Đề
+                    xuất</span>
+                </div>
+                <div class="px-3 py-2.5 flex-1 border-t border-slate-50">
+                  <ul class="space-y-1 text-[11px] text-slate-500 leading-tight">
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-green-400 shrink-0"></span>Chai nước nhựa</li>
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-green-400 shrink-0"></span>Chai nước ngọt</li>
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-green-400 shrink-0"></span>Dầu gội, nước rửa tay</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Kim loại (Vàng) ── -->
+            <div id="binKimLoai" class="bin-card  group" data-tilt data-tilt-max="5" data-tilt-speed="300"
+              data-tilt-glare="true" data-tilt-max-glare="0.08">
+              <div
+                class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border-2 border-transparent h-full flex flex-col">
+                <div class="flex flex-col items-center pt-4 pb-3 px-3 relative"
+                  style="background: linear-gradient(180deg, #FEFCE8 0%, #FEF9C3 100%);">
+                  <span class="material-symbols-outlined text-[120px] md:text-[80px] text-yellow-500 mb-1 relative">
+                    delete
+                  </span>
+                  <span class="text-[#1E293B] font-black text-sm">Kim loại</span>
+                  <span id="badgeKimLoai"
+                    class="hidden mt-1 px-2 py-0.5 rounded-full bg-green-500 text-white text-[9px] font-black uppercase tracking-wider">Đề
+                    xuất</span>
+                </div>
+                <div class="px-3 py-2.5 flex-1 border-t border-slate-50">
+                  <ul class="space-y-1 text-[11px] text-slate-500 leading-tight">
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-yellow-400 shrink-0"></span>Lon nước ngọt, bia</li>
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-yellow-400 shrink-0"></span>Bình kim loại</li>
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-yellow-400 shrink-0"></span>Hộp kim loại</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Thủy tinh (Xanh ngọc) ── -->
+            <div id="binThuyTinh" class="bin-card  group" data-tilt data-tilt-max="5" data-tilt-speed="300"
+              data-tilt-glare="true" data-tilt-max-glare="0.08">
+              <div
+                class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border-2 border-transparent h-full flex flex-col">
+                <div class="flex flex-col items-center pt-4 pb-3 px-3 relative"
+                  style="background: linear-gradient(180deg, #F0FDFA 0%, #CCFBF1 100%);">
+                  <span class="material-symbols-outlined text-[120px] md:text-[80px] text-teal-500 mb-1 relative">
+                    delete
+                  </span>
+                  <span class="text-[#1E293B] font-black text-sm">Thủy tinh</span>
+                  <span id="badgeThuyTinh"
+                    class="hidden mt-1 px-2 py-0.5 rounded-full bg-green-500 text-white text-[9px] font-black uppercase tracking-wider">Đề
+                    xuất</span>
+                </div>
+                <div class="px-3 py-2.5 flex-1 border-t border-slate-50">
+                  <ul class="space-y-1 text-[11px] text-slate-500 leading-tight">
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-teal-400 shrink-0"></span>Chai thủy tinh</li>
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-teal-400 shrink-0"></span>Chai nước giải khát</li>
+                    <li class="flex items-center gap-1.5"><span
+                        class="w-1 h-1 rounded-full bg-teal-400 shrink-0"></span>Chai thực phẩm, mỹ phẩm</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="bg-white border border-[#CBD5E1] rounded-3xl p-6 md:p-8 shadow-sm">
           <div class="flex items-center justify-between mb-6">
             <div class="flex flex-col">
@@ -1184,6 +1340,90 @@
         }
       };
     }
+function resetTrashBins() {
+  document.querySelectorAll(".bin-card").forEach(bin => {
+    bin.classList.remove(
+      "active-bin",
+      "ring-4",
+      "ring-green-500",
+      "scale-105",
+      "shadow-2xl",
+      "opacity-100"
+    );
+
+    bin.classList.add("inactive-bin");
+  });
+
+  ["badgeGiay", "badgeNhua", "badgeKimLoai", "badgeThuyTinh"].forEach(id => {
+    document.getElementById(id)?.classList.add("hidden");
+  });
+}
+
+function normalizeTrashBinName(name) {
+  return String(name || "")
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function highlightTrashBin(binCode) {
+  const binMap = {
+    "giay": ["binGiay", "badgeGiay", "Giấy"],
+    "nhua": ["binNhua", "badgeNhua", "Nhựa"],
+    "kim_loai": ["binKimLoai", "badgeKimLoai", "Kim loại"],
+    "thuy_tinh": ["binThuyTinh", "badgeThuyTinh", "Thủy tinh"]
+  };
+
+  const target = binMap[binCode];
+  if (!target) return;
+
+  // Reset tất cả các thùng
+  Object.keys(binMap).forEach(key => {
+    const [binId, badgeId] = binMap[key];
+    const binElement = document.getElementById(binId);
+    if (binElement) {
+      binElement.classList.remove("active-bin");
+      binElement.classList.add("inactive-bin");
+    }
+    const badgeElement = document.getElementById(badgeId);
+    if (badgeElement) {
+      badgeElement.classList.add("hidden");
+    }
+  });
+
+  // Active thùng đúng
+  const [binId, badgeId, displayName] = target;
+  const activeBin = document.getElementById(binId);
+  if (activeBin) {
+    activeBin.classList.remove("inactive-bin");
+    activeBin.classList.add("active-bin");
+  }
+  const activeBadge = document.getElementById(badgeId);
+  if (activeBadge) {
+    activeBadge.classList.remove("hidden");
+  }
+
+  // Hiển thị notification
+  const aiNotification = document.getElementById("aiNotification");
+  const arrowDown = document.getElementById("arrowDown");
+  const aiSuggestBin = document.getElementById("aiSuggestBin");
+  
+  if (aiNotification) aiNotification.classList.remove("hidden");
+  if (arrowDown) arrowDown.classList.remove("hidden");
+  if (aiSuggestBin) aiSuggestBin.textContent = `Đề xuất bỏ vào thùng ${displayName}`;
+}
+function handleTrashBin(data) {
+  const trashBinName =
+    data?.trashBin?.name ||
+    data?.trashBinName ||
+    data?.binName ||
+    data?.material ||
+    data?.detections?.[0]?.trashBin?.name ||
+    data?.detections?.[0]?.material;
+
+  highlightTrashBin(trashBinName);
+}
     function drawDetectedObjectsCanvas(imageUrl, detections) {
       const canvas = document.getElementById("detectedObjectsCanvas");
       if (!canvas) return;
@@ -1350,69 +1590,132 @@
       });
     }
 
-    function renderDetectionDetail(det) {
-      const labelText = det?.labelDisplay || prettifyLabel(det?.label);
+   function renderDetectionDetail(det) {
+  const labelText = det?.labelDisplay || prettifyLabel(det?.label);
 
-      if (det?.status === "NEEDS_CONFIRM") {
-        setHtml(
-          "mainLabel",
-          `${labelText} <span class="text-yellow-400 text-sm font-bold align-middle">(Cần xác nhận)</span>`
-        );
-      } else if (det?.status === "CONFIRMED") {
-        setHtml(
-          "mainLabel",
-          `${labelText} <span class="text-primary text-sm font-bold align-middle">(Đã xác nhận)</span>`
-        );
-      } else if (det?.status === "CORRECTED") {
-        setHtml(
-          "mainLabel",
-          `${labelText} <span class="text-blue-400 text-sm font-bold align-middle">(Đã chỉnh sửa)</span>`
-        );
-      } else {
-        setText("mainLabel", labelText);
-      }
+  if (det?.status === "NEEDS_CONFIRM") {
+    setHtml(
+      "mainLabel",
+      `${labelText} <span class="text-yellow-400 text-sm font-bold align-middle">(Cần xác nhận)</span>`
+    );
+  } else if (det?.status === "CONFIRMED") {
+    setHtml(
+      "mainLabel",
+      `${labelText} <span class="text-primary text-sm font-bold align-middle">(Đã xác nhận)</span>`
+    );
+  } else if (det?.status === "CORRECTED") {
+    setHtml(
+      "mainLabel",
+      `${labelText} <span class="text-blue-400 text-sm font-bold align-middle">(Đã chỉnh sửa)</span>`
+    );
+  } else {
+    setText("mainLabel", labelText);
+  }
 
-      const conf = safeNum(det?.confidence, null);
-      setText(
-        "confidenceText",
-        conf != null ? `Độ chính xác ${Math.round(conf * 100)}%` : "Độ chính xác --%"
-      );
+  const conf = safeNum(det?.confidence, null);
+  setText(
+    "confidenceText",
+    conf != null ? `Độ chính xác ${Math.round(conf * 100)}%` : "Độ chính xác --%"
+  );
 
-      setText("trashTypeText", det?.trashType || "Chưa phân loại");
-      setText("materialText", det?.material || "Chưa có dữ liệu");
-      setText("noteText", det?.note || "Chưa có lưu ý");
-      setText("actionText", det?.action || "Chưa có hướng dẫn");
-      setText("impactText", det?.detail?.impact || "Không có dữ liệu tác động.");
-      setText("toxicityText", det?.detail?.toxicity || "Không có dữ liệu độc hại.");
+  setText("trashTypeText", det?.trashType || "Chưa phân loại");
+  setText("materialText", det?.material || "Chưa có dữ liệu");
+  setText("noteText", det?.note || "Chưa có lưu ý");
+  setText("actionText", det?.action || "Chưa có hướng dẫn");
+  setText("impactText", det?.detail?.impact || "Không có dữ liệu tác động.");
+  setText("toxicityText", det?.detail?.toxicity || "Không có dữ liệu độc hại.");
 
-      renderSafeSteps(det?.detail?.safeSteps);
+  renderSafeSteps(det?.detail?.safeSteps);
 
-      const trashStepsWrapper = document.getElementById("trashStepsWrapper");
-      const trashStepsList = document.getElementById("trashStepsList");
-      if (trashStepsWrapper && trashStepsList) {
-        trashStepsList.innerHTML = "";
-        const steps = det?.detail?.trashSteps;
-        if (Array.isArray(steps) && steps.length > 0) {
-          steps.forEach(step => {
-            if (step.imageUrl) {
-              const img = document.createElement("img");
-              img.src = step.imageUrl;
-              img.alt = step.labelDisplay || step.label || "Trash Step";
-              img.className = "w-full rounded-lg border border-[#28392e] cursor-zoom-in hover:border-primary/50 transition-colors";
-              img.addEventListener("click", () => openImgModal(img.src));
-              trashStepsList.appendChild(img);
-            }
-          });
-          if (trashStepsList.childElementCount > 0) {
-            trashStepsWrapper.classList.remove("hidden");
-          } else {
-            trashStepsWrapper.classList.add("hidden");
-          }
-        } else {
-          trashStepsWrapper.classList.add("hidden");
-        }
+  // ========== XỬ LÝ HIGHLIGHT THÙNG RÁC ==========
+  let binCode = det?.binCode;
+  
+  // Nếu là unknown hoặc không xác định -> tối hết
+  const isUnknown = !det?.binCode && (
+    det?.label === "unknown" || 
+    det?.labelDisplay === "Chai không xác định" ||
+    (det?.label || "").toLowerCase().includes("unknown") ||
+    (det?.labelDisplay || "").toLowerCase().includes("không xác định")
+  );
+  
+  if (isUnknown) {
+    // Tối hết tất cả thùng rác
+    document.querySelectorAll(".bin-card").forEach(bin => {
+      bin.classList.remove("active-bin");
+      bin.classList.add("inactive-bin");
+    });
+    ["badgeGiay", "badgeNhua", "badgeKimLoai", "badgeThuyTinh"].forEach(id => {
+      document.getElementById(id)?.classList.add("hidden");
+    });
+    return;
+  }
+  
+  // Nếu không có binCode, thử suy luận
+  if (!binCode) {
+    const material = String(det?.material || "").toLowerCase().trim();
+    if (material.includes("giấy") || material.includes("giay") || material.includes("paper") || material.includes("cardboard")) {
+      binCode = "giay";
+    } else if (material.includes("nhựa") || material.includes("nhua") || material.includes("plastic")) {
+      binCode = "nhua";
+    } else if (material.includes("kim loại") || material.includes("kim loai") || material.includes("metal")) {
+      binCode = "kim_loai";
+    } else if (material.includes("thủy tinh") || material.includes("thuy tinh") || material.includes("glass")) {
+      binCode = "thuy_tinh";
+    }
+    
+    if (!binCode) {
+      const label = String(det?.label || "").toLowerCase();
+      if (label.includes("paper") || label.includes("giay")) {
+        binCode = "giay";
+      } else if (label.includes("plastic")) {
+        binCode = "nhua";
+      } else if (label.includes("metal")) {
+        binCode = "kim_loai";
+      } else if (label.includes("glass")) {
+        binCode = "thuy_tinh";
       }
     }
+  }
+  
+  if (binCode) {
+    highlightTrashBin(binCode);
+  } else {
+    // Không xác định được -> tối hết
+    document.querySelectorAll(".bin-card").forEach(bin => {
+      bin.classList.remove("active-bin");
+      bin.classList.add("inactive-bin");
+    });
+    ["badgeGiay", "badgeNhua", "badgeKimLoai", "badgeThuyTinh"].forEach(id => {
+      document.getElementById(id)?.classList.add("hidden");
+    });
+  }
+
+  const trashStepsWrapper = document.getElementById("trashStepsWrapper");
+  const trashStepsList = document.getElementById("trashStepsList");
+  if (trashStepsWrapper && trashStepsList) {
+    trashStepsList.innerHTML = "";
+    const steps = det?.detail?.trashSteps;
+    if (Array.isArray(steps) && steps.length > 0) {
+      steps.forEach(step => {
+        if (step.imageUrl) {
+          const img = document.createElement("img");
+          img.src = step.imageUrl;
+          img.alt = step.labelDisplay || step.label || "Trash Step";
+          img.className = "w-full rounded-lg border border-[#28392e] cursor-zoom-in hover:border-primary/50 transition-colors";
+          img.addEventListener("click", () => openImgModal(img.src));
+          trashStepsList.appendChild(img);
+        }
+      });
+      if (trashStepsList.childElementCount > 0) {
+        trashStepsWrapper.classList.remove("hidden");
+      } else {
+        trashStepsWrapper.classList.add("hidden");
+      }
+    } else {
+      trashStepsWrapper.classList.add("hidden");
+    }
+  }
+}
 
     function renderChips(detections) {
       const wrap = document.getElementById("detectionsChips");
@@ -1576,7 +1879,21 @@
     function showFeedbackThankYouMessage() {
       showToast("Cảm ơn bạn đã xác nhận, hệ thống đã cập nhật lại kết quả và nội dung liên quan.", "success");
     }
-
+function guessBinCodeFromDetection(det) {
+  if (!det) return null;
+  const fields = [
+    det.material, det.trashType, det.label, det.labelDisplay
+  ].map(v => String(v || "").toLowerCase());
+  
+  const joined = fields.join(" ");
+  
+  if (joined.match(/gi[aấ]y|paper|cardboard|carton/)) return "giay";
+  if (joined.match(/nh[ựu]a|plastic/)) return "nhua";
+  if (joined.match(/kim\s*lo[aạ]i|metal|lon\b|can\b/)) return "kim_loai";
+  if (joined.match(/th[uủ]y\s*tinh|thu[yỷ]\s*tinh|glass/)) return "thuy_tinh";
+  
+  return null;
+}
     function renderFromApi(payload, options = {}) {
       const d = payload?.data ?? payload;
       const updatedDetectionId = options.updatedDetectionId ?? null;
@@ -1627,18 +1944,19 @@
         };
       });
 
-      if (updatedDetectionId != null) {
+       if (updatedDetectionId != null) {
         const updatedIndex = detectionsState.findIndex(x => x?.id === updatedDetectionId);
         selectedIndex = updatedIndex >= 0 ? updatedIndex : 0;
       } else if (!keepSelection) {
-        selectedIndex = 0;
+        // Ưu tiên chọn vật thể có status DETECTED (đã xác nhận)
+        const firstDetectedIndex = detectionsState.findIndex(x => x?.status === "DETECTED");
+        if (firstDetectedIndex >= 0) {
+          selectedIndex = firstDetectedIndex;
+        } else {
+          selectedIndex = 0;
+        }
       } else if (selectedIndex >= detectionsState.length) {
         selectedIndex = 0;
-      }
-
-      const firstNeedConfirmIndex = detectionsState.findIndex(x => x?.status === "NEEDS_CONFIRM");
-      if (updatedDetectionId == null && firstNeedConfirmIndex >= 0 && !keepSelection) {
-        selectedIndex = firstNeedConfirmIndex;
       }
 
       renderChips(detectionsState);
@@ -1671,34 +1989,46 @@
     }
 
     async function loadResult() {
-      const id = qs("id");
-      if (!id) {
-        setText("mainLabel", "Thiếu id trên URL");
-        setText("confidenceText", "Độ chính xác --%");
-        return;
-      }
+  const id = qs("id");
+  if (!id) {
+    setText("mainLabel", "Thiếu id trên URL");
+    setText("confidenceText", "Độ chính xác --%");
+    return;
+  }
 
-      try {
-        const headers = {};
-        if (token) headers.Authorization = "Bearer " + token;
+  try {
+    const headers = {};
+    if (token) headers.Authorization = "Bearer " + token;
 
-        const res = await fetch(DETAIL_URL(id), { headers });
-        const json = await res.json().catch(() => null);
+    const res = await fetch(DETAIL_URL(id), { headers });
+    const json = await res.json().catch(() => null);
 
-        if (!res.ok) {
-          console.error("GET detail failed:", json);
-          setText("mainLabel", "Không tải được kết quả");
-          setText("confidenceText", "Độ chính xác --%");
-          return;
-        }
-
-        renderFromApi(json, { autoOpenConfirm: true });
-      } catch (e) {
-        console.error(e);
-        setText("mainLabel", "Lỗi kết nối server");
-        setText("confidenceText", "Độ chính xác --%");
-      }
+    if (!res.ok) {
+      console.error("GET detail failed:", json);
+      setText("mainLabel", "Không tải được kết quả");
+      setText("confidenceText", "Độ chính xác --%");
+      return;
     }
+
+    renderFromApi(json, { autoOpenConfirm: true });
+    
+    // ✅ Gọi highlight sau khi render
+const mainDetection = json?.data?.detections?.[0] || json?.detections?.[0];
+const binCode = mainDetection?.binCode || guessBinCodeFromDetection(mainDetection);
+if (binCode) {
+  highlightTrashBin(binCode);
+} else {
+  // Không có gì để highlight → hiện tất cả bình thường
+  document.querySelectorAll(".bin-card").forEach(bin => {
+    bin.classList.remove("active-bin", "inactive-bin");
+  });
+}
+  } catch (e) {
+    console.error(e);
+    setText("mainLabel", "Lỗi kết nối server");
+    setText("confidenceText", "Độ chính xác --%");
+  }
+}
 
     const imgModal = document.getElementById("imgModal");
     const imgModalSrc = document.getElementById("imgModalSrc");
@@ -1873,19 +2203,19 @@
 
         closeConfirmModal();
         showFeedbackThankYouMessage();
+        window.location.reload();
+        // const item = detectionsState.find(x => x.id === detectionId);
 
-        const item = detectionsState.find(x => x.id === detectionId);
+        // if (item) {
+        //   item.status = "CONFIRMED";
+        // }
 
-        if (item) {
-          item.status = "CONFIRMED";
-        }
+        // renderChips(detectionsState);
+        // renderDetectedObjectsGrid(detectionsState);
+        // renderDetectionDetail(detectionsState[selectedIndex]);
 
-        renderChips(detectionsState);
-        renderDetectedObjectsGrid(detectionsState);
-        renderDetectionDetail(detectionsState[selectedIndex]);
-
-        confirmQueue = detectionsState.filter(x => x?.status === "NEEDS_CONFIRM" && x?.id != null);
-        showConfirmBanner(confirmQueue.length > 0 || requiresConfirmationState);
+        // confirmQueue = detectionsState.filter(x => x?.status === "NEEDS_CONFIRM" && x?.id != null);
+        // showConfirmBanner(confirmQueue.length > 0 || requiresConfirmationState);
 
       } catch (e) {
         console.error(e);
