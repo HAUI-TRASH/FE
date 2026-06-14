@@ -1,415 +1,445 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TrashDisposal — Nhận diện và phân loại rác bằng AI</title>
-    <meta
-      name="description"
-      content="Hệ thống phân loại rác thông minh bảo vệ môi trường"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400..700,0..1,0&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400..700,0..1,0&display=swap"
-      rel="stylesheet"
-    />
-    <script src="constants.js"></script>
-    <script>
-      window.TRASH_ROIS = [{ x: 0.1, y: 0.1, w: 0.8, h: 0.6, label: "" }];
-    </script>
-    <script src="iot-main.js" defer></script>
-    <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
 
-      :root {
-        --bg-body: #f4fbf7;
-        --bg-card: #ffffff;
-        --text-main: #1e3932;
-        --text-muted: #5e7a71;
-        --primary: #2e7d32;
-        --primary-light: #4caf50;
-        --primary-bg: #e8f5e9;
-        --accent: #8bc34a;
-        --border: #c8e6c9;
-        --shadow: rgba(46, 125, 50, 0.08);
-        --danger: #ef5350;
-        --warning: #ffb300;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartDisposal_P — Nhận diện và phân loại rác bằng AI</title>
+  <meta name="description" content="Hệ thống phân loại rác thông minh bảo vệ môi trường" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400..700,0..1,0&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400..700,0..1,0&display=swap"
+    rel="stylesheet" />
+  <script src="constants.js"></script>
+  <script>
+    window.TRASH_ROIS = [{ x: 0.15, y: 0.15, w: 0.7, h: 0.7, label: "" }];
+  </script>
+  <script src="iot-main.js" defer></script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-      body {
-        font-family: "Nunito", sans-serif;
-        background-color: var(--bg-body);
-        color: var(--text-main);
-        min-height: 100vh;
-        background-image:
-          radial-gradient(circle at top right, #e8f5e9 0%, transparent 40%),
-          radial-gradient(circle at bottom left, #f1f8e9 0%, transparent 40%);
-        background-attachment: fixed;
-      }
+    :root {
+      --bg-body: #f4fbf7;
+      --bg-card: #ffffff;
+      --text-main: #1e3932;
+      --text-muted: #5e7a71;
+      --primary: #2e7d32;
+      --primary-light: #4caf50;
+      --primary-bg: #e8f5e9;
+      --accent: #8bc34a;
+      --border: #c8e6c9;
+      --shadow: rgba(46, 125, 50, 0.08);
+      --danger: #ef5350;
+      --warning: #ffb300;
+    }
 
-      h1,
-      h2,
-      h3,
-      .brand-text {
-        font-family: "Quicksand", sans-serif;
-      }
+    body {
+      font-family: "Nunito", sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at top right, #e8f5e9 0%, transparent 40%),
+        radial-gradient(circle at bottom left, #f1f8e9 0%, transparent 40%);
+      background-attachment: fixed;
+    }
 
-      .app-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 40px;
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-      }
+    h1,
+    h2,
+    h3,
+    .brand-text {
+      font-family: "Quicksand", sans-serif;
+    }
 
-      /* Header */
-      .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 20px;
-        background: rgba(255, 255, 255, 0.7);
-        padding: 20px 30px;
-        border-radius: 24px;
-        backdrop-filter: blur(20px);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      .brand-icon {
-        font-size: 32px;
-        color: #10B981;
-        flex-shrink: 0;
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 600,
-          "GRAD" 0,
-          "opsz" 32;
-      }
-      .brand-title {
-        font-size: 24px;
-        font-weight: 700;
-        color: var(--primary);
-        line-height: 1.2;
-      }
-      .brand-subtitle {
-        font-size: 13px;
-        color: var(--text-muted);
-        font-weight: 600;
-      }
-      .tag {
-        background: white;
-        border: 1px solid var(--border);
-        padding: 8px 16px;
-        border-radius: 30px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--primary);
-        box-shadow: 0 4px 12px var(--shadow);
-      }
+    .app-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
 
-      /* Main Grid */
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 20px 30px;
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      font-size: 32px;
+      color: #10B981;
+      flex-shrink: 0;
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 600,
+        "GRAD" 0,
+        "opsz" 32;
+    }
+
+    .brand-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .tag {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    /* Main Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(500px, 1fr) 420px;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 1024px) {
       .main-grid {
-        display: grid;
-        grid-template-columns: minmax(500px, 1fr) 420px;
-        gap: 40px;
-        align-items: stretch;
+        grid-template-columns: 1fr;
       }
-      @media (max-width: 1024px) {
-        .main-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-      @media (max-width: 640px) {
-        .brand-icon {
-          font-size: 24px;
-        }
-      }
+    }
 
-      /* Camera Area */
-      .camera-wrapper {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-      }
-      .camera-box {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        max-width: 512px;
-        background: #e0f2f1;
-        border-radius: 32px;
-        overflow: hidden;
-        position: relative;
-        border: 6px solid white;
-        box-shadow:
-          0 30px 60px rgba(46, 125, 50, 0.12),
-          0 4px 12px rgba(0, 0, 0, 0.04);
-      }
-
-      .camera-state {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 20px;
-        background: white;
-        z-index: 20;
-      }
-      .camera-state.hidden {
-        display: none !important;
-      }
-
-      .spinner {
-        font-size: 50px;
-        color: var(--primary);
-        animation: spin 1s linear infinite;
-        margin-bottom: 15px;
-      }
-      @keyframes spin {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      #cameraActive {
-        position: absolute;
-        inset: 0;
-      }
-      #cameraActive.hidden {
-        display: none !important;
-      }
-      #camVideo {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      #roiCanvas {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-      }
-
-      /* HUD */
-      .hud {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 40px 20px 20px;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-        color: white;
-        z-index: 10;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-      }
-      .hud-title {
-        font-size: 18px;
-        font-weight: 700;
-        margin-bottom: 4px;
-      }
-      .hud-desc {
-        font-size: 13px;
-        opacity: 0.8;
-      }
-
-      .meter {
-        width: 150px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        height: 8px;
-        overflow: hidden;
-        margin-top: 5px;
-      }
-      .meter-fill {
-        height: 100%;
-        background: var(--accent);
-        width: 0%;
-        transition:
-          width 0.2s,
-          background-color 0.3s;
-      }
-      .meter-fill.bg-amber-400 {
-        background: var(--warning) !important;
-      }
-
-      /* Sidebar Panels */
-      .sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-        width: 100%;
-      }
-
-      .panel {
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(20px);
-        border-radius: 24px;
-        padding: 30px;
-        box-shadow: 0 15px 40px var(--shadow);
-        border: 1px solid rgba(255, 255, 255, 0.6);
-      }
-      .panel-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 20px;
-      }
-      .panel-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background: var(--primary-bg);
-        color: var(--primary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .panel-icon .material-symbols-rounded {
+    @media (max-width: 640px) {
+      .brand-icon {
         font-size: 24px;
       }
-      .panel-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--text-main);
-      }
-      .panel-subtitle {
-        font-size: 13px;
-        color: var(--text-muted);
-        margin-top: 2px;
-      }
+    }
 
-      /* Buttons */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        padding: 14px;
-        border-radius: 14px;
-        font-size: 15px;
-        font-weight: 700;
-        font-family: inherit;
-        border: none;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .btn-main {
-        background: var(--primary);
-        color: white;
-        box-shadow: 0 6px 16px rgba(46, 125, 50, 0.2);
-      }
-      .btn-main:hover {
-        background: #1b5e20;
-        transform: translateY(-2px);
-      }
-      .btn-outline {
-        background: white;
-        color: var(--primary);
-        border: 2px solid var(--border);
-      }
-      .btn-outline:hover {
-        background: var(--primary-bg);
-      }
-      .btn-group {
-        display: flex;
-        gap: 12px;
-      }
+    /* Camera Area */
+    .camera-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
 
-      /* Steps */
-      .step-list {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-      .step-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: 600;
-        font-size: 14px;
-        color: var(--text-muted);
-        transition: color 0.2s ease;
-      }
-      .step-item.step-done {
-        color: var(--primary);
-        font-weight: 800;
-      }
-      .step-item.step-active {
-        color: var(--text-muted);
-      }
-      .step-item .material-symbols-rounded {
-        font-size: 22px;
-        color: #cfd8dc;
-        transition:
-          color 0.2s ease,
-          transform 0.2s ease;
-      }
-      .step-item .material-symbols-rounded.text-emerald-500 {
-        color: var(--primary) !important;
-        transform: scale(1.08);
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 700,
-          "GRAD" 0,
-          "opsz" 24;
-      }
-      .step-item .material-symbols-rounded.text-blue-500 {
-        color: var(--warning) !important;
-      }
+    .camera-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 512px;
+      background: #e0f2f1;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+      border: 6px solid white;
+      box-shadow:
+        0 30px 60px rgba(46, 125, 50, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.04);
+    }
 
-      .material-symbols-rounded {
-        font-variation-settings:
-          "FILL" 1,
-          "wght" 600,
-          "GRAD" 0,
-          "opsz" 24;
-      }
-      .material-symbols-rounded.outline {
-        font-variation-settings: "FILL" 0;
-      }
-    </style>
-  </head>
+    .camera-state {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      background: white;
+      z-index: 20;
+    }
 
-  <body>
-    <div class="app-container">
-      <header class="header" style="flex-direction: column; gap: 0; padding: 0; overflow: hidden;">
-        <!-- Brand row -->
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 28px; width: 100%;">
-          <div class="brand" style="margin: 0;">
-            <div style="
+    .camera-state.hidden {
+      display: none !important;
+    }
+
+    .spinner {
+      font-size: 50px;
+      color: var(--primary);
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #cameraActive {
+      position: absolute;
+      inset: 0;
+    }
+
+    #cameraActive.hidden {
+      display: none !important;
+    }
+
+    #camVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #roiCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* HUD */
+    .hud {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px 20px 20px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+      color: white;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .hud-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .hud-desc {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .meter {
+      width: 150px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      height: 8px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+
+    .meter-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition:
+        width 0.2s,
+        background-color 0.3s;
+    }
+
+    .meter-fill.bg-amber-400 {
+      background: var(--warning) !important;
+    }
+
+    /* Sidebar Panels */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      width: 100%;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 15px 40px var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .panel-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary-bg);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .panel-icon .material-symbols-rounded {
+      font-size: 24px;
+    }
+
+    .panel-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .panel-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-main {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 6px 16px rgba(46, 125, 50, 0.2);
+    }
+
+    .btn-main:hover {
+      background: #1b5e20;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-bg);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* Steps */
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+
+    .step-item.step-done {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .step-item.step-active {
+      color: var(--text-muted);
+    }
+
+    .step-item .material-symbols-rounded {
+      font-size: 22px;
+      color: #cfd8dc;
+      transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .step-item .material-symbols-rounded.text-emerald-500 {
+      color: var(--primary) !important;
+      transform: scale(1.08);
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 700,
+        "GRAD" 0,
+        "opsz" 24;
+    }
+
+    .step-item .material-symbols-rounded.text-blue-500 {
+      color: var(--warning) !important;
+    }
+
+    .material-symbols-rounded {
+      font-variation-settings:
+        "FILL" 1,
+        "wght" 600,
+        "GRAD" 0,
+        "opsz" 24;
+    }
+
+    .material-symbols-rounded.outline {
+      font-variation-settings: "FILL" 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-container">
+    <header class="header" style="flex-direction: column; gap: 0; padding: 0; overflow: hidden;">
+      <!-- Brand row -->
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 28px; width: 100%;">
+        <div class="brand" style="margin: 0;">
+          <div style="
               width: 52px; height: 52px;
               background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
               border-radius: 16px;
@@ -417,440 +447,501 @@
               box-shadow: 0 4px 14px rgba(46,125,50,0.28);
               flex-shrink: 0;
             ">
-              <span class="material-symbols-outlined" style="
+            <span class="material-symbols-outlined" style="
                 font-size: 28px; color: white;
                 font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 28;
               ">recycling</span>
-            </div>
-            <div>
-              <h1 class="brand-title" style="font-size: 22px; letter-spacing: -0.3px;">SmartDisposal</h1>
-              <p class="brand-subtitle">Trạm phân loại rác thông minh</p>
-            </div>
           </div>
+          <div>
+            <h1 class="brand-title" style="font-size: 22px; letter-spacing: -0.3px;">SmartDisposal</h1>
+            <p class="brand-subtitle">Trạm phân loại rác thông minh</p>
+          </div>
+        </div>
 
-          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-            <div style="
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <div style="
               display: flex; align-items: center; gap: 7px;
               background: #e8f5e9; border: 1px solid #c8e6c9;
               border-radius: 30px; padding: 8px 16px;
               font-size: 13px; font-weight: 700; color: #2e7d32;
               font-family: 'Nunito', sans-serif;
             ">
-              <span style="width: 7px; height: 7px; border-radius: 50%; background: #4caf50; display: inline-block; animation: statusBlink 1.4s infinite;"></span>
-              Đang hoạt động
-            </div>
-            <div style="
+            <span
+              style="width: 7px; height: 7px; border-radius: 50%; background: #4caf50; display: inline-block; animation: statusBlink 1.4s infinite;"></span>
+            Đang hoạt động
+          </div>
+          <div style="
               display: flex; align-items: center; gap: 7px;
               background: #fff3e0; border: 1px solid #ffe0b2;
               border-radius: 30px; padding: 8px 16px;
               font-size: 13px; font-weight: 700; color: #e65100;
               font-family: 'Nunito', sans-serif;
             ">
-              <span class="material-symbols-rounded" style="font-size: 15px; font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 16;">sensors</span>
-              AI sẵn sàng
-            </div>
+            <span class="material-symbols-rounded"
+              style="font-size: 15px; font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 16;">sensors</span>
+            AI sẵn sàng
           </div>
         </div>
+      </div>
 
-                <style>
-          @keyframes statusBlink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.25; }
-          }
-          @media (max-width: 640px) {
-            .stats-bar { grid-template-columns: repeat(2, 1fr) !important; }
-          }
-        </style>
-      </header>
+      <style>
+        @keyframes statusBlink {
 
-      <div class="main-grid">
-        <!-- Camera Wrapper -->
-        <div class="camera-wrapper">
-          <div class="camera-box" id="cameraShell">
-            <div id="cameraLoading" class="camera-state">
-              <span class="material-symbols-rounded spinner outline"
-                >hourglass_empty</span
-              >
-              <h2>Khởi động Camera</h2>
-              <p
-                style="
+          0%,
+          100% {
+            opacity: 1;
+          }
+
+          50% {
+            opacity: 0.25;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .stats-bar {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+      </style>
+    </header>
+
+    <div class="main-grid">
+      <!-- Camera Wrapper -->
+      <div class="camera-wrapper">
+        <div class="camera-box" id="cameraShell">
+          <div id="cameraLoading" class="camera-state">
+            <span class="material-symbols-rounded spinner outline">hourglass_empty</span>
+            <h2>Khởi động Camera</h2>
+            <p style="
                   color: var(--text-muted);
                   font-size: 14px;
                   margin-top: 5px;
-                "
-              >
-                Vui lòng cấp quyền truy cập...
-              </p>
-            </div>
+                ">
+              Vui lòng cấp quyền truy cập...
+            </p>
+          </div>
 
-            <div id="cameraError" class="camera-state hidden">
-              <span
-                class="material-symbols-rounded outline"
-                style="
+          <div id="cameraError" class="camera-state hidden">
+            <span class="material-symbols-rounded outline" style="
                   font-size: 48px;
                   color: var(--danger);
                   margin-bottom: 10px;
-                "
-                >videocam_off</span
-              >
-              <h2 id="cameraErrorMsg">Lỗi Camera</h2>
-              <button
-                id="btnRetry"
-                class="btn btn-outline"
-                style="margin-top: 15px; width: auto; padding: 10px 24px"
-              >
-                Thử lại
-              </button>
-            </div>
-
-            <div id="cameraActive" class="hidden">
-              <video id="camVideo" autoplay playsinline muted></video>
-              <canvas id="roiCanvas"></canvas>
-              <div class="hud">
-                <div>
-                  <div class="hud-title" id="statusTitle">Đang chờ rác</div>
-                  <div class="hud-desc" id="statusText">
-                    Đặt rác vào khu vực quét
-                  </div>
-                </div>
-                <div style="text-align: right">
-                  <div style="font-size: 12px; font-weight: 700">
-                    Chuyển động: <span id="motionValue">0</span>
-                  </div>
-                  <div class="meter">
-                    <div id="motionBar" class="meter-fill"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sidebar -->
-
-          <div class="panel">
-            <div class="panel-header">
-              <div
-                class="panel-icon"
-                style="background: #d3f2d4; color: #4caf50"
-              >
-                <span class="material-symbols-rounded outline">rule</span>
-              </div>
-              <div>
-                <div class="panel-title">Hướng dẫn xử lý</div>
-              </div>
-            </div>
-            <div class="step-list">
-              <div class="step-item">
-                <span id="stepMotion" class="material-symbols-rounded outline"
-                  >radio_button_unchecked</span
-                >
-                1. Đưa vật thể rác vào 
-              </div>
-              <div class="step-item">
-                <span id="stepStable" class="material-symbols-rounded outline"
-                  >radio_button_unchecked</span
-                >
-                2. Đợi rác nằm yên tĩnh
-              </div>
-              <div class="step-item">
-                <span id="stepClassify" class="material-symbols-rounded outline"
-                  >radio_button_unchecked</span
-                >
-                3.Đợi AI phân tích chất liệu
-              </div>
-              <div class="step-item">
-                <span id="stepResult" class="material-symbols-rounded outline"
-                  >radio_button_unchecked</span
-                >
-                4.Đọc kết quả trên màn hình
-              </div>
-              <div class="step-item">
-                <span id="stepDispose" class="material-symbols-rounded outline"
-                  >radio_button_unchecked</span
-                >
-                5.Vứt rác đúng thùng quy định
-              </div>
-            </div>
-
-            <!-- Nút Kết quả -->
-            <button id="btnKetQua" onclick="showKetQua()" style="
-              margin-top: 24px;
-              width: 100%;
-              padding: 14px 20px;
-              background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
-              color: white;
-              border: none;
-              border-radius: 14px;
-              font-size: 16px;
-              font-weight: 700;
-              font-family: 'Nunito', sans-serif;
-              cursor: pointer;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              gap: 8px;
-              box-shadow: 0 6px 20px rgba(46,125,50,0.3);
-              transition: all 0.2s;
-              letter-spacing: 0.3px;
-            "
-            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 28px rgba(46,125,50,0.4)';"
-            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(46,125,50,0.3)';"
-            >
-              <span class="material-symbols-rounded" style="font-size:20px; font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 20;">assignment_turned_in</span>
-              Kết quả
+                ">videocam_off</span>
+            <h2 id="cameraErrorMsg">Lỗi Camera</h2>
+            <button id="btnRetry" class="btn btn-outline" style="margin-top: 15px; width: auto; padding: 10px 24px">
+              Thử lại
             </button>
           </div>
+
+          <div id="cameraActive" class="hidden">
+            <video id="camVideo" autoplay playsinline muted></video>
+            <canvas id="roiCanvas"></canvas>
+            <div class="hud">
+              <div>
+                <div class="hud-title" id="statusTitle">Đang chờ rác</div>
+                <div class="hud-desc" id="statusText">
+                  Đặt rác vào khu vực quét
+                </div>
+              </div>
+              <div style="text-align: right">
+                <div style="font-size: 12px; font-weight: 700">
+                  Chuyển động: <span id="motionValue">0</span>
+                </div>
+                <div class="meter">
+                  <div id="motionBar" class="meter-fill"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- POPUP KẾT QUẢ -->
-    <style>
-      #ketQuaPopup {
-        position: fixed;
-        top : 30%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(1);
-        width: 512px;
-        background: white;
-        border-radius: 24px;
-        box-shadow: 0 50px 100px rgba(46,125,50,0.22), 0 4px 16px rgba(0,0,0,0.08);
-        border: 1.5px solid #c8e6c9;
-        z-index: 9999;
-        overflow: hidden;
-        opacity: 0;
-        transform: translateY(24px) scale(0.96);
-        pointer-events: none;
-        transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1),
-                    transform 0.35s cubic-bezier(0.4,0,0.2,1);
-      }
-      #ketQuaPopup.show {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-        pointer-events: auto;
-      }
 
-      .kq-sub {
-        font-size: 12px; font-weight: 600;
-        color: rgba(255,255,255,0.78);
-        margin-top: 3px;
-      }
-      .kq-close {
-        position: absolute;
-        top: 12px; right: 12px;
-        width: 28px; height: 28px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.18);
-        border: none; cursor: pointer;
-        display: flex; align-items: center; justify-content: center;
-        color: white; font-size: 16px;
-        transition: background 0.2s;
-      }
-      .kq-close:hover { background: rgba(255,255,255,0.35); }
-      .kq-body {
-        padding: 18px 20px 20px;
-      }
-      .kq-badge {
-        display: flex; align-items: center; gap: 10px;
-        background: #e8f5e9;
-        border: 1.5px solid #c8e6c9;
-        border-radius: 14px;
-        padding: 12px 16px;
-        margin-bottom: 14px;
-      }
-      .kq-badge-label {
-        font-size: 11px; font-weight: 700;
-        color: #5e7a71; text-transform: uppercase; letter-spacing: 0.5px;
-      }
-      .kq-badge-value {
-        font-family: 'Quicksand', sans-serif;
-        font-size: 16px; font-weight: 700;
-        color: #2e7d32;
-      }
-      .kq-timer-wrap {
-        display: flex; align-items: center; justify-content: space-between;
-        margin-top: 2px;
-      }
-      .kq-timer-label {
-        font-size: 11px; font-weight: 600; color: #9eaeb0;
-        display: flex; align-items: center; gap: 4px;
-      }
-      .kq-bar-wrap {
-        flex: 1; margin-left: 10px;
-        height: 4px; background: #e0e0e0;
-        border-radius: 10px; overflow: hidden;
-      }
-      .kq-bar {
-        height: 100%; width: 100%;
-        background: linear-gradient(90deg, #4caf50, #8bc34a);
-        border-radius: 10px;
-        transition: width linear;
-      }
+      <!-- Sidebar -->
 
-      /* Compact AI result popup */
-      #ketQuaPopup {
-        top: 18%;
-        width: min(620px, calc(100vw - 28px));
-        padding: 24px 28px 26px;
-        background: #f7fbff;
-        border: 2px solid #bed6ee;
-        border-radius: 20px;
-        box-shadow: 0 10px 28px rgba(95, 148, 201, 0.16);
-        transform: translate(-50%, calc(-50% + 18px)) scale(0.97);
-      }
-      #ketQuaPopup.show {
-        transform: translate(-50%, -50%) scale(1);
-      }
-      .kq-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        text-align: center;
-      }
-      .kq-icon-circle {
-        width: 30px;
-        height: 30px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-      #kqIconSym {
-        color: #5c91c7 !important;
-      }
-      .kq-title {
-        color: #243248;
-        font-family: "Nunito", sans-serif;
-        font-size: 22px;
-        font-weight: 800;
-        line-height: 1.25;
-      }
-      .kq-sub,
-      .kq-close,
-      .kq-badge-icon,
-      .kq-badge-label,
-      .kq-timer-wrap {
-        display: none !important;
-      }
-      .kq-body {
-        padding: 12px 0 0;
-      }
-      .kq-badge {
-        justify-content: center;
-        gap: 0;
-        margin: 0;
-        padding: 0;
-        background: transparent;
-        border: 0;
-      }
-      .kq-badge-value {
-        color: #34a96a;
-        font-family: "Nunito", sans-serif;
-        font-size: 16px;
-        font-weight: 900;
-        line-height: 1.25;
-        text-align: center;
-      }
-      @media (max-width: 520px) {
-        #ketQuaPopup {
-          padding: 20px 18px 22px;
-          border-radius: 18px;
-        }
-        .kq-title {
-          font-size: 18px;
-        }
-        .kq-badge-value {
-          font-size: 14px;
-        }
-      }
-    </style>
-
-    <div id="ketQuaPopup">
-      <div class="kq-header">
-        <div class="kq-icon-circle">
-          <span id="kqIconSym" class="material-symbols-rounded" style="font-size:28px; color:white; font-variation-settings:'FILL' 0,'wght' 700,'GRAD' 0,'opsz' 28;">psychology</span>
-        </div>
-        <div>
-          <div id="kqTitle" class="kq-title">Rác tái chế</div>
-          <div id="kqSub" class="kq-sub">Nhựa / Chai PET</div>
-        </div>
-        <button class="kq-close" onclick="closeKetQua()">
-          <span class="material-symbols-rounded" style="font-size:16px; font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 16;">close</span>
-        </button>
-      </div>
-      <div class="kq-body">
-        <div class="kq-badge">
-          <div class="kq-badge-icon">
-            <span class="material-symbols-rounded" style="font-size:20px; color:white; font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 20;">delete_sweep</span>
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-icon" style="background: #d3f2d4; color: #4caf50">
+            <span class="material-symbols-rounded outline">rule</span>
           </div>
           <div>
-            <div class="kq-badge-label">Vứt vào</div>
-            <div id="kqBin" class="kq-badge-value"></div>
-
+            <div class="panel-title" style="display: flex; align-items: center; gap: 8px;">
+              Hướng dẫn xử lý
+              <span id="speakGuideIcon" class="material-symbols-rounded" style="font-size:20px; cursor:pointer; color:var(--primary); font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 20;" onclick="toggleSpeakGuide()" title="Phát hướng dẫn">volume_up</span>
+            </div>
           </div>
         </div>
-        <div class="kq-timer-wrap">
-          <div class="kq-timer-label">
-            <span class="material-symbols-rounded" style="font-size:13px; font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 13;">timer</span>
-            Tự đóng sau
+        <div class="step-list">
+          <div class="step-item">
+            <span id="stepMotion" class="material-symbols-rounded outline">radio_button_unchecked</span>
+            1. Đưa vật thể rác vào
           </div>
-          <div class="kq-bar-wrap">
-            <div id="kqBar" class="kq-bar"></div>
+          <div class="step-item">
+            <span id="stepStable" class="material-symbols-rounded outline">radio_button_unchecked</span>
+            2. Đợi rác nằm yên tĩnh
+          </div>
+          <div class="step-item">
+            <span id="stepClassify" class="material-symbols-rounded outline">radio_button_unchecked</span>
+            3.Đợi AI phân tích chất liệu
+          </div>
+          <div class="step-item">
+            <span id="stepResult" class="material-symbols-rounded outline">radio_button_unchecked</span>
+            4.Đọc kết quả trên màn hình
+          </div>
+          <div class="step-item">
+            <span id="stepDispose" class="material-symbols-rounded outline">radio_button_unchecked</span>
+            5.Vứt rác đúng thùng quy định
           </div>
         </div>
       </div>
     </div>
+  </div>
+  </div>
+  <!-- POPUP KẾT QUẢ -->
+  <style>
+    #ketQuaPopup {
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 512px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 50px 100px rgba(46, 125, 50, 0.22), 0 4px 16px rgba(0, 0, 0, 0.08);
+      border: 1.5px solid #c8e6c9;
+      z-index: 9999;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-    <script>
-      (function () {
-        var sampleResults = [
-          { material: "NHỰA", icon: "psychology", bin: "THÙNG NHỰA" },
-        ];
+    #ketQuaPopup.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
 
-        var hideTimer = null;
-        var DISPLAY_MS = 6000;
+    .kq-sub {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.78);
+      margin-top: 3px;
+    }
 
-        window.showKetQua = function () {
-          clearTimeout(hideTimer);
+    .kq-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
 
-          var popup = document.getElementById('ketQuaPopup');
-          var bar   = document.getElementById('kqBar');
-          var r     = window.latestResult || sampleResults[Math.floor(Math.random() * sampleResults.length)];
+    .kq-close:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
 
-          var material = (r.material || r.sub || r.label || 'NHỰA').toString().trim().toUpperCase();
-          var bin = (r.bin || 'THÙNG NHỰA').toString().trim().toUpperCase();
-          var hasWasteWord = material.indexOf('RÁC') === 0 || material.indexOf('RAC') === 0;
-          var binText = bin.indexOf('THÙNG') >= 0 || bin.indexOf('THUNG') >= 0 ? bin : 'THÙNG ' + bin;
+    .kq-body {
+      padding: 18px 20px 20px;
+    }
 
-          document.getElementById('kqIconSym').textContent = r.icon || 'psychology';
-          document.getElementById('kqTitle').textContent   = r.title || ('AI xác định đây là ' + (hasWasteWord ? material : 'rác ' + material));
-          document.getElementById('kqSub').textContent     = r.sub || '';
-          document.getElementById('kqBin').textContent     = '✓ NÊN BỎ VÀO ' + binText;
+    .kq-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #e8f5e9;
+      border: 1.5px solid #c8e6c9;
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
 
-          // Reset bar
-          bar.style.transition = 'none';
-          bar.style.width = '100%';
+    .kq-badge-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #5e7a71;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
-          popup.classList.add('show');
+    .kq-badge-value {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #2e7d32;
+    }
 
+    .kq-timer-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2px;
+    }
+
+    .kq-timer-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #9eaeb0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .kq-bar-wrap {
+      flex: 1;
+      margin-left: 10px;
+      height: 4px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .kq-bar {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #4caf50, #8bc34a);
+      border-radius: 10px;
+      transition: width linear;
+    }
+
+    /* Compact AI result popup */
+    #ketQuaPopup {
+      top: 18%;
+      width: min(620px, calc(100vw - 28px));
+      padding: 24px 28px 26px;
+      background: #f7fbff;
+      border: 2px solid #bed6ee;
+      border-radius: 20px;
+      box-shadow: 0 10px 28px rgba(95, 148, 201, 0.16);
+      transform: translate(-50%, calc(-50% + 18px)) scale(0.97);
+    }
+
+    #ketQuaPopup.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .kq-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .kq-icon-circle {
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    #kqIconSym {
+      color: #5c91c7 !important;
+    }
+
+    .kq-title {
+      color: #243248;
+      font-family: "Nunito", sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .kq-sub,
+    .kq-close,
+    .kq-badge-icon,
+    .kq-badge-label,
+    .kq-timer-wrap {
+      display: none !important;
+    }
+
+    .kq-body {
+      padding: 12px 0 0;
+    }
+
+    .kq-badge {
+      justify-content: center;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border: 0;
+    }
+
+    .kq-badge-value {
+      color: #34a96a;
+      font-family: "Nunito", sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    @media (max-width: 520px) {
+      #ketQuaPopup {
+        padding: 20px 18px 22px;
+        border-radius: 18px;
+      }
+
+      .kq-title {
+        font-size: 18px;
+      }
+
+      .kq-badge-value {
+        font-size: 14px;
+      }
+    }
+  </style>
+
+  <div id="ketQuaPopup">
+    <div class="kq-header">
+      <div class="kq-icon-circle">
+        <span id="kqIconSym" class="material-symbols-rounded"
+          style="font-size:28px; color:white; font-variation-settings:'FILL' 0,'wght' 700,'GRAD' 0,'opsz' 28;">psychology</span>
+      </div>
+      <div>
+        <div id="kqTitle" class="kq-title">Rác tái chế</div>
+        <div id="kqSub" class="kq-sub">Nhựa / Chai PET</div>
+      </div>
+      <button class="kq-close" onclick="closeKetQua()">
+        <span class="material-symbols-rounded"
+          style="font-size:16px; font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 16;">close</span>
+      </button>
+    </div>
+    <div class="kq-body">
+      <div class="kq-badge">
+        <div class="kq-badge-icon">
+          <span class="material-symbols-rounded"
+            style="font-size:20px; color:white; font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 20;">delete_sweep</span>
+        </div>
+        <div>
+          <div class="kq-badge-label">Vứt vào</div>
+          <div id="kqBin" class="kq-badge-value"></div>
+
+        </div>
+      </div>
+      <div class="kq-timer-wrap">
+        <div class="kq-timer-label">
+          <span class="material-symbols-rounded"
+            style="font-size:13px; font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 13;">timer</span>
+          Tự đóng sau
+        </div>
+        <div class="kq-bar-wrap">
+          <div id="kqBar" class="kq-bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var sampleResults = [
+        { material: "NHỰA", icon: "psychology", bin: "THÙNG NHỰA" },
+      ];
+
+      function getBinColorName(material) {
+        var m = (material || '').toString().toUpperCase();
+        if (m.indexOf('NHỰA') >= 0 || m.indexOf('NHUA') >= 0 || m.indexOf('PLASTIC') >= 0) return 'XANH LÁ';
+        if (m.indexOf('GIẤY') >= 0 || m.indexOf('GIAY') >= 0 || m.indexOf('PAPER') >= 0 || m.indexOf('CARTON') >= 0) return 'XANH DƯƠNG';
+        if (m.indexOf('KIM LOẠI') >= 0 || m.indexOf('KIM LOAI') >= 0 || m.indexOf('METAL') >= 0 || m.indexOf('LON') >= 0) return 'VÀNG';
+        if (m.indexOf('THỦY TINH') >= 0 || m.indexOf('THUY TINH') >= 0 || m.indexOf('GLASS') >= 0) return 'ĐỎ';
+        return '';
+      }
+
+      var hideTimer = null;
+      var DISPLAY_MS = 6000;
+
+      window.showKetQua = function () {
+        clearTimeout(hideTimer);
+
+        var popup = document.getElementById('ketQuaPopup');
+        var bar = document.getElementById('kqBar');
+        var r = window.latestResult || sampleResults[Math.floor(Math.random() * sampleResults.length)];
+
+        var material = (r.material || r.sub || r.label || 'NHỰA').toString().trim().toUpperCase();
+        var bin = (r.bin || 'THÙNG NHỰA').toString().trim().toUpperCase();
+        var hasWasteWord = material.indexOf('RÁC') === 0 || material.indexOf('RAC') === 0;
+        var binText = bin.indexOf('THÙNG') >= 0 || bin.indexOf('THUNG') >= 0 ? bin : 'THÙNG ' + bin;
+        var colorName = getBinColorName(material);
+
+        document.getElementById('kqIconSym').textContent = r.icon || 'psychology';
+        document.getElementById('kqTitle').textContent = r.title || ('AI xác định đây là ' + (hasWasteWord ? material : 'rác ' + material));
+        document.getElementById('kqSub').textContent = r.sub || '';
+        document.getElementById('kqBin').textContent = colorName ? '✓ NÊN BỎ VÀO THÙNG MÀU ' + colorName : '✓ NÊN BỎ VÀO ' + binText;
+
+        // Reset bar
+        bar.style.transition = 'none';
+        bar.style.width = '100%';
+
+        popup.classList.add('show');
+
+        requestAnimationFrame(function () {
           requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              bar.style.transition = 'width ' + DISPLAY_MS + 'ms linear';
-              bar.style.width = '0%';
-            });
+            bar.style.transition = 'width ' + DISPLAY_MS + 'ms linear';
+            bar.style.width = '0%';
           });
+        });
 
+        // Chỉ auto-hide khi là dữ liệu mẫu (demo), không auto-hide khi có kết quả thật từ AI
+        if (!window.latestResult) {
           hideTimer = setTimeout(function () {
             popup.classList.remove('show');
           }, DISPLAY_MS);
-        };
+        }
+      };
 
-        window.closeKetQua = function () {
-          clearTimeout(hideTimer);
-          document.getElementById('ketQuaPopup').classList.remove('show');
-        };
-      })();
-    </script>
-  </body>
+      window.closeKetQua = function () {
+        clearTimeout(hideTimer);
+        document.getElementById('ketQuaPopup').classList.remove('show');
+        window.latestResult = null;
+      };
+
+      window.toggleSpeakGuide = function () {
+        if (!('speechSynthesis' in window)) return;
+        if (speechSynthesis.speaking && !speechSynthesis.paused) {
+          speechSynthesis.cancel();
+          var icon = document.getElementById('speakGuideIcon');
+          if (icon) icon.textContent = 'volume_off';
+        } else {
+          var r = window.latestResult;
+          if (!r) return;
+          var material = (r.material || '').toString();
+          var colorName = '';
+          var m = material.toUpperCase();
+          if (m.indexOf('NHỰA') >= 0 || m.indexOf('PLASTIC') >= 0) colorName = 'xanh lá';
+          else if (m.indexOf('GIẤY') >= 0 || m.indexOf('PAPER') >= 0) colorName = 'xanh dương';
+          else if (m.indexOf('KIM LOẠI') >= 0 || m.indexOf('METAL') >= 0) colorName = 'vàng';
+          else if (m.indexOf('THỦY TINH') >= 0 || m.indexOf('GLASS') >= 0) colorName = 'xanh ngọc';
+          var text = 'AI xác định đây là rác ' + material + '. ';
+          if (colorName) text += 'Nên bỏ vào thùng màu ' + colorName + '.';
+          var u = new SpeechSynthesisUtterance(text);
+          u.lang = 'vi-VN';
+          u.rate = 0.95;
+          u.onend = function () {
+            var icon = document.getElementById('speakGuideIcon');
+            if (icon) icon.textContent = 'volume_up';
+          };
+          speechSynthesis.speak(u);
+          var icon = document.getElementById('speakGuideIcon');
+          if (icon) icon.textContent = 'record_voice_over';
+        }
+      };
+
+    })();
+  </script>
+</body>
+
 </html>

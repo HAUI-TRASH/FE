@@ -6,7 +6,7 @@
   var SAMPLE_INTERVAL_MS = 100;
   var MOTION_THRESHOLD = 3;
   var STABLE_THRESHOLD = 3;
-  var STABLE_DURATION_MS = 500;
+  var STABLE_DURATION_MS = 1500;
   var CAPTURE_MAX_DIM = 1024;
   var CAPTURE_QUALITY = 0.92;
   var CAPTURE_ROI_ONLY = true;
@@ -51,6 +51,8 @@
     els.stepMotion = document.getElementById("stepMotion");
     els.stepStable = document.getElementById("stepStable");
     els.stepClassify = document.getElementById("stepClassify");
+    els.stepResult = document.getElementById("stepResult");
+    els.stepDispose = document.getElementById("stepDispose");
   }
 
   function getToken() {
@@ -175,6 +177,16 @@
     setStep(els.stepMotion, motion, !motion);
     setStep(els.stepStable, stable, motion && !stable);
     setStep(els.stepClassify, classify, stable && !classify);
+    // Reset step 4,5 khi bắt đầu chu kỳ mới
+    if (!motion && !stable && !classify) {
+      setStep(els.stepResult, false, false);
+      setStep(els.stepDispose, false, false);
+    }
+  }
+
+  function markResultSteps() {
+    setStep(els.stepResult, true, false);   // step 4: done
+    setStep(els.stepDispose, true, false);  // step 5: done
   }
 
   function drawVideoCover(ctx, video, width, height) {
@@ -399,6 +411,8 @@
 
     if (!stableSince) {
       stableSince = Date.now();
+      // Bắt đầu đọc hướng dẫn khi vật vừa ổn định
+      speakResult();
     }
 
     var elapsed = Date.now() - stableSince;
@@ -495,7 +509,7 @@
         return callAiRequestAPI(blob);
       })
       .then(function (created) {
-        setStatus("ResNet50 đang phân loại", "Model chỉ trả về nhãn chất liệu.", "Đang chạy ResNet50.");
+        setStatus("Hệ thống đang phân tích", "Model chỉ trả về nhãn chất liệu.", "Đang chạy ResNet50.");
         return callPredictAPI(created.id, created.cloudinaryUrl).then(function () {
           return created.id;
         });
@@ -503,7 +517,35 @@
       .then(function (aiRequestId) {
         updateSteps(true, true, true);
         return cacheDetail(aiRequestId).then(function () {
-          window.location.href = "result.html?id=" + encodeURIComponent(aiRequestId);
+          // Thay vì redirect, hiển thị popup kết quả tại chỗ
+          try {
+            var cached = sessionStorage.getItem("iot_detail_cache");
+            if (cached) {
+              var detail = JSON.parse(cached);
+              var detections = (detail && detail.data ? detail.data.detections : null) || (detail && detail.detections) || [];
+              var firstDet = Array.isArray(detections) && detections.length > 0 ? detections[0] : null;
+              var label = firstDet ? (firstDet.labelDisplay || firstDet.label || firstDet.material || '') : '';
+              // Rút gọn nếu quá dài
+              var shortLabel = label.split(/[.;。]/)[0].trim();
+              if (shortLabel.length > 50) shortLabel = shortLabel.substring(0, 50).replace(/\s\S*$/, '');
+              window.latestResult = {
+                material: shortLabel || 'CHẤT LIỆU',
+                icon: 'recycling',
+                bin: firstDet ? ('THÙNG ' + (firstDet.material || shortLabel || 'RÁC').toUpperCase()) : 'THÙNG RÁC',
+                title: firstDet ? ('AI xác định đây là rác ' + shortLabel.toUpperCase()) : 'AI đã phân loại xong',
+                sub: firstDet && firstDet.confidence != null ? 'Độ tin cậy: ' + Math.round(firstDet.confidence * 100) + '%' : ''
+              };
+            }
+          } catch (e) {
+            console.warn('Parse detail cache failed:', e);
+          }
+          if (typeof window.showKetQua === 'function') {
+            window.showKetQua();
+          }
+          markResultSteps();
+          // Bắt đầu theo dõi vật thể rời đi
+          isProcessing = false;
+          startRemovalWatch();
         });
       })
       .catch(function (err) {
@@ -513,6 +555,72 @@
         resetGate();
         startStabilityWatch();
       });
+  }
+
+  // Theo dõi vật thể rời khỏi camera sau khi đã phân loại xong
+  var removalTimer = null;
+  var removalMotionSince = null;
+
+  function speakResult() {
+    if (!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    var text = 'Bước 1. Đưa vật thể rác vào. ' +
+               'Bước 2. Đợi rác nằm yên tĩnh. ' +
+               'Bước 3. Đợi AI phân tích chất liệu. ' +
+               'Bước 4. Đọc kết quả trên màn hình. ' +
+               'Bước 5. Vứt rác đúng thùng quy định.';
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'vi-VN';
+    u.rate = 0.9;
+    speechSynthesis.speak(u);
+    var icon = document.getElementById('speakGuideIcon');
+    if (icon) icon.textContent = 'volume_up';
+  }
+
+  function stopSpeak() {
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+    }
+  }
+
+  function startRemovalWatch() {
+    if (removalTimer) clearInterval(removalTimer);
+    removalMotionSince = null;
+    setStatus("Đã phân loại xong", "Rút vật thể ra để tiếp tục.", "Kết quả đã hiển thị.");
+    removalTimer = setInterval(function () {
+      if (!els.camVideo || !els.camVideo.videoWidth) return;
+      drawVideoCover(sampleCtx, els.camVideo, SAMPLE_WIDTH, SAMPLE_HEIGHT);
+      var imageData = sampleCtx.getImageData(0, 0, SAMPLE_WIDTH, SAMPLE_HEIGHT).data;
+      var current = frameToRoiGrayData(imageData);
+      if (!previousFrame) { previousFrame = current; return; }
+      var score = calculateRoiMotionScore(previousFrame, current);
+      previousFrame = current;
+      // Khi có chuyển động lớn → vật đang được rút ra
+      if (score >= MOTION_THRESHOLD) {
+        if (!removalMotionSince) {
+          removalMotionSince = Date.now();
+        }
+        var elapsed = Date.now() - removalMotionSince;
+        if (elapsed >= 2000) {
+          // Đã có chuyển động liên tục 2s → đóng popup và refresh
+          stopSpeak();
+          if (typeof window.closeKetQua === 'function') {
+            window.closeKetQua();
+          }
+          clearInterval(removalTimer);
+          removalTimer = null;
+          removalMotionSince = null;
+          hasSeenMotion = false;
+          stableSince = null;
+          previousFrame = null;
+          updateSteps(false, false, false);
+          startStabilityWatch();
+        }
+      } else {
+        // Không còn chuyển động → reset timer
+        removalMotionSince = null;
+      }
+    }, 300);
   }
 
   function callAiRequestAPI(blob) {
